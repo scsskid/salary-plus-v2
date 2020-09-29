@@ -1,15 +1,15 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
     main: './src/js/App.js'
   },
   output: {
-    // path: path.join(__dirname, 'dist'),
-    // filename: "[name].js",
-    sourceMapFilename: '[name].js.map'
+    filename: '[name].js'
   },
-  devtool: 'source-map',
+  devtool: 'cheap-source-map',
   module: {
     rules: [
       {
@@ -26,10 +26,31 @@ module.exports = {
             loader: 'html-loader'
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: 'file-loader'
       }
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'main.[contenthash].css'
+    }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
