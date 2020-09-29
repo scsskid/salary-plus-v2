@@ -1,21 +1,53 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header';
-import MainView from './components/MainView';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation
+} from 'react-router-dom';
+
+import Home from './components/Home';
+import Add from './components/Add';
 
 import '../css/index.css';
-import Navigation from './components/Navigation';
+import { func } from 'prop-types';
 
 const App = () => {
   return (
-    <div className="container">
-      <Header />
-      <MainView />
-      <Navigation />
-    </div>
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/add">Add</Link>
+          </li>
+        </ul>
+      </nav>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/add" component={Add} />
+        <Route path="*" component={NoMatch} />
+      </Switch>
+    </Router>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('app'));
+function NoMatch() {
+  let location = useLocation();
 
-console.log('foo');
+  return (
+    <div>
+      <h1>404</h1>
+      <p>
+        Not found: <code>{location.pathname}</code>
+      </p>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById('root'));
