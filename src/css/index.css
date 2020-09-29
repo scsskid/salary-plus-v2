@@ -1,8 +1,3 @@
-body {
-  color: white;
-  background-color: black;
-
-  & h1 {
-    color: red;
-  }
-}
+@charset "utf-8";
+@import 'vendor/modern-normalize.css';
+@import 'base/typography.css';
