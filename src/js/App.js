@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,9 +10,9 @@ import {
 
 import Home from './components/Home';
 import Add from './components/Add';
+import Calendar from './components/Calendar';
 
 import '../css/index.css';
-import { func } from 'prop-types';
 
 const App = () => {
   return (
@@ -28,11 +27,13 @@ const App = () => {
           </li>
         </ul>
       </nav>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/add" component={Add} />
-        <Route path="*" component={NoMatch} />
-      </Switch>
+      <main className="main">
+        <Switch>
+          <Route exact path="/" component={Calendar} />
+          <Route path="/add" component={Add} />
+          <Route path="*" component={NoMatch} />
+        </Switch>
+      </main>
     </Router>
   );
 };
