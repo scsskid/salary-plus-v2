@@ -4,36 +4,38 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  // Link,
   useLocation
 } from 'react-router-dom';
 
-import Home from './components/Home';
 import Add from './components/Add';
 import Calendar from './components/Calendar';
 
 import '../css/index.css';
+import Nav from './components/Nav';
 
 const App = () => {
+  const [inputDate, setInputDate] = React.useState(new Date());
+  console.log(inputDate);
+
+  const changeInputDate = () => {
+    setInputDate(new Date('1982-10-04'));
+  };
+
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/add">Add</Link>
-          </li>
-        </ul>
-      </nav>
+      <Nav />
       <main className="main">
         <Switch>
-          <Route exact path="/" component={Calendar} />
+          <Route exact path="/">
+            <Calendar inputDate={inputDate} />
+          </Route>
+
           <Route path="/add" component={Add} />
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
+      <button onClick={changeInputDate}>Change Date</button>
     </Router>
   );
 };

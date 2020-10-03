@@ -4,8 +4,11 @@
   /* height: -webkit-fill-available; */
   display: grid;
   grid-template-rows: auto 1fr auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .main {
-  padding-left: 1rem;
 }

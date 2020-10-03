@@ -1,0 +1,13 @@
+.Nav {
+  margin-bottom: 1rem;
+}
+
+.Nav ul {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.Nav li {
+  margin-right: 0.5rem;
+}
