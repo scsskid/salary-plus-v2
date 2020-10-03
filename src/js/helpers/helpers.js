@@ -29,3 +29,7 @@ export function getFirstDay(date) {
   tempDate.setDate(1);
   return (tempDate.getDay() + 6) % 7;
 }
+
+export function getDaysInMonth(date) {
+  return 32 - new Date(date.getFullYear(), date.getMonth(), 32).getDate();
+}

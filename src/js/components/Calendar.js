@@ -1,7 +1,12 @@
 import React from 'react';
-import { pad, getDayName, getFirstDay } from '../helpers/helpers.js';
+import {
+  pad,
+  getDayName,
+  getFirstDay,
+  getDaysInMonth
+} from '../helpers/helpers.js';
 
-const Calendar = (props) => {
+function Calendar(props) {
   const { inputDate } = props;
   const dateString = `${inputDate.getFullYear()}-${pad(
     inputDate.getMonth() + 1
@@ -21,9 +26,7 @@ const Calendar = (props) => {
       </table>
     </div>
   );
-};
-
-export default Calendar;
+}
 
 function CalendarHead() {
   let cells = [];
@@ -43,6 +46,8 @@ function CalendarBody({ inputDate }) {
     first Day of this month (${pad(
       inputDate.getMonth() + 1
     )}) starts on a ${getDayName(getFirstDay(inputDate))}
+
+    Month has ${getDaysInMonth(inputDate)} Dates
   `);
 
   let rows = [];
@@ -58,3 +63,5 @@ function CalendarBody({ inputDate }) {
   }
   return <tbody>{rows}</tbody>;
 }
+
+export default Calendar;
