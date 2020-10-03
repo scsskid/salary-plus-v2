@@ -1,5 +1,5 @@
 import React from 'react';
-import { pad, getDayName } from '../helpers/helpers.js';
+import { pad, getDayName, getFirstDay } from '../helpers/helpers.js';
 
 const Calendar = (props) => {
   const { inputDate } = props;
@@ -57,11 +57,4 @@ function CalendarBody({ inputDate }) {
     rows.push(<tr key={`weekday-bodyrow-${i}`}>{cells}</tr>);
   }
   return <tbody>{rows}</tbody>;
-}
-
-// Get First (Week-)Day, Adjusted for On Monday Starting Week
-function getFirstDay(date) {
-  let tempDate = new Date(date.getTime());
-  tempDate.setDate(1);
-  return (tempDate.getDay() + 6) % 7;
 }
