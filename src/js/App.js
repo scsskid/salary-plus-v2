@@ -22,6 +22,10 @@ const App = () => {
     setInputDate(new Date('1982-10-04'));
   };
 
+  const resetInputDate = () => {
+    setInputDate(new Date());
+  };
+
   return (
     <Router>
       <Nav />
@@ -35,7 +39,8 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <button onClick={changeInputDate}>Change Date</button>
+      <button onClick={changeInputDate}>Change Date</button>{' '}
+      <button onClick={resetInputDate}>Reset Date</button>
     </Router>
   );
 };
