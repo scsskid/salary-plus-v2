@@ -18,3 +18,7 @@ export function ISODateString(d) {
 export function pad(n) {
   return n < 10 ? '0' + n : n;
 }
+
+export function getDayName(i) {
+  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
+}

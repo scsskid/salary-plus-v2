@@ -1,5 +1,5 @@
 import React from 'react';
-import { pad } from '../helpers/helpers.js';
+import { pad, getDayName } from '../helpers/helpers.js';
 
 const Calendar = (props) => {
   const { inputDate } = props;
@@ -26,10 +26,9 @@ const Calendar = (props) => {
 export default Calendar;
 
 function CalendarHead() {
-  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   let cells = [];
   for (let i = 0; i < 7; i++) {
-    cells.push(<td key={`weekday-headcell-${i}`}>{dayNames[i]}</td>);
+    cells.push(<td key={`weekday-headcell-${i}`}>{getDayName(i)}</td>);
   }
 
   return (
@@ -39,8 +38,12 @@ function CalendarHead() {
   );
 }
 
-function CalendarBody(inputDate) {
-  // getFirstDay(inputDate);
+function CalendarBody({ inputDate }) {
+  console.log(`
+    first Day of this month (${pad(
+      inputDate.getMonth() + 1
+    )}) starts on a ${getDayName(getFirstDay(inputDate))}
+  `);
 
   let rows = [];
 
@@ -56,9 +59,9 @@ function CalendarBody(inputDate) {
   return <tbody>{rows}</tbody>;
 }
 
-// Get First (Week-)Day
+// Get First (Week-)Day, Adjusted for On Monday Starting Week
 function getFirstDay(date) {
   let tempDate = new Date(date.getTime());
   tempDate.setDate(1);
-  console.log('getFWD', tempDate, (tempDate.getDay() + 6) % 7);
+  return (tempDate.getDay() + 6) % 7;
 }
