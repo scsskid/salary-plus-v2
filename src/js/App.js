@@ -26,21 +26,38 @@ const App = () => {
     setInputDate(new Date());
   };
 
+  const updateInputDate = (summand = 0) => {
+    const newDate = new Date(inputDate);
+    const now = new Date();
+
+    newDate.setMonth(inputDate.getMonth() + summand);
+
+    if (
+      now.getMonth() == newDate.getMonth() &&
+      now.getFullYear() == newDate.getFullYear()
+    ) {
+      newDate.setDate(now.getDate());
+    } else {
+      newDate.setDate(1);
+    }
+
+    setInputDate(summand === 0 ? now : newDate);
+  };
+
   return (
     <Router>
       <Nav />
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Calendar inputDate={inputDate} />
+            <Calendar inputDate={inputDate} changeMonth={updateInputDate} />
           </Route>
 
           <Route path="/add" component={Add} />
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <button onClick={changeInputDate}>Change Date</button>{' '}
-      <button onClick={resetInputDate}>Reset Date</button>
+      <button onClick={changeInputDate}>Change Date to 1982</button>
     </Router>
   );
 };
