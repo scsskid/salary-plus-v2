@@ -11,3 +11,12 @@
 .Nav li {
   margin-right: 0.5rem;
 }
+
+table {
+  width: 100%;
+}
+
+table td {
+  border: 1px solid green;
+  width: calc(100% / 7);
+}

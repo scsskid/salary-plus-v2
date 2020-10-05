@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   pad,
   getDayName,
@@ -12,6 +12,10 @@ function Calendar(props) {
     inputDate.getMonth() + 1
   )}-${pad(inputDate.getDate())}`;
   console.log(inputDate.toString());
+
+  useEffect(() => {
+    console.log('effect');
+  });
 
   return (
     <div className="calendar">
@@ -42,10 +46,15 @@ function CalendarHead() {
 }
 
 function CalendarBody({ inputDate }) {
+  let date = 1;
+  const firstDay = getFirstDay(inputDate);
+  const daysInMonth = getDaysInMonth(inputDate);
+
   console.log(`
     first Day of this month (${pad(
       inputDate.getMonth() + 1
     )}) starts on a ${getDayName(getFirstDay(inputDate))}
+    (${getFirstDay(inputDate)})
 
     Month has ${getDaysInMonth(inputDate)} Dates
   `);
@@ -54,14 +63,26 @@ function CalendarBody({ inputDate }) {
 
   for (let i = 0; i < 6; i++) {
     let cells = [];
+    if (date >= daysInMonth) {
+      break;
+    }
+    for (let j = 0; j < 7; j++) {
+      const isLeadingCell = i === 0 && j < firstDay;
+      const isTrailingCell = date > daysInMonth;
 
-    for (let i = 0; i < 7; i++) {
-      cells.push(<td key={`weekday-bodycell-${i}`}></td>);
+      if (isLeadingCell || isTrailingCell) {
+        cells.push(<td key={`weekday-bodycell-${j}`}></td>);
+      } else {
+        cells.push(<td key={`weekday-bodycell-${j}`}>{date}</td>);
+        date++;
+      }
     }
 
     rows.push(<tr key={`weekday-bodyrow-${i}`}>{cells}</tr>);
   }
   return <tbody>{rows}</tbody>;
 }
+
+function appendEvents() {}
 
 export default Calendar;
