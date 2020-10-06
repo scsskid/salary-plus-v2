@@ -33,3 +33,9 @@ export function getFirstDay(date) {
 export function getDaysInMonth(date) {
   return 32 - new Date(date.getFullYear(), date.getMonth(), 32).getDate();
 }
+
+export function getShortIsoString(date) {
+  const offset = date.getTimezoneOffset();
+  date = new Date(date.getTime() - offset * 60 * 1000);
+  return date.toISOString().split('T')[0];
+}

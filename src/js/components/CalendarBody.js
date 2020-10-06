@@ -3,13 +3,15 @@ import {
   pad,
   getDayName,
   getFirstDay,
-  getDaysInMonth
+  getDaysInMonth,
+  getShortIsoString
 } from '../helpers/helpers.js';
 
 function CalendarBody({ inputDate }) {
   let date = 1;
   const firstDay = getFirstDay(inputDate);
   const daysInMonth = getDaysInMonth(inputDate);
+  const currentDate = new Date();
 
   console.log(`
     first Day of this month (${pad(
@@ -34,7 +36,15 @@ function CalendarBody({ inputDate }) {
       if (isLeadingCell || isTrailingCell) {
         cells.push(<td key={`weekday-bodycell-${j}`}></td>);
       } else {
-        cells.push(<td key={`weekday-bodycell-${j}`}>{date}</td>);
+        currentDate.setDate(date);
+        cells.push(
+          <td
+            data-date-string={getShortIsoString(currentDate)}
+            key={`weekday-bodycell-${j}`}
+          >
+            {date}
+          </td>
+        );
         date++;
       }
     }
