@@ -7,7 +7,7 @@ import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import '../css/index.css';
 import sampleData from '../data/sample-data';
-import Nav from './components/Nav';
+import Navigation from './components/Navigation';
 import { useLocalStorageState } from './utils/store';
 
 const App = () => {
@@ -75,7 +75,7 @@ const App = () => {
 
   return (
     <Router>
-      <Nav />
+      <Navigation />
       <main className="main">
         <Switch>
           <Route exact path="/">
