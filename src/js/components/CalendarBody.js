@@ -89,13 +89,17 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
     updateInputDate(new Date(rootEl.current.dataset.dateString));
   }
 
+  function onKeyUp() {
+    return;
+  }
+
   return (
     <td
       ref={rootEl}
       data-date-string={dateString}
       data-selected={cellMatchesInputDate ? `selected` : ``}
     >
-      <button onClick={onClick} onKeyUp={onClick}>
+      <button onClick={onClick} onKeyUp={onKeyUp}>
         <span>{date}</span>
         <span data-records></span>
       </button>

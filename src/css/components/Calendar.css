@@ -2,18 +2,31 @@
   width: 100%;
 }
 
+.calendar-table tbody td {
+  --color: hsl(0deg 20% 80%);
+  box-shadow: inset 0 0 0 1px var(--color);
+  width: calc(100% / 7);
+  border-radius: 2px;
+  position: relative;
+  height: 2rem;
+}
+
 .calendar-table button {
   background: none;
   display: block;
   width: 100%;
   text-align: left;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
-.calendar-table tbody td {
-  border: 1px solid #66339945;
-  width: calc(100% / 7);
-  position: relative;
-  padding: 0.1rem;
+[data-today] button {
+  color: rebeccapurple;
+  font-weight: bold;
 }
 
 [data-records] {
@@ -23,13 +36,9 @@
 }
 
 .calendar-table [data-selected='selected'] button {
-  outline: 5px solid #000;
-  color: red !important;
-}
-
-[data-today] button {
-  color: rebeccapurple;
-  font-weight: bold;
+  --color: hsl(0deg 50% 40%);
+  box-shadow: inset 0 0 0 2px var(--color);
+  color: var(--color);
 }
 
 .calendar-date-event {
