@@ -1,0 +1,39 @@
+.calendar-table {
+  width: 100%;
+}
+
+.calendar-table button {
+  background: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.calendar-table tbody td {
+  border: 1px solid #66339945;
+  width: calc(100% / 7);
+  position: relative;
+  padding: 0.1rem;
+}
+
+[data-records] {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+[data-today] button {
+  color: rebeccapurple;
+  font-weight: bold;
+}
+
+.calendar-date-event {
+  background: rebeccapurple;
+  margin-bottom: 2px;
+  size: 0.4rem;
+  color: rebeccapurple;
+  font-size: 0.5rem;
+  & small {
+    display: none;
+  }
+}

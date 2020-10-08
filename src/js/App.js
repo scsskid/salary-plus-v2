@@ -10,7 +10,7 @@ import Nav from './components/Nav';
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
 
-  const updateInputDate = (summand = 0) => {
+  const changeMonth = (summand = 0) => {
     const newDate = new Date(inputDate);
     const now = new Date();
 
@@ -28,6 +28,10 @@ const App = () => {
     setInputDate(summand === 0 ? now : newDate);
   };
 
+  const updateInputDate = (date) => {
+    setInputDate(date);
+  };
+
   // console.log(JSON.stringify(dataShifted));
   // console.table(dataShifted.records.slice(0));
 
@@ -37,7 +41,11 @@ const App = () => {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Calendar inputDate={inputDate} changeMonth={updateInputDate} />
+            <Calendar
+              inputDate={inputDate}
+              changeMonth={changeMonth}
+              updateInputDate={updateInputDate}
+            />
           </Route>
 
           <Route path="/add" component={Add} />

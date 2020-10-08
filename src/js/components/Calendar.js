@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CalendarBody from './CalendarBody.js';
 import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
-import { pad, shiftRecordsDates } from '../helpers/helpers.js';
+import { pad } from '../helpers/helpers.js';
 import sampleData from '../../data/sample-data';
 
-function Calendar({ inputDate, changeMonth }) {
-  const dataShifted = shiftRecordsDates({ data: sampleData, summand: 7 });
-
+function Calendar({ inputDate, changeMonth, updateInputDate }) {
   const currentRecords = getRecordsByMonth({
-    records: dataShifted.records,
+    records: sampleData.records,
     inputDate
   });
 
@@ -25,9 +23,13 @@ function Calendar({ inputDate, changeMonth }) {
         </code>
       </p>
       <CalendarControls changeMonth={changeMonth} />
-      <table>
+      <table className="calendar-table">
         <CalendarHead />
-        <CalendarBody inputDate={inputDate} records={currentRecords} />
+        <CalendarBody
+          inputDate={inputDate}
+          records={currentRecords}
+          updateInputDate={updateInputDate}
+        />
       </table>
     </div>
   );

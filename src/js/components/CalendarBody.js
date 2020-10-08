@@ -5,11 +5,11 @@ import {
   getShortIsoString
 } from '../helpers/helpers.js';
 
-function CalendarBody({ inputDate, records }) {
+function CalendarBody({ inputDate, records, updateInputDate }) {
   const tbody = React.useRef();
   const firstDay = getFirstDay(inputDate);
   const daysInMonth = getDaysInMonth(inputDate);
-  const rows = getRows({ inputDate, daysInMonth, firstDay });
+  const rows = getRows({ inputDate, daysInMonth, firstDay, updateInputDate });
   const todayDate = new Date();
   const todayShortString = getShortIsoString(todayDate);
 
@@ -32,12 +32,16 @@ function CalendarBody({ inputDate, records }) {
     };
   });
 
-  return <tbody ref={tbody}>{rows}</tbody>;
+  return (
+    <>
+      <tbody ref={tbody}>{rows}</tbody>
+    </>
+  );
 }
 
 export default CalendarBody;
 
-function getRows({ inputDate, daysInMonth, firstDay }) {
+function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
   const currentDate = new Date(inputDate);
   const rows = [];
   let date = 1;
@@ -52,7 +56,7 @@ function getRows({ inputDate, daysInMonth, firstDay }) {
       const isTrailingCell = date > daysInMonth;
 
       if (isLeadingCell || isTrailingCell) {
-        cells.push(<td key={`weekday-bodycell-${j}`}>123</td>);
+        cells.push(<td key={`weekday-bodycell-${j}`}></td>);
       } else {
         currentDate.setDate(date);
         cells.push(
@@ -60,6 +64,7 @@ function getRows({ inputDate, daysInMonth, firstDay }) {
             dateString={getShortIsoString(currentDate)}
             date={date}
             key={`weekday-bodycell-${j}`}
+            updateInputDate={updateInputDate}
           />
         );
         date++;
@@ -72,11 +77,18 @@ function getRows({ inputDate, daysInMonth, firstDay }) {
   return rows;
 }
 
-function CalendarCell({ dateString, date }) {
+function CalendarCell({ dateString, date, updateInputDate }) {
+  const rootEl = React.useRef();
+  function onClick() {
+    updateInputDate(new Date(rootEl.current.dataset.dateString));
+  }
+
   return (
-    <td data-date-string={dateString}>
-      <span>{date}</span>
-      <span data-records></span>
+    <td ref={rootEl} data-date-string={dateString}>
+      <button onClick={onClick} onKeyUp={onClick}>
+        <span>{date}</span>
+        <span data-records></span>
+      </button>
     </td>
   );
 }
@@ -85,6 +97,7 @@ function appendDates({ nodes = [], records = [] }) {
   nodes.forEach((cell) => {
     // !TODO: Account for 2 more more entries
     // matched Records forEach append to cell?
+
     records.filter((record) => {
       const isMatch =
         getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
@@ -92,12 +105,11 @@ function appendDates({ nodes = [], records = [] }) {
           : null;
 
       if (isMatch) {
-        //
         cell
           .querySelector('[data-records]')
           .insertAdjacentHTML(
             'beforeend',
-            `<small style="font-size: .5rem; color: rebeccapurple"> ${record.id}</small>`
+            `<div class="calendar-date-event"><small>${record.id}</span></div>`
           );
       }
     });
