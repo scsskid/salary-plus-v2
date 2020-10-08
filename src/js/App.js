@@ -1,23 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  // Link,
-  useLocation
-} from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { shiftRecordsDates } from './helpers/helpers';
 import Add from './components/Add';
 import Calendar from './components/Calendar';
-
+import NoMatch from './components/NoMatch';
 import '../css/index.css';
 import Nav from './components/Nav';
+import sampleData from '../data/sample-data';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
-  console.log(inputDate);
-
   const changeInputDate = () => {
     setInputDate(new Date('1982-10-04'));
   };
@@ -40,6 +33,11 @@ const App = () => {
     setInputDate(summand === 0 ? now : newDate);
   };
 
+  const dataShifted = shiftRecordsDates({ data: sampleData, summand: 0 });
+
+  // console.log(JSON.stringify(dataShifted));
+  console.table(dataShifted.records.slice(0, 50));
+
   return (
     <Router>
       <Nav />
@@ -57,18 +55,5 @@ const App = () => {
     </Router>
   );
 };
-
-function NoMatch() {
-  let location = useLocation();
-
-  return (
-    <div>
-      <h1>404</h1>
-      <p>
-        Not found: <code>{location.pathname}</code>
-      </p>
-    </div>
-  );
-}
 
 ReactDOM.render(<App />, document.getElementById('root'));

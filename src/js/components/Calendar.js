@@ -9,10 +9,6 @@ function Calendar({ inputDate, changeMonth }) {
     inputDate.getMonth() + 1
   )}-${pad(inputDate.getDate())}`;
 
-  useEffect(() => {
-    console.log('effect');
-  });
-
   return (
     <div className="calendar">
       <h1>Calendar</h1>

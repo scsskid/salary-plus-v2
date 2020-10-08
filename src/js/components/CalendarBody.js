@@ -1,28 +1,20 @@
 import React from 'react';
 import {
-  pad,
-  getDayName,
   getFirstDay,
   getDaysInMonth,
   getShortIsoString
 } from '../helpers/helpers.js';
 
 function CalendarBody({ inputDate }) {
-  let date = 1;
   const firstDay = getFirstDay(inputDate);
   const daysInMonth = getDaysInMonth(inputDate);
   const currentDate = new Date();
-
-  console.log(`
-    first Day of this month (${pad(
-      inputDate.getMonth() + 1
-    )}) starts on a ${getDayName(getFirstDay(inputDate))}
-    (${getFirstDay(inputDate)})
-
-    Month has ${getDaysInMonth(inputDate)} Dates
-  `);
-
+  let date = 1;
   let rows = [];
+
+  React.useEffect(() => {
+    console.log('effect');
+  });
 
   for (let i = 0; i < 6; i++) {
     let cells = [];
