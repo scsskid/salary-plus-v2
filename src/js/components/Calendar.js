@@ -6,8 +6,13 @@ import { pad } from '../helpers/helpers.js';
 import sampleData from '../../data/sample-data';
 
 function Calendar({ inputDate, changeMonth, updateInputDate }) {
-  const currentRecords = getRecordsByMonth({
+  const monthRecords = getRecordsByMonth({
     records: sampleData.records,
+    inputDate
+  });
+
+  const dateRecords = getRecordsByDate({
+    records: monthRecords,
     inputDate
   });
 
@@ -27,15 +32,25 @@ function Calendar({ inputDate, changeMonth, updateInputDate }) {
         <CalendarHead />
         <CalendarBody
           inputDate={inputDate}
-          records={currentRecords}
+          records={monthRecords}
           updateInputDate={updateInputDate}
         />
       </table>
+      <DateDetails inputDate={inputDate} dateRecords={dateRecords} />
     </div>
   );
 }
 
-// function appendEvents() {}
+const getRecordsByDate = ({ records, inputDate }) => {
+  return records.filter((record) => {
+    const beginDate = new Date(record.begin);
+    return (
+      beginDate.getDate() === inputDate.getDate() &&
+      beginDate.getMonth() === inputDate.getMonth() &&
+      beginDate.getFullYear() === inputDate.getFullYear()
+    );
+  });
+};
 
 function getRecordsByMonth({ records, inputDate }) {
   return records.filter((record) => {
@@ -48,3 +63,23 @@ function getRecordsByMonth({ records, inputDate }) {
 }
 
 export default Calendar;
+
+function DateDetails({ inputDate, dateRecords }) {
+  let content = [];
+
+  dateRecords.forEach((record) => {
+    content.push(
+      <DateDetailsEntry key={`record-details-${record.id}`} record={record} />
+    );
+  });
+
+  return <div className="date-details">{content}</div>;
+}
+
+function DateDetailsEntry({ record }) {
+  return (
+    <div className="date-details-entry">
+      <pre>{JSON.stringify(record, null, 2)}</pre>
+    </div>
+  );
+}

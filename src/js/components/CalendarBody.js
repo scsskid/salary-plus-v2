@@ -87,12 +87,6 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
 
   function onClick() {
     updateInputDate(new Date(rootEl.current.dataset.dateString));
-
-    console.log(`
-    ${cellDateObj} 
-    ${inputDate} 
-    ${cellMatchesInputDate}
-  `);
   }
 
   return (
