@@ -1,4 +1,3 @@
-import { doc } from 'prettier';
 import React from 'react';
 import {
   getFirstDay,
@@ -10,13 +9,9 @@ function CalendarBody({ inputDate, records }) {
   const tbody = React.useRef();
   const firstDay = getFirstDay(inputDate);
   const daysInMonth = getDaysInMonth(inputDate);
+  const rows = getRows({ inputDate, daysInMonth, firstDay });
   const todayDate = new Date();
   const todayShortString = getShortIsoString(todayDate);
-
-  console.log(records);
-
-  let date = 1;
-  let rows = [];
 
   React.useEffect(() => {
     const allDateCells = document.querySelectorAll('[data-date-string]');
@@ -25,31 +20,7 @@ function CalendarBody({ inputDate, records }) {
     );
 
     if (todayCell) todayCell.dataset.today = '';
-
-    function appendDates() {
-      allDateCells.forEach((cell) => {
-        // !TODO: Account for 2 more more entries
-        // matched Records forEach append to cell?
-        const matchedRecord = records.filter((record) => {
-          const isMatch =
-            getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
-              ? record
-              : null;
-
-          if (isMatch) {
-            //
-            cell
-              .querySelector('[data-records]')
-              .insertAdjacentHTML(
-                'beforeend',
-                `<small style="font-size: .5rem; color: rebeccapurple"> ${record.id}</small>`
-              );
-          }
-        });
-      });
-    }
-
-    appendDates();
+    appendDates({ nodes: allDateCells, records });
 
     // Cleanup
     return () => {
@@ -61,7 +32,15 @@ function CalendarBody({ inputDate, records }) {
     };
   });
 
+  return <tbody ref={tbody}>{rows}</tbody>;
+}
+
+export default CalendarBody;
+
+function getRows({ inputDate, daysInMonth, firstDay }) {
   const currentDate = new Date(inputDate);
+  const rows = [];
+  let date = 1;
 
   for (let i = 0; i < 6; i++) {
     let cells = [];
@@ -73,7 +52,7 @@ function CalendarBody({ inputDate, records }) {
       const isTrailingCell = date > daysInMonth;
 
       if (isLeadingCell || isTrailingCell) {
-        cells.push(<td key={`weekday-bodycell-${j}`}></td>);
+        cells.push(<td key={`weekday-bodycell-${j}`}>123</td>);
       } else {
         currentDate.setDate(date);
         cells.push(
@@ -90,10 +69,8 @@ function CalendarBody({ inputDate, records }) {
     rows.push(<tr key={`weekday-bodyrow-${i}`}>{cells}</tr>);
   }
 
-  return <tbody ref={tbody}>{rows}</tbody>;
+  return rows;
 }
-
-export default CalendarBody;
 
 function CalendarCell({ dateString, date }) {
   return (
@@ -102,4 +79,27 @@ function CalendarCell({ dateString, date }) {
       <span data-records></span>
     </td>
   );
+}
+
+function appendDates({ nodes = [], records = [] }) {
+  nodes.forEach((cell) => {
+    // !TODO: Account for 2 more more entries
+    // matched Records forEach append to cell?
+    records.filter((record) => {
+      const isMatch =
+        getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
+          ? record
+          : null;
+
+      if (isMatch) {
+        //
+        cell
+          .querySelector('[data-records]')
+          .insertAdjacentHTML(
+            'beforeend',
+            `<small style="font-size: .5rem; color: rebeccapurple"> ${record.id}</small>`
+          );
+      }
+    });
+  });
 }
