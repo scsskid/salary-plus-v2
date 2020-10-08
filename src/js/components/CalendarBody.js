@@ -5,7 +5,7 @@ import {
   getShortIsoString
 } from '../helpers/helpers.js';
 
-function CalendarBody({ inputDate }) {
+function CalendarBody({ inputDate, records }) {
   const firstDay = getFirstDay(inputDate);
   const daysInMonth = getDaysInMonth(inputDate);
   const currentDate = new Date();
@@ -13,7 +13,9 @@ function CalendarBody({ inputDate }) {
   let rows = [];
 
   React.useEffect(() => {
-    console.log('effect');
+    // get records for inputDate Month
+    console.log(records);
+    // append data to cells
   });
 
   for (let i = 0; i < 6; i++) {
