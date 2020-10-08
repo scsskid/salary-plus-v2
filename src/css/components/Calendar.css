@@ -22,6 +22,11 @@
   right: 2px;
 }
 
+.calendar-table [data-selected='selected'] button {
+  outline: 5px solid #000;
+  color: red !important;
+}
+
 [data-today] button {
   color: rebeccapurple;
   font-weight: bold;

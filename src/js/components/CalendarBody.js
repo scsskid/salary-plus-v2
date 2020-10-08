@@ -2,7 +2,8 @@ import React from 'react';
 import {
   getFirstDay,
   getDaysInMonth,
-  getShortIsoString
+  getShortIsoString,
+  isSameDay
 } from '../helpers/helpers.js';
 
 function CalendarBody({ inputDate, records, updateInputDate }) {
@@ -65,6 +66,7 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
             date={date}
             key={`weekday-bodycell-${j}`}
             updateInputDate={updateInputDate}
+            inputDate={inputDate}
           />
         );
         date++;
@@ -77,14 +79,28 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
   return rows;
 }
 
-function CalendarCell({ dateString, date, updateInputDate }) {
+function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
   const rootEl = React.useRef();
+  const cellDateObj = new Date(dateString);
+
+  const cellMatchesInputDate = isSameDay(cellDateObj, inputDate);
+
   function onClick() {
     updateInputDate(new Date(rootEl.current.dataset.dateString));
+
+    console.log(`
+    ${cellDateObj} 
+    ${inputDate} 
+    ${cellMatchesInputDate}
+  `);
   }
 
   return (
-    <td ref={rootEl} data-date-string={dateString}>
+    <td
+      ref={rootEl}
+      data-date-string={dateString}
+      data-selected={cellMatchesInputDate ? `selected` : ``}
+    >
       <button onClick={onClick} onKeyUp={onClick}>
         <span>{date}</span>
         <span data-records></span>
@@ -95,9 +111,6 @@ function CalendarCell({ dateString, date, updateInputDate }) {
 
 function appendDates({ nodes = [], records = [] }) {
   nodes.forEach((cell) => {
-    // !TODO: Account for 2 more more entries
-    // matched Records forEach append to cell?
-
     records.filter((record) => {
       const isMatch =
         getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
