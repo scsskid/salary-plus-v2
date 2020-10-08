@@ -3,12 +3,37 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Add from './components/Add';
 import Calendar from './components/Calendar';
+import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import '../css/index.css';
+import sampleData from '../data/sample-data';
 import Nav from './components/Nav';
+import { useLocalStorageState } from './utils/store';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
+  const [appData, setAppData] = useLocalStorageState(
+    'salary-plus:app-data',
+    null
+  );
+
+  let startPage; // in State?
+
+  function insertSampleData() {
+    setAppData(sampleData);
+  }
+
+  function insertBootstrapData() {
+    setAppData({
+      ...sampleData,
+      records: [],
+      jobs: [],
+      patterns: [],
+      user: {
+        name: 'Anonymous'
+      }
+    });
+  }
 
   const changeMonth = (summand = 0) => {
     const newDate = new Date(inputDate);
@@ -32,8 +57,21 @@ const App = () => {
     setInputDate(date);
   };
 
-  // console.log(JSON.stringify(dataShifted));
-  // console.table(dataShifted.records.slice(0));
+  if (appData === null) {
+    startPage = (
+      <Welcome seedFunctions={{ insertSampleData, insertBootstrapData }} />
+    );
+  } else {
+    const records = appData.records;
+    startPage = (
+      <Calendar
+        inputDate={inputDate}
+        changeMonth={changeMonth}
+        updateInputDate={updateInputDate}
+        records={records}
+      />
+    );
+  }
 
   return (
     <Router>
@@ -41,11 +79,7 @@ const App = () => {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Calendar
-              inputDate={inputDate}
-              changeMonth={changeMonth}
-              updateInputDate={updateInputDate}
-            />
+            {startPage}
           </Route>
 
           <Route path="/add" component={Add} />

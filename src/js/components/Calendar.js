@@ -2,12 +2,11 @@ import React from 'react';
 import CalendarBody from './CalendarBody.js';
 import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
-import { pad } from '../helpers/helpers.js';
-import sampleData from '../../data/sample-data';
+import { pad } from '../utils/helpers.js';
 
-function Calendar({ inputDate, changeMonth, updateInputDate }) {
+function Calendar({ inputDate, changeMonth, updateInputDate, records }) {
   const monthRecords = getRecordsByMonth({
-    records: sampleData.records,
+    records,
     inputDate
   });
 

@@ -4,7 +4,7 @@ import {
   getDaysInMonth,
   getShortIsoString,
   isSameDay
-} from '../helpers/helpers.js';
+} from '../utils/helpers.js';
 
 function CalendarBody({ inputDate, records, updateInputDate }) {
   const tbody = React.useRef();

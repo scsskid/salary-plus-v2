@@ -1,5 +1,5 @@
 import React from 'react';
-import { getDayName } from '../helpers/helpers.js';
+import { getDayName } from '../utils/helpers.js';
 
 function CalendarHead() {
   let cells = [];
