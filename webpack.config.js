@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
-  devtool: 'cheap-source-map',
+  devtool: 'eval-inline-source-map',
   devServer: {
     historyApiFallback: true,
     open: false,
