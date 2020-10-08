@@ -22,10 +22,6 @@ const App = () => {
     setInputDate(new Date('1982-10-04'));
   };
 
-  const resetInputDate = () => {
-    setInputDate(new Date());
-  };
-
   const updateInputDate = (summand = 0) => {
     const newDate = new Date(inputDate);
     const now = new Date();
