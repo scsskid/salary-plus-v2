@@ -8,15 +8,15 @@
   width: calc(100% / 7);
   border-radius: 2px;
   position: relative;
-  height: 2rem;
+  height: 3rem;
 }
 
 .calendar-table button {
   background: none;
   display: block;
   width: 100%;
-  text-align: left;
-
+  /* text-align: left; */
+  padding: 0;
   position: absolute;
   top: 0;
   left: 0;
