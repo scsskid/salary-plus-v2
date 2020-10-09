@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   },
-  devtool: 'eval-inline-source-map',
+  devtool: 'cheap-source-map',
   devServer: {
     historyApiFallback: true,
     open: false,
@@ -44,7 +44,10 @@ module.exports = {
               importLoaders: 1
             }
           },
-          'postcss-loader'
+          {
+            loader: 'postcss-loader',
+            options: {}
+          }
         ]
       },
       {

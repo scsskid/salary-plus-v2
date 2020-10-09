@@ -23,6 +23,8 @@ function CalendarBody({ inputDate, records, updateInputDate }) {
     if (todayCell) todayCell.dataset.today = '';
     appendDates({ nodes: allDateCells, records });
 
+    console.log(inputDate);
+
     // Cleanup
     return () => {
       tbody.current
