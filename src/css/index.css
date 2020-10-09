@@ -1,6 +1,7 @@
 @charset "utf-8";
 @import 'vendor/modern-normalize.css';
 @import 'base/typography.css';
+@import 'base/forms.css';
 @import 'base/layout.css';
 @import 'base/misc.css';
 

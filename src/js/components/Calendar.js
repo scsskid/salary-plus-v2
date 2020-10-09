@@ -63,7 +63,7 @@ function getRecordsByMonth({ records, inputDate }) {
 
 export default Calendar;
 
-function DateDetails({ inputDate, dateRecords }) {
+function DateDetails({ dateRecords }) {
   let content = [];
 
   dateRecords.forEach((record) => {

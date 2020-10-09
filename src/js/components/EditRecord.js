@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Add = () => {
+const EditRecord = ({ id }) => {
   return (
     <div className="add">
-      <h1>Add</h1>
+      <h1>Edit {id}</h1>
     </div>
   );
 };
 
-export default Add;
+export default EditRecord;

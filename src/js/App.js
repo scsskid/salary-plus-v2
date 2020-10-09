@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Add from './components/Add';
+import AddRecord from './components/AddRecord';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
@@ -9,6 +9,7 @@ import '../css/index.css';
 import sampleData from '../data/sample-data';
 import Navigation from './components/Navigation';
 import { useLocalStorageState } from './utils/store';
+import { mapFormDataToStorageObject } from './utils/helpers';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -73,6 +74,10 @@ const App = () => {
     );
   }
 
+  function saveRecord(formData) {
+    console.log(mapFormDataToStorageObject(formData));
+  }
+
   return (
     <Router>
       <Navigation />
@@ -82,7 +87,13 @@ const App = () => {
             {startPage}
           </Route>
 
-          <Route path="/add" component={Add} />
+          <Route path="/add">
+            <AddRecord
+              inputDate={inputDate}
+              userJobs={appData.jobs}
+              saveRecord={saveRecord}
+            />
+          </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>

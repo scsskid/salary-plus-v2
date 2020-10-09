@@ -79,3 +79,46 @@ export function isSameDay(d1, d2) {
     d1.getDate() === d2.getDate()
   );
 }
+
+const formatDate = {
+  rfc3339: (date) => {
+    // target: YYYY-MM-DD
+    var year = date.getFullYear().toString();
+    var month = (date.getMonth() + 101).toString().substring(1); // 101 because first month is 0 not 1
+    var day = (date.getDate() + 100).toString().substring(1);
+    return year + '-' + month + '-' + day;
+  }
+};
+
+const mapFormDataToStorageObject = (record) => {
+  record.dateBegin = record.dateBegin.replace(/-/g, '/');
+  record.dateEnd = record.dateBegin;
+
+  // check if endtime is less that begin time (enddate is next day), if so add one day
+  if (record.timeBegin > record.timeEnd) {
+    var recordedDate = new Date(record.dateEnd);
+    var recordedDay = recordedDate.getDate();
+    recordedDate.setDate(recordedDay + 1);
+    record.dateEnd = recordedDate.toDateString();
+  }
+
+  let begin = new Date(record.dateBegin + ' ' + record.timeBegin).toISOString();
+  let end = new Date(record.dateEnd + ' ' + record.timeEnd).toISOString();
+
+  delete record.dateEnd; // ? otherwise it get returned, why?
+
+  return {
+    id: record.id,
+    jobId: parseInt(record.jobId), // ? Why parseInt()?
+    begin,
+    end,
+    bonus: record.bonus || '',
+    note: record.note || '',
+    sickLeave: record.sickLeave == 'on' ? 'true' : '' || '',
+    status: record.status || '',
+    rate: record.rate || '',
+    interval: record.rateInterval || ''
+  };
+};
+
+export { formatDate, mapFormDataToStorageObject };
