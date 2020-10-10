@@ -6,33 +6,19 @@ import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import '../css/index.css';
-import sampleData from '../data/sample-data';
+import { sampleData, bootstrapData } from '../data/sample-data';
 import Navigation from './components/Navigation';
 import { useLocalStorageState } from './utils/store';
 import { mapFormDataToStorageObject } from './utils/helpers';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
-  const [appData, setAppData] = useLocalStorageState('salary-plus:app-data', {
-    app: {
-      version: 'Beta0.2',
-      state: 'welcome'
-    },
-    records: [],
-    jobs: [],
-    patterns: [],
-    user: {
-      name: 'Anonymous',
-      settings: {},
-      autoincrementIds: {
-        records: 0,
-        patterns: 0,
-        jobs: 0
-      }
-    }
-  });
+  const [appData, setAppData] = useLocalStorageState(
+    'salary-plus:app-data',
+    bootstrapData
+  );
 
-  const { records, jobs, user, app, patterns } = appData;
+  const { records, jobs, user, app } = appData;
 
   let startPage; // in State?
 
@@ -91,15 +77,24 @@ const App = () => {
 
   function saveRecord(formData) {
     const newRecord = mapFormDataToStorageObject(formData);
-    newRecord.id = user.autoincrementIds.records + 1;
-    const newRecords = { ...records, newRecord };
-    setAppData({ ...appData, newRecords });
+    newRecord.id = user.incrementIds.records + 1;
+    setAppData({
+      ...appData,
+      user: {
+        ...user,
+        incrementIds: {
+          ...appData.user.incrementIds,
+          records: appData.user.incrementIds.records + 1
+        }
+      },
+      records: [...records, newRecord]
+    });
   }
 
   function resetApp() {
-    // setAppData();
+    setAppData({ ...appData, app: { ...app, state: 'welcome' } });
   }
-
+  console.log(app.state);
   return (
     <Router>
       <Navigation />
@@ -120,9 +115,14 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <div>
-        <button onClick={resetApp}>Reset App</button>
-      </div>
+      <footer style={{ paddingTop: 40 }}>
+        {app.state !== 'welcome' && (
+          <button onClick={resetApp}>Reset App</button>
+        )}
+        <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
+          state: {app.state}
+        </div>
+      </footer>
     </Router>
   );
 };

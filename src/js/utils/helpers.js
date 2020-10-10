@@ -109,7 +109,7 @@ const mapFormDataToStorageObject = (record) => {
 
   return {
     id: record.id,
-    jobId: parseInt(record.jobId), // ? Why parseInt()?
+    jobId: parseInt(record.jobId),
     begin,
     end,
     bonus: record.bonus || '',
@@ -120,5 +120,28 @@ const mapFormDataToStorageObject = (record) => {
     interval: record.rateInterval || ''
   };
 };
+
+/**
+ * add object to or alter obj in array
+ * @param {obj} obj
+ * @param {array} array
+ */
+export function mutateArray(obj, array) {
+  if (typeof obj.id == 'undefined') {
+    // add new
+    obj.id = getMaxId(array) + 1;
+    array.push(obj);
+  } else {
+    // update existing
+    const targetIndex = array.findIndex((el) => {
+      return el.id == obj.id;
+    });
+    array[targetIndex] = obj;
+  }
+
+  return array;
+}
+
+export function insertEntry() {}
 
 export { formatDate, mapFormDataToStorageObject };

@@ -1,7 +1,9 @@
 import React from 'react';
 import { formatDate } from '../utils/helpers';
+import { useHistory } from 'react-router-dom';
 
 const Add = ({ inputDate, saveRecord, userJobs, user }) => {
+  const history = useHistory();
   const form = React.useRef();
   const defaultFormValues = {
     jobId: user.settings.defaultJobId,
@@ -49,6 +51,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
     }
 
     saveRecord(formData);
+    history.push('/');
   }
 
   return (

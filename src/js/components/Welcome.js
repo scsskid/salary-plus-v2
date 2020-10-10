@@ -8,7 +8,7 @@ function Welcome({ seedFunctions }) {
       <h1>Welcome</h1>
       <p>
         Thank you for trying out Salary Calendar.{' '}
-        <span role="img" aria-label="bowing emoji">
+        <span style={{ display: 'none' }} role="img" aria-label="bowing emoji">
           🙇‍♂️
         </span>
       </p>
