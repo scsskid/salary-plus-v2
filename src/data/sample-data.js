@@ -1,8 +1,13 @@
 var appData = {
-  app: { version: '0.0.1' },
+  app: { version: 'Beta0.2', state: 'running' },
   user: {
     name: 'Warren McFly',
-    settings: { defaultJobId: 1 }
+    settings: { defaultJobId: 1 },
+    incrementIds: {
+      records: 159,
+      patterns: 4,
+      jobs: 2
+    }
   },
   records: [
     {
