@@ -5,11 +5,11 @@ import AddRecord from './components/AddRecord';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
-import '../css/index.css';
-import { sampleData, bootstrapData } from '../data/sample-data';
 import Navigation from './components/Navigation';
+import { sampleData, bootstrapData } from '../data/sample-data';
 import { useLocalStorageState } from './utils/store';
 import { mapFormDataToStorageObject } from './utils/helpers';
+import '../css/index.css';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());

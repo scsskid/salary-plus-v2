@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 const Add = ({ inputDate, saveRecord, userJobs, user }) => {
   const history = useHistory();
   const form = React.useRef();
+  const inputRate = React.useRef();
   const defaultFormValues = {
     jobId: user.settings.defaultJobId,
     dateBegin: formatDate.rfc3339(inputDate),
@@ -14,11 +15,6 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
       userJobs.find((job) => job.id === user.settings.defaultJobId)?.rate || 0,
     bonus: 0
   };
-
-  const inputRate = React.useRef();
-  React.useEffect(() => {
-    console.log('effect');
-  });
 
   function OptionsJob() {
     const options = [];
