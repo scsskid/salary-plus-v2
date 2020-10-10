@@ -13,10 +13,26 @@ import { mapFormDataToStorageObject } from './utils/helpers';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
-  const [appData, setAppData] = useLocalStorageState(
-    'salary-plus:app-data',
-    null
-  );
+  const [appData, setAppData] = useLocalStorageState('salary-plus:app-data', {
+    app: {
+      version: 'Beta0.2',
+      state: 'welcome'
+    },
+    records: [],
+    jobs: [],
+    patterns: [],
+    user: {
+      name: 'Anonymous',
+      settings: {},
+      autoincrementIds: {
+        records: 0,
+        patterns: 0,
+        jobs: 0
+      }
+    }
+  });
+
+  const { records, jobs, user, app, patterns } = appData;
 
   let startPage; // in State?
 
@@ -26,12 +42,11 @@ const App = () => {
 
   function insertBootstrapData() {
     setAppData({
-      ...sampleData,
-      records: [],
-      jobs: [],
-      patterns: [],
+      ...appData,
+      app: { ...app, state: 'running' },
       user: {
-        name: 'Anonymous'
+        ...user,
+        name: 'Bootstrapper'
       }
     });
   }
@@ -58,7 +73,7 @@ const App = () => {
     setInputDate(date);
   };
 
-  if (appData === null) {
+  if (app.state === 'welcome') {
     startPage = (
       <Welcome seedFunctions={{ insertSampleData, insertBootstrapData }} />
     );
@@ -75,7 +90,14 @@ const App = () => {
   }
 
   function saveRecord(formData) {
-    console.log(mapFormDataToStorageObject(formData));
+    const newRecord = mapFormDataToStorageObject(formData);
+    newRecord.id = user.autoincrementIds.records + 1;
+    const newRecords = { ...records, newRecord };
+    setAppData({ ...appData, newRecords });
+  }
+
+  function resetApp() {
+    // setAppData();
   }
 
   return (
@@ -90,14 +112,17 @@ const App = () => {
           <Route path="/add">
             <AddRecord
               inputDate={inputDate}
-              userJobs={appData.jobs}
-              user={appData.user}
+              userJobs={jobs}
+              user={user}
               saveRecord={saveRecord}
             />
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
+      <div>
+        <button onClick={resetApp}>Reset App</button>
+      </div>
     </Router>
   );
 };
