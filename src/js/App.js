@@ -18,7 +18,7 @@ const App = () => {
     bootstrapData
   );
 
-  const { records, jobs, user, app } = appData;
+  const { records, jobs, settings, app } = appData;
 
   let startPage; // in State?
 
@@ -73,14 +73,14 @@ const App = () => {
 
   function saveRecord(formData) {
     const newRecord = mapFormDataToStorageObject(formData);
-    newRecord.id = user.incrementIds.records + 1;
+    newRecord.id = settings.incrementIds.records + 1;
     setAppData({
       ...appData,
-      user: {
-        ...user,
+      settings: {
+        ...settings,
         incrementIds: {
-          ...appData.user.incrementIds,
-          records: appData.user.incrementIds.records + 1
+          ...appData.settings.incrementIds,
+          records: appData.settings.incrementIds.records + 1
         }
       },
       records: [...records, newRecord]
@@ -103,8 +103,8 @@ const App = () => {
           <Route path="/add">
             <AddRecord
               inputDate={inputDate}
-              userJobs={jobs}
-              user={user}
+              jobs={jobs}
+              settings={settings}
               saveRecord={saveRecord}
             />
           </Route>

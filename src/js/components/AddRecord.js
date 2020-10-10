@@ -2,24 +2,23 @@ import React from 'react';
 import { formatDate } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
-const Add = ({ inputDate, saveRecord, userJobs, user }) => {
+const Add = ({ inputDate, saveRecord, jobs, settings }) => {
   const history = useHistory();
   const form = React.useRef();
   const inputRate = React.useRef();
   const defaultFormValues = {
-    jobId: user.settings.defaultJobId,
+    jobId: settings.defaultJobId,
     dateBegin: formatDate.rfc3339(inputDate),
     timeBegin: '14:00',
     timeEnd: '02:00',
-    rate:
-      userJobs.find((job) => job.id === user.settings.defaultJobId)?.rate || 0,
+    rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
     bonus: 0
   };
 
   function OptionsJob() {
     const options = [];
 
-    userJobs.forEach((job) => {
+    jobs.forEach((job) => {
       options.push(
         <option key={`job-${job.id}`} value={job.id}>
           {job.name} {job.rate}
@@ -32,9 +31,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
 
   const handleSelectChange = (e) => {
     const selectedJobId = parseInt(e.target.value);
-    inputRate.current.value = userJobs.find(
-      (job) => job.id === selectedJobId
-    ).rate;
+    inputRate.current.value = jobs.find((job) => job.id === selectedJobId).rate;
   };
 
   function handleSubmit(e) {
@@ -63,7 +60,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             type="date"
             onBlur={handleSelectChange}
             onChange={handleSelectChange}
-            defaultValue={user.settings.defaultJobId}
+            defaultValue={settings.defaultJobId}
           >
             <OptionsJob />
           </select>

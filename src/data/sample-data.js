@@ -6,9 +6,7 @@ export const bootstrapData = {
   records: [],
   jobs: [],
   patterns: [],
-  user: {
-    name: 'Anonymous',
-    settings: {},
+  settings: {
     incrementIds: {
       records: 0,
       patterns: 0,
@@ -19,9 +17,8 @@ export const bootstrapData = {
 
 export const sampleData = {
   app: { version: 'Beta0.2', state: 'running' },
-  user: {
-    name: 'Warren McFly',
-    settings: { defaultJobId: 1 },
+  settings: {
+    defaultJobId: 1,
     incrementIds: {
       records: 159,
       patterns: 4,
