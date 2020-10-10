@@ -1,27 +1,21 @@
 import React from 'react';
 import { formatDate } from '../utils/helpers';
 
-const Add = ({ inputDate, saveRecord, userJobs }) => {
-  console.log(userJobs);
+const Add = ({ inputDate, saveRecord, userJobs, user }) => {
   const form = React.useRef();
   const defaultFormValues = {
-    // jobId: store.get('user').return().settings.defaultJobId,
-    jobId: 1,
+    jobId: user.settings.defaultJobId,
     dateBegin: formatDate.rfc3339(inputDate),
     timeBegin: '14:00',
     timeEnd: '02:00',
-    rate: 20,
-    // store.get('jobs') != null
-    //   ? store
-    //       .get('jobs')
-    //       .filter(job => job.id == 1)
-    //       .return()[0].rate
-    //   : 0,
+    rate: userJobs.find((job) => job.id === user.settings.defaultJobId).rate,
     bonus: '0.00'
   };
 
+  const [recordFormData, setRecordFormData] = React.useState(defaultFormValues);
+  const inputRate = React.useRef();
   React.useEffect(() => {
-    console.log();
+    console.log('effect');
   });
 
   function OptionsJob() {
@@ -38,20 +32,22 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
     return options;
   }
 
+  const handleSelectChange = (e) => {
+    const selectedJobId = parseInt(e.target.value);
+    inputRate.current.value = userJobs.find(
+      (job) => job.id === selectedJobId
+    ).rate;
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    const formEntries = new FormData(form).entries();
+    const formEntries = new FormData(e.target).entries();
     const formData = {};
-
     for (var [formElementName, value] of formEntries) {
       formData[formElementName] = value;
     }
 
     saveRecord(formData);
-
-    // process formData
-    // import update records function
   }
 
   return (
@@ -61,7 +57,14 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
       <form ref={form} onSubmit={handleSubmit} action="">
         <div className="form-el">
           <label htmlFor="entry-job">Job</label>
-          <select name="jobId" id="entry-job" type="date">
+          <select
+            name="jobId"
+            id="entry-job"
+            type="date"
+            onBlur={handleSelectChange}
+            onChange={handleSelectChange}
+            defaultValue={user.settings.defaultJobId}
+          >
             <OptionsJob />
           </select>
         </div>
@@ -71,7 +74,7 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
             name="dateBegin"
             id="entry-date"
             type="date"
-            defaultValue={defaultFormValues.dateBegin}
+            defaultValue={recordFormData.dateBegin}
           />
         </div>
         <div className="form-el">
@@ -80,7 +83,7 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
             name="timeBegin"
             id="entry-begin-time"
             type="time"
-            defaultValue={defaultFormValues.timeBegin}
+            defaultValue={recordFormData.timeBegin}
           />
         </div>
         <div className="form-el">
@@ -89,18 +92,20 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
             name="timeEnd"
             id="entry-end-time"
             type="time"
-            defaultValue={defaultFormValues.timeEnd}
+            defaultValue={recordFormData.timeEnd}
           />
         </div>
         <div className="form-el">
           <label htmlFor="entry-rate">Rate</label>
           <input
+            ref={inputRate}
             inputMode="decimal"
             name="rate"
             id="entry-rate"
             type="number"
             step="0.01"
-            defaultValue={defaultFormValues.rate}
+            value={recordFormData.rate}
+            readOnly
           />{' '}
           €
         </div>
@@ -112,7 +117,7 @@ const Add = ({ inputDate, saveRecord, userJobs }) => {
             id="entry-bonus"
             type="number"
             step="0.01"
-            defaultValue={defaultFormValues.bonus}
+            defaultValue={recordFormData.bonus}
           />{' '}
           €
         </div>

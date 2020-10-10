@@ -91,6 +91,7 @@ const App = () => {
             <AddRecord
               inputDate={inputDate}
               userJobs={appData.jobs}
+              user={appData.user}
               saveRecord={saveRecord}
             />
           </Route>
