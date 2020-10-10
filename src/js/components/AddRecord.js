@@ -8,8 +8,9 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
     dateBegin: formatDate.rfc3339(inputDate),
     timeBegin: '14:00',
     timeEnd: '02:00',
-    rate: userJobs.find((job) => job.id === user.settings.defaultJobId).rate,
-    bonus: '0.00'
+    rate:
+      userJobs.find((job) => job.id === user.settings.defaultJobId)?.rate || 0,
+    bonus: 0
   };
 
   const [recordFormData, setRecordFormData] = React.useState(defaultFormValues);
@@ -43,6 +44,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
     e.preventDefault();
     const formEntries = new FormData(e.target).entries();
     const formData = {};
+
     for (var [formElementName, value] of formEntries) {
       formData[formElementName] = value;
     }
