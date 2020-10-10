@@ -1,4 +1,23 @@
-var appData = {
+export const bootstrapData = {
+  app: {
+    version: 'Beta0.2',
+    state: 'welcome'
+  },
+  records: [],
+  jobs: [],
+  patterns: [],
+  user: {
+    name: 'Anonymous',
+    settings: {},
+    autoincrementIds: {
+      records: 0,
+      patterns: 0,
+      jobs: 0
+    }
+  }
+};
+
+export const sampleData = {
   app: { version: 'Beta0.2', state: 'running' },
   user: {
     name: 'Warren McFly',
@@ -1962,7 +1981,3 @@ var appData = {
     }
   ]
 };
-
-export const { app, user, records, jobs } = appData;
-
-export default appData;
