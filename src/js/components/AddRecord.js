@@ -13,7 +13,6 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
     bonus: 0
   };
 
-  const [recordFormData, setRecordFormData] = React.useState(defaultFormValues);
   const inputRate = React.useRef();
   React.useEffect(() => {
     console.log('effect');
@@ -76,7 +75,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             name="dateBegin"
             id="entry-date"
             type="date"
-            defaultValue={recordFormData.dateBegin}
+            defaultValue={defaultFormValues.dateBegin}
           />
         </div>
         <div className="form-el">
@@ -85,7 +84,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             name="timeBegin"
             id="entry-begin-time"
             type="time"
-            defaultValue={recordFormData.timeBegin}
+            defaultValue={defaultFormValues.timeBegin}
           />
         </div>
         <div className="form-el">
@@ -94,7 +93,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             name="timeEnd"
             id="entry-end-time"
             type="time"
-            defaultValue={recordFormData.timeEnd}
+            defaultValue={defaultFormValues.timeEnd}
           />
         </div>
         <div className="form-el">
@@ -106,7 +105,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             id="entry-rate"
             type="number"
             step="0.01"
-            value={recordFormData.rate}
+            value={defaultFormValues.rate}
             readOnly
           />{' '}
           €
@@ -119,7 +118,7 @@ const Add = ({ inputDate, saveRecord, userJobs, user }) => {
             id="entry-bonus"
             type="number"
             step="0.01"
-            defaultValue={recordFormData.bonus}
+            defaultValue={defaultFormValues.bonus}
           />{' '}
           €
         </div>
