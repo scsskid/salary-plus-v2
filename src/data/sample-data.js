@@ -9,7 +9,7 @@ export const bootstrapData = {
   user: {
     name: 'Anonymous',
     settings: {},
-    autoincrementIds: {
+    incrementIds: {
       records: 0,
       patterns: 0,
       jobs: 0

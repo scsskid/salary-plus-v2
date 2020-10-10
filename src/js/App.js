@@ -29,11 +29,7 @@ const App = () => {
   function insertBootstrapData() {
     setAppData({
       ...bootstrapData,
-      app: { ...app, state: 'running' },
-      user: {
-        ...user,
-        name: 'Bootstrapper'
-      }
+      app: { ...app, state: 'running' }
     });
   }
 
