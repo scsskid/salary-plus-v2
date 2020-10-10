@@ -93,7 +93,7 @@ const App = () => {
   console.log(app.state);
   return (
     <Router>
-      <Navigation />
+      {app.state !== 'welcome' && <Navigation />}
       <main className="main">
         <Switch>
           <Route exact path="/">
