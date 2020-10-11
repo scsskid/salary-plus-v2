@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
 import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
@@ -85,13 +86,14 @@ function DateDetails({ dateRecords, jobs }) {
 
 function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
+  const history = useHistory();
   function handleClick() {
-    console.log('click');
+    history.push(`/records/${record.id}`);
   }
   return (
     <>
       <div className="date-details-entry">
-        <button onClick={handleClick}>
+        <button data-record-id={record.id} onClick={handleClick}>
           <p>
             {getTimeOfDate(record.begin)}
             <br />

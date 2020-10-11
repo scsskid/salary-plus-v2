@@ -13,10 +13,14 @@ function Welcome({ seedFunctions }) {
         </span>
       </p>
       <p>
-        <button onClick={insertSampleData}>Insert Sample Data</button>
+        <button className="btn" onClick={insertSampleData}>
+          Insert Sample Data
+        </button>
       </p>
       <p>
-        <button onClick={insertBootstrapData}>Start with empty calendar</button>
+        <button className="btn" onClick={insertBootstrapData}>
+          Start with empty calendar
+        </button>
       </p>
     </div>
   );

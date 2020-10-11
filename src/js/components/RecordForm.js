@@ -1,19 +1,47 @@
 import React from 'react';
-import { formatDate, parseFormData } from '../utils/helpers';
-import { useHistory } from 'react-router-dom';
+import { formatDate, parseFormData, getTimeOfDate } from '../utils/helpers';
+import { useHistory, useParams } from 'react-router-dom';
 
-const Add = ({ inputDate, saveRecord, jobs, settings }) => {
+const RecordForm = ({
+  inputDate,
+  saveRecord,
+  jobs,
+  settings,
+  records,
+  mode
+}) => {
   const history = useHistory();
+  const params = useParams();
   const form = React.useRef();
   const inputRate = React.useRef();
-  const defaultFormValues = {
-    jobId: settings.defaultJobId,
-    dateBegin: formatDate.rfc3339(inputDate),
-    timeBegin: '14:00',
-    timeEnd: '02:00',
-    rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
-    bonus: 0
-  };
+  const requestedRecordId = params?.id;
+  const requestedRecord = records?.find(
+    (record) => record.id === parseInt(requestedRecordId)
+  );
+  let formValues;
+  const [state, setState] = React.useState({ mode });
+
+  if ('insert' === state.mode) {
+    formValues = {
+      id: 0,
+      jobId: settings.defaultJobId,
+      dateBegin: formatDate.rfc3339(inputDate),
+      timeBegin: '14:00',
+      timeEnd: '02:00',
+      rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
+      bonus: 0
+    };
+  } else if ('update' === state.mode) {
+    formValues = {
+      id: requestedRecord.id,
+      jobId: requestedRecord.jobId,
+      dateBegin: formatDate.rfc3339(new Date(requestedRecord.begin)),
+      timeBegin: getTimeOfDate(new Date(requestedRecord.begin)),
+      timeEnd: getTimeOfDate(new Date(requestedRecord.end)),
+      rate: requestedRecord.rate,
+      bonus: requestedRecord.bonus
+    };
+  }
 
   function OptionsJob() {
     const options = [];
@@ -38,15 +66,22 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    saveRecord(parseFormData(e.target));
+    const form = e.target;
+    saveRecord(parseFormData(form));
     history.push('/');
+    setState({ mode: 'insert' });
   }
 
   return (
-    <div className="add">
-      <h1>Add</h1>
+    <>
+      <h1>{state.mode}</h1>
 
-      <form ref={form} onSubmit={handleSubmit} action="">
+      <form
+        ref={form}
+        onSubmit={handleSubmit}
+        data-record-id={formValues.recordId}
+      >
+        <input type="hidden" name="id" value={formValues.id} />
         <div className="form-el">
           <label htmlFor="entry-job">Job</label>
           <select
@@ -55,7 +90,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             type="date"
             onBlur={handleSelectChange}
             onChange={handleSelectChange}
-            defaultValue={settings.defaultJobId}
+            defaultValue={formValues.jobId}
           >
             <OptionsJob />
           </select>
@@ -66,7 +101,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             name="dateBegin"
             id="entry-date"
             type="date"
-            defaultValue={defaultFormValues.dateBegin}
+            defaultValue={formValues.dateBegin}
           />
         </div>
         <div className="form-el">
@@ -75,7 +110,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             name="timeBegin"
             id="entry-begin-time"
             type="time"
-            defaultValue={defaultFormValues.timeBegin}
+            defaultValue={formValues.timeBegin}
           />
         </div>
         <div className="form-el">
@@ -84,7 +119,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             name="timeEnd"
             id="entry-end-time"
             type="time"
-            defaultValue={defaultFormValues.timeEnd}
+            defaultValue={formValues.timeEnd}
           />
         </div>
         <div className="form-el">
@@ -96,7 +131,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             id="entry-rate"
             type="number"
             step="0.01"
-            value={defaultFormValues.rate}
+            value={formValues.rate}
             readOnly
           />{' '}
           €
@@ -109,7 +144,7 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
             id="entry-bonus"
             type="number"
             step="0.01"
-            defaultValue={defaultFormValues.bonus}
+            defaultValue={formValues.bonus}
           />{' '}
           €
         </div>
@@ -126,8 +161,8 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
 
         <div className="form-el"></div>
       </form>
-    </div>
+    </>
   );
 };
 
-export default Add;
+export default RecordForm;

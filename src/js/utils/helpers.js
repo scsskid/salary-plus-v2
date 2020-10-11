@@ -130,17 +130,10 @@ const mapFormDataToStorageObject = (record) => {
  * @param {array} array
  */
 export function mutateArrayWithObject(obj, array) {
-  if (typeof obj.id == 'undefined') {
-    // add new
-    obj.id = getMaxId(array) + 1;
-    array.push(obj);
-  } else {
-    // update existing
-    const targetIndex = array.findIndex((el) => {
-      return el.id == obj.id;
-    });
-    array[targetIndex] = obj;
-  }
+  const targetIndex = array.findIndex((el) => {
+    return el.id == obj.id;
+  });
+  array[targetIndex] = obj;
 
   return array;
 }

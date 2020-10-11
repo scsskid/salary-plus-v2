@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import AddRecord from './components/AddRecord';
+import RecordForm from './components/RecordForm';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
@@ -77,18 +77,29 @@ const App = () => {
   }
 
   function saveRecord(formData) {
-    const newRecord = mapFormDataToStorageObject(formData);
-    newRecord.id = settings.incrementIds.records + 1;
-    setAppData({
-      ...appData,
-      settings: {
+    const id = parseInt(formData.id);
+    const record = mapFormDataToStorageObject(formData);
+    let newRecords,
+      newSettings = appData.settings;
+
+    if (id === 0) {
+      record.id = settings.incrementIds.records + 1;
+      newRecords = [...records, record];
+      newSettings = {
         ...settings,
         incrementIds: {
           ...appData.settings.incrementIds,
           records: appData.settings.incrementIds.records + 1
         }
-      },
-      records: [...records, newRecord]
+      };
+    } else {
+      newRecords = mutateArrayWithObject(record, records);
+    }
+
+    setAppData({
+      ...appData,
+      settings: newSettings,
+      records: newRecords
     });
   }
 
@@ -100,11 +111,9 @@ const App = () => {
     };
 
     const newJobs = mutateArrayWithObject(newJob, appData.jobs);
-    console.log('save Job', newJobs);
     setAppData({
       ...appData,
       jobs: newJobs
-      // jobs: []
     });
   }
 
@@ -122,13 +131,27 @@ const App = () => {
           </Route>
 
           <Route path="/add">
-            <AddRecord
+            <RecordForm
+              mode={`insert`}
               inputDate={inputDate}
               jobs={jobs}
               settings={settings}
               saveRecord={saveRecord}
             />
           </Route>
+          <Route path="/records/:id">
+            <RecordForm
+              mode={`update`}
+              jobs={jobs}
+              settings={settings}
+              records={records}
+              saveRecord={saveRecord}
+            />
+          </Route>
+          <Route path="/records">
+            <NoMatch />
+          </Route>
+
           <Route path="/Settings">
             <Settings settings={settings} jobs={jobs} saveJob={saveJob} />
           </Route>
