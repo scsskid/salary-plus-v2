@@ -21,6 +21,10 @@ const RecordForm = ({
   let formValues;
   const [state, setState] = React.useState({ mode });
 
+  if (state.mode === 'update' && typeof requestedRecord === 'undefined') {
+    return <>{"Error: Requested to update record, which doesn't exist."}</>;
+  }
+
   if ('insert' === state.mode) {
     formValues = {
       id: 0,

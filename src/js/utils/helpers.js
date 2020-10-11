@@ -111,7 +111,7 @@ const mapFormDataToStorageObject = (record) => {
   delete record.dateEnd; // ? otherwise it get returned, why?
 
   return {
-    id: record.id,
+    id: parseInt(record.id),
     jobId: parseInt(record.jobId),
     begin,
     end,
