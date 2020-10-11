@@ -11,6 +11,9 @@ const Navigaton = () => {
         <li>
           <Link to="/add">Add</Link>
         </li>
+        <li>
+          <Link to="/settings">Settings</Link>
+        </li>
       </ul>
     </nav>
   );

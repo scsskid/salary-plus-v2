@@ -15,6 +15,17 @@ export function ISODateString(d) {
   );
 }
 
+export function parseFormData(formData) {
+  const formEntries = new FormData(formData).entries();
+  const data = {};
+
+  for (var [formElementName, value] of formEntries) {
+    data[formElementName] = value;
+  }
+
+  return data;
+}
+
 export function pad(n) {
   return n < 10 ? '0' + n : n;
 }
@@ -126,7 +137,7 @@ const mapFormDataToStorageObject = (record) => {
  * @param {obj} obj
  * @param {array} array
  */
-export function mutateArray(obj, array) {
+export function mutateArrayWithObject(obj, array) {
   if (typeof obj.id == 'undefined') {
     // add new
     obj.id = getMaxId(array) + 1;

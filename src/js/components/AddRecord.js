@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate } from '../utils/helpers';
+import { formatDate, parseFormData } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
 const Add = ({ inputDate, saveRecord, jobs, settings }) => {
@@ -31,19 +31,14 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
 
   const handleSelectChange = (e) => {
     const selectedJobId = parseInt(e.target.value);
-    inputRate.current.value = jobs.find((job) => job.id === selectedJobId).rate;
+    inputRate.current.value = jobs.find(
+      (job) => job.id === selectedJobId
+    )?.rate;
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    const formEntries = new FormData(e.target).entries();
-    const formData = {};
-
-    for (var [formElementName, value] of formEntries) {
-      formData[formElementName] = value;
-    }
-
-    saveRecord(formData);
+    saveRecord(parseFormData(e.target));
     history.push('/');
   }
 

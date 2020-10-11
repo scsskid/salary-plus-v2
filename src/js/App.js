@@ -6,9 +6,13 @@ import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
+import Settings from './components/Settings';
 import { sampleData, bootstrapData } from '../data/sample-data';
 import { useLocalStorageState } from './utils/store';
-import { mapFormDataToStorageObject } from './utils/helpers';
+import {
+  mapFormDataToStorageObject,
+  mutateArrayWithObject
+} from './utils/helpers';
 import '../css/index.css';
 
 const App = () => {
@@ -87,10 +91,26 @@ const App = () => {
     });
   }
 
+  function saveJob(job) {
+    const newJob = {
+      id: parseInt(job.id),
+      name: job.name,
+      rate: parseInt(job.rate)
+    };
+
+    const newJobs = mutateArrayWithObject(newJob, appData.jobs);
+    console.log('save Job', newJobs);
+    setAppData({
+      ...appData,
+      jobs: newJobs
+      // jobs: []
+    });
+  }
+
   function resetApp() {
     setAppData({ ...appData, app: { ...app, state: 'welcome' } });
   }
-  console.log(app.state);
+
   return (
     <Router>
       {app.state !== 'welcome' && <Navigation />}
@@ -107,6 +127,9 @@ const App = () => {
               settings={settings}
               saveRecord={saveRecord}
             />
+          </Route>
+          <Route path="/Settings">
+            <Settings settings={settings} jobs={jobs} saveJob={saveJob} />
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
