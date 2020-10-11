@@ -1,14 +1,22 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 function NoMatch() {
-  let location = useLocation();
+  const location = useLocation();
+  const history = useHistory();
+
+  function goToStart() {
+    history.push('/');
+  }
 
   return (
     <div>
       <h1>404</h1>
       <p>
         Not found: <code>{location.pathname}</code>
+      </p>
+      <p>
+        <button onClick={goToStart}>Go To Start</button>
       </p>
     </div>
   );
