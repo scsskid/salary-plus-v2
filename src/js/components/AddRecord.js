@@ -119,7 +119,9 @@ const Add = ({ inputDate, saveRecord, jobs, settings }) => {
         </div>
 
         <div className="form-el">
-          <button data-button-submit>Save</button>
+          <button className="btn" data-button-submit>
+            Save
+          </button>
         </div>
 
         <div className="form-el"></div>

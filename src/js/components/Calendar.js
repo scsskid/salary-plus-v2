@@ -85,20 +85,24 @@ function DateDetails({ dateRecords, jobs }) {
 
 function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
-
+  function handleClick() {
+    console.log('click');
+  }
   return (
     <>
       <div className="date-details-entry">
-        <p>
-          {getTimeOfDate(record.begin)}
-          <br />
-          {getTimeOfDate(record.end)}
-        </p>
-        <p>
-          {job.name} (current rate: {job.rate})
-          <br />
-          Recorded Rate: {record.rate}
-        </p>
+        <button onClick={handleClick}>
+          <p>
+            {getTimeOfDate(record.begin)}
+            <br />
+            {getTimeOfDate(record.end)}
+          </p>
+          <p>
+            {job.name} (current rate: {job.rate})
+            <br />
+            Recorded Rate: {record.rate}
+          </p>
+        </button>
       </div>
       <pre>{JSON.stringify(record, null, 2)}</pre>
       <hr />

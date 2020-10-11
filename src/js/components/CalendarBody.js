@@ -99,9 +99,15 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
       data-date-string={dateString}
       data-selected={cellMatchesInputDate ? `selected` : ``}
     >
-      <button onClick={onClick} onKeyUp={onKeyUp}>
-        <span>{date}</span>
-        <span data-records></span>
+      <button
+        className="calendar-date-button"
+        onClick={onClick}
+        onKeyUp={onKeyUp}
+      >
+        <div className="calendar-date-button-inner">
+          <span>{date}</span>
+          <span data-records></span>
+        </div>
       </button>
     </td>
   );

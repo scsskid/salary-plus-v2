@@ -12,7 +12,7 @@
   margin-right: 0.5rem;
 }
 
-button {
+.btn {
   display: inline-block;
   border: none;
   padding: 0.5rem 0.75rem;
@@ -28,8 +28,12 @@ button {
   border-radius: 2px;
 }
 
-button:hover,
-button:focus {
+button {
+  all: unset;
+}
+
+.btn:hover,
+.btn:focus {
   background: #ddd;
 }
 

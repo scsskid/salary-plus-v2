@@ -137,7 +137,9 @@ const App = () => {
       </main>
       <footer style={{ paddingTop: 40 }}>
         {app.state !== 'welcome' && (
-          <button onClick={resetApp}>Reset App</button>
+          <button className="btn" onClick={resetApp}>
+            Reset App
+          </button>
         )}
         <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
           state: {app.state}

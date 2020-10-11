@@ -15,9 +15,17 @@ function CalendarControls({ changeMonth }) {
 
   return (
     <p>
-      <button onClick={decreaseInputDate}>Prev</button>
-      <button onClick={resetInputDate}>Today</button>
-      <button onClick={increaseInputDate}>Next</button>
+      <button className="btn" onClick={decreaseInputDate}>
+        Prev
+      </button>
+      {` `}
+      <button className="btn" onClick={resetInputDate}>
+        Today
+      </button>
+      {` `}
+      <button className="btn" onClick={increaseInputDate}>
+        Next
+      </button>
     </p>
   );
 }
