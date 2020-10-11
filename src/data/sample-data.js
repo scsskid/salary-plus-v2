@@ -21,8 +21,8 @@ export const sampleData = {
     defaultJobId: 1,
     incrementIds: {
       records: 159,
-      patterns: 4,
-      jobs: 2
+      patterns: 2,
+      jobs: 3
     }
   },
   records: [
@@ -1968,13 +1968,21 @@ export const sampleData = {
   jobs: [
     {
       id: 1,
-      name: 'LPG Ostkreuz',
-      rate: 20.0
+      name: 'Cafè Claus',
+      rate: 20.0,
+      status: 'archived'
     },
     {
       id: 2,
-      name: 'Blackrock',
-      rate: 2457.5
+      name: 'Hack0r Grill',
+      rate: 17.5,
+      status: 'active'
+    },
+    {
+      id: 3,
+      name: 'Benedikts Teufelsküche',
+      rate: 75.0,
+      status: 'active'
     }
   ]
 };
