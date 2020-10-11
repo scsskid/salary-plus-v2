@@ -1,3 +1,11 @@
+// general
+
+export function pad(n) {
+  return n < 10 ? '0' + n : n;
+}
+
+// dates
+
 export function ISODateString(d) {
   return (
     d.getUTCFullYear() +
@@ -13,21 +21,6 @@ export function ISODateString(d) {
     pad(d.getUTCSeconds()) +
     'Z'
   );
-}
-
-export function parseFormData(formData) {
-  const formEntries = new FormData(formData).entries();
-  const data = {};
-
-  for (var [formElementName, value] of formEntries) {
-    data[formElementName] = value;
-  }
-
-  return data;
-}
-
-export function pad(n) {
-  return n < 10 ? '0' + n : n;
 }
 
 export function getDayName(i) {
@@ -62,27 +55,6 @@ export function logMonthSpecs(inputDate) {
 `);
 }
 
-export function shiftRecordsDates({ data, summand }) {
-  const shiftMonths = (record) => {
-    const beginCopy = new Date(record.begin);
-    const endCopy = new Date(record.end);
-
-    beginCopy.setMonth(beginCopy.getMonth() + summand);
-    endCopy.setMonth(endCopy.getMonth() + summand);
-
-    return {
-      ...record,
-      begin: beginCopy.toISOString(),
-      end: endCopy.toISOString()
-    };
-  };
-
-  return {
-    ...data,
-    records: data.records.map(shiftMonths)
-  };
-}
-
 export function isSameDay(d1, d2) {
   return (
     d1.getFullYear() === d2.getFullYear() &&
@@ -100,6 +72,19 @@ const formatDate = {
     return year + '-' + month + '-' + day;
   }
 };
+
+// Input Handling
+
+export function parseFormData(formData) {
+  const formEntries = new FormData(formData).entries();
+  const data = {};
+
+  for (var [formElementName, value] of formEntries) {
+    data[formElementName] = value;
+  }
+
+  return data;
+}
 
 const mapFormDataToStorageObject = (record) => {
   record.dateBegin = record.dateBegin.replace(/-/g, '/');
@@ -156,3 +141,26 @@ export function mutateArrayWithObject(obj, array) {
 export function insertEntry() {}
 
 export { formatDate, mapFormDataToStorageObject };
+
+// Development
+
+export function shiftRecordsDates({ data, summand }) {
+  const shiftMonths = (record) => {
+    const beginCopy = new Date(record.begin);
+    const endCopy = new Date(record.end);
+
+    beginCopy.setMonth(beginCopy.getMonth() + summand);
+    endCopy.setMonth(endCopy.getMonth() + summand);
+
+    return {
+      ...record,
+      begin: beginCopy.toISOString(),
+      end: endCopy.toISOString()
+    };
+  };
+
+  return {
+    ...data,
+    records: data.records.map(shiftMonths)
+  };
+}
