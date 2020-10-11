@@ -71,6 +71,7 @@ const App = () => {
         changeMonth={changeMonth}
         updateInputDate={updateInputDate}
         records={records}
+        jobs={jobs}
       />
     );
   }

@@ -2,9 +2,9 @@ import React from 'react';
 import CalendarBody from './CalendarBody.js';
 import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
-import { pad } from '../utils/helpers.js';
+import { pad, getTimeOfDate } from '../utils/helpers.js';
 
-function Calendar({ inputDate, changeMonth, updateInputDate, records }) {
+function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
   const monthRecords = getRecordsByMonth({
     records,
     inputDate
@@ -35,7 +35,11 @@ function Calendar({ inputDate, changeMonth, updateInputDate, records }) {
           updateInputDate={updateInputDate}
         />
       </table>
-      <DateDetails inputDate={inputDate} dateRecords={dateRecords} />
+      <DateDetails
+        inputDate={inputDate}
+        jobs={jobs}
+        dateRecords={dateRecords}
+      />
     </div>
   );
 }
@@ -63,22 +67,41 @@ function getRecordsByMonth({ records, inputDate }) {
 
 export default Calendar;
 
-function DateDetails({ dateRecords }) {
+function DateDetails({ dateRecords, jobs }) {
   let content = [];
 
   dateRecords.forEach((record) => {
     content.push(
-      <DateDetailsEntry key={`record-details-${record.id}`} record={record} />
+      <DateDetailsEntry
+        key={`record-details-${record.id}`}
+        record={record}
+        jobs={jobs}
+      />
     );
   });
 
   return <div className="date-details">{content}</div>;
 }
 
-function DateDetailsEntry({ record }) {
+function DateDetailsEntry({ record, jobs }) {
+  const job = jobs.find((job) => job.id == record.jobId);
+
   return (
-    <div className="date-details-entry">
+    <>
+      <div className="date-details-entry">
+        <p>
+          {getTimeOfDate(record.begin)}
+          <br />
+          {getTimeOfDate(record.end)}
+        </p>
+        <p>
+          {job.name} (current rate: {job.rate})
+          <br />
+          Recorded Rate: {record.rate}
+        </p>
+      </div>
       <pre>{JSON.stringify(record, null, 2)}</pre>
-    </div>
+      <hr />
+    </>
   );
 }

@@ -38,6 +38,13 @@ export function getDaysInMonth(date) {
   return 32 - new Date(date.getFullYear(), date.getMonth(), 32).getDate();
 }
 
+export function getTimeOfDate(string) {
+  return new Date(string).toLocaleTimeString('DE-de', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
 export function getShortIsoString(date) {
   const offset = date.getTimezoneOffset();
   date = new Date(date.getTime() - offset * 60 * 1000);
