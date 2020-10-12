@@ -79,8 +79,10 @@ const App = () => {
   function saveRecord(formData) {
     const id = parseInt(formData.id);
     const record = mapFormDataToStorageObject(formData);
-    let newRecords,
-      newSettings = appData.settings;
+    const dateBeginSplit = formData.dateBegin.split('/');
+    const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
+    let newRecords;
+    let newSettings = appData.settings;
 
     if (id === 0) {
       record.id = settings.incrementIds.records + 1;
@@ -101,6 +103,7 @@ const App = () => {
       settings: newSettings,
       records: newRecords
     });
+    updateInputDate(new Date(dateIsoString));
   }
 
   function saveJob(job) {
