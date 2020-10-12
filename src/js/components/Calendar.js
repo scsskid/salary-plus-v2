@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
 import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
-import { pad, getTimeOfDate } from '../utils/helpers.js';
+import { pad } from '../utils/helpers.js';
 
 function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
   const monthRecords = getRecordsByMonth({
@@ -20,11 +20,22 @@ function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
     <div className="calendar">
       <h1>Calendar</h1>
       <p>
+        {inputDate.toLocaleDateString(undefined, {
+          month: 'long',
+          timeZone: 'Europe/Berlin'
+        })}{' '}
+        {inputDate.getFullYear()}
+      </p>
+
+      <p>
         <code>
           inputDate:{` `}
           {`${inputDate.getFullYear()}-${pad(inputDate.getMonth() + 1)}-${pad(
             inputDate.getDate()
           )}`}
+          <br></br>
+          {inputDate.toLocaleDateString(undefined, undefined)}
+          <br></br>
         </code>
       </p>
       <CalendarControls changeMonth={changeMonth} />
@@ -95,9 +106,17 @@ function DateDetailsEntry({ record, jobs }) {
       <div className="date-details-entry">
         <button data-record-id={record.id} onClick={handleClick}>
           <p>
-            {getTimeOfDate(record.begin)}
+            {new Date(record.begin).toLocaleTimeString(undefined, {
+              timeZone: 'Europe/Berlin',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
             <br />
-            {getTimeOfDate(record.end)}
+            {new Date(record.end).toLocaleTimeString(undefined, {
+              timeZone: 'Europe/Berlin',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
           </p>
           <p>
             {job.name} (current rate: {job.rate})

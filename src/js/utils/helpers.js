@@ -1,3 +1,31 @@
+const dateFormatOptions = {
+  nice: {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  },
+  short: {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  }
+};
+
+export function getWeekDayNames({ format = 'short', locale = 'en-EN' }) {
+  const names = [];
+  const date = new Date('2020-10-04');
+  let days = 7;
+
+  while (days !== 0) {
+    date.setDate(date.getDate() + 1);
+    names.push(date.toLocaleDateString(locale, { weekday: format }));
+    days--;
+  }
+
+  return names;
+}
+
 // general
 
 export function pad(n) {
@@ -6,26 +34,24 @@ export function pad(n) {
 
 // dates
 
-export function ISODateString(d) {
-  return (
-    d.getUTCFullYear() +
-    '-' +
-    pad(d.getUTCMonth() + 1) +
-    '-' +
-    pad(d.getUTCDate()) +
-    'T' +
-    pad(d.getUTCHours()) +
-    ':' +
-    pad(d.getUTCMinutes()) +
-    ':' +
-    pad(d.getUTCSeconds()) +
-    'Z'
-  );
+export function getShortIsoString(date) {
+  const offset = date.getTimezoneOffset();
+  date = new Date(date.getTime() - offset * 60 * 1000);
+  return date.toISOString().split('T')[0];
 }
 
-export function getDayName(i) {
-  return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][i];
-}
+// export function getlocaleDateString(date, locale = undefined) {
+//   return date.toLocaleDateString(locale, {
+//     weekday: 'long',
+//     year: 'numeric',
+//     month: 'long',
+//     day: '2-digit'
+//   });
+// }
+
+// export function getDayNames() {
+//   return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+// }
 
 // Get First (Week-)Day, Adjusted for On Monday Starting Week
 export function getFirstDay(date) {
@@ -43,12 +69,6 @@ export function getTimeOfDate(string) {
     hour: '2-digit',
     minute: '2-digit'
   });
-}
-
-export function getShortIsoString(date) {
-  const offset = date.getTimezoneOffset();
-  date = new Date(date.getTime() - offset * 60 * 1000);
-  return date.toISOString().split('T')[0];
 }
 
 export function logMonthSpecs(inputDate) {
