@@ -21,7 +21,6 @@ import {
 import '../css/index.css';
 
 const App = () => {
-  const history = useHistory();
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, setAppData] = useLocalStorageState(
     'salary-plus:app-data',
