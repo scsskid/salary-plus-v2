@@ -77,7 +77,6 @@ const RecordForm = ({
     const form = e.target;
     saveRecord(parseFormData(form));
     history.push('/');
-    setState({ mode: 'insert' });
   }
 
   return (

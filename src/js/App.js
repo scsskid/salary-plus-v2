@@ -113,18 +113,42 @@ const App = () => {
     updateInputDate(new Date(dateIsoString));
   }
 
-  function saveJob(job) {
-    const newJob = {
-      id: parseInt(job.id),
-      name: job.name,
-      rate: parseInt(job.rate)
+  function saveJob({ id, name, rate, status }) {
+    id = parseInt(id);
+    rate = parseInt(rate);
+    const mode = id === 0 ? 'insert' : 'edit';
+    const nextId = settings.incrementIds.jobs + 1;
+
+    let newJob = {
+      id: mode === 'insert' ? nextId : id,
+      name,
+      rate,
+      status
     };
 
-    const newJobs = mutateArrayWithObject(newJob, appData.jobs);
-    setAppData({
-      ...appData,
-      jobs: newJobs
-    });
+    if (id === 0) {
+      const newJobs = mutateArrayWithObject(newJob, appData.jobs);
+      setAppData({
+        ...appData,
+        jobs: newJobs
+      });
+    } else {
+      console.log(name, id);
+      setAppData({
+        ...appData,
+        settings: {
+          ...settings,
+          incrementIds: {
+            ...settings.incrementIds,
+            jobs: nextId
+          }
+        },
+        jobs: {
+          ...jobs,
+          newJob
+        }
+      });
+    }
   }
 
   function resetApp() {
@@ -152,7 +176,7 @@ const App = () => {
           </Route>
 
           <Route path="/jobs/:id">
-            <JobForm jobs={jobs} />
+            <JobForm jobs={jobs} saveJob={saveJob} />
           </Route>
           <Route path="/records/:id">
             <RecordForm
