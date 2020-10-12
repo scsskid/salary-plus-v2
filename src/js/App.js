@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useHistory
+} from 'react-router-dom';
 import RecordForm from './components/RecordForm';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
@@ -16,6 +21,7 @@ import {
 import '../css/index.css';
 
 const App = () => {
+  const history = useHistory();
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, setAppData] = useLocalStorageState(
     'salary-plus:app-data',
@@ -162,18 +168,28 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <footer style={{ paddingTop: 40 }}>
-        {app.state !== 'welcome' && (
-          <button className="btn" onClick={resetApp}>
-            Reset App
-          </button>
-        )}
-        <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
-          state: {app.state}
-        </div>
-      </footer>
+      <AppFooter appState={app.state} resetApp={resetApp} />
     </Router>
   );
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+function AppFooter({ appState, resetApp }) {
+  const history = useHistory();
+  function handleClick() {
+    resetApp();
+    history.push('/');
+  }
+
+  return (
+    <footer style={{ paddingTop: 40 }}>
+      {appState !== 'welcome' && (
+        <button className="btn" onClick={handleClick}>
+          Reset App
+        </button>
+      )}
+      <div style={{ fontSize: '.8rem', opacity: 0.5 }}>state: {appState}</div>
+    </footer>
+  );
+}
