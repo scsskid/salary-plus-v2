@@ -122,6 +122,7 @@ const App = () => {
 
   function resetApp() {
     setAppData({ ...appData, app: { ...app, state: 'welcome' } });
+    setInputDate(new Date());
   }
 
   return (
