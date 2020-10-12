@@ -12,6 +12,7 @@ import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
 import Settings from './components/Settings';
+import JobForm from './components/JobForm';
 import { sampleData, bootstrapData } from '../data/sample-data';
 import { useLocalStorageState } from './utils/store';
 import {
@@ -148,6 +149,10 @@ const App = () => {
               settings={settings}
               saveRecord={saveRecord}
             />
+          </Route>
+
+          <Route path="/jobs/:id">
+            <JobForm jobs={jobs} />
           </Route>
           <Route path="/records/:id">
             <RecordForm
