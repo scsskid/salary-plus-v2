@@ -1,6 +1,9 @@
 const settings = {
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  locale: 'en'
+  locale: 'en',
+  currency: 'EUR',
+  previousPreset: null,
+  previousJob: null
 };
 
 export const bootstrapData = {
@@ -10,12 +13,12 @@ export const bootstrapData = {
   },
   records: [],
   jobs: [],
-  patterns: [],
+  presets: [],
   settings: {
     ...settings,
     incrementIds: {
       records: 0,
-      patterns: 0,
+      presets: 0,
       jobs: 0
     }
   }
@@ -28,7 +31,7 @@ export const sampleData = {
     defaultJobId: 1,
     incrementIds: {
       records: 159,
-      patterns: 2,
+      presets: 2,
       jobs: 3
     }
   },
@@ -1954,7 +1957,7 @@ export const sampleData = {
       interval: 'hourly'
     }
   ],
-  patterns: [
+  presets: [
     {
       id: 1,
       jobId: 1,

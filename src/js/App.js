@@ -27,7 +27,7 @@ const App = () => {
     bootstrapData
   );
 
-  const { records, jobs, settings, app } = appData;
+  const { records, jobs, settings, app, presets } = appData;
 
   let startPage; // in State?
 
@@ -163,7 +163,12 @@ const App = () => {
           </Route>
 
           <Route path="/Settings">
-            <Settings settings={settings} jobs={jobs} saveJob={saveJob} />
+            <Settings
+              settings={settings}
+              jobs={jobs}
+              saveJob={saveJob}
+              presets={presets}
+            />
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
