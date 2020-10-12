@@ -1,3 +1,8 @@
+const settings = {
+  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  locale: 'en'
+};
+
 export const bootstrapData = {
   app: {
     version: 'Beta0.2',
@@ -7,6 +12,7 @@ export const bootstrapData = {
   jobs: [],
   patterns: [],
   settings: {
+    ...settings,
     incrementIds: {
       records: 0,
       patterns: 0,
@@ -18,6 +24,7 @@ export const bootstrapData = {
 export const sampleData = {
   app: { version: 'Beta0.2', state: 'running' },
   settings: {
+    ...settings,
     defaultJobId: 1,
     incrementIds: {
       records: 159,

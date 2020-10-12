@@ -77,6 +77,7 @@ const App = () => {
         updateInputDate={updateInputDate}
         records={records}
         jobs={jobs}
+        settings={settings}
       />
     );
   }
@@ -167,14 +168,14 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app.state} resetApp={resetApp} />
+      <AppFooter appState={app.state} settings={settings} resetApp={resetApp} />
     </Router>
   );
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-function AppFooter({ appState, resetApp }) {
+function AppFooter({ appState, resetApp, settings }) {
   const history = useHistory();
   function handleClick() {
     resetApp();
@@ -184,9 +185,13 @@ function AppFooter({ appState, resetApp }) {
   return (
     <footer style={{ paddingTop: 40 }}>
       {appState !== 'welcome' && (
-        <button className="btn" onClick={handleClick}>
-          Reset App
-        </button>
+        <>
+          <button className="btn" onClick={handleClick}>
+            Reset App
+          </button>
+
+          <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
+        </>
       )}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>state: {appState}</div>
     </footer>

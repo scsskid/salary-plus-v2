@@ -1,11 +1,21 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
-import CalendarHead from './CalendarHead.js';
 import CalendarControls from './CalendarControls.js';
-import { pad } from '../utils/helpers.js';
+import {
+  pad,
+  getIntlDateTimeFormat,
+  getWeekDayNames
+} from '../utils/helpers.js';
 
-function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
+function Calendar({
+  inputDate,
+  changeMonth,
+  updateInputDate,
+  records,
+  jobs,
+  settings
+}) {
   const monthRecords = getRecordsByMonth({
     records,
     inputDate
@@ -22,7 +32,7 @@ function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
       <p>
         {inputDate.toLocaleDateString(undefined, {
           month: 'long',
-          timeZone: 'Europe/Berlin'
+          timeZone: settings.timeZone
         })}{' '}
         {inputDate.getFullYear()}
       </p>
@@ -40,7 +50,7 @@ function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
       </p>
       <CalendarControls changeMonth={changeMonth} />
       <table className="calendar-table">
-        <CalendarHead />
+        <CalendarHead settings={settings} />
         <CalendarBody
           inputDate={inputDate}
           records={monthRecords}
@@ -51,8 +61,76 @@ function Calendar({ inputDate, changeMonth, updateInputDate, records, jobs }) {
         inputDate={inputDate}
         jobs={jobs}
         dateRecords={dateRecords}
+        settings={settings}
       />
     </div>
+  );
+}
+
+function DateDetails({ dateRecords, jobs, settings }) {
+  let content = [];
+
+  dateRecords.forEach((record) => {
+    content.push(
+      <DateDetailsEntry
+        key={`record-details-${record.id}`}
+        record={record}
+        jobs={jobs}
+        settings={settings}
+      />
+    );
+  });
+
+  return <div className="date-details">{content}</div>;
+}
+
+function DateDetailsEntry({ record, jobs, settings }) {
+  const job = jobs.find((job) => job.id == record.jobId);
+  const history = useHistory();
+
+  const intl = getIntlDateTimeFormat({
+    date: new Date(record.begin),
+    options: {
+      timeZone: settings.timeZone,
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }
+  });
+
+  function handleClick() {
+    history.push(`/records/${record.id}`);
+  }
+
+  return (
+    <>
+      <div className="date-details-entry">
+        <button data-record-id={record.id} onClick={handleClick}>
+          <p>{intl}</p>
+          <p>
+            {new Date(record.begin).toLocaleTimeString(undefined, {
+              timeZone: 'Europe/Berlin',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+            <br />
+            {new Date(record.end).toLocaleTimeString(undefined, {
+              timeZone: 'Europe/Berlin',
+              hour: '2-digit',
+              minute: '2-digit'
+            })}
+          </p>
+          <p>
+            {job.name} (current rate: {job.rate})
+            <br />
+            Recorded Rate: {record.rate}
+          </p>
+        </button>
+      </div>
+      <pre>{JSON.stringify(record, null, 2)}</pre>
+      <hr />
+    </>
   );
 }
 
@@ -79,54 +157,19 @@ function getRecordsByMonth({ records, inputDate }) {
 
 export default Calendar;
 
-function DateDetails({ dateRecords, jobs }) {
-  let content = [];
-
-  dateRecords.forEach((record) => {
-    content.push(
-      <DateDetailsEntry
-        key={`record-details-${record.id}`}
-        record={record}
-        jobs={jobs}
-      />
+function CalendarHead({ settings }) {
+  let cells = [];
+  for (let i = 0; i < 7; i++) {
+    cells.push(
+      <td key={`weekday-headcell-${i}`}>
+        {getWeekDayNames({ format: 'short', locale: settings.locale })[i]}
+      </td>
     );
-  });
-
-  return <div className="date-details">{content}</div>;
-}
-
-function DateDetailsEntry({ record, jobs }) {
-  const job = jobs.find((job) => job.id == record.jobId);
-  const history = useHistory();
-  function handleClick() {
-    history.push(`/records/${record.id}`);
   }
+
   return (
-    <>
-      <div className="date-details-entry">
-        <button data-record-id={record.id} onClick={handleClick}>
-          <p>
-            {new Date(record.begin).toLocaleTimeString(undefined, {
-              timeZone: 'Europe/Berlin',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-            <br />
-            {new Date(record.end).toLocaleTimeString(undefined, {
-              timeZone: 'Europe/Berlin',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
-          </p>
-          <p>
-            {job.name} (current rate: {job.rate})
-            <br />
-            Recorded Rate: {record.rate}
-          </p>
-        </button>
-      </div>
-      <pre>{JSON.stringify(record, null, 2)}</pre>
-      <hr />
-    </>
+    <thead>
+      <tr>{cells}</tr>
+    </thead>
   );
 }

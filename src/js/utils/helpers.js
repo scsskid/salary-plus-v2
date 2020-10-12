@@ -12,7 +12,7 @@ const dateFormatOptions = {
   }
 };
 
-export function getWeekDayNames({ format = 'short', locale = 'en-EN' }) {
+export function getWeekDayNames({ format = 'short', locale = 'en' }) {
   const names = [];
   const date = new Date('2020-10-04');
   let days = 7;
@@ -32,22 +32,34 @@ export function pad(n) {
   return n < 10 ? '0' + n : n;
 }
 
+export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
+  .timeZone;
+
 // dates
+
+export function getIntlDateTimeFormat(
+  { date, options } = {
+    date: new Date(),
+    options: {
+      timeZone: Intl.DateTimeFormat().resolvedOptions(),
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    }
+  }
+) {
+  return new Intl.DateTimeFormat(undefined, options).format(date);
+}
 
 export function getShortIsoString(date) {
   const offset = date.getTimezoneOffset();
   date = new Date(date.getTime() - offset * 60 * 1000);
   return date.toISOString().split('T')[0];
 }
-
-// export function getlocaleDateString(date, locale = undefined) {
-//   return date.toLocaleDateString(locale, {
-//     weekday: 'long',
-//     year: 'numeric',
-//     month: 'long',
-//     day: '2-digit'
-//   });
-// }
 
 // export function getDayNames() {
 //   return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
