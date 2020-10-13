@@ -118,23 +118,21 @@ const App = () => {
     rate = parseInt(rate);
     const mode = id === 0 ? 'insert' : 'edit';
     const nextId = settings.incrementIds.jobs + 1;
-
     let newJob = {
       id: mode === 'insert' ? nextId : id,
       name,
       rate,
       status
     };
+    const newJobs = mutateArrayWithObject(newJob, appData.jobs);
 
     if (id === 0) {
-      const newJobs = mutateArrayWithObject(newJob, appData.jobs);
       setAppData({
         ...appData,
         jobs: newJobs
       });
     } else {
-      console.log(name, id);
-      setAppData({
+      const newAppData = {
         ...appData,
         settings: {
           ...settings,
@@ -143,11 +141,9 @@ const App = () => {
             jobs: nextId
           }
         },
-        jobs: {
-          ...jobs,
-          newJob
-        }
-      });
+        jobs: newJobs
+      };
+      setAppData(newAppData);
     }
   }
 

@@ -10,8 +10,6 @@ const JobForm = function ({ jobs, saveJob }) {
 
   if (state === 'edit') {
     ({ name, status, rate } = jobs.find((job) => job.id === parseInt(id)));
-  } else {
-    ({ name, status, rate } = {});
   }
 
   function handleSubmit(e) {
