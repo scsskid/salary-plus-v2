@@ -171,7 +171,7 @@ const App = () => {
             />
           </Route>
 
-          <Route path="/jobs/:id">
+          <Route path="/jobs/:jobId">
             <JobForm jobs={jobs} saveJob={saveJob} />
           </Route>
           <Route path="/records/:id">

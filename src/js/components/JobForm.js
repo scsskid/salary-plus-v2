@@ -3,12 +3,26 @@ import { parseFormData } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 
 const JobForm = function ({ jobs, saveJob }) {
-  const { id } = useParams();
+  const { jobId } = useParams();
   const history = useHistory();
-  const [state, setState] = React.useState('edit');
-  let name, status, rate;
+  const [state, setState] = React.useState({
+    mode: 'edit',
+    formData: {
+      id: jobId,
+      name: '',
+      rate: '',
+      status: ''
+    }
+  });
 
-  if (state === 'edit') {
+  let {
+    mode,
+    formData: { id, name, rate, status }
+  } = state;
+
+  // let name, status, rate;
+
+  if (mode === 'edit') {
     ({ name, status, rate } = jobs.find((job) => job.id === parseInt(id)));
   }
 
