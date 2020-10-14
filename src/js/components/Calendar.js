@@ -87,6 +87,18 @@ function DateDetails({ dateRecords, jobs, settings }) {
 function DateDetailsEntry({ record, jobs, settings }) {
   const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
+  const time = {
+    begin: new Date(record.begin).toLocaleTimeString(undefined, {
+      timeZone: 'Europe/Berlin',
+      hour: '2-digit',
+      minute: '2-digit'
+    }),
+    end: new Date(record.end).toLocaleTimeString(undefined, {
+      timeZone: 'Europe/Berlin',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  };
 
   const intl = getIntlDateTimeFormat({
     date: new Date(record.begin),
@@ -109,17 +121,9 @@ function DateDetailsEntry({ record, jobs, settings }) {
         <button data-record-id={record.id} onClick={handleClick}>
           <p>{intl}</p>
           <p>
-            {new Date(record.begin).toLocaleTimeString(undefined, {
-              timeZone: 'Europe/Berlin',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
+            {time.begin}
             <br />
-            {new Date(record.end).toLocaleTimeString(undefined, {
-              timeZone: 'Europe/Berlin',
-              hour: '2-digit',
-              minute: '2-digit'
-            })}
+            {time.end}
           </p>
           <p>
             {job.name} (current rate: {job.rate})
