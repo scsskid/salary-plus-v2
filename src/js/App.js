@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -21,12 +21,33 @@ import {
 } from './utils/helpers';
 import '../css/index.css';
 
+function reducer(state, action) {
+  console.log('reducer');
+  return state;
+}
+
+function useLocalStorageReducer(defaultValue) {
+  const key = defaultValue.app.localStorageKey;
+  const [appData, dispatch] = useReducer(reducer, bootstrapData);
+
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(appData));
+  }, [appData, dispatch]);
+
+  return [appData, dispatch];
+}
+
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
+
+  const [reducedData, dispatch] = useLocalStorageReducer(bootstrapData);
+
   const [appData, setAppData] = useLocalStorageState(
     'salary-plus:app-data',
     bootstrapData
   );
+
+  console.log(reducedData);
 
   const { records, jobs, settings, app, presets } = appData;
 

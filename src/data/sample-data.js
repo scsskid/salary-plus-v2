@@ -9,7 +9,8 @@ const settings = {
 export const bootstrapData = {
   app: {
     version: 'Beta0.2',
-    state: 'welcome'
+    state: 'welcome',
+    localStorageKey: 'salary-plus:app-data-test'
   },
   records: [],
   jobs: [],
