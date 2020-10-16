@@ -2,11 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
 import CalendarControls from './CalendarControls.js';
-import {
-  pad,
-  getIntlDateTimeFormat,
-  getWeekDayNames
-} from '../utils/helpers.js';
+import { getIntlDateTimeFormat, getWeekDayNames } from '../utils/helpers.js';
 
 function Calendar({
   inputDate,
