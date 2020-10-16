@@ -38,8 +38,8 @@ function useLocalStorageReducer(defaultValue) {
 }
 
 const App = () => {
+  const history = useHistory();
   const [inputDate, setInputDate] = React.useState(new Date());
-
   const [reducedData, dispatch] = useLocalStorageReducer(bootstrapData);
 
   const [appData, setAppData] = useLocalStorageState(
@@ -168,9 +168,11 @@ const App = () => {
     }
   }
 
-  function resetApp() {
+  function handleResetApp() {
     setAppData({ ...appData, app: { ...app, state: 'welcome' } });
     setInputDate(new Date());
+
+    history.push('/');
   }
 
   return (
@@ -219,31 +221,27 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app.state} settings={settings} resetApp={resetApp} />
+      <AppFooter appState={app.state}>
+        {app.state !== 'welcome' && (
+          <>
+            <p>What</p>
+            <button className="btn" onClick={handleResetApp}>
+              Reset App
+            </button>
+            <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
+          </>
+        )}
+      </AppFooter>
     </Router>
   );
 };
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-function AppFooter({ appState, resetApp, settings }) {
-  const history = useHistory();
-  function handleClick() {
-    resetApp();
-    history.push('/');
-  }
-
+function AppFooter({ appState, children }) {
   return (
     <footer style={{ paddingTop: 40 }}>
-      {appState !== 'welcome' && (
-        <>
-          <button className="btn" onClick={handleClick}>
-            Reset App
-          </button>
-
-          <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
-        </>
-      )}
+      {appState !== 'welcome' && <>{children}</>}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>state: {appState}</div>
     </footer>
   );
