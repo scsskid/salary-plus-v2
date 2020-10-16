@@ -16,7 +16,9 @@ function NoMatch() {
         Not found: <code>{location.pathname}</code>
       </p>
       <p>
-        <button onClick={goToStart}>Go To Start</button>
+        <button className="btn" onClick={goToStart}>
+          Go To Start
+        </button>
       </p>
     </div>
   );

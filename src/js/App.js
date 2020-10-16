@@ -15,30 +15,52 @@ import Settings from './components/Settings';
 import JobForm from './components/JobForm';
 import { sampleData, bootstrapData } from '../data/sample-data';
 import { useLocalStorageReducer } from './utils/store';
-import {
-  mutateArrayWithObject,
-  getDateFromFormInputDate
-} from './utils/helpers';
+import { getDateFromFormInputDate } from './utils/helpers';
 import '../css/index.css';
 
 const App = () => {
-  const history = useHistory();
   const [inputDate, setInputDate] = React.useState(new Date());
-  const [appData, dispatch] = useLocalStorageReducer(bootstrapData);
+  const [appData, dispatch] = useLocalStorageReducer();
 
-  const { records, jobs, settings, app, presets } = appData;
+  const isLoggedIn = Object.entries(appData).length > 0;
+  console.log(isLoggedIn);
 
-  let startPage; // in State?
+  // React.useEffect(() => {
+  //   const history = useHistory();
+  //   history.push('/');
+  // });
 
-  function insertSampleData() {
-    dispatch({ type: 'insertSampleData', payload: sampleData });
+  const {
+    app = {},
+    settings = {},
+    records = [],
+    jobs = [],
+    presets = []
+  } = appData;
+
+  function updateInputDate(date) {
+    setInputDate(date);
   }
 
-  function insertBootstrapData() {
-    dispatch({ type: 'start' });
+  function saveRecord(formData) {
+    const action = {
+      type: parseInt(formData.id) === 0 ? 'createRecord' : 'updateRecord',
+      payload: formData
+    };
+    dispatch(action);
+    updateInputDate(getDateFromFormInputDate(formData.dateBegin));
   }
 
-  const changeMonth = (summand = 0) => {
+  function saveJob(formData) {
+    formData.id = parseInt(formData.id);
+    const action = {
+      type: formData.id === 0 ? 'createJob' : 'updateJob',
+      payload: formData
+    };
+    dispatch(action);
+  }
+
+  function changeMonth(summand = 0) {
     const newDate = new Date(inputDate);
     const now = new Date();
 
@@ -54,63 +76,50 @@ const App = () => {
     }
 
     setInputDate(summand === 0 ? now : newDate);
-  };
+  }
 
-  const updateInputDate = (date) => {
-    setInputDate(date);
-  };
+  function handleDeleteAppData() {
+    dispatch({ type: 'deleteAppData' });
+  }
 
-  if (app.state === 'welcome') {
-    startPage = (
-      <Welcome seedFunctions={{ insertSampleData, insertBootstrapData }} />
+  function insertSampleData() {
+    dispatch({ type: 'insertSampleData' });
+  }
+
+  function insertBootstrapData() {
+    dispatch({ type: 'reset' });
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Welcome
+              seedFunctions={{ insertSampleData, insertBootstrapData }}
+            />
+            <AppFooter />
+          </Route>
+          <Route path="*" component={NoMatch} />
+        </Switch>
+      </Router>
     );
-  } else {
-    const records = appData.records;
-    startPage = (
-      <Calendar
-        inputDate={inputDate}
-        changeMonth={changeMonth}
-        updateInputDate={updateInputDate}
-        records={records}
-        jobs={jobs}
-        settings={settings}
-      />
-    );
-  }
-
-  function saveRecord(formData) {
-    const action = {
-      type: parseInt(formData.id) === 0 ? 'createRecord' : 'updateRecord',
-      payload: formData
-    };
-    dispatch(action);
-    updateInputDate(getDateFromFormInputDate(formData.dateBegin));
-  }
-
-  function saveJob(formData) {
-    console.log(formData);
-    formData.id = parseInt(formData.id);
-    const action = {
-      type: formData.id === 0 ? 'createJob' : 'updateJob',
-      payload: formData
-    };
-    dispatch(action);
-  }
-
-  function handleResetApp() {
-    setAppData({ ...appData, app: { ...app, state: 'welcome' } });
-    setInputDate(new Date());
-
-    history.push('/');
   }
 
   return (
     <Router>
-      {app.state !== 'welcome' && <Navigation />}
+      {isLoggedIn && <Navigation />}
       <main className="main">
         <Switch>
           <Route exact path="/">
-            {startPage}
+            <Calendar
+              inputDate={inputDate}
+              changeMonth={changeMonth}
+              updateInputDate={updateInputDate}
+              records={records}
+              jobs={jobs}
+              settings={settings}
+            />
           </Route>
 
           <Route path="/add">
@@ -150,12 +159,15 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app.state}>
-        {app.state !== 'welcome' && (
+      <AppFooter appState={app?.state} isLoggedIn={isLoggedIn}>
+        {isLoggedIn && (
           <>
             <p>What</p>
-            <button className="btn" onClick={handleResetApp}>
-              Reset App
+            <button className="btn" onClick={insertBootstrapData}>
+              Reset App (Bootstrap)
+            </button>
+            <button className="btn" onClick={handleDeleteAppData}>
+              Delete App Data
             </button>
             <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
           </>
@@ -167,11 +179,13 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-function AppFooter({ appState, children }) {
+function AppFooter({ isLoggedIn, children }) {
   return (
     <footer style={{ paddingTop: 40 }}>
-      {appState !== 'welcome' && <>{children}</>}
-      <div style={{ fontSize: '.8rem', opacity: 0.5 }}>state: {appState}</div>
+      {isLoggedIn && <>{children}</>}
+      <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
+        state: {isLoggedIn ? 'logged in' : 'logged out'}
+      </div>
     </footer>
   );
 }

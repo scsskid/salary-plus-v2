@@ -1,6 +1,6 @@
 import React from 'react';
 import { mapFormDataToStorageObject, mutateArrayWithObject } from './helpers';
-
+import { sampleData, bootstrapData } from '../../data/sample-data';
 /**
  *
  * @param {String} key The key to set in localStorage for this value
@@ -8,9 +8,13 @@ import { mapFormDataToStorageObject, mutateArrayWithObject } from './helpers';
  * @param {{serialize: Function, deserialize: Function}} options The serialize and deserialize functions to use (defaults to JSON.stringify and JSON.parse respectively)
  */
 
+function init(initialData) {
+  return initialData;
+}
+
 function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
-  state.app.freshNess = new Date().toISOString();
+  // state.app.freshNess = new Date().toISOString();
   switch (type) {
     case 'createRecord':
       payload.id = state.settings.incrementIds.records;
@@ -51,22 +55,26 @@ function reducer(state, { type, payload }) {
         ...state,
         jobs: mutateArrayWithObject(payload, state.jobs)
       };
-    case 'start':
-      state.app.state = 'running';
-      return { ...state };
+    case 'reset':
+      // state.app.state = 'running';
+      return init(bootstrapData);
+    case 'deleteAppData':
+      // state.app.state = 'running';
+      return init({});
     case 'insertSampleData':
-      return { ...state, ...payload };
+      return init(sampleData);
     default:
       break;
   }
 }
 
-function useLocalStorageReducer(defaultValue) {
-  const key = defaultValue.app.localStorageKey;
-  const localStorageValue = JSON.parse(window.localStorage.getItem(key));
+function useLocalStorageReducer() {
+  const key = bootstrapData.app.localStorageKey;
+  const localStorageValue = JSON.parse(window.localStorage.getItem(key)) || {};
   const [appData, dispatch] = React.useReducer(
     reducer,
-    localStorageValue || defaultValue
+    localStorageValue,
+    init
   );
 
   React.useEffect(() => {
