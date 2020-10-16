@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -21,18 +21,47 @@ import {
 } from './utils/helpers';
 import '../css/index.css';
 
-function reducer(state, action) {
-  console.log('reducer');
-  return state;
+function reducer(state, { type, payload }) {
+  console.log(`reducer: [ ${type} ]`, payload);
+  state.app.freshNess = new Date().toISOString();
+  console.log('fresh', state);
+  switch (type) {
+    case 'createRecord':
+      console.log('rducer payload', payload);
+      // state.app.state = 'welcome';
+      return {
+        ...state,
+        records: [...state.records, payload],
+        settings: {
+          ...state.settings,
+          incrementIds: {
+            ...state.incrementIds,
+            records: state.settings.incrementIds.records + 1
+          }
+        }
+      };
+    case 'start':
+      state.app.state = 'running';
+      return { ...state };
+    case 'insertSampleData':
+      return { ...state, ...payload };
+    default:
+      break;
+  }
 }
 
 function useLocalStorageReducer(defaultValue) {
   const key = defaultValue.app.localStorageKey;
-  const [appData, dispatch] = useReducer(reducer, bootstrapData);
+  const localStorageValue = JSON.parse(window.localStorage.getItem(key));
+  const [appData, dispatch] = React.useReducer(
+    reducer,
+    localStorageValue || defaultValue
+  );
 
-  useEffect(() => {
+  React.useEffect(() => {
+    console.log('appData write', appData);
     window.localStorage.setItem(key, JSON.stringify(appData));
-  }, [appData, dispatch]);
+  }, [appData]);
 
   return [appData, dispatch];
 }
@@ -40,28 +69,25 @@ function useLocalStorageReducer(defaultValue) {
 const App = () => {
   const history = useHistory();
   const [inputDate, setInputDate] = React.useState(new Date());
-  const [reducedData, dispatch] = useLocalStorageReducer(bootstrapData);
+  const [appData, dispatch] = useLocalStorageReducer(bootstrapData);
 
-  const [appData, setAppData] = useLocalStorageState(
-    'salary-plus:app-data',
-    bootstrapData
-  );
+  // const [appData2, setAppData] = useLocalStorageState(
+  //   'salary-plus:app-data',
+  //   bootstrapData
+  // );
 
-  console.log(reducedData);
+  console.log(appData);
 
   const { records, jobs, settings, app, presets } = appData;
 
   let startPage; // in State?
 
   function insertSampleData() {
-    setAppData(sampleData);
+    dispatch({ type: 'insertSampleData', payload: sampleData });
   }
 
   function insertBootstrapData() {
-    setAppData({
-      ...bootstrapData,
-      app: { ...app, state: 'running' }
-    });
+    dispatch({ type: 'start' });
   }
 
   const changeMonth = (summand = 0) => {
@@ -105,34 +131,52 @@ const App = () => {
   }
 
   function saveRecord(formData) {
-    const id = parseInt(formData.id);
-    const record = mapFormDataToStorageObject(formData);
     const dateBeginSplit = formData.dateBegin.split('/');
     const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
-    let newRecords;
-    let newSettings = appData.settings;
-
-    if (id === 0) {
-      record.id = settings.incrementIds.records + 1;
-      newRecords = [...records, record];
-      newSettings = {
-        ...settings,
-        incrementIds: {
-          ...appData.settings.incrementIds,
-          records: appData.settings.incrementIds.records + 1
-        }
-      };
-    } else {
-      newRecords = mutateArrayWithObject(record, records);
-    }
-
-    setAppData({
-      ...appData,
-      settings: newSettings,
-      records: newRecords
+    // dispatch({
+    //   type: 'incrementId',
+    //   payload: { key: 'records' }
+    // });
+    dispatch({
+      type: 'createRecord',
+      payload: mapFormDataToStorageObject({
+        ...formData,
+        id: appData.settings.incrementIds.records
+      })
     });
-    updateInputDate(new Date(dateIsoString));
+
+    // updateInputDate(new Date(dateIsoString));
   }
+
+  // function saveRecord(formData) {
+  //   const id = parseInt(formData.id);
+  //   const record = mapFormDataToStorageObject(formData);
+  //   const dateBeginSplit = formData.dateBegin.split('/');
+  //   const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
+  //   let newRecords;
+  //   let newSettings = appData.settings;
+
+  //   if (id === 0) {
+  //     record.id = settings.incrementIds.records + 1;
+  //     newRecords = [...records, record];
+  //     newSettings = {
+  //       ...settings,
+  //       incrementIds: {
+  //         ...appData.settings.incrementIds,
+  //         records: appData.settings.incrementIds.records + 1
+  //       }
+  //     };
+  //   } else {
+  //     newRecords = mutateArrayWithObject(record, records);
+  //   }
+
+  //   setAppData({
+  //     ...appData,
+  //     settings: newSettings,
+  //     records: newRecords
+  //   });
+  //   updateInputDate(new Date(dateIsoString));
+  // }
 
   function saveJob({ id, name, rate, status }) {
     id = parseInt(id);

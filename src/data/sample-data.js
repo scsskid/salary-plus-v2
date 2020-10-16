@@ -13,14 +13,21 @@ export const bootstrapData = {
     localStorageKey: 'salary-plus:app-data-test'
   },
   records: [],
-  jobs: [],
+  jobs: [
+    {
+      id: 1,
+      name: 'Default Job',
+      rate: 0,
+      status: 'active'
+    }
+  ],
   presets: [],
   settings: {
     ...settings,
     incrementIds: {
-      records: 0,
-      presets: 0,
-      jobs: 0
+      records: 1,
+      presets: 1,
+      jobs: 1
     }
   }
 };
