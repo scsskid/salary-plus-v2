@@ -30,23 +30,14 @@ function Calendar({
     <div className="calendar">
       <h1>Calendar</h1>
       <p>
-        {inputDate.toLocaleDateString(undefined, {
-          month: 'long',
-          timeZone: settings.timeZone
-        })}{' '}
+        <b>
+          {inputDate.toLocaleDateString(undefined, {
+            month: 'long',
+            timeZone: settings.timeZone
+          })}
+        </b>
+        <br />
         {inputDate.getFullYear()}
-      </p>
-
-      <p>
-        <code>
-          inputDate:{` `}
-          {`${inputDate.getFullYear()}-${pad(inputDate.getMonth() + 1)}-${pad(
-            inputDate.getDate()
-          )}`}
-          <br></br>
-          {inputDate.toLocaleDateString(undefined, undefined)}
-          <br></br>
-        </code>
       </p>
       <CalendarControls changeMonth={changeMonth} />
       <table className="calendar-table">

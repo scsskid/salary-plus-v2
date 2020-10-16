@@ -9,7 +9,7 @@ import Navigation from './components/Navigation';
 import Settings from './components/Settings';
 import JobForm from './components/JobForm';
 import { useLocalStorageReducer } from './utils/store';
-import { getDateFromFormInputDate } from './utils/helpers';
+import { getDateFromFormInputDate, pad } from './utils/helpers';
 import '../css/index.css';
 
 const App = () => {
@@ -145,7 +145,7 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app?.state} isLoggedIn={isLoggedIn}>
+      <AppFooter appState={app?.state} isLoggedIn inputDate>
         <>
           <button className="btn" onClick={insertBootstrapData}>
             Reset App (Bootstrap)
@@ -156,6 +156,12 @@ const App = () => {
           <p>
             {`Jobs: ${jobs.length}`} {`Records: ${records.length}`}{' '}
           </p>
+          <code>
+            inputDate:{` `}
+            {`${inputDate.getFullYear()}-${pad(inputDate.getMonth() + 1)}-${pad(
+              inputDate.getDate()
+            )}`}
+          </code>
 
           <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
         </>
