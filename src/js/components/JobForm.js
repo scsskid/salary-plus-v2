@@ -6,9 +6,9 @@ const JobForm = function ({ jobs, saveJob }) {
   const { jobId } = useParams();
   const history = useHistory();
   const [state, setState] = React.useState({
-    mode: 'edit',
+    mode: isNaN(jobId) ? 'create' : 'update',
     formData: {
-      id: jobId,
+      id: isNaN(jobId) ? 0 : parseInt(jobId),
       name: '',
       rate: '',
       status: ''
@@ -20,10 +20,10 @@ const JobForm = function ({ jobs, saveJob }) {
     formData: { id, name, rate, status }
   } = state;
 
-  // let name, status, rate;
-
-  if (mode === 'edit') {
+  if (mode === 'update') {
     ({ name, status, rate } = jobs.find((job) => job.id === parseInt(id)));
+  } else {
+    console.log(id);
   }
 
   function handleSubmit(e) {
@@ -35,10 +35,10 @@ const JobForm = function ({ jobs, saveJob }) {
 
   return (
     <>
-      <h1>Edit Job</h1>
+      <h1>{mode} Job</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          ID: {id} <input type="hidden" name="id" value={id} />
+          ID: {id} <input type="hidden" name="id" value={isNaN(id) ? 0 : id} />
         </div>
         <div>
           <label htmlFor="name">Name</label>
@@ -53,7 +53,7 @@ const JobForm = function ({ jobs, saveJob }) {
           <input type="text" name="status" defaultValue={status} />
         </div>
         <div>
-          <button className="btn">Cancel</button>
+          {/* <button className="btn">Cancel</button> */}
           <button className="btn" type="submit">
             Save
           </button>

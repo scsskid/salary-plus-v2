@@ -87,7 +87,17 @@ const App = () => {
     updateInputDate(getDateFromFormInputDate(formData.dateBegin));
   }
 
-  function saveJob({ id, name, rate, status }) {
+  function saveJob(formData) {
+    console.log(formData);
+    formData.id = parseInt(formData.id);
+    const action = {
+      type: formData.id === 0 ? 'createJob' : 'updateJob',
+      payload: formData
+    };
+    dispatch(action);
+  }
+
+  function saveJob2({ id, name, rate, status }) {
     id = parseInt(id);
     rate = parseInt(rate);
     const mode = id === 0 ? 'insert' : 'edit';

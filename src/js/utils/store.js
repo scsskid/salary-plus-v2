@@ -33,7 +33,24 @@ function reducer(state, { type, payload }) {
           state.records
         )
       };
-
+    case 'createJob':
+      payload.id = state.settings.incrementIds.jobs;
+      return {
+        ...state,
+        jobs: [...state.jobs, payload],
+        settings: {
+          ...state.settings,
+          incrementIds: {
+            ...state.settings.incrementIds,
+            jobs: state.settings.incrementIds.jobs + 1
+          }
+        }
+      };
+    case 'updateJob':
+      return {
+        ...state,
+        jobs: mutateArrayWithObject(payload, state.jobs)
+      };
     case 'start':
       state.app.state = 'running';
       return { ...state };
@@ -53,7 +70,7 @@ function useLocalStorageReducer(defaultValue) {
   );
 
   React.useEffect(() => {
-    console.log('appData write', appData);
+    // console.log('appData write', appData);
     window.localStorage.setItem(key, JSON.stringify(appData));
   }, [appData]);
 
