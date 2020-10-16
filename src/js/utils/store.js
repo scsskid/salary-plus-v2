@@ -1,4 +1,5 @@
 import React from 'react';
+import { mapFormDataToStorageObject, mutateArrayWithObject } from './helpers';
 
 /**
  *
@@ -34,4 +35,56 @@ function useLocalStorageState(
   return [state, setState];
 }
 
-export { useLocalStorageState };
+function reducer(state, { type, payload }) {
+  console.log(`reducer: [ ${type} ]`, payload);
+  state.app.freshNess = new Date().toISOString();
+  switch (type) {
+    case 'createRecord':
+      payload.id = state.settings.incrementIds.records;
+      return {
+        ...state,
+        records: [...state.records, mapFormDataToStorageObject(payload)],
+        settings: {
+          ...state.settings,
+          incrementIds: {
+            ...state.incrementIds,
+            records: state.settings.incrementIds.records + 1
+          }
+        }
+      };
+    case 'updateRecord':
+      return {
+        ...state,
+        records: mutateArrayWithObject(
+          mapFormDataToStorageObject(payload),
+          state.records
+        )
+      };
+
+    case 'start':
+      state.app.state = 'running';
+      return { ...state };
+    case 'insertSampleData':
+      return { ...state, ...payload };
+    default:
+      break;
+  }
+}
+
+function useLocalStorageReducer(defaultValue) {
+  const key = defaultValue.app.localStorageKey;
+  const localStorageValue = JSON.parse(window.localStorage.getItem(key));
+  const [appData, dispatch] = React.useReducer(
+    reducer,
+    localStorageValue || defaultValue
+  );
+
+  React.useEffect(() => {
+    console.log('appData write', appData);
+    window.localStorage.setItem(key, JSON.stringify(appData));
+  }, [appData]);
+
+  return [appData, dispatch];
+}
+
+export { useLocalStorageReducer };

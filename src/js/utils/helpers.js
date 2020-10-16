@@ -114,6 +114,12 @@ const formatDate = {
 
 // Input Handling
 
+export function getDateFromFormInputDate(string) {
+  const dateBeginSplit = string.split('/');
+  const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
+  return new Date(dateIsoString);
+}
+
 export function parseFormData(formData) {
   const formEntries = new FormData(formData).entries();
   const data = {};
