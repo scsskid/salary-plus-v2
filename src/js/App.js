@@ -7,10 +7,11 @@ import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
 import Settings from './components/Settings';
-import JobForm from './components/JobForm';
 import { useLocalStorageReducer } from './utils/store';
 import { getDateFromFormInputDate, pad } from './utils/helpers';
 import '../css/index.css';
+import FormJobCreate from './components/FormJobCreate';
+import FormJobUpdate from './components/FormJobUpdate';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -39,9 +40,10 @@ const App = () => {
   }
 
   function saveJob(formData) {
+    console.log(formData, formData.id, parseInt(formData.id));
     formData.id = parseInt(formData.id);
     const action = {
-      type: formData.id === 0 ? 'createJob' : 'updateJob',
+      type: isNaN(formData.id) ? 'createJob' : 'updateJob',
       payload: formData
     };
     dispatch(action);
@@ -117,9 +119,11 @@ const App = () => {
               saveRecord={saveRecord}
             />
           </Route>
-
+          <Route path="/jobs/add">
+            <FormJobCreate saveJob={saveJob} />
+          </Route>
           <Route path="/jobs/:jobId">
-            <JobForm jobs={jobs} saveJob={saveJob} />
+            <FormJobUpdate jobs={jobs} saveJob={saveJob} />
           </Route>
           <Route path="/records/:id">
             <RecordForm
