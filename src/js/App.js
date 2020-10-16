@@ -97,40 +97,6 @@ const App = () => {
     dispatch(action);
   }
 
-  function saveJob2({ id, name, rate, status }) {
-    id = parseInt(id);
-    rate = parseInt(rate);
-    const mode = id === 0 ? 'insert' : 'edit';
-    const nextId = settings.incrementIds.jobs + 1;
-    let newJob = {
-      id: mode === 'insert' ? nextId : id,
-      name,
-      rate,
-      status
-    };
-    const newJobs = mutateArrayWithObject(newJob, appData.jobs);
-
-    if (id === 0) {
-      setAppData({
-        ...appData,
-        jobs: newJobs
-      });
-    } else {
-      const newAppData = {
-        ...appData,
-        settings: {
-          ...settings,
-          incrementIds: {
-            ...settings.incrementIds,
-            jobs: nextId
-          }
-        },
-        jobs: newJobs
-      };
-      setAppData(newAppData);
-    }
-  }
-
   function handleResetApp() {
     setAppData({ ...appData, app: { ...app, state: 'welcome' } });
     setInputDate(new Date());
