@@ -8,7 +8,6 @@ import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
 import Settings from './components/Settings';
 import JobForm from './components/JobForm';
-import { sampleData, bootstrapData } from '../data/sample-data';
 import { useLocalStorageReducer } from './utils/store';
 import { getDateFromFormInputDate } from './utils/helpers';
 import '../css/index.css';
@@ -147,18 +146,19 @@ const App = () => {
         </Switch>
       </main>
       <AppFooter appState={app?.state} isLoggedIn={isLoggedIn}>
-        {isLoggedIn && (
-          <>
-            <p>What</p>
-            <button className="btn" onClick={insertBootstrapData}>
-              Reset App (Bootstrap)
-            </button>
-            <button className="btn" onClick={handleDeleteAppData}>
-              Delete App Data
-            </button>
-            <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
-          </>
-        )}
+        <>
+          <button className="btn" onClick={insertBootstrapData}>
+            Reset App (Bootstrap)
+          </button>
+          <button className="btn" onClick={handleDeleteAppData}>
+            Delete App Data
+          </button>
+          <p>
+            {`Jobs: ${jobs.length}`} {`Records: ${records.length}`}{' '}
+          </p>
+
+          <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
+        </>
       </AppFooter>
     </Router>
   );

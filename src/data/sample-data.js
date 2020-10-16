@@ -24,10 +24,11 @@ export const bootstrapData = {
   presets: [],
   settings: {
     ...settings,
+    defaultJobId: 1,
     incrementIds: {
-      records: 1,
-      presets: 1,
-      jobs: 2
+      records: 0,
+      presets: 0,
+      jobs: 1
     }
   }
 };

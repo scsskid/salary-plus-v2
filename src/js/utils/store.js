@@ -9,6 +9,7 @@ import { sampleData, bootstrapData } from '../../data/sample-data';
  */
 
 function init(initialData) {
+  console.log('init reducer', initialData);
   return initialData;
 }
 
@@ -17,7 +18,7 @@ function reducer(state, { type, payload }) {
   // state.app.freshNess = new Date().toISOString();
   switch (type) {
     case 'createRecord':
-      payload.id = state.settings.incrementIds.records;
+      payload.id = state.settings.incrementIds.records + 1;
       return {
         ...state,
         records: [...state.records, mapFormDataToStorageObject(payload)],
@@ -38,7 +39,7 @@ function reducer(state, { type, payload }) {
         )
       };
     case 'createJob':
-      payload.id = state.settings.incrementIds.jobs;
+      payload.id = state.settings.incrementIds.jobs + 1;
       return {
         ...state,
         jobs: [...state.jobs, payload],
@@ -56,10 +57,8 @@ function reducer(state, { type, payload }) {
         jobs: mutateArrayWithObject(payload, state.jobs)
       };
     case 'reset':
-      // state.app.state = 'running';
       return init(bootstrapData);
     case 'deleteAppData':
-      // state.app.state = 'running';
       return init({});
     case 'insertSampleData':
       return init(sampleData);

@@ -5,7 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 const JobForm = function ({ jobs, saveJob }) {
   const { jobId } = useParams();
   const history = useHistory();
-  const [state, setState] = React.useState({
+  const [state] = React.useState({
     mode: isNaN(jobId) ? 'create' : 'update',
     formData: {
       id: isNaN(jobId) ? 0 : parseInt(jobId),

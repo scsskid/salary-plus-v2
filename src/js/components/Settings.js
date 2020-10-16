@@ -2,7 +2,7 @@ import React from 'react';
 import { parseFormData } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
-const Settings = ({ settings, jobs, saveJob, presets }) => {
+const Settings = ({ jobs, saveJob, presets }) => {
   const jobDetailsEls = [];
   const history = useHistory();
   jobs.forEach((job) => {
@@ -14,8 +14,8 @@ const Settings = ({ settings, jobs, saveJob, presets }) => {
       <h1>Settings</h1>
       <hr></hr>
       <h2>General</h2>
-      <label>Languge</label>
-      <select>
+      <label htmlFor="language">Languge</label>
+      <select name="language">
         <option>DE</option>
         <option>EN</option>
       </select>
@@ -121,14 +121,6 @@ function JobDetails({ job = null, saveJob, settings }) {
           </button>
         </td>
       </tr>
-    </>
-  );
-}
-
-function EditJobForm({ job }) {
-  return (
-    <>
-      <form>123</form>
     </>
   );
 }
