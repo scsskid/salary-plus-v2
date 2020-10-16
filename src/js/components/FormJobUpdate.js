@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import FormJob from './FormJob';
 
-const JobForm = function ({ jobs, saveJob }) {
+const JobForm = function ({ saveJob }) {
   const { jobId } = useParams();
   const history = useHistory();
 

@@ -123,7 +123,7 @@ const App = () => {
             <FormJobCreate saveJob={saveJob} />
           </Route>
           <Route path="/jobs/:jobId">
-            <FormJobUpdate jobs={jobs} saveJob={saveJob} />
+            <FormJobUpdate saveJob={saveJob} />
           </Route>
           <Route path="/records/:id">
             <RecordForm

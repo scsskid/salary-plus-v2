@@ -1,8 +1,8 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FormJob from './FormJob';
 
-const FormJobCreate = function ({ jobs, saveJob }) {
+const FormJobCreate = function ({ saveJob }) {
   const history = useHistory();
 
   function handleDispatch(formData) {
