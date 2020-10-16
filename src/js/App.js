@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RecordForm from './components/RecordForm';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
@@ -21,15 +16,7 @@ import '../css/index.css';
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, dispatch] = useLocalStorageReducer();
-
   const isLoggedIn = Object.entries(appData).length > 0;
-  console.log(isLoggedIn);
-
-  // React.useEffect(() => {
-  //   const history = useHistory();
-  //   history.push('/');
-  // });
-
   const {
     app = {},
     settings = {},
@@ -42,6 +29,7 @@ const App = () => {
     setInputDate(date);
   }
 
+  // make higher order fn
   function saveRecord(formData) {
     const action = {
       type: parseInt(formData.id) === 0 ? 'createRecord' : 'updateRecord',
@@ -63,7 +51,6 @@ const App = () => {
   function changeMonth(summand = 0) {
     const newDate = new Date(inputDate);
     const now = new Date();
-
     newDate.setMonth(inputDate.getMonth() + summand);
 
     if (
