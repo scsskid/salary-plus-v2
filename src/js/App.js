@@ -125,15 +125,15 @@ const App = () => {
             <FormRecordCreate
               inputDate={inputDate}
               jobs={jobs}
+              presets={presets}
               settings={settings}
               saveRecord={saveRecord}
             />
           </Route>
           <Route path="/records/:id">
             <FormRecordUpdate
-              mode={`update`}
               jobs={jobs}
-              settings={settings}
+              presets={presets}
               records={records}
               saveRecord={saveRecord}
             />

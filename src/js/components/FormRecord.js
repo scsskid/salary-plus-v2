@@ -2,7 +2,13 @@ import React from 'react';
 import { formatDate, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 
-export function FormRecordCreate({ inputDate, saveRecord, jobs, settings }) {
+export function FormRecordCreate({
+  inputDate,
+  saveRecord,
+  jobs,
+  settings,
+  presets
+}) {
   const initialFormData = {
     id: 0,
     jobId: settings.defaultJobId,
@@ -20,12 +26,13 @@ export function FormRecordCreate({ inputDate, saveRecord, jobs, settings }) {
         initialFormData={initialFormData}
         jobs={jobs}
         saveRecord={saveRecord}
+        presets={presets}
       />
     </>
   );
 }
 
-export function FormRecordUpdate({ saveRecord, jobs, records }) {
+export function FormRecordUpdate({ saveRecord, jobs, records, presets }) {
   const params = useParams();
   const requestedRecord = records?.find(
     (record) => record.id === parseInt(params?.id)
@@ -48,12 +55,18 @@ export function FormRecordUpdate({ saveRecord, jobs, records }) {
         initialFormData={initialFormData}
         jobs={jobs}
         saveRecord={saveRecord}
+        presets={presets}
       />
     </>
   );
 }
 
-export default function FormRecord({ saveRecord, jobs, initialFormData }) {
+export default function FormRecord({
+  saveRecord,
+  jobs,
+  initialFormData,
+  presets
+}) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const form = React.useRef();
@@ -66,34 +79,47 @@ export default function FormRecord({ saveRecord, jobs, initialFormData }) {
   }
 
   function OptionsJob() {
-    const options = [];
-
-    jobs.forEach((job) => {
-      options.push(
+    return jobs.map((job) => {
+      return (
         <option key={`job-${job.id}`} value={job.id}>
           {job.name} {job.rate}
         </option>
       );
     });
-
-    return options;
   }
 
-  const handleSelectChange = (e) => {
-    const selectedJobId = parseInt(e.target.value);
-    const ratebyJobId = jobs.find((job) => job.id === selectedJobId)?.rate;
-
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-      ['rate']: ratebyJobId
+  function OptionsPreset() {
+    return presets.map((preset) => {
+      return (
+        <option key={`preset-${preset.id}`} value={preset.id}>
+          {preset.name} {preset.rate}
+        </option>
+      );
     });
-  };
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    handleDispatch(formData);
   }
+
+  //  option: { value, label }
+
+  const RenderSelect = ({ name, id, label, options, handleSelectChange }) => {
+    <select
+      name={name}
+      id={id}
+      value={formData.jobId}
+      onBlur={handleSelectChange}
+      onChange={handleSelectChange}
+    >
+      <option disabled value="selected">
+        Select Job
+      </option>
+      {options.map((option, i) => {
+        return (
+          <option key={`${label}-${i}`} value={option.value}>
+            {option.label}
+          </option>
+        );
+      })}
+    </select>;
+  };
 
   function handleChange(e) {
     console.log(e.target);
@@ -101,6 +127,38 @@ export default function FormRecord({ saveRecord, jobs, initialFormData }) {
       ...formData,
       [e.target.name]: e.target.value
     });
+  }
+
+  function handleSelectChange(e) {
+    const selectedJobId = parseInt(e.target.value);
+    const jobRate = jobs.find((job) => job.id === selectedJobId)?.rate;
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      ['rate']: jobRate
+    });
+  }
+
+  function handleSelectPresetChange(e) {
+    const selectedPresetId = parseInt(e.target.value);
+    const presetData = presets.find((preset) => preset.id === selectedPresetId);
+    const presetFormData = {
+      timeBegin: presetData.timeBegin || '',
+      timeEnd: presetData.timeEnd || '',
+      rate: presetData.rate || 0
+    };
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      ...presetFormData
+    });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleDispatch(formData);
   }
 
   return (
@@ -116,12 +174,29 @@ export default function FormRecord({ saveRecord, jobs, initialFormData }) {
           <select
             name="jobId"
             id="entry-job"
-            type="date"
+            value={formData.jobId}
             onBlur={handleSelectChange}
             onChange={handleSelectChange}
-            value={formData.jobId}
           >
+            <option disabled value="selected">
+              Select Job
+            </option>
             <OptionsJob />
+          </select>
+        </div>
+
+        <div className="form-el">
+          <label htmlFor="preset">Fill from preset</label>
+          <select
+            name="preset"
+            value={formData.preset}
+            onBlur={handleSelectPresetChange}
+            onChange={handleSelectPresetChange}
+          >
+            <option disabled value="selected">
+              Select Preset to prefill fields
+            </option>
+            <OptionsPreset />
           </select>
         </div>
         <div className="form-el">
