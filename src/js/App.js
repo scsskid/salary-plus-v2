@@ -188,8 +188,13 @@ function AppFooter({ isLoggedIn, dataFreshness, children }) {
     <footer style={{ paddingTop: 40 }}>
       {isLoggedIn && <>{children}</>}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
-        state: {isLoggedIn ? 'logged in' : 'logged out'}/ dataFreshness:{' '}
-        {getIntlDateTimeFormat(new Date(dataFreshness))}
+        state: {isLoggedIn ? 'logged in' : 'logged out'}
+        {isLoggedIn && (
+          <>
+            {' '}
+            / dataFreshness: {getIntlDateTimeFormat(new Date(dataFreshness))}
+          </>
+        )}
       </div>
     </footer>
   );
