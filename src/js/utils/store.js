@@ -17,15 +17,21 @@ function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
   console.log(state);
   const freshNess = new Date().toISOString();
+  const nextPresetId = state?.settings?.incrementIdPresets + 1;
+  const nextJobId = state?.settings?.incrementIdJobs + 1;
+  const nextRecordId = state?.settings?.incrementIdRecords + 1;
+
+  console.log('reducer');
+
   switch (type) {
     case 'createRecord':
-      payload.id = state.settings.incrementIdRecords + 1;
+      payload.id = nextRecordId;
       return {
         ...state,
         records: [...state.records, mapFormDataToStorageObject(payload)],
         settings: {
           ...state.settings,
-          incrementIdRecords: state.settings.incrementIdRecords + 1
+          incrementIdRecords: nextRecordId
         }
       };
     case 'updateRecord':
@@ -37,19 +43,29 @@ function reducer(state, { type, payload }) {
         )
       };
     case 'createJob':
-      payload.id = state.settings.incrementIdJobs + 1;
+      payload.id = nextJobId;
       return {
         ...state,
         jobs: [...state.jobs, payload],
         settings: {
           ...state.settings,
-          incrementIdJobs: state.settings.incrementIdJobs
+          incrementIdJobs: nextJobId
         }
       };
     case 'updateJob':
       return {
         ...state,
         jobs: mutateArrayWithObject(payload, state.jobs)
+      };
+    case 'createPreset':
+      payload.id = nextPresetId;
+      return {
+        ...state,
+        presets: [...state.presets, payload],
+        settings: {
+          ...state.settings,
+          incrementIdJobs: nextPresetId
+        }
       };
     case 'reset':
       return init({
