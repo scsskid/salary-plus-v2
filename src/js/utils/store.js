@@ -15,13 +15,10 @@ function init(initialData) {
 
 function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
-  console.log(state);
   const freshNess = new Date().toISOString();
   const nextPresetId = state?.settings?.incrementIdPresets + 1;
   const nextJobId = state?.settings?.incrementIdJobs + 1;
   const nextRecordId = state?.settings?.incrementIdRecords + 1;
-
-  console.log('reducer');
 
   switch (type) {
     case 'createRecord':
@@ -64,8 +61,13 @@ function reducer(state, { type, payload }) {
         presets: [...state.presets, payload],
         settings: {
           ...state.settings,
-          incrementIdJobs: nextPresetId
+          incrementIdPresets: nextPresetId
         }
+      };
+    case 'updatePreset':
+      return {
+        ...state,
+        presets: mutateArrayWithObject(payload, state.presets)
       };
     case 'reset':
       return init({
