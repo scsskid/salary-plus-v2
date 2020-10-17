@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatDate, parseFormData, getTimeOfDate } from '../utils/helpers';
+import { formatDate, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 
 export function FormRecordCreate({ inputDate, saveRecord, jobs, settings }) {
