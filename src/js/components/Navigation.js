@@ -9,7 +9,7 @@ const Navigaton = () => {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/add">Add</Link>
+          <Link to="/records/add">Add</Link>
         </li>
         <li>
           <Link to="/settings">Settings</Link>

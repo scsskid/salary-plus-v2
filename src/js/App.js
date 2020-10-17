@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import RecordForm from './components/RecordForm';
 import Calendar from './components/Calendar';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
@@ -10,6 +9,7 @@ import Settings from './components/Settings';
 import { useLocalStorageReducer } from './utils/store';
 import { getDateFromFormInputDate, pad } from './utils/helpers';
 import '../css/index.css';
+import { FormRecordCreate, FormRecordUpdate } from './components/FormRecord';
 import { FormJobCreate, FormJobUpdate } from './components/FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './components/FormPreset';
 import { getIntlDateTimeFormat } from './utils/helpers';
@@ -121,13 +121,20 @@ const App = () => {
               settings={settings}
             />
           </Route>
-
-          <Route path="/add">
-            <RecordForm
-              mode={`insert`}
+          <Route path="/records/add">
+            <FormRecordCreate
               inputDate={inputDate}
               jobs={jobs}
               settings={settings}
+              saveRecord={saveRecord}
+            />
+          </Route>
+          <Route path="/records/:id">
+            <FormRecordUpdate
+              mode={`update`}
+              jobs={jobs}
+              settings={settings}
+              records={records}
               saveRecord={saveRecord}
             />
           </Route>
@@ -142,18 +149,6 @@ const App = () => {
           </Route>
           <Route path="/presets/:presetId">
             <FormPresetUpdate savePreset={savePreset} />
-          </Route>
-          <Route path="/records/:id">
-            <RecordForm
-              mode={`update`}
-              jobs={jobs}
-              settings={settings}
-              records={records}
-              saveRecord={saveRecord}
-            />
-          </Route>
-          <Route path="/records">
-            <NoMatch />
           </Route>
 
           <Route path="/Settings">

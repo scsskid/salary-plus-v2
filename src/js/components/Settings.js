@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const Settings = ({ jobs, saveJob, presets }) => {
+const Settings = ({ jobs, presets }) => {
   const history = useHistory();
 
   return (

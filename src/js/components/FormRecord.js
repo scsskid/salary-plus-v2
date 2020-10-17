@@ -2,53 +2,67 @@ import React from 'react';
 import { formatDate, parseFormData, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 
-const RecordForm = ({
-  inputDate,
-  saveRecord,
-  jobs,
-  settings,
-  records,
-  mode
-}) => {
-  const history = useHistory();
+export function FormRecordCreate({ inputDate, saveRecord, jobs, settings }) {
+  const initialFormData = {
+    id: 0,
+    jobId: settings.defaultJobId,
+    dateBegin: formatDate.rfc3339(inputDate),
+    timeBegin: '15:00',
+    timeEnd: '02:00',
+    rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
+    bonus: 0
+  };
+
+  return (
+    <>
+      <h1>New Entry</h1>
+      <FormRecord
+        initialFormData={initialFormData}
+        jobs={jobs}
+        saveRecord={saveRecord}
+      />
+    </>
+  );
+}
+
+export function FormRecordUpdate({ saveRecord, jobs, records }) {
   const params = useParams();
+  const requestedRecord = records?.find(
+    (record) => record.id === parseInt(params?.id)
+  );
+
+  const initialFormData = {
+    id: requestedRecord.id,
+    jobId: requestedRecord.jobId,
+    dateBegin: formatDate.rfc3339(new Date(requestedRecord.begin)),
+    timeBegin: getTimeOfDate(new Date(requestedRecord.begin)),
+    timeEnd: getTimeOfDate(new Date(requestedRecord.end)),
+    rate: requestedRecord.rate,
+    bonus: requestedRecord.bonus
+  };
+
+  return (
+    <>
+      <h1>Update Entry</h1>
+      <FormRecord
+        initialFormData={initialFormData}
+        jobs={jobs}
+        saveRecord={saveRecord}
+      />
+    </>
+  );
+}
+
+export default function FormRecord({ saveRecord, jobs, initialFormData }) {
+  const history = useHistory();
+  const [formData, setFormData] = React.useState(initialFormData);
   const form = React.useRef();
   const inputRate = React.useRef();
-  const requestedRecordId = params?.id;
-  const requestedRecord = records?.find(
-    (record) => record.id === parseInt(requestedRecordId)
-  );
-  let formValues;
-  const [state, setState] = React.useState({ mode });
 
-  React.useEffect(() => {
-    setState({ mode });
-  }, [params]);
-
-  if (state.mode === 'update' && typeof requestedRecord === 'undefined') {
-    return <>{"Error: Requested to update record, which doesn't exist."}</>;
-  }
-
-  if ('insert' === state.mode) {
-    formValues = {
-      id: 0,
-      jobId: settings.defaultJobId,
-      dateBegin: formatDate.rfc3339(inputDate),
-      timeBegin: '14:00',
-      timeEnd: '02:00',
-      rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
-      bonus: 0
-    };
-  } else if ('update' === state.mode) {
-    formValues = {
-      id: requestedRecord.id,
-      jobId: requestedRecord.jobId,
-      dateBegin: formatDate.rfc3339(new Date(requestedRecord.begin)),
-      timeBegin: getTimeOfDate(new Date(requestedRecord.begin)),
-      timeEnd: getTimeOfDate(new Date(requestedRecord.end)),
-      rate: requestedRecord.rate,
-      bonus: requestedRecord.bonus
-    };
+  function handleDispatch(formData) {
+    console.log(formData);
+    saveRecord(formData);
+    history.push('/');
   }
 
   function OptionsJob() {
@@ -67,28 +81,36 @@ const RecordForm = ({
 
   const handleSelectChange = (e) => {
     const selectedJobId = parseInt(e.target.value);
-    inputRate.current.value = jobs.find(
-      (job) => job.id === selectedJobId
-    )?.rate;
+    const ratebyJobId = jobs.find((job) => job.id === selectedJobId)?.rate;
+
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      ['rate']: ratebyJobId
+    });
   };
 
   function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    saveRecord(parseFormData(form));
-    history.push('/');
+    handleDispatch(formData);
+  }
+
+  function handleChange(e) {
+    console.log(e.target);
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   }
 
   return (
     <>
-      <h1>{state.mode}</h1>
-
       <form
         ref={form}
         onSubmit={handleSubmit}
-        data-record-id={formValues.recordId}
+        data-record-id={formData.recordId}
       >
-        <input type="hidden" name="id" value={formValues.id} />
+        <input type="hidden" name="id" value={formData.id} />
         <div className="form-el">
           <label htmlFor="entry-job">Job</label>
           <select
@@ -97,7 +119,7 @@ const RecordForm = ({
             type="date"
             onBlur={handleSelectChange}
             onChange={handleSelectChange}
-            defaultValue={formValues.jobId}
+            value={formData.jobId}
           >
             <OptionsJob />
           </select>
@@ -108,7 +130,8 @@ const RecordForm = ({
             name="dateBegin"
             id="entry-date"
             type="date"
-            defaultValue={formValues.dateBegin}
+            value={formData.dateBegin}
+            onChange={handleChange}
           />
         </div>
         <div className="form-el">
@@ -117,7 +140,8 @@ const RecordForm = ({
             name="timeBegin"
             id="entry-begin-time"
             type="time"
-            defaultValue={formValues.timeBegin}
+            value={formData.timeBegin}
+            onChange={handleChange}
           />
         </div>
         <div className="form-el">
@@ -126,7 +150,8 @@ const RecordForm = ({
             name="timeEnd"
             id="entry-end-time"
             type="time"
-            defaultValue={formValues.timeEnd}
+            value={formData.timeEnd}
+            onChange={handleChange}
           />
         </div>
         <div className="form-el">
@@ -138,8 +163,8 @@ const RecordForm = ({
             id="entry-rate"
             type="number"
             step="0.01"
-            value={formValues.rate}
-            readOnly
+            value={formData.rate}
+            onChange={handleChange}
           />{' '}
           €
         </div>
@@ -151,7 +176,8 @@ const RecordForm = ({
             id="entry-bonus"
             type="number"
             step="0.01"
-            defaultValue={formValues.bonus}
+            value={formData.bonus}
+            onChange={handleChange}
           />{' '}
           €
         </div>
@@ -170,6 +196,4 @@ const RecordForm = ({
       </form>
     </>
   );
-};
-
-export default RecordForm;
+}
