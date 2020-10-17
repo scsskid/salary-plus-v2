@@ -1,16 +1,16 @@
-const dateFormatOptions = {
-  nice: {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  },
-  short: {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  }
-};
+// const dateFormatOptions = {
+//   nice: {
+//     weekday: 'short',
+//     year: 'numeric',
+//     month: 'short',
+//     day: '2-digit'
+//   },
+//   short: {
+//     year: 'numeric',
+//     month: 'short',
+//     day: '2-digit'
+//   }
+// };
 
 export function getWeekDayNames({ format = 'short', locale = 'en' }) {
   const names = [];
@@ -38,18 +38,16 @@ export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
 // dates
 
 export function getIntlDateTimeFormat(
-  { date, options } = {
-    date: new Date(),
-    options: {
-      timeZone: Intl.DateTimeFormat().resolvedOptions(),
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    }
+  date = new Date(),
+  options = {
+    // timeZone: Intl.DateTimeFormat().resolvedOptions(),
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
   }
 ) {
   return new Intl.DateTimeFormat(undefined, options).format(date);
@@ -81,17 +79,6 @@ export function getTimeOfDate(string) {
     hour: '2-digit',
     minute: '2-digit'
   });
-}
-
-export function logMonthSpecs(inputDate) {
-  console.log(`
-  first Day of this month (${pad(
-    inputDate.getMonth() + 1
-  )}) starts on a ${getDayName(getFirstDay(inputDate))}
-  (${getFirstDay(inputDate)})
-
-  Month has ${getDaysInMonth(inputDate)} Dates
-`);
 }
 
 export function isSameDay(d1, d2) {

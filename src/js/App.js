@@ -12,11 +12,13 @@ import { getDateFromFormInputDate, pad } from './utils/helpers';
 import '../css/index.css';
 import FormJobCreate from './components/FormJobCreate';
 import FormJobUpdate from './components/FormJobUpdate';
+import { getIntlDateTimeFormat } from './utils/helpers';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
+  const dataFreshness = appData?.app?.freshNess;
   const {
     app = {},
     settings = {},
@@ -149,7 +151,12 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app?.state} isLoggedIn inputDate>
+      <AppFooter
+        appState={app?.state}
+        isLoggedIn
+        inputDate
+        dataFreshness={dataFreshness}
+      >
         <>
           <button className="btn" onClick={insertBootstrapData}>
             Reset App (Bootstrap)
@@ -176,12 +183,13 @@ const App = () => {
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-function AppFooter({ isLoggedIn, children }) {
+function AppFooter({ isLoggedIn, dataFreshness, children }) {
   return (
     <footer style={{ paddingTop: 40 }}>
       {isLoggedIn && <>{children}</>}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
-        state: {isLoggedIn ? 'logged in' : 'logged out'}
+        state: {isLoggedIn ? 'logged in' : 'logged out'}/ dataFreshness:{' '}
+        {getIntlDateTimeFormat(new Date(dataFreshness))}
       </div>
     </footer>
   );

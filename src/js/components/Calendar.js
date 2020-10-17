@@ -87,15 +87,12 @@ function DateDetailsEntry({ record, jobs, settings }) {
     })
   };
 
-  const intl = getIntlDateTimeFormat({
-    date: new Date(record.begin),
-    options: {
-      timeZone: settings.timeZone,
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }
+  const intl = getIntlDateTimeFormat(new Date(record.begin), {
+    timeZone: settings.timeZone,
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
   });
 
   function handleClick() {

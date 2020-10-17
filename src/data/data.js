@@ -25,11 +25,9 @@ export const bootstrapData = {
   settings: {
     ...settings,
     defaultJobId: 1,
-    incrementIds: {
-      records: 0,
-      presets: 0,
-      jobs: 1
-    }
+    incrementIdRecords: 0,
+    incrementIdPresets: 0,
+    incrementIdJobs: 1
   }
 };
 
@@ -38,11 +36,9 @@ export const sampleData = {
   settings: {
     ...settings,
     defaultJobId: 1,
-    incrementIds: {
-      records: 159,
-      presets: 2,
-      jobs: 3
-    }
+    incrementIdRecords: 159,
+    incrementIdPresets: 2,
+    incrementIdJobs: 3
   },
   records: [
     {

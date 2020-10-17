@@ -1,6 +1,6 @@
 import React from 'react';
 import { mapFormDataToStorageObject, mutateArrayWithObject } from './helpers';
-import { sampleData, bootstrapData } from '../../data/sample-data';
+import { sampleData, bootstrapData } from '../../data/data';
 /**
  *
  * @param {String} key The key to set in localStorage for this value
@@ -15,7 +15,8 @@ function init(initialData) {
 
 function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
-  // state.app.freshNess = new Date().toISOString();
+  console.log(state);
+  const freshNess = new Date().toISOString();
   switch (type) {
     case 'createRecord':
       payload.id = state.settings.incrementIds.records + 1;
@@ -24,10 +25,7 @@ function reducer(state, { type, payload }) {
         records: [...state.records, mapFormDataToStorageObject(payload)],
         settings: {
           ...state.settings,
-          incrementIds: {
-            ...state.incrementIds,
-            records: state.settings.incrementIds.records + 1
-          }
+          incrementIdRecords: state.settings.incrementIdRecords + 1
         }
       };
     case 'updateRecord':
@@ -45,10 +43,7 @@ function reducer(state, { type, payload }) {
         jobs: [...state.jobs, payload],
         settings: {
           ...state.settings,
-          incrementIds: {
-            ...state.settings.incrementIds,
-            jobs: state.settings.incrementIds.jobs + 1
-          }
+          incrementIdJobs: state.settings.incrementIdJobs
         }
       };
     case 'updateJob':
@@ -57,11 +52,14 @@ function reducer(state, { type, payload }) {
         jobs: mutateArrayWithObject(payload, state.jobs)
       };
     case 'reset':
-      return init(bootstrapData);
+      return init({
+        ...bootstrapData,
+        app: { ...bootstrapData.app, freshNess }
+      });
     case 'deleteAppData':
       return init({});
     case 'insertSampleData':
-      return init(sampleData);
+      return init({ ...sampleData, app: { ...sampleData.app, freshNess } });
     default:
       break;
   }
