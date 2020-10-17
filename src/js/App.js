@@ -52,7 +52,13 @@ const App = () => {
   }
 
   function savePreset(formData) {
-    console.log(formData);
+    console.log(formData, formData.id, parseInt(formData.id));
+    formData.id = parseInt(formData.id);
+    const action = {
+      type: isNaN(formData.id) ? 'createPreset' : 'updatePreset',
+      payload: formData
+    };
+    dispatch(action);
   }
 
   function changeMonth(summand = 0) {

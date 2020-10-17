@@ -38,7 +38,7 @@ export function FormJobUpdate({ saveJob, jobs }) {
 
 export default function FormJob({ handleDispatch, job }) {
   const [state, setState] = React.useState({
-    name: '',
+    name: 'Unnamed Job',
     rate: 0,
     id: 'AUTOINCREMENT'
   });

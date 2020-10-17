@@ -35,10 +35,10 @@ export const FormPresetUpdate = function ({ savePreset }) {
 
 export default function FormPreset({ handleDispatch, id }) {
   const [state, setState] = React.useState({
-    name: '',
+    name: 'Unnamed Preset',
     timeBegin: '08:00',
     timeEnd: '17:00',
-    rate: '17:00',
+    rate: 0,
     id: typeof id === 'undefined' ? 'AUTOINCREMENT' : id
   });
 
@@ -89,6 +89,18 @@ export default function FormPreset({ handleDispatch, id }) {
             value={state.timeEnd}
             onChange={handleChange}
           />
+        </div>
+        <div className="form-el">
+          <label htmlFor="entry-rate">Rate</label>
+          <input
+            inputMode="decimal"
+            name="rate"
+            type="number"
+            step="0.01"
+            value={state.rate}
+            onChange={handleChange}
+          />
+          €
         </div>
 
         <div>
