@@ -1,53 +1,46 @@
-import React, { useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 
-export function FormJobCreate({ saveJob }) {
+export const FormPresetCreate = function ({ savePreset }) {
   const history = useHistory();
 
   function handleDispatch(formData) {
-    saveJob(formData);
+    savePreset(formData);
     history.push('/settings');
   }
 
   return (
     <>
-      <h1>Add New Job</h1>
-      <FormJob handleDispatch={handleDispatch} />
+      <h1>Add New Preset</h1>
+      <FormPreset handleDispatch={handleDispatch} />
     </>
   );
-}
+};
 
-export function FormJobUpdate({ saveJob, jobs }) {
-  const { jobId } = useParams();
+export const FormPresetUpdate = function ({ savePreset }) {
   const history = useHistory();
 
-  const job = jobs.find((job) => job.id === parseInt(jobId));
-
   function handleDispatch(formData) {
-    saveJob(formData);
+    savePreset(formData);
     history.push('/settings');
   }
 
   return (
     <>
-      <h1>Update Job</h1>
-      <FormJob handleDispatch={handleDispatch} job={job} />
+      <h1>Update Preset</h1>
+      <FormPreset handleDispatch={handleDispatch} />
     </>
   );
-}
+};
 
-export default function FormJob({ handleDispatch, job }) {
+export default function FormPreset({ handleDispatch, id }) {
   const [state, setState] = React.useState({
     name: '',
-    rate: 0,
-    id: 'AUTOINCREMENT'
+    timeBegin: '08:00',
+    timeEnd: '17:00',
+    rate: '17:00',
+    id: typeof id === 'undefined' ? 'AUTOINCREMENT' : id
   });
-
-  useEffect(() => {
-    if (job) {
-      setState(job);
-    }
-  }, [job]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -65,7 +58,7 @@ export default function FormJob({ handleDispatch, job }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p>ID: {state.id}</p>
+        <p>ID: {id}</p>
         <div>
           <label htmlFor="name">Name</label>
           <input
@@ -74,18 +67,27 @@ export default function FormJob({ handleDispatch, job }) {
             value={state.name}
             onChange={handleChange}
             required
-            placeholder="Enter a job name..."
+            placeholder="Enter a Preset name..."
           />
         </div>
         <div>
-          <label htmlFor="name">Rate</label>
+          <label htmlFor="name">Time Begin</label>
           <input
-            type="number"
-            step="0.01"
-            name="rate"
-            value={state.rate}
+            type="time"
+            step="900"
+            name="timeBegin"
+            value={state.timeBegin}
             onChange={handleChange}
-            placeholder="Enter optional rate..."
+          />
+        </div>
+        <div>
+          <label htmlFor="name">Time End</label>
+          <input
+            type="time"
+            step="900"
+            name="timeEnd"
+            value={state.timeEnd}
+            onChange={handleChange}
           />
         </div>
 

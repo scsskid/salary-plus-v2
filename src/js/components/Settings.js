@@ -62,7 +62,7 @@ const Settings = ({ jobs, saveJob, presets }) => {
         </div>
       ))}
       <div>
-        <button className="btn" onClick={() => history.push(`/jobs/new`)}>
+        <button className="btn" onClick={() => history.push(`/presets/add`)}>
           Add New Preset
         </button>
       </div>

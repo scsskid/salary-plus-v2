@@ -10,8 +10,8 @@ import Settings from './components/Settings';
 import { useLocalStorageReducer } from './utils/store';
 import { getDateFromFormInputDate, pad } from './utils/helpers';
 import '../css/index.css';
-import FormJobCreate from './components/FormJobCreate';
-import FormJobUpdate from './components/FormJobUpdate';
+import { FormJobCreate, FormJobUpdate } from './components/FormJob';
+import { FormPresetCreate, FormPresetUpdate } from './components/FormPreset';
 import { getIntlDateTimeFormat } from './utils/helpers';
 
 const App = () => {
@@ -49,6 +49,10 @@ const App = () => {
       payload: formData
     };
     dispatch(action);
+  }
+
+  function savePreset(formData) {
+    console.log(formData);
   }
 
   function changeMonth(summand = 0) {
@@ -125,7 +129,13 @@ const App = () => {
             <FormJobCreate saveJob={saveJob} />
           </Route>
           <Route path="/jobs/:jobId">
-            <FormJobUpdate saveJob={saveJob} />
+            <FormJobUpdate saveJob={saveJob} jobs={jobs} />
+          </Route>
+          <Route path="/presets/add">
+            <FormPresetCreate savePreset={savePreset} />
+          </Route>
+          <Route path="/presets/:presetId">
+            <FormPresetUpdate savePreset={savePreset} />
           </Route>
           <Route path="/records/:id">
             <RecordForm

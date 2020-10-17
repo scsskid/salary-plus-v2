@@ -19,7 +19,7 @@ function reducer(state, { type, payload }) {
   const freshNess = new Date().toISOString();
   switch (type) {
     case 'createRecord':
-      payload.id = state.settings.incrementIds.records + 1;
+      payload.id = state.settings.incrementIdRecords + 1;
       return {
         ...state,
         records: [...state.records, mapFormDataToStorageObject(payload)],
@@ -37,7 +37,7 @@ function reducer(state, { type, payload }) {
         )
       };
     case 'createJob':
-      payload.id = state.settings.incrementIds.jobs + 1;
+      payload.id = state.settings.incrementIdJobs + 1;
       return {
         ...state,
         jobs: [...state.jobs, payload],
