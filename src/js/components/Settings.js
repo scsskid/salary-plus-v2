@@ -1,13 +1,8 @@
 import React from 'react';
-import { parseFormData } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
 const Settings = ({ jobs, saveJob, presets }) => {
-  const jobDetailsEls = [];
   const history = useHistory();
-  jobs.forEach((job) => {
-    jobDetailsEls.push(<JobDetails key={job.id} job={job} saveJob={saveJob} />);
-  });
 
   return (
     <div>
@@ -67,60 +62,9 @@ const Settings = ({ jobs, saveJob, presets }) => {
         </button>
       </div>
 
-      <hr></hr>
-
       <hr />
     </div>
   );
 };
 
 export default Settings;
-
-function JobDetails({ job = null, saveJob, settings }) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    saveJob(parseFormData(e.target));
-  }
-
-  if (!job) {
-    job = {
-      id: settings.incrementIds.jobs + 1
-    };
-  }
-
-  const formID = `form-${job.id}`;
-
-  return (
-    <>
-      <tr>
-        <td>
-          <form id={formID} onSubmit={handleSubmit}>
-            {job.id}
-            <input type="hidden" name="id" value={job.id} />
-          </form>
-        </td>
-        <td>
-          <input
-            form={formID}
-            name="name"
-            type="text"
-            defaultValue={job.name}
-          />
-        </td>
-        <td>
-          <input
-            form={formID}
-            name="rate"
-            type="decimal"
-            defaultValue={job.rate}
-          />
-        </td>
-        <td>
-          <button form={formID} type="submit">
-            Save
-          </button>
-        </td>
-      </tr>
-    </>
-  );
-}
