@@ -16,7 +16,7 @@ export const bootstrapData = {
   jobs: [
     {
       id: 1,
-      name: 'Default Job',
+      name: 'Unnamed Job',
       rate: 0,
       status: 'active'
     }
