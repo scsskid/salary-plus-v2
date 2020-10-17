@@ -16,7 +16,8 @@ export function FormRecordCreate({
     timeBegin: '15:00',
     timeEnd: '02:00',
     rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
-    bonus: 0
+    bonus: 0,
+    preset: 0
   };
 
   return (
@@ -45,7 +46,8 @@ export function FormRecordUpdate({ saveRecord, jobs, records, presets }) {
     timeBegin: getTimeOfDate(new Date(requestedRecord.begin)),
     timeEnd: getTimeOfDate(new Date(requestedRecord.end)),
     rate: requestedRecord.rate,
-    bonus: requestedRecord.bonus
+    bonus: requestedRecord.bonus,
+    preset: 0
   };
 
   return (
@@ -97,29 +99,6 @@ export default function FormRecord({
       );
     });
   }
-
-  //  option: { value, label }
-
-  const RenderSelect = ({ name, id, label, options, handleSelectChange }) => {
-    <select
-      name={name}
-      id={id}
-      value={formData.jobId}
-      onBlur={handleSelectChange}
-      onChange={handleSelectChange}
-    >
-      <option disabled value="selected">
-        Select Job
-      </option>
-      {options.map((option, i) => {
-        return (
-          <option key={`${label}-${i}`} value={option.value}>
-            {option.label}
-          </option>
-        );
-      })}
-    </select>;
-  };
 
   function handleChange(e) {
     console.log(e.target);
@@ -178,23 +157,21 @@ export default function FormRecord({
             onBlur={handleSelectChange}
             onChange={handleSelectChange}
           >
-            <option disabled value="selected">
-              Select Job
-            </option>
+            <option value={0}>No Job</option>
             <OptionsJob />
           </select>
         </div>
 
         <div className="form-el">
-          <label htmlFor="preset">Fill from preset</label>
+          <label htmlFor="preset">Preset</label>
           <select
             name="preset"
             value={formData.preset}
             onBlur={handleSelectPresetChange}
             onChange={handleSelectPresetChange}
           >
-            <option disabled value="selected">
-              Select Preset to prefill fields
+            <option key={`preset-0`} disabled={true} value={0}>
+              Select Preset to prefill fields...
             </option>
             <OptionsPreset />
           </select>

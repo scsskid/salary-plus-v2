@@ -9,7 +9,6 @@ import { sampleData, bootstrapData } from '../../data/data';
  */
 
 function init(initialData) {
-  console.log('init reducer', initialData);
   return initialData;
 }
 
