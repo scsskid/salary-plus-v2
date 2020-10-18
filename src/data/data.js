@@ -1983,13 +1983,13 @@ export const sampleData = {
   jobs: [
     {
       id: 1,
-      name: 'Cafè Claus',
-      rate: 20.0,
+      name: 'Palsta',
+      rate: 25.0,
       status: 'archived'
     },
     {
       id: 2,
-      name: 'Hack0r Grill',
+      name: 'OBI',
       rate: 17.5,
       status: 'active'
     },
