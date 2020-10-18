@@ -6,5 +6,6 @@
 @import 'base/misc.css';
 
 @import 'components/Calendar.css';
+@import 'components/Button.css';
 
 @import 'base/colors.css';

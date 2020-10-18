@@ -118,7 +118,7 @@ export default function FormJob({
                 e.preventDefault();
                 setDialogOpen(true);
               }}
-              className="btn-delete"
+              className="btn--delete"
               data-button-delete=""
             >
               Delete Job
@@ -129,7 +129,7 @@ export default function FormJob({
       <Dialog
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
-        buttonConfirmLabel="Conf1rm"
+        buttonConfirmLabel="Delete Job 🗑"
         handleConfirm={() => {
           console.log('foo');
         }}

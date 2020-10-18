@@ -14,7 +14,9 @@ export default function Dialog({
       {dialogOpen.toString()}
       {children}
       <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
-      <Button onClick={handleConfirm}>{buttonConfirmLabel}</Button>
+      <Button className="btn--delete" onClick={handleConfirm}>
+        {buttonConfirmLabel}
+      </Button>
     </div>
   );
 }
