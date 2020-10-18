@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
+import Dialog from './Dialog';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -57,6 +58,7 @@ export default function FormJob({
       id: 'AUTOINCREMENT'
     }
   );
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   function handleDelete(e) {
     e.preventDefault();
@@ -111,7 +113,11 @@ export default function FormJob({
           </Button>
           {isUpdateForm && (
             <Button
-              onClick={handleDelete}
+              // onClick={handleDelete}
+              onClick={(e) => {
+                e.preventDefault();
+                setDialogOpen(true);
+              }}
               className="btn-delete"
               data-button-delete=""
             >
@@ -120,6 +126,17 @@ export default function FormJob({
           )}
         </div>
       </form>
+      <Dialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        buttonConfirmLabel="Conf1rm"
+        handleConfirm={() => {
+          console.log('foo');
+        }}
+      >
+        <h1>Okay</h1>
+        <p>Sure?</p>
+      </Dialog>
     </>
   );
 }
