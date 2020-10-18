@@ -8,13 +8,13 @@ const Settings = ({ jobs, presets }) => {
     <div>
       <h1>Settings</h1>
       <hr></hr>
-      <h2>General</h2>
+      {/* <h2>General</h2>
       <label htmlFor="language">Languge</label>
       <select name="language">
         <option>DE</option>
         <option>EN</option>
-      </select>
-      <hr></hr>
+      </select> 
+      <hr></hr>*/}
       <h2>Jobs</h2>
       {jobs.map((job) => (
         <div key={job.id}>

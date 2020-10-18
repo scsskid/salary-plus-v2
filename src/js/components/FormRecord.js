@@ -75,7 +75,6 @@ export default function FormRecord({
   const inputRate = React.useRef();
 
   function handleDispatch(formData) {
-    console.log(formData);
     saveRecord(formData);
     history.push('/');
   }
@@ -101,7 +100,6 @@ export default function FormRecord({
   }
 
   function handleChange(e) {
-    console.log(e.target);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
