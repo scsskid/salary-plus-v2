@@ -7,12 +7,11 @@ import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
 import Settings from './components/Settings';
 import { useLocalStorageReducer } from './utils/store';
-import { getDateFromFormInputDate, pad } from './utils/helpers';
-import '../css/index.css';
+import { getDateFromFormInputDate } from './utils/helpers';
 import { FormRecordCreate, FormRecordUpdate } from './components/FormRecord';
 import { FormJobCreate, FormJobUpdate } from './components/FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './components/FormPreset';
-import { getIntlDateTimeFormat } from './utils/helpers';
+import '../css/index.css';
 
 const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -57,6 +56,13 @@ const App = () => {
       payload: formData
     };
     dispatch(action);
+  }
+
+  function deleteItem({ type, id }) {
+    dispatch({
+      type: `delete${type.charAt(0).toUpperCase() + type.slice(1)}`,
+      payload: { id }
+    });
   }
 
   function changeMonth(summand = 0) {
@@ -134,28 +140,32 @@ const App = () => {
               presets={presets}
               records={records}
               saveRecord={saveRecord}
+              deleteItem={deleteItem}
             />
           </Route>
           <Route path="/jobs/add">
             <FormJobCreate saveJob={saveJob} />
           </Route>
           <Route path="/jobs/:jobId">
-            <FormJobUpdate saveJob={saveJob} jobs={jobs} />
+            <FormJobUpdate
+              jobs={jobs}
+              saveJob={saveJob}
+              deleteItem={deleteItem}
+            />
           </Route>
           <Route path="/presets/add">
             <FormPresetCreate savePreset={savePreset} />
           </Route>
           <Route path="/presets/:presetId">
-            <FormPresetUpdate savePreset={savePreset} />
+            <FormPresetUpdate
+              presets={presets}
+              savePreset={savePreset}
+              deleteItem={deleteItem}
+            />
           </Route>
 
           <Route path="/Settings">
-            <Settings
-              settings={settings}
-              jobs={jobs}
-              saveJob={saveJob}
-              presets={presets}
-            />
+            <Settings settings={settings} jobs={jobs} presets={presets} />
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
@@ -183,8 +193,6 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
 function AppFooter({ isLoggedIn, dataFreshness, children }) {
   return (
     <footer style={{ paddingTop: 40 }}>
@@ -195,3 +203,5 @@ function AppFooter({ isLoggedIn, dataFreshness, children }) {
     </footer>
   );
 }
+
+ReactDOM.render(<App />, document.getElementById('root'));

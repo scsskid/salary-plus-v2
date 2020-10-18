@@ -38,6 +38,13 @@ function reducer(state, { type, payload }) {
           state.records
         )
       };
+    case 'deleteRecord':
+      return {
+        ...state,
+        records: state.records.filter((record) => {
+          return record.id != payload.id;
+        })
+      };
     case 'createJob':
       payload.id = nextJobId;
       return {
@@ -53,6 +60,13 @@ function reducer(state, { type, payload }) {
         ...state,
         jobs: mutateArrayWithObject(payload, state.jobs)
       };
+    case 'deleteJob':
+      return {
+        ...state,
+        jobs: state.jobs.filter((job) => {
+          return job.id != payload.id;
+        })
+      };
     case 'createPreset':
       payload.id = nextPresetId;
       return {
@@ -67,6 +81,13 @@ function reducer(state, { type, payload }) {
       return {
         ...state,
         presets: mutateArrayWithObject(payload, state.presets)
+      };
+    case 'deletePreset':
+      return {
+        ...state,
+        presets: state.presets.filter((preset) => {
+          return preset.id != payload.id;
+        })
       };
     case 'reset':
       return init({ ...bootstrapData });

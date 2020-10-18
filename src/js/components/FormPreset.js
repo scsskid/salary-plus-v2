@@ -1,5 +1,6 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import Button from './Button';
 
 export const FormPresetCreate = function ({ savePreset }) {
   const history = useHistory();
@@ -17,8 +18,13 @@ export const FormPresetCreate = function ({ savePreset }) {
   );
 };
 
-export const FormPresetUpdate = function ({ savePreset }) {
+export const FormPresetUpdate = function ({ presets, savePreset, deleteItem }) {
+  const { presetId } = useParams();
   const history = useHistory();
+
+  const preset = presets.find((preset) => preset.id === parseInt(presetId));
+
+  console.log(presets, preset);
 
   function handleDispatch(formData) {
     savePreset(formData);
@@ -28,29 +34,49 @@ export const FormPresetUpdate = function ({ savePreset }) {
   return (
     <>
       <h1>Update Preset</h1>
-      <FormPreset handleDispatch={handleDispatch} />
+      <FormPreset
+        handleDispatch={handleDispatch}
+        preset={preset}
+        deleteItem={deleteItem}
+        history={history}
+        isUpdateForm={true}
+      />
     </>
   );
 };
 
-export default function FormPreset({ handleDispatch, id }) {
-  const [state, setState] = React.useState({
-    name: 'Unnamed Preset',
-    timeBegin: '08:00',
-    timeEnd: '17:00',
-    rate: 0,
-    id: typeof id === 'undefined' ? 'AUTOINCREMENT' : id
-  });
+export default function FormPreset({
+  handleDispatch,
+  preset,
+  deleteItem,
+  history,
+  isUpdateForm
+}) {
+  const [formData, setFormData] = React.useState(
+    preset || {
+      name: 'Unnamed Preset',
+      timeBegin: '08:00',
+      timeEnd: '17:00',
+      rate: 0,
+      id: 'AUTOINCREMENT'
+    }
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleDispatch(state);
+    handleDispatch(formData);
+  }
+
+  function handleDelete(e) {
+    e.preventDefault();
+    deleteItem({ type: 'preset', id: formData.id });
+    history.push('/settings');
   }
 
   function handleChange(e) {
     // console.log(e.target.name);
-    setState({
-      ...state,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     });
   }
@@ -58,13 +84,13 @@ export default function FormPreset({ handleDispatch, id }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p>ID: {id}</p>
+        <p>ID: {formData.id}</p>
         <div>
           <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
-            value={state.name}
+            value={formData.name}
             onChange={handleChange}
             required
             placeholder="Enter a Preset name..."
@@ -76,7 +102,7 @@ export default function FormPreset({ handleDispatch, id }) {
             type="time"
             step="900"
             name="timeBegin"
-            value={state.timeBegin}
+            value={formData.timeBegin}
             onChange={handleChange}
           />
         </div>
@@ -86,7 +112,7 @@ export default function FormPreset({ handleDispatch, id }) {
             type="time"
             step="900"
             name="timeEnd"
-            value={state.timeEnd}
+            value={formData.timeEnd}
             onChange={handleChange}
           />
         </div>
@@ -97,7 +123,7 @@ export default function FormPreset({ handleDispatch, id }) {
             name="rate"
             type="number"
             step="0.01"
-            value={state.rate}
+            value={formData.rate}
             onChange={handleChange}
           />
           €
@@ -105,9 +131,18 @@ export default function FormPreset({ handleDispatch, id }) {
 
         <div>
           {/* <button className="btn">Cancel</button> */}
-          <button className="btn" type="submit">
+          <Button type="submit" data-button-submit="">
             Save
-          </button>
+          </Button>
+          {isUpdateForm && (
+            <Button
+              onClick={handleDelete}
+              className="btn-delete"
+              data-button-delete=""
+            >
+              Delete Preset
+            </Button>
+          )}
         </div>
       </form>
     </>

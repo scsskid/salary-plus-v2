@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import Button from './Button';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -17,7 +18,7 @@ export function FormJobCreate({ saveJob }) {
   );
 }
 
-export function FormJobUpdate({ saveJob, jobs }) {
+export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
   const { jobId } = useParams();
   const history = useHistory();
 
@@ -31,33 +32,47 @@ export function FormJobUpdate({ saveJob, jobs }) {
   return (
     <>
       <h1>Update Job</h1>
-      <FormJob handleDispatch={handleDispatch} job={job} />
+      <FormJob
+        handleDispatch={handleDispatch}
+        job={job}
+        deleteItem={deleteItem}
+        history={history}
+        isUpdateForm={true}
+      />
     </>
   );
 }
 
-export default function FormJob({ handleDispatch, job }) {
-  const [state, setState] = React.useState({
-    name: 'Unnamed Job',
-    rate: 0,
-    id: 'AUTOINCREMENT'
-  });
-
-  useEffect(() => {
-    if (job) {
-      setState(job);
+export default function FormJob({
+  handleDispatch,
+  job,
+  deleteItem,
+  history,
+  isUpdateForm
+}) {
+  const [formData, setFormData] = React.useState(
+    job || {
+      name: 'Unnamed Job',
+      rate: 0,
+      id: 'AUTOINCREMENT'
     }
-  }, [job]);
+  );
+
+  function handleDelete(e) {
+    e.preventDefault();
+    deleteItem({ type: 'job', id: formData.id });
+    history.push('/settings');
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleDispatch(state);
+    handleDispatch(formData);
   }
 
   function handleChange(e) {
     // console.log(e.target.name);
-    setState({
-      ...state,
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     });
   }
@@ -65,13 +80,13 @@ export default function FormJob({ handleDispatch, job }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <p>ID: {state.id}</p>
+        <p>ID: {formData.id}</p>
         <div>
           <label htmlFor="name">Name</label>
           <input
             type="text"
             name="name"
-            value={state.name}
+            value={formData.name}
             onChange={handleChange}
             required
             placeholder="Enter a job name..."
@@ -83,7 +98,7 @@ export default function FormJob({ handleDispatch, job }) {
             type="number"
             step="0.01"
             name="rate"
-            value={state.rate}
+            value={formData.rate}
             onChange={handleChange}
             placeholder="Enter optional rate..."
           />
@@ -91,9 +106,18 @@ export default function FormJob({ handleDispatch, job }) {
 
         <div>
           {/* <button className="btn">Cancel</button> */}
-          <button className="btn" type="submit">
+          <Button type="submit" data-button-submit="">
             Save
-          </button>
+          </Button>
+          {isUpdateForm && (
+            <Button
+              onClick={handleDelete}
+              className="btn-delete"
+              data-button-delete=""
+            >
+              Delete Job
+            </Button>
+          )}
         </div>
       </form>
     </>

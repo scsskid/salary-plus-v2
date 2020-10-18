@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatDate, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
+import Button from './Button';
 
 export function FormRecordCreate({
   inputDate,
@@ -33,7 +34,13 @@ export function FormRecordCreate({
   );
 }
 
-export function FormRecordUpdate({ saveRecord, jobs, records, presets }) {
+export function FormRecordUpdate({
+  saveRecord,
+  jobs,
+  records,
+  presets,
+  deleteItem
+}) {
   const params = useParams();
   const requestedRecord = records?.find(
     (record) => record.id === parseInt(params?.id)
@@ -57,7 +64,9 @@ export function FormRecordUpdate({ saveRecord, jobs, records, presets }) {
         initialFormData={initialFormData}
         jobs={jobs}
         saveRecord={saveRecord}
+        deleteItem={deleteItem}
         presets={presets}
+        isUpdateForm={true}
       />
     </>
   );
@@ -65,9 +74,11 @@ export function FormRecordUpdate({ saveRecord, jobs, records, presets }) {
 
 export default function FormRecord({
   saveRecord,
+  deleteItem,
   jobs,
   initialFormData,
-  presets
+  presets,
+  isUpdateForm
 }) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
@@ -136,6 +147,12 @@ export default function FormRecord({
   function handleSubmit(e) {
     e.preventDefault();
     handleDispatch(formData);
+  }
+
+  function handleDelete(e) {
+    e.preventDefault();
+    deleteItem({ type: 'record', id: formData.id });
+    history.push('/');
   }
 
   return (
@@ -237,9 +254,18 @@ export default function FormRecord({
         </div>
 
         <div className="form-el">
-          <button className="btn" data-button-submit>
+          <Button type="submit" data-button-submit="">
             Save
-          </button>
+          </Button>
+          {isUpdateForm && (
+            <Button
+              onClick={handleDelete}
+              className="btn-delete"
+              data-button-delete=""
+            >
+              Delete Record
+            </Button>
+          )}
         </div>
 
         <div className="form-el"></div>
