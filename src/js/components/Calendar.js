@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
 import CalendarControls from './CalendarControls.js';
-import { getIntlDateTimeFormat, getWeekDayNames } from '../utils/helpers.js';
+import { getWeekDayNames, getLocaleTimeString } from '../utils/helpers.js';
 
 function Calendar({
   inputDate,
@@ -75,25 +75,9 @@ function DateDetailsEntry({ record, jobs, settings }) {
   const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
   const time = {
-    begin: new Date(record.begin).toLocaleTimeString(undefined, {
-      timeZone: 'Europe/Berlin',
-      hour: '2-digit',
-      minute: '2-digit'
-    }),
-    end: new Date(record.end).toLocaleTimeString(undefined, {
-      timeZone: 'Europe/Berlin',
-      hour: '2-digit',
-      minute: '2-digit'
-    })
+    begin: getLocaleTimeString(new Date(record.begin)),
+    end: getLocaleTimeString(new Date(record.end))
   };
-
-  const intl = getIntlDateTimeFormat(new Date(record.begin), {
-    timeZone: settings.timeZone,
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  });
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -103,7 +87,6 @@ function DateDetailsEntry({ record, jobs, settings }) {
     <>
       <div className="date-details-entry">
         <button data-record-id={record.id} onClick={handleClick}>
-          <p>{intl}</p>
           <p>
             {time.begin}
             <br />
@@ -116,7 +99,7 @@ function DateDetailsEntry({ record, jobs, settings }) {
           </p>
         </button>
       </div>
-      <pre>{JSON.stringify(record, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
       <hr />
     </>
   );

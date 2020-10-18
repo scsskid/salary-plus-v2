@@ -14,7 +14,7 @@ function init(initialData) {
 
 function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
-  const freshNess = new Date().toISOString();
+  // const freshNess = new Date().toISOString();
   const nextPresetId = state?.settings?.incrementIdPresets + 1;
   const nextJobId = state?.settings?.incrementIdJobs + 1;
   const nextRecordId = state?.settings?.incrementIdRecords + 1;
@@ -69,14 +69,11 @@ function reducer(state, { type, payload }) {
         presets: mutateArrayWithObject(payload, state.presets)
       };
     case 'reset':
-      return init({
-        ...bootstrapData,
-        app: { ...bootstrapData.app, freshNess }
-      });
+      return init({ ...bootstrapData });
     case 'deleteAppData':
       return init({});
     case 'insertSampleData':
-      return init({ ...sampleData, app: { ...sampleData.app, freshNess } });
+      return init({ ...sampleData });
     default:
       break;
   }

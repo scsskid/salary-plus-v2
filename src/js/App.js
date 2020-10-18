@@ -173,17 +173,10 @@ const App = () => {
           <button className="btn" onClick={handleDeleteAppData}>
             Delete App Data
           </button>
-          <p>
-            {`Jobs: ${jobs.length}`} {`Records: ${records.length}`}{' '}
-          </p>
-          <code>
-            inputDate:{` `}
-            {`${inputDate.getFullYear()}-${pad(inputDate.getMonth() + 1)}-${pad(
-              inputDate.getDate()
-            )}`}
-          </code>
 
-          <pre>userSettings: {JSON.stringify(settings, null, 2)}</pre>
+          <pre style={{ fontSize: '.6rem' }}>
+            userSettings: {JSON.stringify(settings, null, 2)}
+          </pre>
         </>
       </AppFooter>
     </Router>
@@ -198,12 +191,6 @@ function AppFooter({ isLoggedIn, dataFreshness, children }) {
       {isLoggedIn && <>{children}</>}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
         state: {isLoggedIn ? 'logged in' : 'logged out'}
-        {isLoggedIn && (
-          <>
-            {' '}
-            / dataFreshness: {getIntlDateTimeFormat(new Date(dataFreshness))}
-          </>
-        )}
       </div>
     </footer>
   );

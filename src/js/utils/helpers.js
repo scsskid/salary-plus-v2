@@ -37,6 +37,13 @@ export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
 
 // dates
 
+export function getLocaleTimeString(date) {
+  return date.toLocaleTimeString(undefined, {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
 export function getIntlDateTimeFormat(
   date = new Date(),
   options = {
