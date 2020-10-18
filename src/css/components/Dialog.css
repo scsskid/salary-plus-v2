@@ -1,0 +1,9 @@
+.dialog {
+  background: #f7f7f7;
+  padding: 1rem;
+  display: none;
+}
+
+.dialog--open {
+  display: block;
+}

@@ -113,9 +113,8 @@ export default function FormJob({
           </Button>
           {isUpdateForm && (
             <Button
-              // onClick={handleDelete}
-              onClick={(e) => {
-                e.preventDefault();
+              type="button"
+              onClick={() => {
                 setDialogOpen(true);
               }}
               className="btn--delete"
@@ -130,12 +129,12 @@ export default function FormJob({
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
         buttonConfirmLabel="Delete Job 🗑"
-        handleConfirm={() => {
-          console.log('foo');
-        }}
+        handleConfirm={handleDelete}
       >
-        <h1>Okay</h1>
-        <p>Sure?</p>
+        <h1>Confirm deletion</h1>
+        <p>
+          Are you sure to permanently delete <b>{formData.name}</b>?
+        </p>
       </Dialog>
     </>
   );

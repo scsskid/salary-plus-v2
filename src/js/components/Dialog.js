@@ -9,9 +9,7 @@ export default function Dialog({
   children
 }) {
   return (
-    <div className={`dialog ${open ?? 'dialog--open'}`}>
-      <p></p>
-      {dialogOpen.toString()}
+    <div className={`dialog ${dialogOpen ? 'dialog--open' : ''}`}>
       {children}
       <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
       <Button className="btn--delete" onClick={handleConfirm}>
