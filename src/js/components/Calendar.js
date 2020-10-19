@@ -1,10 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import CalendarBody from './CalendarBody.js';
 import CalendarControls from './CalendarControls.js';
-import { getWeekDayNames, getLocaleTimeString } from '../utils/helpers.js';
+import DateDetails from './DateDetails.js';
+import { getWeekDayNames } from '../utils/helpers.js';
 
-function Calendar({
+export default function Calendar({
   inputDate,
   changeMonth,
   updateInputDate,
@@ -54,58 +54,7 @@ function Calendar({
   );
 }
 
-function DateDetails({ dateRecords, jobs, settings }) {
-  let content = [];
-
-  dateRecords.forEach((record) => {
-    content.push(
-      <DateDetailsEntry
-        key={`record-details-${record.id}`}
-        record={record}
-        jobs={jobs}
-        settings={settings}
-      />
-    );
-  });
-
-  return <div className="date-details">{content}</div>;
-}
-
-function DateDetailsEntry({ record, jobs, settings }) {
-  const job = jobs.find((job) => job.id == record.jobId);
-  const history = useHistory();
-  const time = {
-    begin: getLocaleTimeString(new Date(record.begin)),
-    end: getLocaleTimeString(new Date(record.end))
-  };
-
-  function handleClick() {
-    history.push(`/records/${record.id}`);
-  }
-
-  return (
-    <>
-      <div className="date-details-entry">
-        <button data-record-id={record.id} onClick={handleClick}>
-          <p>
-            {time.begin}
-            <br />
-            {time.end}
-          </p>
-          <p>
-            {job.name} (current rate: {job.rate})
-            <br />
-            Recorded Rate: {record.rate}
-          </p>
-        </button>
-      </div>
-      {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
-      <hr />
-    </>
-  );
-}
-
-const getRecordsByDate = ({ records, inputDate }) => {
+function getRecordsByDate({ records, inputDate }) {
   return records.filter((record) => {
     const beginDate = new Date(record.begin);
     return (
@@ -114,7 +63,7 @@ const getRecordsByDate = ({ records, inputDate }) => {
       beginDate.getFullYear() === inputDate.getFullYear()
     );
   });
-};
+}
 
 function getRecordsByMonth({ records, inputDate }) {
   return records.filter((record) => {
@@ -125,8 +74,6 @@ function getRecordsByMonth({ records, inputDate }) {
     );
   });
 }
-
-export default Calendar;
 
 function CalendarHead({ settings }) {
   let cells = [];

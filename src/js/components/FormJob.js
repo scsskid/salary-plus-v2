@@ -135,6 +135,12 @@ export default function FormJob({
         <p>
           Are you sure to permanently delete <b>{formData.name}</b>?
         </p>
+        <p>
+          <small>
+            You will loose the ability to filter reporting by Job, entries wont
+            be deleted.
+          </small>
+        </p>
       </Dialog>
     </>
   );

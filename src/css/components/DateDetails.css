@@ -1,0 +1,7 @@
+.date-details-entry {
+  display: flex;
+}
+
+.date-details-entry-time {
+  width: 4rem;
+}
