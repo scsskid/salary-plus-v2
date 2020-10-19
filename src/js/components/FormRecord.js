@@ -10,25 +10,15 @@ export function FormRecordCreate({
   settings,
   presets
 }) {
-  const initialFormData = {
-    id: 0,
-    jobId: settings.defaultJobId,
-    dateBegin: formatDate.rfc3339(inputDate),
-    timeBegin: '15:00',
-    timeEnd: '02:00',
-    rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
-    bonus: 0,
-    preset: 0
-  };
-
   return (
     <>
       <h1>New Entry</h1>
       <FormRecord
-        initialFormData={initialFormData}
         jobs={jobs}
         saveRecord={saveRecord}
         presets={presets}
+        inputDate={inputDate}
+        settings={settings}
       />
     </>
   );
@@ -42,31 +32,18 @@ export function FormRecordUpdate({
   deleteItem
 }) {
   const params = useParams();
-  const requestedRecord = records?.find(
-    (record) => record.id === parseInt(params?.id)
-  );
-
-  const initialFormData = {
-    id: requestedRecord.id,
-    jobId: requestedRecord.jobId,
-    dateBegin: formatDate.rfc3339(new Date(requestedRecord.begin)),
-    timeBegin: getTimeOfDate(new Date(requestedRecord.begin)),
-    timeEnd: getTimeOfDate(new Date(requestedRecord.end)),
-    rate: requestedRecord.rate,
-    bonus: requestedRecord.bonus,
-    preset: 0
-  };
+  const record = records?.find((record) => record.id === parseInt(params?.id));
 
   return (
     <>
       <h1>Update Entry</h1>
       <FormRecord
-        initialFormData={initialFormData}
         jobs={jobs}
         saveRecord={saveRecord}
         deleteItem={deleteItem}
         presets={presets}
         isUpdateForm={true}
+        record={record}
       />
     </>
   );
@@ -76,10 +53,34 @@ export default function FormRecord({
   saveRecord,
   deleteItem,
   jobs,
-  initialFormData,
   presets,
-  isUpdateForm
+  isUpdateForm,
+  record,
+  settings,
+  inputDate
 }) {
+  const initialFormData = record
+    ? {
+        id: record.id,
+        jobId: record.jobId,
+        jobName: jobs?.find((job) => job.id === record.jobId).name,
+        dateBegin: formatDate.rfc3339(new Date(record.begin)),
+        timeBegin: getTimeOfDate(new Date(record.begin)),
+        timeEnd: getTimeOfDate(new Date(record.end)),
+        rate: record.rate,
+        bonus: record.bonus,
+        preset: false
+      }
+    : {
+        jobId: settings.defaultJobId,
+        dateBegin: formatDate.rfc3339(inputDate),
+        timeBegin: '15:00',
+        timeEnd: '02:00',
+        rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
+        bonus: 0,
+        preset: false
+      };
+
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const form = React.useRef();
@@ -119,12 +120,13 @@ export default function FormRecord({
 
   function handleSelectChange(e) {
     const selectedJobId = parseInt(e.target.value);
-    const jobRate = jobs.find((job) => job.id === selectedJobId)?.rate;
+    const job = jobs.find((job) => job.id === selectedJobId);
 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      ['rate']: jobRate
+      ['rate']: job.rate,
+      ['jobName']: job.name
     });
   }
 
@@ -163,6 +165,7 @@ export default function FormRecord({
         data-record-id={formData.recordId}
       >
         <input type="hidden" name="id" value={formData.id} />
+        {formData.jobName}
         <div className="form-el">
           <label htmlFor="entry-job">Job</label>
           <select

@@ -57,8 +57,7 @@ export default function FormPreset({
       name: 'Unnamed Preset',
       timeBegin: '08:00',
       timeEnd: '17:00',
-      rate: 0,
-      id: 'AUTOINCREMENT'
+      rate: false
     }
   );
 

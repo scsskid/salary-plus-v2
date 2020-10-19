@@ -54,8 +54,7 @@ export default function FormJob({
   const [formData, setFormData] = React.useState(
     job || {
       name: 'Unnamed Job',
-      rate: 0,
-      id: 'AUTOINCREMENT'
+      rate: 0
     }
   );
   const [dialogOpen, setDialogOpen] = React.useState(false);

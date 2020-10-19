@@ -32,30 +32,25 @@ const App = () => {
 
   // make higher order fn
   function saveRecord(formData) {
-    const action = {
-      type: parseInt(formData.id) === 0 ? 'createRecord' : 'updateRecord',
+    dispatch({
+      type: 'id' in formData ? 'updateRecord' : 'createRecord',
       payload: formData
-    };
-    dispatch(action);
+    });
     updateInputDate(getDateFromFormInputDate(formData.dateBegin));
   }
 
   function saveJob(formData) {
-    formData.id = parseInt(formData.id);
-    const action = {
-      type: isNaN(formData.id) ? 'createJob' : 'updateJob',
+    dispatch({
+      type: 'id' in formData ? 'updateJob' : 'createJob',
       payload: formData
-    };
-    dispatch(action);
+    });
   }
 
   function savePreset(formData) {
-    formData.id = parseInt(formData.id);
-    const action = {
-      type: isNaN(formData.id) ? 'createPreset' : 'updatePreset',
+    dispatch({
+      type: 'id' in formData ? 'updatePreset' : 'createPreset',
       payload: formData
-    };
-    dispatch(action);
+    });
   }
 
   function deleteItem({ type, id }) {
