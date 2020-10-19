@@ -69,6 +69,13 @@ function reducer(state, { type, payload }) {
         jobs: state.jobs.filter((job) => {
           return job.id != payload.id;
         })
+        // settings: {
+        //   ...state.settings,
+        //   previousJobId:
+        //     state.settings.previousJobId == payload.id
+        //       ? null
+        //       : state.settings.previousJobId
+        // }
       };
     case 'createPreset':
       payload.id = nextPresetId;

@@ -68,7 +68,7 @@ export default function FormRecord({
   const initialFormData = record
     ? {
         id: record.id,
-        jobId: record.jobId,
+        jobId: parseInt(record.jobId),
         jobName: record.jobName || 'Was undefined!',
         dateBegin: formatDate.rfc3339(new Date(record.begin)),
         timeBegin: getTimeOfDate(new Date(record.begin)),
@@ -138,7 +138,8 @@ export default function FormRecord({
     }
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
-    dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
+    // Causes Bug
+    // dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
 
     setFormData({
       ...formData,
@@ -169,6 +170,13 @@ export default function FormRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
+    // via useMemo
+    // if (!jobs.length) {
+    //   dispatch({
+    //     type: 'createJob',
+    //     payload: { name: formData.name, rate: formData.rate }
+    //   });
+    // }
     handleDispatch(formData);
   }
 
@@ -198,7 +206,9 @@ export default function FormRecord({
               onBlur={handleSelectJobChange}
               onChange={handleSelectJobChange}
             >
-              <option value={0}>Custom</option>
+              <option key={`job-0`} disabled={true} value={0}>
+                Select Job...
+              </option>
               <OptionsJob />
             </select>
           </div>
@@ -212,6 +222,9 @@ export default function FormRecord({
               value={formData.jobName}
               onChange={handleChange}
             />
+            {/* <p>
+              <small>Job will be added to saved Jobs.</small>
+            </p> */}
           </div>
         )}
         <div className="form-el">
@@ -271,7 +284,16 @@ export default function FormRecord({
             onChange={handleChange}
           />{' '}
           €
+          {/* {jobs.length == 0 && (
+            <p>
+              <small>
+                Rate will linked to above entered jobName and preset in this
+                form when selecting this job.
+              </small>
+            </p>
+          )} */}
         </div>
+
         <div className="form-el">
           <label htmlFor="entry-bonus">Bonus</label>
           <input

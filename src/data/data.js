@@ -3,6 +3,8 @@ const settings = {
   locale: 'en',
   currency: 'EUR',
   previousJobId: null,
+  previousJobName: null,
+  previousRate: null,
   previousTimeBegin: null,
   previousTimeEnd: null
 };
