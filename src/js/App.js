@@ -179,7 +179,7 @@ const App = () => {
             Delete App Data
           </button>
 
-          <pre style={{ fontSize: '.6rem' }}>
+          <pre style={{ fontSize: '.6rem', display: 'none' }}>
             userSettings: {JSON.stringify(settings, null, 2)}
           </pre>
         </>
@@ -188,7 +188,7 @@ const App = () => {
   );
 };
 
-function AppFooter({ isLoggedIn, dataFreshness, children }) {
+function AppFooter({ isLoggedIn, children }) {
   return (
     <footer style={{ paddingTop: 40 }}>
       {isLoggedIn && <>{children}</>}

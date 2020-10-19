@@ -44,6 +44,7 @@ export const sampleData = {
     {
       id: 1,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-01T13:30:00.000Z',
       end: '2020-01-01T22:30:00.000Z',
       bonus: '29.00',
@@ -56,6 +57,7 @@ export const sampleData = {
     {
       id: 2,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-04T12:00:00.000Z',
       end: '2020-01-04T23:00:00.000Z',
       bonus: '37.00',
@@ -68,6 +70,7 @@ export const sampleData = {
     {
       id: 3,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-05T13:30:00.000Z',
       end: '2020-01-05T22:45:00.000Z',
       bonus: '10.00',
@@ -80,6 +83,7 @@ export const sampleData = {
     {
       id: 4,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-06T13:00:00.000Z',
       end: '2020-01-06T22:30:00.000Z',
       bonus: '20.00',
@@ -92,6 +96,7 @@ export const sampleData = {
     {
       id: 5,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-07T14:00:00.000Z',
       end: '2020-01-07T21:30:00.000Z',
       bonus: '11.00',
@@ -104,6 +109,7 @@ export const sampleData = {
     {
       id: 6,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-08T14:00:00.000Z',
       end: '2020-01-08T23:00:00.000Z',
       bonus: '20.00',
@@ -116,6 +122,7 @@ export const sampleData = {
     {
       id: 7,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-11T12:00:00.000Z',
       end: '2020-01-11T22:30:00.000Z',
       bonus: '17.00',
@@ -128,6 +135,7 @@ export const sampleData = {
     {
       id: 8,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-12T13:30:00.000Z',
       end: '2020-01-12T22:30:00.000Z',
       bonus: '28.50',
@@ -140,6 +148,7 @@ export const sampleData = {
     {
       id: 9,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-15T09:00:00.000Z',
       end: '2020-01-15T15:45:00.000Z',
       bonus: '0.00',
@@ -152,6 +161,7 @@ export const sampleData = {
     {
       id: 10,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-18T12:00:00.000Z',
       end: '2020-01-18T22:30:00.000Z',
       bonus: '19.50',
@@ -164,6 +174,7 @@ export const sampleData = {
     {
       id: 11,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-19T13:00:00.000Z',
       end: '2020-01-19T22:15:00.000Z',
       bonus: '20.00',
@@ -176,6 +187,7 @@ export const sampleData = {
     {
       id: 12,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-20T14:00:00.000Z',
       end: '2020-01-20T22:15:00.000Z',
       bonus: '7.00',
@@ -188,6 +200,7 @@ export const sampleData = {
     {
       id: 13,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-22T14:00:00.000Z',
       end: '2020-01-22T23:50:00.000Z',
       bonus: '33.00',
@@ -200,6 +213,7 @@ export const sampleData = {
     {
       id: 14,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-25T12:00:00.000Z',
       end: '2020-01-25T22:00:00.000Z',
       bonus: '20.00',
@@ -212,6 +226,7 @@ export const sampleData = {
     {
       id: 15,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-26T13:00:00.000Z',
       end: '2020-01-26T22:25:00.000Z',
       bonus: '22.50',
@@ -224,6 +239,7 @@ export const sampleData = {
     {
       id: 16,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-27T14:00:00.000Z',
       end: '2020-01-27T22:30:00.000Z',
       bonus: '19.00',
@@ -236,6 +252,7 @@ export const sampleData = {
     {
       id: 17,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-28T13:00:00.000Z',
       end: '2020-01-28T23:00:00.000Z',
       bonus: '24.00',
@@ -248,6 +265,7 @@ export const sampleData = {
     {
       id: 18,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-01-29T13:00:00.000Z',
       end: '2020-01-29T23:00:00.000Z',
       bonus: '30.00',
@@ -260,6 +278,7 @@ export const sampleData = {
     {
       id: 19,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-02T12:00:00.000Z',
       end: '2020-02-02T16:15:00.000Z',
       bonus: '0.00',
@@ -272,6 +291,7 @@ export const sampleData = {
     {
       id: 20,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-03T14:00:00.000Z',
       end: '2020-02-03T22:40:00.000Z',
       bonus: '15.00',
@@ -284,6 +304,7 @@ export const sampleData = {
     {
       id: 21,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-06T14:00:00.000Z',
       end: '2020-02-06T23:30:00.000Z',
       bonus: '28.00',
@@ -296,6 +317,7 @@ export const sampleData = {
     {
       id: 22,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-09T13:00:00.000Z',
       end: '2020-02-09T22:30:00.000Z',
       bonus: '17.00',
@@ -308,6 +330,7 @@ export const sampleData = {
     {
       id: 23,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-10T14:00:00.000Z',
       end: '2020-02-10T22:30:00.000Z',
       bonus: '0.00',
@@ -320,6 +343,7 @@ export const sampleData = {
     {
       id: 24,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-12T14:00:00.000Z',
       end: '2020-02-12T23:00:00.000Z',
       bonus: '36.00',
@@ -332,6 +356,7 @@ export const sampleData = {
     {
       id: 25,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-13T14:00:00.000Z',
       end: '2020-02-13T23:00:00.000Z',
       bonus: '38.00',
@@ -344,6 +369,7 @@ export const sampleData = {
     {
       id: 26,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-16T14:00:00.000Z',
       end: '2020-02-16T22:30:00.000Z',
       bonus: '30.00',
@@ -356,6 +382,7 @@ export const sampleData = {
     {
       id: 27,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-17T14:00:00.000Z',
       end: '2020-02-17T22:15:00.000Z',
       bonus: '12.00',
@@ -368,6 +395,7 @@ export const sampleData = {
     {
       id: 28,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-18T13:00:00.000Z',
       end: '2020-02-18T22:15:00.000Z',
       bonus: '31.50',
@@ -380,6 +408,7 @@ export const sampleData = {
     {
       id: 29,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-23T13:00:00.000Z',
       end: '2020-02-23T18:00:00.000Z',
       bonus: '0.00',
@@ -392,6 +421,7 @@ export const sampleData = {
     {
       id: 30,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-24T13:30:00.000Z',
       end: '2020-02-24T22:30:00.000Z',
       bonus: '17.50',
@@ -404,6 +434,7 @@ export const sampleData = {
     {
       id: 31,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-25T13:00:00.000Z',
       end: '2020-02-25T23:00:00.000Z',
       bonus: '26.00',
@@ -416,6 +447,7 @@ export const sampleData = {
     {
       id: 32,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-26T13:00:00.000Z',
       end: '2020-02-26T22:30:00.000Z',
       bonus: '20.00',
@@ -428,6 +460,7 @@ export const sampleData = {
     {
       id: 33,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-02-27T13:00:00.000Z',
       end: '2020-02-27T23:00:00.000Z',
       bonus: '24.00',
@@ -440,6 +473,7 @@ export const sampleData = {
     {
       id: 34,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-06T13:00:00.000Z',
       end: '2020-03-06T22:15:00.000Z',
       bonus: '0.00',
@@ -452,6 +486,7 @@ export const sampleData = {
     {
       id: 35,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-07T13:00:00.000Z',
       end: '2020-03-07T22:30:00.000Z',
       bonus: '0.00',
@@ -464,6 +499,7 @@ export const sampleData = {
     {
       id: 36,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-08T14:00:00.000Z',
       end: '2020-03-08T22:30:00.000Z',
       bonus: '0.00',
@@ -476,6 +512,7 @@ export const sampleData = {
     {
       id: 37,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-09T14:00:00.000Z',
       end: '2020-03-09T22:45:00.000Z',
       bonus: '0.00',
@@ -488,6 +525,7 @@ export const sampleData = {
     {
       id: 38,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-10T14:00:00.000Z',
       end: '2020-03-10T23:45:00.000Z',
       bonus: '0.00',
@@ -500,6 +538,7 @@ export const sampleData = {
     {
       id: 39,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-13T12:00:00.000Z',
       end: '2020-03-13T22:30:00.000Z',
       bonus: '0.00',
@@ -512,6 +551,7 @@ export const sampleData = {
     {
       id: 40,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-15T13:00:00.000Z',
       end: '2020-03-15T22:45:00.000Z',
       bonus: '0.00',
@@ -524,6 +564,7 @@ export const sampleData = {
     {
       id: 41,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-16T13:00:00.000Z',
       end: '2020-03-16T22:30:00.000Z',
       bonus: '0.00',
@@ -536,6 +577,7 @@ export const sampleData = {
     {
       id: 42,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-17T14:00:00.000Z',
       end: '2020-03-17T23:30:00.000Z',
       bonus: '0.00',
@@ -548,6 +590,7 @@ export const sampleData = {
     {
       id: 43,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-20T12:00:00.000Z',
       end: '2020-03-20T23:00:00.000Z',
       bonus: '0.00',
@@ -560,6 +603,7 @@ export const sampleData = {
     {
       id: 44,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-22T13:00:00.000Z',
       end: '2020-03-22T23:30:00.000Z',
       bonus: '0.00',
@@ -572,6 +616,7 @@ export const sampleData = {
     {
       id: 45,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-23T14:00:00.000Z',
       end: '2020-03-23T23:00:00.000Z',
       bonus: '0.00',
@@ -584,6 +629,7 @@ export const sampleData = {
     {
       id: 46,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-27T12:00:00.000Z',
       end: '2020-03-27T22:45:00.000Z',
       bonus: '0.00',
@@ -596,6 +642,7 @@ export const sampleData = {
     {
       id: 47,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-30T13:00:00.000Z',
       end: '2020-03-30T22:30:00.000Z',
       bonus: '0.00',
@@ -608,6 +655,7 @@ export const sampleData = {
     {
       id: 48,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-03-31T13:00:00.000Z',
       end: '2020-03-31T22:00:00.000Z',
       bonus: '0.00',
@@ -620,6 +668,7 @@ export const sampleData = {
     {
       id: 49,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-03T11:30:00.000Z',
       end: '2020-04-03T21:15:00.000Z',
       bonus: '0.00',
@@ -632,6 +681,7 @@ export const sampleData = {
     {
       id: 50,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-05T12:00:00.000Z',
       end: '2020-04-05T20:45:00.000Z',
       bonus: '0.00',
@@ -644,6 +694,7 @@ export const sampleData = {
     {
       id: 51,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-06T13:00:00.000Z',
       end: '2020-04-06T22:00:00.000Z',
       bonus: '0.00',
@@ -656,6 +707,7 @@ export const sampleData = {
     {
       id: 52,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-07T13:30:00.000Z',
       end: '2020-04-07T20:15:00.000Z',
       bonus: '0.00',
@@ -668,6 +720,7 @@ export const sampleData = {
     {
       id: 53,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-10T12:00:00.000Z',
       end: '2020-04-10T15:15:00.000Z',
       bonus: '0.00',
@@ -680,6 +733,7 @@ export const sampleData = {
     {
       id: 54,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-12T13:00:00.000Z',
       end: '2020-04-12T21:45:00.000Z',
       bonus: '0.00',
@@ -692,6 +746,7 @@ export const sampleData = {
     {
       id: 55,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-13T12:30:00.000Z',
       end: '2020-04-13T22:00:00.000Z',
       bonus: '0.00',
@@ -704,6 +759,7 @@ export const sampleData = {
     {
       id: 56,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-14T12:00:00.000Z',
       end: '2020-04-14T22:45:00.000Z',
       bonus: '0.00',
@@ -716,6 +772,7 @@ export const sampleData = {
     {
       id: 57,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-17T11:00:00.000Z',
       end: '2020-04-17T21:00:00.000Z',
       bonus: '0.00',
@@ -728,6 +785,7 @@ export const sampleData = {
     {
       id: 58,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-18T12:00:00.000Z',
       end: '2020-04-18T20:30:00.000Z',
       bonus: '0.00',
@@ -740,6 +798,7 @@ export const sampleData = {
     {
       id: 59,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-19T13:00:00.000Z',
       end: '2020-04-19T21:00:00.000Z',
       bonus: '0.00',
@@ -752,6 +811,7 @@ export const sampleData = {
     {
       id: 60,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-20T13:00:00.000Z',
       end: '2020-04-20T21:00:00.000Z',
       bonus: '0.00',
@@ -764,6 +824,7 @@ export const sampleData = {
     {
       id: 61,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-21T12:00:00.000Z',
       end: '2020-04-21T22:30:00.000Z',
       bonus: '0.00',
@@ -776,6 +837,7 @@ export const sampleData = {
     {
       id: 62,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-24T11:00:00.000Z',
       end: '2020-04-24T21:00:00.000Z',
       bonus: '0.00',
@@ -788,6 +850,7 @@ export const sampleData = {
     {
       id: 63,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-25T12:00:00.000Z',
       end: '2020-04-25T21:15:00.000Z',
       bonus: '0.00',
@@ -800,6 +863,7 @@ export const sampleData = {
     {
       id: 64,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-26T12:30:00.000Z',
       end: '2020-04-26T21:00:00.000Z',
       bonus: '0.00',
@@ -812,6 +876,7 @@ export const sampleData = {
     {
       id: 65,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-27T13:00:00.000Z',
       end: '2020-04-27T21:30:00.000Z',
       bonus: '0.00',
@@ -824,6 +889,7 @@ export const sampleData = {
     {
       id: 66,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-04-28T14:00:00.000Z',
       end: '2020-04-28T22:00:00.000Z',
       bonus: '0.00',
@@ -836,6 +902,7 @@ export const sampleData = {
     {
       id: 67,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-03T12:00:00.000Z',
       end: '2020-05-03T21:30:00.000Z',
       bonus: '0.00',
@@ -848,6 +915,7 @@ export const sampleData = {
     {
       id: 68,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-04T12:00:00.000Z',
       end: '2020-05-04T21:00:00.000Z',
       bonus: '0.00',
@@ -860,6 +928,7 @@ export const sampleData = {
     {
       id: 69,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-05T14:00:00.000Z',
       end: '2020-05-05T22:00:00.000Z',
       bonus: '0.00',
@@ -872,6 +941,7 @@ export const sampleData = {
     {
       id: 70,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-11T12:00:00.000Z',
       end: '2020-05-11T23:00:00.000Z',
       bonus: '0.00',
@@ -884,6 +954,7 @@ export const sampleData = {
     {
       id: 71,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-12T12:00:00.000Z',
       end: '2020-05-12T23:00:00.000Z',
       bonus: '0.00',
@@ -896,6 +967,7 @@ export const sampleData = {
     {
       id: 72,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-17T13:00:00.000Z',
       end: '2020-05-17T22:00:00.000Z',
       bonus: '0.00',
@@ -908,6 +980,7 @@ export const sampleData = {
     {
       id: 73,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-18T12:00:00.000Z',
       end: '2020-05-18T22:30:00.000Z',
       bonus: '0.00',
@@ -920,6 +993,7 @@ export const sampleData = {
     {
       id: 74,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-19T12:00:00.000Z',
       end: '2020-05-19T23:30:00.000Z',
       bonus: '0.00',
@@ -932,6 +1006,7 @@ export const sampleData = {
     {
       id: 75,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-22T11:00:00.000Z',
       end: '2020-05-22T22:00:00.000Z',
       bonus: '0.00',
@@ -944,6 +1019,7 @@ export const sampleData = {
     {
       id: 76,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-24T12:30:00.000Z',
       end: '2020-05-24T21:30:00.000Z',
       bonus: '0.00',
@@ -956,6 +1032,7 @@ export const sampleData = {
     {
       id: 77,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-25T12:00:00.000Z',
       end: '2020-05-25T22:00:00.000Z',
       bonus: '0.00',
@@ -968,6 +1045,7 @@ export const sampleData = {
     {
       id: 78,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-05-31T12:30:00.000Z',
       end: '2020-05-31T21:45:00.000Z',
       bonus: '0.00',
@@ -980,6 +1058,7 @@ export const sampleData = {
     {
       id: 79,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-01T12:00:00.000Z',
       end: '2020-06-01T22:00:00.000Z',
       bonus: '0.00',
@@ -992,6 +1071,7 @@ export const sampleData = {
     {
       id: 80,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-02T12:00:00.000Z',
       end: '2020-06-02T22:15:00.000Z',
       bonus: '0.00',
@@ -1004,6 +1084,7 @@ export const sampleData = {
     {
       id: 81,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-05T11:00:00.000Z',
       end: '2020-06-05T20:45:00.000Z',
       bonus: '0.00',
@@ -1016,6 +1097,7 @@ export const sampleData = {
     {
       id: 82,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-06T13:00:00.000Z',
       end: '2020-06-06T22:00:00.000Z',
       bonus: '0.00',
@@ -1028,6 +1110,7 @@ export const sampleData = {
     {
       id: 83,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-07T12:00:00.000Z',
       end: '2020-06-07T22:30:00.000Z',
       bonus: '0.00',
@@ -1040,6 +1123,7 @@ export const sampleData = {
     {
       id: 84,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-09T11:30:00.000Z',
       end: '2020-06-09T22:00:00.000Z',
       bonus: '0.00',
@@ -1052,6 +1136,7 @@ export const sampleData = {
     {
       id: 85,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-12T11:00:00.000Z',
       end: '2020-06-12T21:30:00.000Z',
       bonus: '0.00',
@@ -1064,6 +1149,7 @@ export const sampleData = {
     {
       id: 86,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-13T12:00:00.000Z',
       end: '2020-06-13T21:30:00.000Z',
       bonus: '0.00',
@@ -1076,6 +1162,7 @@ export const sampleData = {
     {
       id: 87,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-14T12:00:00.000Z',
       end: '2020-06-14T21:30:00.000Z',
       bonus: '0.00',
@@ -1088,6 +1175,7 @@ export const sampleData = {
     {
       id: 88,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-19T11:00:00.000Z',
       end: '2020-06-19T21:30:00.000Z',
       bonus: '0.00',
@@ -1100,6 +1188,7 @@ export const sampleData = {
     {
       id: 89,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-20T12:00:00.000Z',
       end: '2020-06-20T21:45:00.000Z',
       bonus: '0.00',
@@ -1112,6 +1201,7 @@ export const sampleData = {
     {
       id: 90,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-21T13:00:00.000Z',
       end: '2020-06-21T21:30:00.000Z',
       bonus: '0.00',
@@ -1124,6 +1214,7 @@ export const sampleData = {
     {
       id: 91,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-23T12:00:00.000Z',
       end: '2020-06-23T22:00:00.000Z',
       bonus: '0.00',
@@ -1136,6 +1227,7 @@ export const sampleData = {
     {
       id: 92,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-26T11:00:00.000Z',
       end: '2020-06-26T15:00:00.000Z',
       bonus: '0.00',
@@ -1148,6 +1240,7 @@ export const sampleData = {
     {
       id: 93,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-27T13:00:00.000Z',
       end: '2020-06-27T22:15:00.000Z',
       bonus: '0.00',
@@ -1160,6 +1253,7 @@ export const sampleData = {
     {
       id: 94,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-28T12:00:00.000Z',
       end: '2020-06-28T21:30:00.000Z',
       bonus: '0.00',
@@ -1172,6 +1266,7 @@ export const sampleData = {
     {
       id: 95,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-06-30T12:00:00.000Z',
       end: '2020-06-30T22:30:00.000Z',
       bonus: '0.00',
@@ -1184,6 +1279,7 @@ export const sampleData = {
     {
       id: 96,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-01T14:00:00.000Z',
       end: '2020-07-01T21:30:00.000Z',
       bonus: '0.00',
@@ -1196,6 +1292,7 @@ export const sampleData = {
     {
       id: 97,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-03T11:00:00.000Z',
       end: '2020-07-03T21:15:00.000Z',
       bonus: '0.00',
@@ -1208,6 +1305,7 @@ export const sampleData = {
     {
       id: 98,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-06T12:00:00.000Z',
       end: '2020-07-06T21:30:00.000Z',
       bonus: '0.00',
@@ -1220,6 +1318,7 @@ export const sampleData = {
     {
       id: 99,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-07T12:00:00.000Z',
       end: '2020-07-07T22:30:00.000Z',
       bonus: '0.00',
@@ -1232,6 +1331,7 @@ export const sampleData = {
     {
       id: 100,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-11T12:30:00.000Z',
       end: '2020-07-11T22:00:00.000Z',
       bonus: '0.00',
@@ -1244,6 +1344,7 @@ export const sampleData = {
     {
       id: 101,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-12T12:00:00.000Z',
       end: '2020-07-12T21:15:00.000Z',
       bonus: '0.00',
@@ -1256,6 +1357,7 @@ export const sampleData = {
     {
       id: 102,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-17T16:00:00.000Z',
       end: '2020-07-17T21:00:00.000Z',
       bonus: '0.00',
@@ -1268,6 +1370,7 @@ export const sampleData = {
     {
       id: 103,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-19T12:30:00.000Z',
       end: '2020-07-19T21:45:00.000Z',
       bonus: '0.00',
@@ -1280,6 +1383,7 @@ export const sampleData = {
     {
       id: 104,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-20T12:00:00.000Z',
       end: '2020-07-20T22:00:00.000Z',
       bonus: '0.00',
@@ -1292,6 +1396,7 @@ export const sampleData = {
     {
       id: 105,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-07-21T14:00:00.000Z',
       end: '2020-07-22T00:30:00.000Z',
       bonus: '0.00',
@@ -1304,6 +1409,7 @@ export const sampleData = {
     {
       id: 106,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-06T11:00:00.000Z',
       end: '2020-08-06T17:00:00.000Z',
       bonus: '0.00',
@@ -1316,6 +1422,7 @@ export const sampleData = {
     {
       id: 107,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-07T15:00:00.000Z',
       end: '2020-08-07T21:00:00.000Z',
       bonus: '0.00',
@@ -1328,6 +1435,7 @@ export const sampleData = {
     {
       id: 108,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-09T13:00:00.000Z',
       end: '2020-08-09T21:30:00.000Z',
       bonus: '0.00',
@@ -1340,6 +1448,7 @@ export const sampleData = {
     {
       id: 109,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-11T12:30:00.000Z',
       end: '2020-08-11T21:30:00.000Z',
       bonus: '0.00',
@@ -1352,6 +1461,7 @@ export const sampleData = {
     {
       id: 110,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-14T16:00:00.000Z',
       end: '2020-08-14T21:00:00.000Z',
       bonus: '0.00',
@@ -1364,6 +1474,7 @@ export const sampleData = {
     {
       id: 111,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-15T13:00:00.000Z',
       end: '2020-08-15T21:00:00.000Z',
       bonus: '0.00',
@@ -1376,6 +1487,7 @@ export const sampleData = {
     {
       id: 112,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-18T08:00:00.000Z',
       end: '2020-08-18T22:00:00.000Z',
       bonus: '0.00',
@@ -1388,6 +1500,7 @@ export const sampleData = {
     {
       id: 113,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-21T16:00:00.000Z',
       end: '2020-08-21T21:00:00.000Z',
       bonus: '0.00',
@@ -1400,6 +1513,7 @@ export const sampleData = {
     {
       id: 114,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-22T12:00:00.000Z',
       end: '2020-08-22T22:00:00.000Z',
       bonus: '0.00',
@@ -1412,6 +1526,7 @@ export const sampleData = {
     {
       id: 115,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-23T12:00:00.000Z',
       end: '2020-08-23T22:00:00.000Z',
       bonus: '0.00',
@@ -1424,6 +1539,7 @@ export const sampleData = {
     {
       id: 116,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-25T14:00:00.000Z',
       end: '2020-08-25T22:00:00.000Z',
       bonus: '0.00',
@@ -1436,6 +1552,7 @@ export const sampleData = {
     {
       id: 117,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-28T16:00:00.000Z',
       end: '2020-08-28T21:00:00.000Z',
       bonus: '0.00',
@@ -1448,6 +1565,7 @@ export const sampleData = {
     {
       id: 118,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-29T13:00:00.000Z',
       end: '2020-08-29T21:00:00.000Z',
       bonus: '0.00',
@@ -1460,6 +1578,7 @@ export const sampleData = {
     {
       id: 119,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-08-30T13:00:00.000Z',
       end: '2020-08-30T21:00:00.000Z',
       bonus: '0.00',
@@ -1472,6 +1591,7 @@ export const sampleData = {
     {
       id: 120,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-01T08:00:00.000Z',
       end: '2020-09-01T14:00:00.000Z',
       bonus: '0.00',
@@ -1484,6 +1604,7 @@ export const sampleData = {
     {
       id: 121,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-04T16:00:00.000Z',
       end: '2020-09-04T21:00:00.000Z',
       bonus: '0.00',
@@ -1496,6 +1617,7 @@ export const sampleData = {
     {
       id: 122,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-06T12:00:00.000Z',
       end: '2020-09-06T22:00:00.000Z',
       bonus: '0.00',
@@ -1508,6 +1630,7 @@ export const sampleData = {
     {
       id: 123,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-07T12:00:00.000Z',
       end: '2020-09-07T22:00:00.000Z',
       bonus: '0.00',
@@ -1520,6 +1643,7 @@ export const sampleData = {
     {
       id: 124,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-08T14:00:00.000Z',
       end: '2020-09-08T22:45:00.000Z',
       bonus: '0.00',
@@ -1532,6 +1656,7 @@ export const sampleData = {
     {
       id: 125,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-11T16:00:00.000Z',
       end: '2020-09-11T22:00:00.000Z',
       bonus: '0.00',
@@ -1544,6 +1669,7 @@ export const sampleData = {
     {
       id: 126,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-13T12:00:00.000Z',
       end: '2020-09-13T22:00:00.000Z',
       bonus: '0.00',
@@ -1556,6 +1682,7 @@ export const sampleData = {
     {
       id: 127,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-15T12:00:00.000Z',
       end: '2020-09-15T22:00:00.000Z',
       bonus: '0.00',
@@ -1568,6 +1695,7 @@ export const sampleData = {
     {
       id: 128,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-18T16:00:00.000Z',
       end: '2020-09-18T22:00:00.000Z',
       bonus: '0.00',
@@ -1580,6 +1708,7 @@ export const sampleData = {
     {
       id: 129,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-20T11:00:00.000Z',
       end: '2020-09-20T22:15:00.000Z',
       bonus: '0.00',
@@ -1592,6 +1721,7 @@ export const sampleData = {
     {
       id: 130,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-21T11:15:00.000Z',
       end: '2020-09-21T21:15:00.000Z',
       bonus: '0.00',
@@ -1604,6 +1734,7 @@ export const sampleData = {
     {
       id: 131,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-22T07:45:00.000Z',
       end: '2020-09-22T14:00:00.000Z',
       bonus: '0.00',
@@ -1616,6 +1747,7 @@ export const sampleData = {
     {
       id: 132,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-25T16:00:00.000Z',
       end: '2020-09-25T21:45:00.000Z',
       bonus: '0.00',
@@ -1628,6 +1760,7 @@ export const sampleData = {
     {
       id: 133,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-28T12:30:00.000Z',
       end: '2020-09-28T21:15:00.000Z',
       bonus: '0.00',
@@ -1640,6 +1773,7 @@ export const sampleData = {
     {
       id: 134,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-09-29T07:30:00.000Z',
       end: '2020-09-30T22:00:00.000Z',
       bonus: '0.00',
@@ -1652,6 +1786,7 @@ export const sampleData = {
     {
       id: 135,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-03T11:00:00.000Z',
       end: '2020-10-03T21:30:00.000Z',
       bonus: '0.00',
@@ -1664,6 +1799,7 @@ export const sampleData = {
     {
       id: 136,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-04T13:00:00.000Z',
       end: '2020-10-04T21:30:00.000Z',
       bonus: '0.00',
@@ -1676,6 +1812,7 @@ export const sampleData = {
     {
       id: 1337,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-04T17:00:00.000Z',
       end: '2020-10-05T00:30:00.000Z',
       bonus: '0.00',
@@ -1688,6 +1825,7 @@ export const sampleData = {
     {
       id: 137,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-07T12:00:00.000Z',
       end: '2020-10-07T22:15:00.000Z',
       bonus: '0.00',
@@ -1700,6 +1838,7 @@ export const sampleData = {
     {
       id: 138,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-12T12:00:00.000Z',
       end: '2020-10-12T20:40:00.000Z',
       bonus: '0.00',
@@ -1712,6 +1851,7 @@ export const sampleData = {
     {
       id: 139,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-13T12:00:00.000Z',
       end: '2020-10-13T20:45:00.000Z',
       bonus: '0.00',
@@ -1724,6 +1864,7 @@ export const sampleData = {
     {
       id: 140,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-17T11:00:00.000Z',
       end: '2020-10-17T22:00:00.000Z',
       bonus: '0.00',
@@ -1736,6 +1877,7 @@ export const sampleData = {
     {
       id: 141,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-19T12:00:00.000Z',
       end: '2020-10-19T22:00:00.000Z',
       bonus: '0.00',
@@ -1748,6 +1890,7 @@ export const sampleData = {
     {
       id: 142,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-21T08:00:00.000Z',
       end: '2020-10-21T14:00:00.000Z',
       bonus: '0.00',
@@ -1760,6 +1903,7 @@ export const sampleData = {
     {
       id: 143,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-24T16:00:00.000Z',
       end: '2020-10-24T22:00:00.000Z',
       bonus: '0.00',
@@ -1772,6 +1916,7 @@ export const sampleData = {
     {
       id: 144,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-26T13:00:00.000Z',
       end: '2020-10-26T23:00:00.000Z',
       bonus: '0.00',
@@ -1784,6 +1929,7 @@ export const sampleData = {
     {
       id: 145,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-27T13:00:00.000Z',
       end: '2020-10-27T23:00:00.000Z',
       bonus: '0.00',
@@ -1796,6 +1942,7 @@ export const sampleData = {
     {
       id: 146,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-28T13:00:00.000Z',
       end: '2020-10-28T23:00:00.000Z',
       bonus: '0.00',
@@ -1808,6 +1955,7 @@ export const sampleData = {
     {
       id: 147,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-10-31T17:00:00.000Z',
       end: '2020-10-31T23:00:00.000Z',
       bonus: '0.00',
@@ -1820,6 +1968,7 @@ export const sampleData = {
     {
       id: 148,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-01T13:00:00.000Z',
       end: '2020-11-01T23:00:00.000Z',
       bonus: '0.00',
@@ -1832,6 +1981,7 @@ export const sampleData = {
     {
       id: 149,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-03T13:00:00.000Z',
       end: '2020-11-03T23:00:00.000Z',
       bonus: '0.00',
@@ -1844,6 +1994,7 @@ export const sampleData = {
     {
       id: 150,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-04T09:00:00.000Z',
       end: '2020-11-04T15:00:00.000Z',
       bonus: '0.00',
@@ -1856,6 +2007,7 @@ export const sampleData = {
     {
       id: 151,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-07T17:00:00.000Z',
       end: '2020-11-07T23:00:00.000Z',
       bonus: '0.00',
@@ -1868,6 +2020,7 @@ export const sampleData = {
     {
       id: 152,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-10T13:00:00.000Z',
       end: '2020-11-10T23:00:00.000Z',
       bonus: '0.00',
@@ -1880,6 +2033,7 @@ export const sampleData = {
     {
       id: 153,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-11T13:00:00.000Z',
       end: '2020-11-11T23:00:00.000Z',
       bonus: '0.00',
@@ -1892,6 +2046,7 @@ export const sampleData = {
     {
       id: 154,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-14T12:00:00.000Z',
       end: '2020-11-14T23:00:00.000Z',
       bonus: '0.00',
@@ -1904,6 +2059,7 @@ export const sampleData = {
     {
       id: 155,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-15T13:00:00.000Z',
       end: '2020-11-15T23:00:00.000Z',
       bonus: '0.00',
@@ -1916,6 +2072,7 @@ export const sampleData = {
     {
       id: 156,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-18T09:00:00.000Z',
       end: '2020-11-18T15:00:00.000Z',
       bonus: '0.00',
@@ -1928,6 +2085,7 @@ export const sampleData = {
     {
       id: 157,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-21T12:00:00.000Z',
       end: '2020-11-21T23:00:00.000Z',
       bonus: '0.00',
@@ -1940,6 +2098,7 @@ export const sampleData = {
     {
       id: 158,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-23T12:00:00.000Z',
       end: '2020-11-23T23:00:00.000Z',
       bonus: '0.00',
@@ -1952,6 +2111,7 @@ export const sampleData = {
     {
       id: 159,
       jobId: 1,
+      jobName: 'Palsta X',
       begin: '2020-11-25T13:00:00.000Z',
       end: '2020-11-25T23:00:00.000Z',
       bonus: '0.00',
@@ -1983,7 +2143,7 @@ export const sampleData = {
   jobs: [
     {
       id: 1,
-      name: 'Palsta',
+      name: 'Palsta Job',
       rate: 25.0,
       status: 'archived'
     },

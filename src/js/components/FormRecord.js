@@ -63,7 +63,7 @@ export default function FormRecord({
     ? {
         id: record.id,
         jobId: record.jobId,
-        jobName: jobs?.find((job) => job.id === record.jobId).name,
+        jobName: record.jobName,
         dateBegin: formatDate.rfc3339(new Date(record.begin)),
         timeBegin: getTimeOfDate(new Date(record.begin)),
         timeEnd: getTimeOfDate(new Date(record.end)),
@@ -73,6 +73,9 @@ export default function FormRecord({
       }
     : {
         jobId: settings.defaultJobId,
+        jobName:
+          jobs?.find((job) => job.id == settings.defaultJobId)?.name ||
+          'No Job',
         dateBegin: formatDate.rfc3339(inputDate),
         timeBegin: '15:00',
         timeEnd: '02:00',
@@ -159,6 +162,7 @@ export default function FormRecord({
 
   return (
     <>
+      <pre>{JSON.stringify(formData, null, 2)}</pre>
       <form
         ref={form}
         onSubmit={handleSubmit}

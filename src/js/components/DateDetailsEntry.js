@@ -27,7 +27,8 @@ export default function DateDetailsEntry({ record, jobs }) {
           {time.end}
         </div>
         <div className="date-details-entry-content">
-          {job.name} (current rate: {job.rate})
+          {record.jobName} (current rate:{' '}
+          {job ? job.rate : 'Job not found / was deleted'})
           <br />
           Recorded Rate: {record.rate}
         </div>
