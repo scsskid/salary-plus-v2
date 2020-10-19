@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  getFirstDay,
-  getDaysInMonth,
-  getShortIsoString,
-  isSameDay
-} from '../utils/helpers.js';
+import { getShortIsoString, isSameDay } from '../utils/helpers.js';
 
 function CalendarBody({
   inputDate,

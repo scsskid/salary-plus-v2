@@ -2,7 +2,6 @@ import React from 'react';
 import CalendarBody from './CalendarBody.js';
 import DateDetails from './DateDetails.js';
 import { getWeekDayNames } from '../utils/helpers.js';
-import Button from './Button.js';
 
 export default function Calendar({
   inputDate,

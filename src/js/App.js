@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Calendar from './components/Calendar';
 import Home from './components/Home';
-import ListView from './components/ListView';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
