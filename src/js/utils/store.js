@@ -28,7 +28,9 @@ function reducer(state, { type, payload }) {
         records: [...state.records, mapFormDataToStorageObject(payload)],
         settings: {
           ...state.settings,
-          incrementIdRecords: nextRecordId
+          incrementIdRecords: nextRecordId,
+          previousTimeBegin: payload.timeBegin,
+          previousTimeEnd: payload.timeEnd
         }
       };
     case 'updateRecord':
@@ -96,6 +98,22 @@ function reducer(state, { type, payload }) {
         settings: {
           ...state.settings,
           previousJobId: payload.id
+        }
+      };
+    case 'setPreviousTimeBegin':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          previousTimeBegin: payload.timeBegin
+        }
+      };
+    case 'setPreviousTimeEnd':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          previousTimeEnd: payload.timeEnd
         }
       };
 

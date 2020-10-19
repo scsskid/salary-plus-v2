@@ -1,7 +1,10 @@
 const settings = {
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   locale: 'en',
-  currency: 'EUR'
+  currency: 'EUR',
+  previousJobId: null,
+  previousTimeBegin: null,
+  previousTimeEnd: null
 };
 
 export const bootstrapData = {
@@ -11,14 +14,7 @@ export const bootstrapData = {
     localStorageKey: 'salary-plus:app-data-test'
   },
   records: [],
-  jobs: [
-    {
-      id: 1,
-      name: 'Unnamed Job',
-      rate: 0,
-      status: 'active'
-    }
-  ],
+  jobs: [],
   presets: [],
   settings: {
     ...settings,

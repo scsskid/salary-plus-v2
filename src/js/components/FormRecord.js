@@ -78,12 +78,18 @@ export default function FormRecord({
         preset: 0
       }
     : {
-        jobId: settings.previousJobId,
+        jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
         jobName:
           jobs?.find((job) => job.id == settings.previousJobId)?.name || '',
         dateBegin: formatDate.rfc3339(inputDate),
-        timeBegin: '15:00',
-        timeEnd: '02:00',
+        timeBegin:
+          settings.previousTimeBegin !== null
+            ? settings.previousTimeBegin
+            : '15:00',
+        timeEnd:
+          settings.previousTimeEnd !== null
+            ? settings.previousTimeEnd
+            : '02:00',
         rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
         bonus: 0,
         preset: 0
@@ -127,6 +133,9 @@ export default function FormRecord({
   }
 
   function handleSelectJobChange(e) {
+    if (e.target.value == 0) {
+      return;
+    }
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
     // Dispatch previousJob
@@ -147,9 +156,9 @@ export default function FormRecord({
     const selectedPresetId = parseInt(e.target.value);
     const presetData = presets.find((preset) => preset.id === selectedPresetId);
     const presetFormData = {
-      timeBegin: presetData.timeBegin || '',
-      timeEnd: presetData.timeEnd || '',
-      rate: presetData.rate || 0
+      timeBegin: presetData.timeBegin || formData.timeBegin,
+      timeEnd: presetData.timeEnd || formData.timeEnd,
+      rate: presetData.rate || formData.rate
     };
 
     setFormData({
@@ -161,6 +170,7 @@ export default function FormRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
+
     handleDispatch(formData);
   }
 

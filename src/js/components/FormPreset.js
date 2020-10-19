@@ -56,8 +56,7 @@ export default function FormPreset({
     preset || {
       name: 'Unnamed Preset',
       timeBegin: '08:00',
-      timeEnd: '17:00',
-      rate: false
+      timeEnd: '17:00'
     }
   );
 
