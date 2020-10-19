@@ -145,6 +145,7 @@ const mapFormDataToStorageObject = (record) => {
   return {
     id: parseInt(record.id),
     jobId: parseInt(record.jobId),
+    jobName: record.jobName || '',
     begin,
     end,
     bonus: record.bonus || '',

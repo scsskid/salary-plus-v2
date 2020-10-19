@@ -69,7 +69,7 @@ export default function FormRecord({
     ? {
         id: record.id,
         jobId: record.jobId,
-        jobName: record.jobName,
+        jobName: record.jobName || 'Was undefined!',
         dateBegin: formatDate.rfc3339(new Date(record.begin)),
         timeBegin: getTimeOfDate(new Date(record.begin)),
         timeEnd: getTimeOfDate(new Date(record.end)),
@@ -138,7 +138,6 @@ export default function FormRecord({
     }
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
-    // Dispatch previousJob
     dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
 
     setFormData({
@@ -170,7 +169,6 @@ export default function FormRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
-
     handleDispatch(formData);
   }
 
@@ -189,21 +187,33 @@ export default function FormRecord({
         data-record-id={formData.recordId}
       >
         <input type="hidden" name="id" value={formData.id} />
-        {formData.jobName}
-        <div className="form-el">
-          <label htmlFor="entry-job">Job</label>
-          <select
-            name="jobId"
-            id="entry-job"
-            value={formData.jobId}
-            onBlur={handleSelectJobChange}
-            onChange={handleSelectJobChange}
-          >
-            <option value={0}>Custom</option>
-            <OptionsJob />
-          </select>
-        </div>
 
+        {jobs.length ? (
+          <div className="form-el">
+            <label htmlFor="entry-job">Job</label>
+            <select
+              name="jobId"
+              id="entry-job"
+              value={formData.jobId}
+              onBlur={handleSelectJobChange}
+              onChange={handleSelectJobChange}
+            >
+              <option value={0}>Custom</option>
+              <OptionsJob />
+            </select>
+          </div>
+        ) : (
+          <div className="form-el">
+            <label htmlFor="jobName">Job Name</label>
+            <input
+              name="jobName"
+              id="jobName"
+              type="text"
+              value={formData.jobName}
+              onChange={handleChange}
+            />
+          </div>
+        )}
         <div className="form-el">
           <label htmlFor="preset">Preset</label>
           <select
