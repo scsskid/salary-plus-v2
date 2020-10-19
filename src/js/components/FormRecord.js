@@ -62,8 +62,7 @@ export default function FormRecord({
   isUpdateForm,
   record,
   settings,
-  inputDate,
-  dispatch
+  inputDate
 }) {
   const initialFormData = record
     ? {

@@ -6,10 +6,15 @@ import {
   isSameDay
 } from '../utils/helpers.js';
 
-function CalendarBody({ inputDate, records, updateInputDate }) {
+function CalendarBody({
+  inputDate,
+  records,
+  updateInputDate,
+  daysInMonth,
+  firstDay
+}) {
   const tbody = React.useRef();
-  const firstDay = getFirstDay(inputDate);
-  const daysInMonth = getDaysInMonth(inputDate);
+
   const rows = getRows({ inputDate, daysInMonth, firstDay, updateInputDate });
   const todayDate = new Date();
   const todayShortString = getShortIsoString(todayDate);
@@ -31,7 +36,7 @@ function CalendarBody({ inputDate, records, updateInputDate }) {
 
       allDateCells.forEach((cell) => cell.removeAttribute('data-today'));
     };
-  });
+  }, [inputDate]);
 
   return (
     <>

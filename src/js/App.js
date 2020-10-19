@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Calendar from './components/Calendar';
+import Home from './components/Home';
+import ListView from './components/ListView';
 import Welcome from './components/Welcome';
 import NoMatch from './components/NoMatch';
 import Navigation from './components/Navigation';
@@ -17,7 +19,6 @@ const App = () => {
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
-  const dataFreshness = appData?.app?.freshNess;
   const {
     app = {},
     settings = {},
@@ -111,7 +112,7 @@ const App = () => {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Calendar
+            <Home
               inputDate={inputDate}
               changeMonth={changeMonth}
               updateInputDate={updateInputDate}
@@ -167,12 +168,7 @@ const App = () => {
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter
-        appState={app?.state}
-        isLoggedIn
-        inputDate
-        dataFreshness={dataFreshness}
-      >
+      <AppFooter appState={app?.state} isLoggedIn inputDate>
         <>
           <button className="btn" onClick={insertBootstrapData}>
             Reset App (Bootstrap)

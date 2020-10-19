@@ -1,78 +1,44 @@
 import React from 'react';
 import CalendarBody from './CalendarBody.js';
-import CalendarControls from './CalendarControls.js';
 import DateDetails from './DateDetails.js';
 import { getWeekDayNames } from '../utils/helpers.js';
+import Button from './Button.js';
 
 export default function Calendar({
   inputDate,
-  changeMonth,
   updateInputDate,
-  records,
   jobs,
-  settings
+  settings,
+  monthRecords,
+  dateRecords,
+  children,
+  daysInMonth,
+  firstDay
 }) {
-  const monthRecords = getRecordsByMonth({
-    records,
-    inputDate
-  });
-
-  const dateRecords = getRecordsByDate({
-    records: monthRecords,
-    inputDate
-  });
-
   return (
-    <div className="calendar">
-      <h1>Calendar</h1>
-      <p>
-        <b>
-          {inputDate.toLocaleDateString(undefined, {
-            month: 'long',
-            timeZone: settings.timeZone
-          })}
-        </b>
-        <br />
-        {inputDate.getFullYear()}
-      </p>
-      <CalendarControls changeMonth={changeMonth} />
-      <table className="calendar-table">
-        <CalendarHead settings={settings} />
-        <CalendarBody
+    <>
+      <div className="calendar">
+        {children}
+
+        <table className="calendar-table">
+          <CalendarHead settings={settings} />
+          <CalendarBody
+            inputDate={inputDate}
+            records={monthRecords}
+            updateInputDate={updateInputDate}
+            daysInMonth={daysInMonth}
+            firstDay={firstDay}
+          />
+        </table>
+        <DateDetails
           inputDate={inputDate}
-          records={monthRecords}
-          updateInputDate={updateInputDate}
+          jobs={jobs}
+          dateRecords={dateRecords}
+          settings={settings}
         />
-      </table>
-      <DateDetails
-        inputDate={inputDate}
-        jobs={jobs}
-        dateRecords={dateRecords}
-        settings={settings}
-      />
-    </div>
+      </div>
+    </>
   );
-}
-
-function getRecordsByDate({ records, inputDate }) {
-  return records.filter((record) => {
-    const beginDate = new Date(record.begin);
-    return (
-      beginDate.getDate() === inputDate.getDate() &&
-      beginDate.getMonth() === inputDate.getMonth() &&
-      beginDate.getFullYear() === inputDate.getFullYear()
-    );
-  });
-}
-
-function getRecordsByMonth({ records, inputDate }) {
-  return records.filter((record) => {
-    const beginDate = new Date(record.begin);
-    return (
-      beginDate.getMonth() === inputDate.getMonth() &&
-      beginDate.getFullYear() === inputDate.getFullYear()
-    );
-  });
 }
 
 function CalendarHead({ settings }) {
