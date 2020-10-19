@@ -1,9 +1,7 @@
 const settings = {
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   locale: 'en',
-  currency: 'EUR',
-  previousPreset: null,
-  previousJob: null
+  currency: 'EUR'
 };
 
 export const bootstrapData = {
@@ -24,7 +22,6 @@ export const bootstrapData = {
   presets: [],
   settings: {
     ...settings,
-    defaultJobId: 1,
     incrementIdRecords: 0,
     incrementIdPresets: 0,
     incrementIdJobs: 1
@@ -35,7 +32,6 @@ export const sampleData = {
   app: { version: 'Beta0.2', state: 'running' },
   settings: {
     ...settings,
-    defaultJobId: 1,
     incrementIdRecords: 159,
     incrementIdPresets: 2,
     incrementIdJobs: 3

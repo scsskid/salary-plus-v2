@@ -8,17 +8,20 @@ export function FormRecordCreate({
   saveRecord,
   jobs,
   settings,
-  presets
+  presets,
+  dispatch
 }) {
   return (
     <>
       <h1>New Entry</h1>
+      {settings.previousJobId}
       <FormRecord
         jobs={jobs}
         saveRecord={saveRecord}
         presets={presets}
         inputDate={inputDate}
         settings={settings}
+        dispatch={dispatch}
       />
     </>
   );
@@ -29,7 +32,8 @@ export function FormRecordUpdate({
   jobs,
   records,
   presets,
-  deleteItem
+  deleteItem,
+  dispatch
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
@@ -44,6 +48,7 @@ export function FormRecordUpdate({
         presets={presets}
         isUpdateForm={true}
         record={record}
+        dispatch={dispatch}
       />
     </>
   );
@@ -57,7 +62,8 @@ export default function FormRecord({
   isUpdateForm,
   record,
   settings,
-  inputDate
+  inputDate,
+  dispatch
 }) {
   const initialFormData = record
     ? {
@@ -69,19 +75,18 @@ export default function FormRecord({
         timeEnd: getTimeOfDate(new Date(record.end)),
         rate: record.rate,
         bonus: record.bonus,
-        preset: false
+        preset: 0
       }
     : {
-        jobId: settings.defaultJobId,
+        jobId: settings.previousJobId,
         jobName:
-          jobs?.find((job) => job.id == settings.defaultJobId)?.name ||
-          'No Job',
+          jobs?.find((job) => job.id == settings.previousJobId)?.name || '',
         dateBegin: formatDate.rfc3339(inputDate),
         timeBegin: '15:00',
         timeEnd: '02:00',
-        rate: jobs.find((job) => job.id === settings.defaultJobId)?.rate || 0,
+        rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
         bonus: 0,
-        preset: false
+        preset: 0
       };
 
   const history = useHistory();
@@ -121,19 +126,24 @@ export default function FormRecord({
     });
   }
 
-  function handleSelectChange(e) {
+  function handleSelectJobChange(e) {
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
+    // Dispatch previousJob
+    dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      ['rate']: job.rate,
-      ['jobName']: job.name
+      ['rate']: job?.rate || formData.rate,
+      ['jobName']: job?.name || ''
     });
   }
 
   function handleSelectPresetChange(e) {
+    if (e.target.value == 0) {
+      return;
+    }
     const selectedPresetId = parseInt(e.target.value);
     const presetData = presets.find((preset) => preset.id === selectedPresetId);
     const presetFormData = {
@@ -176,10 +186,10 @@ export default function FormRecord({
             name="jobId"
             id="entry-job"
             value={formData.jobId}
-            onBlur={handleSelectChange}
-            onChange={handleSelectChange}
+            onBlur={handleSelectJobChange}
+            onChange={handleSelectJobChange}
           >
-            <option value={0}>No Job</option>
+            <option value={0}>Custom</option>
             <OptionsJob />
           </select>
         </div>

@@ -14,6 +14,7 @@ function init(initialData) {
 
 function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
+
   // const freshNess = new Date().toISOString();
   const nextPresetId = state?.settings?.incrementIdPresets + 1;
   const nextJobId = state?.settings?.incrementIdJobs + 1;
@@ -89,6 +90,15 @@ function reducer(state, { type, payload }) {
           return preset.id != payload.id;
         })
       };
+    case 'setPreviousJobId':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          previousJobId: payload.id
+        }
+      };
+
     case 'reset':
       return init({ ...bootstrapData });
     case 'deleteAppData':

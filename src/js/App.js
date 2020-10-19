@@ -127,6 +127,7 @@ const App = () => {
               presets={presets}
               settings={settings}
               saveRecord={saveRecord}
+              dispatch={dispatch}
             />
           </Route>
           <Route path="/records/:id">
@@ -136,6 +137,7 @@ const App = () => {
               records={records}
               saveRecord={saveRecord}
               deleteItem={deleteItem}
+              dispatch={dispatch}
             />
           </Route>
           <Route path="/jobs/add">
