@@ -20,9 +20,7 @@ export default function ListView({
       return (
         hasRecords && (
           <div key={i}>
-            <h3>
-              {/* day {i + 1} */} {date.toLocaleDateString()}
-            </h3>
+            <h3>{date.toLocaleDateString()}</h3>
 
             <DateDetails
               inputDate={inputDate}

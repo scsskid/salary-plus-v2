@@ -19,7 +19,7 @@ export function FormJobCreate({ saveJob }) {
   );
 }
 
-export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
+export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
   const { jobId } = useParams();
   const history = useHistory();
 
@@ -33,6 +33,7 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
   return (
     <>
       <h1>Update Job</h1>
+      {children}
       <FormJob
         handleDispatch={handleDispatch}
         job={job}
