@@ -1,19 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './components/Home';
-import Welcome from './components/Welcome';
-import NoMatch from './components/NoMatch';
-import Navigation from './components/Navigation';
-import Settings from './components/Settings';
-import { useLocalStorageReducer } from './utils/store';
-import { getDateFromFormInputDate } from './utils/helpers';
-import { FormRecordCreate, FormRecordUpdate } from './components/FormRecord';
-import { FormJobCreate, FormJobUpdate } from './components/FormJob';
-import { FormPresetCreate, FormPresetUpdate } from './components/FormPreset';
-import '../css/index.css';
+import Home from './Home';
+import Welcome from './Welcome';
+import NoMatch from './NoMatch';
+import Navigation from './Navigation';
+import Settings from './Settings';
+import { useLocalStorageReducer } from '../utils/store';
+import { getDateFromFormInputDate } from '../utils/helpers';
+import { FormRecordCreate, FormRecordUpdate } from './FormRecord';
+import { FormJobCreate, FormJobUpdate } from './FormJob';
+import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
 
-const App = () => {
+export default function App() {
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
@@ -182,7 +180,7 @@ const App = () => {
       </AppFooter>
     </Router>
   );
-};
+}
 
 function AppFooter({ isLoggedIn, children }) {
   return (
@@ -194,5 +192,3 @@ function AppFooter({ isLoggedIn, children }) {
     </footer>
   );
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));
