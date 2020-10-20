@@ -74,25 +74,16 @@ export default function App() {
     setInputDate(summand === 0 ? now : newDate);
   }
 
-  function handleDeleteAppData() {
-    dispatch({ type: 'deleteAppData' });
-  }
-
-  function insertSampleData() {
-    dispatch({ type: 'insertSampleData' });
-  }
-
-  function insertBootstrapData() {
-    dispatch({ type: 'reset' });
-  }
-
   if (!isLoggedIn) {
     return (
       <Router>
         <Switch>
           <Route exact path="/">
             <Welcome
-              seedFunctions={{ insertSampleData, insertBootstrapData }}
+              seedFunctions={{
+                insertSampleData: dispatch({ type: 'insertSampleData' }),
+                insertBootstrapData: dispatch({ type: 'reset' })
+              }}
             />
             <AppFooter />
           </Route>
@@ -166,11 +157,20 @@ export default function App() {
       </main>
       <AppFooter appState={app?.state} isLoggedIn inputDate>
         <>
-          <button className="btn" onClick={insertBootstrapData}>
+          <button className="btn" onClick={() => dispatch({ type: 'reset' })}>
             Reset App (Bootstrap)
           </button>
-          <button className="btn" onClick={handleDeleteAppData}>
+          <button
+            className="btn"
+            onClick={() => dispatch({ type: 'deleteAppData' })}
+          >
             Delete App Data
+          </button>
+          <button
+            className="btn"
+            onClick={() => dispatch({ type: 'insertSampleData' })}
+          >
+            Insert Sample App Data
           </button>
 
           <pre style={{ fontSize: '.6rem', display: 'none' }}>
