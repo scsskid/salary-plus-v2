@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
+import { getTimeElapsed, timeToDecimal } from '../utils/date-fns';
 
 export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
@@ -31,6 +32,8 @@ export default function DateDetailsEntry({ record, jobs }) {
           {job ? job.rate : 'Job not found / was deleted'})
           <br />
           Recorded Rate: {record.rate}
+          <br />
+          {salaryOfShift(record)}
         </div>
       </button>
 
@@ -38,4 +41,16 @@ export default function DateDetailsEntry({ record, jobs }) {
       <hr />
     </>
   );
+}
+
+function salaryOfShift(record) {
+  var timeElapsed = getTimeElapsed(
+    new Date(record.end) - new Date(record.begin)
+  );
+  var earnedNumber = timeToDecimal(timeElapsed) * record.rate;
+  var earned = new Intl.NumberFormat([], {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(earnedNumber);
+  return earned;
 }
