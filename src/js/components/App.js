@@ -19,6 +19,10 @@ import InputDateControl from './InputDateControl';
 import Calendar from './Calendar';
 import Button from './Button';
 import ListView from './ListView';
+import CalendarHead from './CalendarHead';
+import CalendarBody from './CalendarBody';
+import DateDetails from './DateDetails';
+import CalendarTable from './CalendarTable';
 
 export default function App() {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -150,8 +154,24 @@ export default function App() {
                 dateRecords={dateRecords}
                 daysInMonth={daysInMonth}
                 firstDay={firstDay}
-              />
-
+              >
+                <CalendarTable>
+                  <CalendarHead settings={settings} />
+                  <CalendarBody
+                    inputDate={inputDate}
+                    records={monthRecords}
+                    updateInputDate={updateInputDate}
+                    daysInMonth={daysInMonth}
+                    firstDay={firstDay}
+                  />
+                </CalendarTable>
+                <DateDetails
+                  inputDate={inputDate}
+                  jobs={jobs}
+                  dateRecords={dateRecords}
+                  settings={settings}
+                />
+              </Calendar>
               <ListView
                 jobs={jobs}
                 settings={settings}
