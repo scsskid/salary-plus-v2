@@ -127,14 +127,7 @@ export default function App() {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Home
-              inputDate={inputDate}
-              changeMonth={changeMonth}
-              updateInputDate={updateInputDate}
-              records={records}
-              jobs={jobs}
-              settings={settings}
-            >
+            <Home>
               <InputDateControl
                 inputDate={inputDate}
                 changeMonth={changeMonth}
@@ -144,17 +137,7 @@ export default function App() {
                 <Button onClick={() => {}}>Calendar</Button>{' '}
                 <Button onClick={() => {}}>List</Button>
               </div>
-              <Calendar
-                inputDate={inputDate}
-                updateInputDate={updateInputDate}
-                records={records}
-                jobs={jobs}
-                settings={settings}
-                monthRecords={monthRecords}
-                dateRecords={dateRecords}
-                daysInMonth={daysInMonth}
-                firstDay={firstDay}
-              >
+              <Calendar>
                 <CalendarTable>
                   <CalendarHead settings={settings} />
                   <CalendarBody
