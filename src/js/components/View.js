@@ -8,7 +8,7 @@ import DateDetails from './DateDetails';
 import CalendarTable from './CalendarTable';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 
-export default function Home({
+export default function View({
   inputDate,
   settings,
   changeMonth,

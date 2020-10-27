@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Home';
+import View from './View';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
 import Navigation from './Navigation';
@@ -119,7 +119,7 @@ export default function App() {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Home
+            <View
               inputDate={inputDate}
               settings={settings}
               changeMonth={changeMonth}
