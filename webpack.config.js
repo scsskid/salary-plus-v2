@@ -15,6 +15,7 @@ module.exports = {
   devtool: 'cheap-source-map',
   devServer: {
     historyApiFallback: true,
+    host: '0.0.0.0',
     open: false,
     hot: false
   },
