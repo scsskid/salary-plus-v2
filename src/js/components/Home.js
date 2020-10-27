@@ -22,11 +22,6 @@ export default function Home({
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
-  function handleSegmentNavElClick() {
-    console.dir(event.target.id);
-    setState({ activeSegement: event.target.id });
-  }
-
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
@@ -73,9 +68,11 @@ export default function Home({
             id={segment}
             key={i}
             isActive={state.activeSegement === segment ? true : false}
-            onClick={handleSegmentNavElClick}
+            onClick={(event) =>
+              setState({ activeSegement: event.currentTarget.id })
+            }
           >
-            {segment}
+            <b>{segment}</b>
           </SegmentNavEl>
         ))}
       </SegmentNav>
