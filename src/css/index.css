@@ -6,11 +6,12 @@
 @import 'base/layout.css';
 @import 'base/misc.css';
 
+@import 'components/App.css';
 @import 'components/Calendar.css';
 @import 'components/Button.css';
 @import 'components/SegmentNav.css';
 @import 'components/Dialog.css';
-@import 'components/DateDetails.css';
+@import 'components/DateDetailsEntry.css';
 @import 'components/Nav.css';
 
 @import 'base/colors.css';

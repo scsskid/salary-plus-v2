@@ -3,6 +3,9 @@
   width: 100%;
   justify-content: space-between;
   background: #fff;
+}
+
+.date-details-entry > * {
   padding: calc(2 * var(--b));
 }
 
@@ -20,7 +23,13 @@
   font-weight: bold;
 }
 
+.date-details-entry-content {
+  flex: 1 0 calc(100% - 10rem);
+}
+
 .date-details-entry-time {
+  flex: 1 0 10rem;
+  background: #000;
   order: 1;
   text-align: right;
 }
