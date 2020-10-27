@@ -19,33 +19,17 @@ export default function Home({
   jobs,
   dateRecords
 }) {
-  const segements = [{ name: 'Week' }, { name: 'Month' }, { name: 'List' }];
-  const [state, setState] = React.useState({ activeSegement: 0 });
+  const segements = ['Week', 'Month', 'List'];
+  const [state, setState] = React.useState({ activeSegement: 'Month' });
 
   function handleSegmentNavElClick() {
     console.dir(event.target.id);
-    setState({ activeSegement: parseInt(event.target.id) });
+    setState({ activeSegement: event.target.id });
   }
 
-  return (
-    <div className="home">
-      <InputDateControl
-        inputDate={inputDate}
-        changeMonth={changeMonth}
-        settings={settings}
-      />
-      <SegmentNav>
-        {segements.map((segment, i) => (
-          <SegmentNavEl
-            id={i}
-            key={i}
-            isActive={state.activeSegement === i ? true : false}
-            onClick={handleSegmentNavElClick}
-          >
-            {segment.name}
-          </SegmentNavEl>
-        ))}
-      </SegmentNav>
+  const Views = {
+    Week: <div>W E E K</div>,
+    Month: (
       <Calendar>
         <CalendarTable>
           <CalendarHead settings={settings} />
@@ -64,6 +48,8 @@ export default function Home({
           settings={settings}
         />
       </Calendar>
+    ),
+    List: (
       <ListView
         jobs={jobs}
         settings={settings}
@@ -71,6 +57,29 @@ export default function Home({
         monthRecords={monthRecords}
         daysInMonth={daysInMonth}
       />
+    )
+  };
+
+  return (
+    <div className="home">
+      <InputDateControl
+        inputDate={inputDate}
+        changeMonth={changeMonth}
+        settings={settings}
+      />
+      <SegmentNav>
+        {segements.map((segment, i) => (
+          <SegmentNavEl
+            id={segment}
+            key={i}
+            isActive={state.activeSegement === segment ? true : false}
+            onClick={handleSegmentNavElClick}
+          >
+            {segment}
+          </SegmentNavEl>
+        ))}
+      </SegmentNav>
+      {Views[state.activeSegement]}
     </div>
   );
 }

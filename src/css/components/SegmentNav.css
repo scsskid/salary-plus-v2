@@ -3,6 +3,7 @@
   display: flex;
   padding: var(--b);
   border-radius: 4px;
+  margin-bottom: var(--bx);
 }
 
 .segment-nav-el {

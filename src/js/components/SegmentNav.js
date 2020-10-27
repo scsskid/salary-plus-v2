@@ -17,7 +17,7 @@ export function SegmentNavEl({ id, isActive, onClick, children }) {
       }
       onClick={onClick}
     >
-      <b>{children}</b>
+      {children}
     </button>
   );
 }

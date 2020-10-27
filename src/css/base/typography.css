@@ -1,5 +1,6 @@
 :root {
   --b: 0.3rem;
+  --bx: calc(4 * var(--b));
 }
 
 /* Typography */
