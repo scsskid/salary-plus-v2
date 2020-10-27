@@ -1,23 +1,10 @@
 import React from 'react';
 
-export default function Button({ className, onClick, children, ...props }) {
-  const defaultClassName = 'btn';
+export default function Button({ className, ...props }) {
+  const defaultProps = {
+    className: `btn ${className}`,
+    children: `Unlabelled Button`
+  };
 
-  return (
-    <button
-      onClick={
-        onClick
-          ? onClick
-          : () => {
-              return false;
-            }
-      }
-      className={
-        className ? `${defaultClassName} ${className}` : defaultClassName
-      }
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  return <button {...defaultProps} {...props}></button>;
 }
