@@ -109,8 +109,8 @@ export default function App() {
           <Route exact path="/">
             <Welcome
               seedFunctions={{
-                insertSampleData: dispatch({ type: 'insertSampleData' }),
-                insertBootstrapData: dispatch({ type: 'reset' })
+                insertSampleData: () => dispatch({ type: 'insertSampleData' }),
+                insertBootstrapData: () => dispatch({ type: 'reset' })
               }}
             />
             <AppFooter />
