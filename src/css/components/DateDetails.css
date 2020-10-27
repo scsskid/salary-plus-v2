@@ -1,7 +1,35 @@
 .date-details-entry {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background: #fff;
+  padding: calc(2 * var(--b));
+}
+
+.date-details-entry time {
+  display: block;
+}
+
+.date-details-entry h2 {
+  margin-bottom: 0;
+}
+
+.date-details-entry h2,
+.date-details-entry-time-begin {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .date-details-entry-time {
-  width: 4rem;
+  order: 1;
+  text-align: right;
+}
+
+.date-details-entry-meta,
+.date-details-entry-time-end {
+  opacity: 0.7;
+}
+
+.date-details-entry-meta span:first-child {
+  margin-right: 1rem;
 }

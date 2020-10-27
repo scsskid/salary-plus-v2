@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getLocaleTimeString } from '../utils/helpers';
+import { getLocaleTimeString, round } from '../utils/helpers';
 import { getTimeElapsed, timeToDecimal } from '../utils/date-fns';
 
 export default function DateDetailsEntry({ record, jobs }) {
@@ -10,6 +10,20 @@ export default function DateDetailsEntry({ record, jobs }) {
     begin: getLocaleTimeString(new Date(record.begin)),
     end: getLocaleTimeString(new Date(record.end))
   };
+
+  // HH:mm
+  // var timeElapsed = getTimeElapsed(
+  //   new Date(record.end) - new Date(record.begin)
+  // );
+
+  // 1,000000011H
+  function getHoursElapsed(duration) {
+    return duration / (1000 * 60 * 60);
+  }
+
+  const hoursElapsed = getHoursElapsed(
+    new Date(record.end) - new Date(record.begin)
+  );
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -23,22 +37,32 @@ export default function DateDetailsEntry({ record, jobs }) {
         onClick={handleClick}
       >
         <div className="date-details-entry-time">
-          {time.begin}
-          <br />
-          {time.end}
+          <time
+            className="date-details-entry-time-begin"
+            dateTime="{time.begin}"
+          >
+            {time.begin}
+          </time>
+          <time className="date-details-entry-time-end" dateTime="{time.end}">
+            {time.end}
+          </time>
         </div>
         <div className="date-details-entry-content">
-          {record.jobName} (current rate:{' '}
-          {job ? job.rate : 'Job not found / was deleted'})
-          <br />
-          Recorded Rate: {record.rate}
-          <br />
-          {salaryOfShift(record)}
+          <h2>
+            {record.jobName} {job ? '' : '⚠️ Job not found / was deleted'}
+          </h2>
+
+          <p className="date-details-entry-meta">
+            {/* {timeElapsed} / */}
+            {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
+            <span>{salaryOfShift(record)}</span>{' '}
+            <span>{round(hoursElapsed)}h</span>
+            {/* / Recorded Rate:{record.rate} */}
+          </p>
         </div>
       </button>
 
       {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
-      <hr />
     </>
   );
 }

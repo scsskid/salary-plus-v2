@@ -197,3 +197,8 @@ export function shiftRecordsDates({ data, summand }) {
     records: data.records.map(shiftMonths)
   };
 }
+
+export function round(num, decimalPlaces = 0) {
+  num = Math.round(Math.abs(num) + 'e' + decimalPlaces) * Math.sign(num);
+  return Number(num + 'e' + -decimalPlaces);
+}
