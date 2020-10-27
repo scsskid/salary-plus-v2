@@ -11,9 +11,9 @@ const settings = {
 
 export const bootstrapData = {
   app: {
-    version: 'Beta0.2',
+    version: 'Alpha-Bootstrap',
     state: 'running',
-    localStorageKey: 'salary-plus:app-data-test'
+    localStorageKey: 'salary-plus:app-data'
   },
   records: [],
   jobs: [],
@@ -27,7 +27,11 @@ export const bootstrapData = {
 };
 
 export const sampleData = {
-  app: { version: 'Beta0.2', state: 'running' },
+  app: {
+    version: 'Alpha-Demo',
+    state: 'running',
+    localStorageKey: 'salary-plus:app-data'
+  },
   settings: {
     ...settings,
     incrementIdRecords: 159,
