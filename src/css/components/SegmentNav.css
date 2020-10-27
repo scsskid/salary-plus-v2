@@ -1,0 +1,19 @@
+.segment-nav {
+  background: #fff;
+  display: flex;
+  padding: var(--b);
+  border-radius: 4px;
+}
+
+.segment-nav-el {
+  padding-top: calc(var(--b) * 2);
+  padding-bottom: calc(var(--b) * 2);
+  flex: 1;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.segment-nav-el--active {
+  background: var(--color-dark-bg); /* ! */
+  color: #fff;
+}

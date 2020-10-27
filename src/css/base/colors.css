@@ -6,6 +6,7 @@
   --color-highlight: hsl(var(--hue-main) 100% 44%);
   --color-link: hsl(var(--hue-main) 60% 30%);
   --color-light-bg: hsl(var(--hue-main) 18% 96%);
+  --color-dark-bg: var(--color-text);
 }
 
 body {

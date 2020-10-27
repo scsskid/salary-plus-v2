@@ -15,14 +15,6 @@ import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecord';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
-import InputDateControl from './InputDateControl';
-import Calendar from './Calendar';
-import Button from './Button';
-import ListView from './ListView';
-import CalendarHead from './CalendarHead';
-import CalendarBody from './CalendarBody';
-import DateDetails from './DateDetails';
-import CalendarTable from './CalendarTable';
 
 export default function App() {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -127,42 +119,17 @@ export default function App() {
       <main className="main">
         <Switch>
           <Route exact path="/">
-            <Home>
-              <InputDateControl
-                inputDate={inputDate}
-                changeMonth={changeMonth}
-                settings={settings}
-              />
-              <div>
-                <Button onClick={() => {}}>Calendar</Button>{' '}
-                <Button onClick={() => {}}>List</Button>
-              </div>
-              <Calendar>
-                <CalendarTable>
-                  <CalendarHead settings={settings} />
-                  <CalendarBody
-                    inputDate={inputDate}
-                    records={monthRecords}
-                    updateInputDate={updateInputDate}
-                    daysInMonth={daysInMonth}
-                    firstDay={firstDay}
-                  />
-                </CalendarTable>
-                <DateDetails
-                  inputDate={inputDate}
-                  jobs={jobs}
-                  dateRecords={dateRecords}
-                  settings={settings}
-                />
-              </Calendar>
-              <ListView
-                jobs={jobs}
-                settings={settings}
-                inputDate={inputDate}
-                monthRecords={monthRecords}
-                daysInMonth={daysInMonth}
-              />
-            </Home>
+            <Home
+              inputDate={inputDate}
+              settings={settings}
+              changeMonth={changeMonth}
+              monthRecords={monthRecords}
+              daysInMonth={daysInMonth}
+              updateInputDate={updateInputDate}
+              firstDay={firstDay}
+              jobs={jobs}
+              dateRecords={dateRecords}
+            />
           </Route>
           <Route path="/records/add">
             <FormRecordCreate

@@ -1,3 +1,7 @@
+.body {
+  background: #eee;
+}
+
 .Nav {
   margin-bottom: 1rem;
 }
@@ -14,6 +18,7 @@
 
 button {
   all: unset;
+  cursor: pointer;
 }
 
 button:focus {

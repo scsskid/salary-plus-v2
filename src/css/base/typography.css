@@ -1,3 +1,7 @@
+:root {
+  --b: 0.3rem;
+}
+
 /* Typography */
 
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
@@ -26,5 +30,5 @@ body {
 }
 
 :--heading {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
