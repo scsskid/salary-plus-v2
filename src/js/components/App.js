@@ -15,6 +15,7 @@ import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecord';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
+import Debug from './Debug';
 
 export default function App() {
   const [inputDate, setInputDate] = React.useState(new Date());
@@ -80,8 +81,6 @@ export default function App() {
     date: inputDate
   });
 
-  // console.log(monthRecords);
-
   const dateRecords = getRecordsByDate({
     records: monthRecords,
     date: inputDate
@@ -118,7 +117,7 @@ export default function App() {
                 insertBootstrapData: () => dispatch({ type: 'reset' })
               }}
             />
-            <AppFooter />
+            <Debug />
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
@@ -186,45 +185,17 @@ export default function App() {
           </Route>
 
           <Route path="/Settings">
-            <Settings settings={settings} jobs={jobs} presets={presets} />
+            <Settings settings={settings} jobs={jobs} presets={presets}>
+              <Debug
+                settings={settings}
+                dispatch={dispatch}
+                isLoggedIn={isLoggedIn}
+              />
+            </Settings>
           </Route>
           <Route path="*" component={NoMatch} />
         </Switch>
       </main>
-      <AppFooter appState={app?.state} isLoggedIn inputDate>
-        <>
-          <button className="btn" onClick={() => dispatch({ type: 'reset' })}>
-            Reset App (Bootstrap)
-          </button>
-          <button
-            className="btn"
-            onClick={() => dispatch({ type: 'deleteAppData' })}
-          >
-            Delete App Data
-          </button>
-          <button
-            className="btn"
-            onClick={() => dispatch({ type: 'insertSampleData' })}
-          >
-            Insert Sample App Data
-          </button>
-
-          <pre style={{ fontSize: '.6rem', display: 'none' }}>
-            userSettings: {JSON.stringify(settings, null, 2)}
-          </pre>
-        </>
-      </AppFooter>
     </Router>
-  );
-}
-
-function AppFooter({ isLoggedIn, children }) {
-  return (
-    <footer style={{ paddingTop: 40 }}>
-      {isLoggedIn && <>{children}</>}
-      <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
-        state: {isLoggedIn ? 'logged in' : 'logged out'}
-      </div>
-    </footer>
   );
 }

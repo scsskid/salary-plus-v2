@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const Settings = ({ jobs, presets }) => {
+const Settings = ({ jobs, presets, children }) => {
   const history = useHistory();
 
   return (
@@ -63,6 +63,7 @@ const Settings = ({ jobs, presets }) => {
       </div>
 
       <hr />
+      {children}
     </div>
   );
 };

@@ -1,6 +1,14 @@
+@define-mixin container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem;
+  padding: calc(3 * var(--b));
+}
+
 html {
   height: -webkit-fill-available;
   height: calc(var(--vh, 1vh) * 100);
+  touch-action: manipulation;
 }
 body {
   height: 100vh;
@@ -10,13 +18,8 @@ body {
 .container {
   /* height: 100vh; */
   height: -webkit-fill-available;
+}
 
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-
-  touch-action: manipulation;
+.main {
+  @mixin container;
 }
