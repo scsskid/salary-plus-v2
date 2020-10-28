@@ -23,13 +23,7 @@ export default function App() {
   const [inputDate, setInputDate] = React.useState(new Date());
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
-  const {
-    app = {},
-    settings = {},
-    records = [],
-    jobs = [],
-    presets = []
-  } = appData;
+  const { settings = {}, records = [], jobs = [], presets = [] } = appData;
 
   function updateInputDate(date) {
     setInputDate(date);

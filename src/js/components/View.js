@@ -8,7 +8,6 @@ import DateDetails from './DateDetails';
 import CalendarTable from './CalendarTable';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
-import Button from './Button';
 
 export default function View({
   inputDate,

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-export default function InputDateControl({ inputDate, changeMonth, settings }) {
+export default function InputDateControl({ changeMonth }) {
   return (
     <div className="input-date-control">
       <Button onClick={() => changeMonth(-1)}>Prev</Button>{' '}
