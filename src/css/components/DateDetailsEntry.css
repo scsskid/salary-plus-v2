@@ -19,7 +19,8 @@
 
 .date-details-entry h2,
 .date-details-entry-time-begin {
-  font-size: 1.2rem;
+  @mixin fontSize 14;
+
   font-weight: bold;
 }
 

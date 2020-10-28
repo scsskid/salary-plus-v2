@@ -3,14 +3,14 @@
   --bx: calc(4 * var(--b));
 }
 
+@define-mixin fontSize $size {
+  font-size: calc($size * 1rem / 16);
+}
+
 /* Typography */
 
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 @custom-selector :--typographic :--heading, p, ul, figure;
-
-@define-mixin fontSize $size {
-  font-size: calc($size * 1rem / 16);
-}
 
 /*
    General
@@ -26,7 +26,7 @@ body {
 }
 
 :--heading {
-  font-size: 2rem;
+  @mixin fontSize 16;
 }
 
 :--typographic {
