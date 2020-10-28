@@ -7,6 +7,7 @@ import CalendarBody from './CalendarBody';
 import DateDetails from './DateDetails';
 import CalendarTable from './CalendarTable';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
+import InputDateDisplay from './InputDateDisplay';
 
 export default function View({
   inputDate,
@@ -56,12 +57,20 @@ export default function View({
   };
 
   return (
-    <div className="home">
-      <InputDateControl
-        inputDate={inputDate}
-        changeMonth={changeMonth}
-        settings={settings}
-      />
+    <div className="view">
+      <header className="view-header">
+        <div>
+          <h1>View</h1>
+          {/* {state.activeSegement} */}
+          <InputDateDisplay inputDate={inputDate} settings={settings} />
+        </div>
+        <InputDateControl
+          inputDate={inputDate}
+          changeMonth={changeMonth}
+          settings={settings}
+        />
+      </header>
+
       <SegmentNav>
         {segements.map((segment, i) => (
           <SegmentNavEl

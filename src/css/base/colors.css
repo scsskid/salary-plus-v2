@@ -1,9 +1,10 @@
 :root {
   --hue-main: 210deg;
-  --hue-accent: 57deg;
+  --hue-accent: 16deg;
 
   --color-text: hsl(var(--hue-main) 10% 20%);
-  --color-highlight: hsl(var(--hue-main) 100% 44%);
+  --color-highlight: hsl(var(--hue-accent) 72% 39%);
+
   --color-link: hsl(var(--hue-main) 60% 30%);
   --color-light-bg: hsl(var(--hue-main) 18% 96%);
   --color-dark-bg: var(--color-text);
@@ -15,7 +16,7 @@ body {
 }
 
 .calendar-date-event {
-  background: var(--color-highlight);
+  background-color: aqua;
 }
 
 a {

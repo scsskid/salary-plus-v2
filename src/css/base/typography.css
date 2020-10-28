@@ -25,6 +25,10 @@ body {
   @mixin fontSize 14;
 }
 
+.btn {
+  @mixin fontSize 12;
+}
+
 :--heading {
   @mixin fontSize 16;
 }

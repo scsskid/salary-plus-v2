@@ -32,6 +32,7 @@ export default function App() {
     setInputDate(date);
   }
 
+  // eslint-disable-next-line no-unused-vars
   function appHeight() {
     document.documentElement.style.setProperty(
       '--vh',
@@ -40,8 +41,8 @@ export default function App() {
   }
 
   React.useEffect(() => {
-    window.addEventListener('resize', appHeight);
-    appHeight();
+    // window.addEventListener('resize', appHeight);
+    // appHeight();
   }, []);
 
   // make higher order fn

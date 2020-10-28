@@ -1,0 +1,19 @@
+.view-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--bx);
+}
+.view-header :--heading {
+  margin-bottom: 0;
+}
+
+.input-date-display {
+  color: var(--color-highlight);
+}
+
+.input-date-control {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
