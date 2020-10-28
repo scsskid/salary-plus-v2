@@ -35,7 +35,9 @@ function CalendarBody({
 
   return (
     <>
-      <tbody ref={tbody}>{rows}</tbody>
+      <div className="calendar-body" ref={tbody}>
+        {rows}
+      </div>
     </>
   );
 }
@@ -57,7 +59,12 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
       const isTrailingCell = date > daysInMonth;
 
       if (isLeadingCell || isTrailingCell) {
-        cells.push(<td key={`weekday-bodycell-${j}`}></td>);
+        cells.push(
+          <div
+            className="calendar-date calendar-date--empty"
+            key={`weekday-bodycell-${j}`}
+          ></div>
+        );
       } else {
         currentDate.setDate(date);
         cells.push(
@@ -73,7 +80,11 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
       }
     }
 
-    rows.push(<tr key={`weekday-bodyrow-${i}`}>{cells}</tr>);
+    rows.push(
+      <div className="calendar-week" key={`weekday-bodyrow-${i}`}>
+        {cells}
+      </div>
+    );
   }
 
   return rows;
@@ -94,7 +105,8 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
   }
 
   return (
-    <td
+    <div
+      className="calendar-date"
       ref={rootEl}
       data-date-string={dateString}
       data-selected={cellMatchesInputDate ? `selected` : ``}
@@ -105,11 +117,11 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
         onKeyUp={onKeyUp}
       >
         <div className="calendar-date-button-inner">
-          <span>{date}</span>
-          <span data-records></span>
+          <div>{date}</div>
+          <div data-records></div>
         </div>
       </button>
-    </td>
+    </div>
   );
 }
 

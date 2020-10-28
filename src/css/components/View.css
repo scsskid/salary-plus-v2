@@ -21,8 +21,6 @@
 
 /* Reporting Widget */
 
-/*  */
-
 .main-component {
   display: grid;
   grid-template-rows: auto 1fr;

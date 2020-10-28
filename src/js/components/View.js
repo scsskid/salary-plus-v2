@@ -5,7 +5,7 @@ import ListView from './ListView';
 import CalendarHead from './CalendarHead';
 import CalendarBody from './CalendarBody';
 import DateDetails from './DateDetails';
-import CalendarTable from './CalendarTable';
+import CalendarContainer from './CalendarContainer';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 
@@ -27,16 +27,15 @@ export default function View({
     Week: <div>W E E K</div>,
     Month: (
       <Calendar>
-        <CalendarTable>
-          <CalendarHead settings={settings} />
-          <CalendarBody
-            inputDate={inputDate}
-            records={monthRecords}
-            updateInputDate={updateInputDate}
-            daysInMonth={daysInMonth}
-            firstDay={firstDay}
-          />
-        </CalendarTable>
+        <CalendarHead settings={settings} />
+        <CalendarBody
+          inputDate={inputDate}
+          records={monthRecords}
+          updateInputDate={updateInputDate}
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+        />
+
         <DateDetails
           inputDate={inputDate}
           jobs={jobs}
