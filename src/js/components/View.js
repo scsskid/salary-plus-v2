@@ -66,7 +66,7 @@ export default function View({
 
         <button className="widget-reporting">
           <header className="widget-reporting-figures">
-            <div>This [Month] →</div>
+            <div>[Month] Report →</div>
           </header>
           <div className="widget-reporting-figures">
             <figure className="widget-reporting-figures-el">
@@ -96,12 +96,14 @@ export default function View({
         </SegmentNav>
       </header>
       <div className="component-body">
-        <InputDateDisplay inputDate={inputDate} settings={settings} />
-        <InputDateControl
-          inputDate={inputDate}
-          changeMonth={changeMonth}
-          settings={settings}
-        />
+        <header className="component-body-header">
+          <InputDateDisplay inputDate={inputDate} settings={settings} />
+          <InputDateControl
+            inputDate={inputDate}
+            changeMonth={changeMonth}
+            settings={settings}
+          />
+        </header>
         {Views[state.activeSegement]}
       </div>
     </div>

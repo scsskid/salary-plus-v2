@@ -19,9 +19,14 @@
 .segment-nav-el b {
   transform: translateY(1px);
   display: inline-block;
+  /* color: var(--color-highlight); */
+  color: var(--color-text-low-contrast);
+  /* font-weight: normal; */
 }
 
 .segment-nav-el--active {
-  background: var(--color-dark-bg); /* ! */
-  color: #fff;
+  background: var(--color-highlight);
+  & b {
+    color: #fff;
+  }
 }

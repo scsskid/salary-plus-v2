@@ -8,18 +8,8 @@
   padding-bottom: var(--bx);
 }
 
-.input-date-control {
-  grid-column: 1 / 3;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .component-header .segment-nav {
   grid-column: 1 / 3;
-}
-
-.input-date-display {
-  color: var(--color-highlight);
 }
 
 .widget-reporting {
@@ -44,6 +34,16 @@
 
 .component-body {
   overflow: scroll;
+}
+
+.component-body-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--bx);
+}
+
+.input-date-display {
+  color: var(--color-highlight);
 }
 
 .widget-reporting-figures {

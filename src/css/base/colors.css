@@ -3,6 +3,7 @@
   --hue-accent: 16deg;
 
   --color-text: hsl(var(--hue-main) 10% 20%);
+  --color-text-low-contrast: hsl(var(--hue-main) 10% 40%);
   --color-highlight: hsl(var(--hue-accent) 72% 39%);
 
   --color-link: hsl(var(--hue-main) 60% 30%);
