@@ -19,8 +19,14 @@ export default function ListView({
 
       return (
         hasRecords && (
-          <div key={i}>
-            <h3>{date.toLocaleDateString()}</h3>
+          <div className="view-list-date" key={i}>
+            <h1 className="view-list-date-title">
+              {date.toLocaleDateString(undefined, {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+              })}
+            </h1>
 
             <DateDetails
               inputDate={inputDate}
@@ -33,10 +39,5 @@ export default function ListView({
       );
     });
 
-  return (
-    <div>
-      <h1>List View for Month</h1>
-      {dateList}
-    </div>
-  );
+  return <div>{dateList}</div>;
 }

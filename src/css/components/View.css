@@ -59,3 +59,14 @@
     opacity: 0.7;
   }
 }
+
+/* List view */
+
+.view-list-date {
+  margin-bottom: var(--bx);
+}
+
+.view-list-date-title {
+  @mixin fontSize 14;
+  margin-bottom: var(--b);
+}
