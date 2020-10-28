@@ -12,7 +12,7 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
-  devtool: 'cheap-source-map',
+  devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
     host: '0.0.0.0',
@@ -24,17 +24,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: { loader: 'babel-loader' }
       },
       {
         test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader'
-          }
-        ]
+        use: [{ loader: 'html-loader' }]
       },
       {
         test: /\.css$/,
@@ -42,13 +36,9 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              importLoaders: 1
-            }
+            options: { importLoaders: 1, sourceMap: true }
           },
-          {
-            loader: 'postcss-loader'
-          }
+          { loader: 'postcss-loader', options: { sourceMap: true } }
         ]
       },
       {
