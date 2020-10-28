@@ -8,17 +8,25 @@
 @custom-selector :--heading h1, h2, h3, h4, h5, h6;
 @custom-selector :--typographic :--heading, p, ul, figure;
 
-/* 
+@define-mixin fontSize $size {
+  font-size: calc($size * 1rem / 16);
+}
+
+/*
    General
    .................................
 */
 html {
-  font-size: calc(14em / 16);
 }
 
 body {
-  font-family: 'Inter', 'system-ui';
+  font-family: 'Inter', 'system-ui', sans-serif;
   line-height: 1.4;
+  @mixin fontSize 14;
+}
+
+:--heading {
+  font-size: 2rem;
 }
 
 :--typographic {
@@ -28,8 +36,4 @@ body {
 
 :--typographic:last-child {
   margin-bottom: 0;
-}
-
-:--heading {
-  font-size: 1rem;
 }

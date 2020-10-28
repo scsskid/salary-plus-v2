@@ -32,6 +32,18 @@ export default function App() {
     setInputDate(date);
   }
 
+  function appHeight() {
+    document.documentElement.style.setProperty(
+      '--vh',
+      window.innerHeight * 0.01 + 'px'
+    );
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', appHeight);
+    appHeight();
+  }, []);
+
   // make higher order fn
   function saveRecord(formData) {
     dispatch({

@@ -29,7 +29,6 @@
 
 .date-details-entry-time {
   flex: 1 0 10rem;
-  background: #000;
   order: 1;
   text-align: right;
 }
