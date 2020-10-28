@@ -68,7 +68,7 @@ export default function View({
 
         <div className="widget-reporting">
           <header className="widget-reporting-figures">
-            <div>All Jobs</div>
+            <div>This [Month]</div>
             <Button>Full Report</Button>
           </header>
           <div className="widget-reporting-figures">
@@ -82,12 +82,6 @@ export default function View({
             </figure>
           </div>
         </div>
-
-        <InputDateControl
-          inputDate={inputDate}
-          changeMonth={changeMonth}
-          settings={settings}
-        />
 
         <SegmentNav>
           {segements.map((segment, i) => (
@@ -104,7 +98,14 @@ export default function View({
           ))}
         </SegmentNav>
       </header>
-      <div className="component-body">{Views[state.activeSegement]}</div>
+      <div className="component-body">
+        <InputDateControl
+          inputDate={inputDate}
+          changeMonth={changeMonth}
+          settings={settings}
+        />
+        {Views[state.activeSegement]}
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 .view-header {
   display: grid;
   grid-gap: var(--bx);
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
   padding-top: var(--bx);
