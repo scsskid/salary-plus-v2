@@ -8,6 +8,7 @@ import DateDetails from './DateDetails';
 import CalendarTable from './CalendarTable';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
+import Button from './Button';
 
 export default function View({
   inputDate,
@@ -65,7 +66,22 @@ export default function View({
           <InputDateDisplay inputDate={inputDate} settings={settings} />
         </div>
 
-        <div className="widget-reporting">All Jobs</div>
+        <div className="widget-reporting">
+          <header className="widget-reporting-figures">
+            <div>All Jobs</div>
+            <Button>Full Report</Button>
+          </header>
+          <div className="widget-reporting-figures">
+            <figure className="widget-reporting-figures-el">
+              <b>96,5</b>
+              <figcaption>Hours</figcaption>
+            </figure>
+            <figure className="widget-reporting-figures-el">
+              <b>352,10€</b>
+              <figcaption>Earned</figcaption>
+            </figure>
+          </div>
+        </div>
 
         <InputDateControl
           inputDate={inputDate}

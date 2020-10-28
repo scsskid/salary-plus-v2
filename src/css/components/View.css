@@ -1,8 +1,11 @@
 .view-header {
   display: grid;
+  grid-gap: var(--bx);
   grid-template-rows: auto auto auto;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: var(--bx);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  padding-top: var(--bx);
+  padding-bottom: var(--bx);
 }
 
 .input-date-control {
@@ -20,12 +23,13 @@
 }
 
 .widget-reporting {
-  background-color: darkcyan;
 }
 
 .view-header :--heading {
   margin-bottom: 0;
 }
+
+/* Reporting Widget */
 
 /*  */
 
@@ -40,4 +44,18 @@
 
 .component-body {
   overflow: scroll;
+}
+
+.widget-reporting-figures {
+  display: flex;
+}
+
+.widget-reporting-figures-el {
+  margin-bottom: 0;
+  margin-right: 1rem;
+
+  & figcaption {
+    @mixin fontSize 10;
+    opacity: 0.7;
+  }
 }

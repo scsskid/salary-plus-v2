@@ -12,6 +12,10 @@ button:focus {
   outline-offset: 1px;
 }
 
+figure {
+  margin-left: 0;
+}
+
 /* button:active {
   transform: scale(0.99);
 } */
