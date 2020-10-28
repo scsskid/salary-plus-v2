@@ -202,3 +202,32 @@ export function round(num, decimalPlaces = 0) {
   num = Math.round(Math.abs(num) + 'e' + decimalPlaces) * Math.sign(num);
   return Number(num + 'e' + -decimalPlaces);
 }
+
+export function throttle(fn, threshhold, scope) {
+  threshhold || (threshhold = 250);
+  var last, deferTimer;
+  return function () {
+    var context = scope || this;
+
+    var now = +new Date(),
+      args = arguments;
+    if (last && now < last + threshhold) {
+      // hold on to it
+      clearTimeout(deferTimer);
+      deferTimer = setTimeout(function () {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
+    } else {
+      last = now;
+      fn.apply(context, args);
+    }
+  };
+}
+
+export function setAppInnerHeight() {
+  document.documentElement.style.setProperty(
+    '--vh',
+    window.innerHeight * 0.01 + 'px'
+  );
+}

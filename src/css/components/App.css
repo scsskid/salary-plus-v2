@@ -1,25 +1,28 @@
-@define-mixin container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 40rem;
-  padding: calc(3 * var(--b));
+@define-mixin padHor {
+  padding-left: calc(3 * var(--b));
+  padding-right: calc(3 * var(--b));
 }
 
 html {
-  height: -webkit-fill-available;
   height: calc(var(--vh, 1vh) * 100);
+  /* height: -webkit-fill-available; */
   touch-action: manipulation;
 }
-body {
-  height: 100vh;
-  height: -webkit-fill-available;
-}
 
-.container {
+#root {
   /* height: 100vh; */
-  height: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
+  /* height: -webkit-fill-available; */
+  display: grid;
+  grid-template-rows: 1fr auto;
 }
 
 .main {
-  @mixin container;
+  grid-row: 1 / 2;
+  @mixin padHor;
+  overflow: scroll;
+}
+
+.main-navigation {
+  grid-row: 2 / 3;
 }

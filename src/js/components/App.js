@@ -9,7 +9,9 @@ import { useLocalStorageReducer } from '../utils/store';
 import {
   getDaysInMonth,
   getFirstDay,
-  getDateFromFormInputDate
+  getDateFromFormInputDate,
+  throttle,
+  setAppInnerHeight
 } from '../utils/helpers.js';
 import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecord';
@@ -33,17 +35,9 @@ export default function App() {
     setInputDate(date);
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function appHeight() {
-    document.documentElement.style.setProperty(
-      '--vh',
-      window.innerHeight * 0.01 + 'px'
-    );
-  }
-
   React.useEffect(() => {
-    // window.addEventListener('resize', appHeight);
-    // appHeight();
+    window.addEventListener('resize', throttle(setAppInnerHeight));
+    setAppInnerHeight();
   }, []);
 
   // make higher order fn

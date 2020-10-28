@@ -57,35 +57,38 @@ export default function View({
   };
 
   return (
-    <div className="view">
-      <header className="view-header">
-        <div>
+    <div className="view main-component">
+      <header className="view-header component-header">
+        <div className="component-meta">
           <h1>View</h1>
           {/* {state.activeSegement} */}
           <InputDateDisplay inputDate={inputDate} settings={settings} />
         </div>
+
+        <div className="widget-reporting">All Jobs</div>
+
         <InputDateControl
           inputDate={inputDate}
           changeMonth={changeMonth}
           settings={settings}
         />
-      </header>
 
-      <SegmentNav>
-        {segements.map((segment, i) => (
-          <SegmentNavEl
-            id={segment}
-            key={i}
-            isActive={state.activeSegement === segment ? true : false}
-            onClick={(event) =>
-              setState({ activeSegement: event.currentTarget.id })
-            }
-          >
-            <b>{segment}</b>
-          </SegmentNavEl>
-        ))}
-      </SegmentNav>
-      {Views[state.activeSegement]}
+        <SegmentNav>
+          {segements.map((segment, i) => (
+            <SegmentNavEl
+              id={segment}
+              key={i}
+              isActive={state.activeSegement === segment ? true : false}
+              onClick={(event) =>
+                setState({ activeSegement: event.currentTarget.id })
+              }
+            >
+              <b>{segment}</b>
+            </SegmentNavEl>
+          ))}
+        </SegmentNav>
+      </header>
+      <div className="component-body">{Views[state.activeSegement]}</div>
     </div>
   );
 }
