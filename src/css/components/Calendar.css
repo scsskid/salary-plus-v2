@@ -79,11 +79,11 @@
   border: 1px dotted var(--color-text);
 }
 
-[data-selected='selected'],
-[data-today] {
-  & .calendar-date-button:focus:focus .calendar-date-button-figure {
-    border: 1px solid transparent;
-  }
+[data-selected='selected']
+  .calendar-date-button:focus:focus
+  .calendar-date-button-figure,
+[data-today] .calendar-date-button:focus:focus .calendar-date-button-figure {
+  border: 1px solid transparent;
 }
 
 [data-records] {

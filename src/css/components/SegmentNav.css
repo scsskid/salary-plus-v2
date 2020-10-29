@@ -26,6 +26,7 @@
 
 .segment-nav-el--active {
   background: var(--color-highlight);
+
   & b {
     color: #fff;
   }
