@@ -17,7 +17,7 @@ body {
 }
 
 .calendar-date-event {
-  background-color: aqua;
+  background-color: hsl(191deg 69% 42%);
 }
 
 a {

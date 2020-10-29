@@ -5,6 +5,7 @@
 .calendar-body {
   display: flex;
   flex-direction: column;
+  margin-bottom: var(--bx);
 }
 
 .calendar-weekdays,
@@ -18,7 +19,7 @@
 
 .calendar-date {
   position: relative;
-  height: calc(12 * var(--b));
+  height: calc(10 * var(--b));
 }
 
 .calendar-date:not(.calendar-date--empty) {
@@ -33,22 +34,16 @@
   align-items: center;
 }
 
-[data-records] {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-}
-
 .calendar-date-button:focus {
   outline: none;
 }
 
 .calendar-date-button-figure {
   size: 2rem;
-  border-radius: 50%;
+  size: calc(6 * var(--b));
+  border-radius: calc(50% + 1px);
   display: block;
   border: 1px solid transparent;
-  padding: 1px;
 
   & span {
     border-radius: 50%;
@@ -91,12 +86,21 @@
   }
 }
 
+[data-records] {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
 .calendar-date-event {
+  margin: 0 1px;
   display: block;
-  background: rebeccapurple;
-  margin-bottom: 2px;
-  size: 0.4rem;
-  color: rebeccapurple;
+  background: #000;
+  border-radius: 50%;
+  margin-bottom: 3px;
+  size: 0.3em;
 
   & small {
     display: none;
