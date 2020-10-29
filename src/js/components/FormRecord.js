@@ -43,7 +43,9 @@ export function FormRecordUpdate({
 
   return (
     <>
-      <h1>Update Entry</h1>
+      <div className="component-header">
+        <h1>Update Entry</h1>
+      </div>
       <FormRecord
         jobs={jobs}
         saveRecord={saveRecord}
