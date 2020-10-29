@@ -14,10 +14,7 @@
   text-align: center;
 }
 
-.calendar-week:not(:first-child) {
-  --color: hsl(var(--hue-main) 20% 80%);
-  box-shadow: inset 0 1px 0 0px var(--color);
-}
+/* Date */
 
 .calendar-date {
   border-radius: 2px;
@@ -25,14 +22,17 @@
   height: 3rem;
 }
 
-.calendar-date-button {
-  display: block;
-  size: 100%;
-  border-radius: 2px;
+.calendar-date:not(.calendar-date--empty) {
+  --color: hsl(var(--hue-main) 20% 80%);
+  box-shadow: inset 0 -1px 0 0px var(--color);
 }
 
-.calendar-date-button-inner {
-  padding: 0 1rem;
+.calendar-date-button {
+  size: 100%;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 [data-today] button {
@@ -46,10 +46,39 @@
   right: 2px;
 }
 
-.calendar [data-selected='selected'] button {
-  --color: hsl(0deg 50% 40%);
+.calendar button {
+  /* outline: none; */
+}
+
+.calendar button:focus {
+  outline: none;
+}
+
+.calendar-date-button-figure {
+  size: 20rem;
+  border-radius: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar [data-selected='selected'] .calendar-date-button-figure {
+  --color: hsl(var(--hue-accent) 50% 40%);
   box-shadow: inset 0 0 0 2px var(--color);
   color: var(--color);
+}
+
+.calendar button:focus .calendar-date-button-figure {
+  background: #fff;
+  /* outline: 2px solid red;
+  outline-offset: 4px; */
+  /* outline-style: revert; */
+  box-shadow: 0 0 2px 6px #000, 0 0 2px 0 green;
+}
+
+.calendar [data-selected='selected'] button {
+  /* Inner span background, radius, color white */
+  /* font-size: 200%; */
 }
 
 .calendar-date-event {

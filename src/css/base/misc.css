@@ -8,8 +8,9 @@ button {
 }
 
 button:focus {
-  outline: 2px solid hsl(0deg 0% 50%);
-  outline-offset: 1px;
+  outline: 2px solid hsl(var(--hue-main), 60%, 40%);
+  outline-offset: 4px;
+  outline-style: revert;
 }
 
 figure {
