@@ -1,11 +1,11 @@
 .view-header {
   display: grid;
-  grid-gap: var(--bx);
+  grid-gap: var(--b);
   grid-template-rows: auto auto;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 
   padding-top: var(--bx);
-  padding-bottom: var(--bx);
+  padding-bottom: calc(2 * var(--b));
 }
 
 .component-header .segment-nav {
