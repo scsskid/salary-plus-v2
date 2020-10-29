@@ -5,15 +5,11 @@ export default function CalendarHead({ settings }) {
   let cells = [];
   for (let i = 0; i < 7; i++) {
     cells.push(
-      <span key={`weekday-headcell-${i}`}>
+      <div key={`weekday-headcell-${i}`}>
         {getWeekDayNames({ format: 'short', locale: settings.locale })[i]}
-      </span>
+      </div>
     );
   }
 
-  return (
-    <div>
-      <div>{cells}</div>
-    </div>
-  );
+  return <div className="calendar-weekdays">{cells}</div>;
 }

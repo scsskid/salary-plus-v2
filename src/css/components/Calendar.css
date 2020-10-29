@@ -2,10 +2,24 @@
   width: 100%;
 }
 
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-weekdays,
+.calendar-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.calendar-week:not(:first-child) {
+  --color: hsl(var(--hue-main) 20% 80%);
+  box-shadow: inset 0 1px 0 0px var(--color);
+}
+
 .calendar-date {
-  --color: hsl(0deg 20% 80%);
-  box-shadow: inset 0 0 0 1px var(--color);
-  width: calc(100% / 7);
   border-radius: 2px;
   position: relative;
   height: 3rem;
@@ -13,7 +27,7 @@
 
 .calendar-date-button {
   display: block;
-  width: 100%;
+  size: 100%;
   border-radius: 2px;
 }
 
@@ -36,7 +50,6 @@
   --color: hsl(0deg 50% 40%);
   box-shadow: inset 0 0 0 2px var(--color);
   color: var(--color);
-  font-size: 200%;
 }
 
 .calendar-date-event {
