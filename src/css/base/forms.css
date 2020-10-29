@@ -11,6 +11,7 @@ select,
   cursor: pointer;
   padding-top: var(--b);
   padding-bottom: var(--b);
+  @mixin fontSize 16;
 }
 
 .display-value {
