@@ -116,7 +116,7 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
         onClick={onClick}
         onKeyUp={onKeyUp}
       >
-        <div className="calendar-date-button-figure">{date}</div>
+        <div className="calendar-date-button-figure"><span>{date}</span></div>
         <div data-records></div>
       </button>
     </div>
