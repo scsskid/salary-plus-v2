@@ -17,7 +17,7 @@ module.exports = {
     historyApiFallback: true,
     host: '0.0.0.0',
     open: false,
-    hot: false
+    hot: true
   },
   module: {
     rules: [
@@ -33,7 +33,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
+          'style-loader',
           {
             loader: 'css-loader',
             options: { importLoaders: 1, sourceMap: true }
