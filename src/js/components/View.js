@@ -64,9 +64,9 @@ export default function View({
         </div>
 
         <button className="widget-reporting">
-          <header className="widget-reporting-figures">
+          {/* <header className="widget-reporting-figures">
             <div>[Month] Report →</div>
-          </header>
+          </header> */}
           <div className="widget-reporting-figures">
             <figure className="widget-reporting-figures-el">
               <b>96,5</b>
