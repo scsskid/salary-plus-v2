@@ -5,11 +5,16 @@ select {
 }
 
 input,
-select {
+select,
+.display-value {
   border: none;
   cursor: pointer;
   padding-top: var(--b);
   padding-bottom: var(--b);
+}
+
+.display-value {
+  background: #eee;
 }
 
 fieldset {
@@ -35,6 +40,9 @@ label {
 
 label p {
   margin-bottom: 0;
+  background: #eee;
+  display: flex;
+  align-items: center;
 }
 
 .form-el {

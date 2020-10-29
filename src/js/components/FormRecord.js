@@ -2,6 +2,7 @@ import React from 'react';
 import { formatDate, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
+import FormElement from './FormElement';
 
 export function FormRecordCreate({
   inputDate,
@@ -99,7 +100,6 @@ export default function FormRecord({
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const form = React.useRef();
-  const inputRate = React.useRef();
 
   function handleDispatch(formData) {
     saveRecord(formData);
@@ -232,7 +232,7 @@ export default function FormRecord({
           </fieldset>
         )}
         <fieldset>
-          <div className="form-el">
+          {/* <div className="form-el">
             <label htmlFor="entry-date">Date</label>
             <input
               name="dateBegin"
@@ -241,43 +241,48 @@ export default function FormRecord({
               value={formData.dateBegin}
               onChange={handleChange}
             />
-          </div>
+          </div> */}
           <div className="form-el">
-            <label htmlFor="entry-begin-time">Begin Time</label>
-            <input
-              name="timeBegin"
-              id="entry-begin-time"
-              type="time"
-              value={formData.timeBegin}
-              onChange={handleChange}
-            />
+            <label htmlFor="entry-date">
+              <p>Date</p>
+              <button className="display-value">{formData.dateBegin}</button>
+            </label>
           </div>
-          <div className="form-el">
-            <label htmlFor="entry-end-time">End Time</label>
-            <input
-              name="timeEnd"
-              id="entry-end-time"
-              type="time"
-              value={formData.timeEnd}
-              onChange={handleChange}
-            />
-          </div>
+
+          <FormElement
+            name="timeBegin"
+            id="entry-begin-time"
+            type="time"
+            value={formData.timeBegin}
+            onChange={handleChange}
+          >
+            Begin Time
+          </FormElement>
+
+          <FormElement
+            id="entry-date"
+            name="timeEnd"
+            type="time"
+            value={formData.timeEnd}
+            onChange={handleChange}
+          >
+            End Time
+          </FormElement>
         </fieldset>
         <fieldset>
-          <div className="form-el">
-            <label htmlFor="entry-rate">Rate</label>
-            <input
-              ref={inputRate}
-              inputMode="decimal"
-              name="rate"
-              id="entry-rate"
-              type="number"
-              step="0.01"
-              value={formData.rate}
-              onChange={handleChange}
-            />{' '}
-            €
-            {/* {jobs.length == 0 && (
+          <FormElement
+            inputMode="decimal"
+            variant="currency"
+            name="rate"
+            id="entry-rate"
+            type="number"
+            step="0.01"
+            value={formData.rate}
+            onChange={handleChange}
+          >
+            Rate
+          </FormElement>
+          {/* {jobs.length == 0 && (
             <p>
               <small>
                 Rate will linked to above entered jobName and preset in this
@@ -285,46 +290,43 @@ export default function FormRecord({
               </small>
             </p>
           )} */}
-          </div>
-
-          <div className="form-el">
-            <label htmlFor="entry-bonus">Bonus</label>
-            <input
-              inputMode="decimal"
-              name="bonus"
-              id="entry-bonus"
-              type="number"
-              step="0.01"
-              value={formData.bonus}
-              onChange={handleChange}
-            />{' '}
-            €
-          </div>
+          <FormElement
+            inputMode="decimal"
+            variant="currency"
+            name="rate"
+            id="entry-rate"
+            type="number"
+            step="0.01"
+            value={formData.bonus}
+            onChange={handleChange}
+          >
+            Bonus
+          </FormElement>{' '}
         </fieldset>
         <fieldset>
-          <div className="form-el">
-            <label htmlFor="entry-sick-leave">
-              <p>Sick Leave</p>
-              <input name="sickLeave" id="entry-sick-leave" type="checkbox" />
-            </label>
-          </div>
+          <FormElement
+            name="sickLeave"
+            id="entry-sick-leave"
+            type="checkbox"
+            value={formData.sickLeave}
+            onChange={handleChange}
+          >
+            Sick Leave?
+          </FormElement>
         </fieldset>
-        <div className="form-el">
-          <Button type="submit" data-button-submit="">
-            Save
-          </Button>
-          {isUpdateForm && (
-            <Button
-              onClick={handleDelete}
-              className="btn-delete"
-              data-button-delete=""
-            >
-              Delete Record
-            </Button>
-          )}
-        </div>
 
-        <div className="form-el"></div>
+        <Button type="submit" data-button-submit="">
+          Save
+        </Button>
+        {isUpdateForm && (
+          <Button
+            onClick={handleDelete}
+            className="btn-delete"
+            data-button-delete=""
+          >
+            Delete Record
+          </Button>
+        )}
       </form>
       <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
