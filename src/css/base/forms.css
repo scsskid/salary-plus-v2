@@ -1,29 +1,49 @@
 /* Forms */
 
 select {
-  background: #fff;
+  /* background: #fff; */
 }
 
 input,
 select {
-  cursor: pointer;
   border: none;
-  box-shadow: 0 0 0 1px hsl(0, 0%, 80%), inset 0 2px 2px 0 hsl(0, 0%, 96%);
-  padding: 0.25rem 0.5rem;
-  border-radius: 2px;
+  cursor: pointer;
+  padding-top: var(--b);
+  padding-bottom: var(--b);
+}
+
+fieldset {
+  background: #fff;
+  @mixin padHor;
+  @mixin bleedHor;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+  margin-bottom: var(--bx);
 }
 
 label {
-  display: block;
-  margin-bottom: 0.25rem;
+  @mixin fontSize 14;
+  opacity: 0.7;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--bx);
+  padding-bottom: var(--bx);
+  cursor: pointer;
+}
+
+label p {
+  margin-bottom: 0;
 }
 
 .form-el {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0 -1px 0 hsl(0deg 0% 90%);
 }
 
-/* Edit Job */
-
-.edit-job {
-  /* */
+.form-el:last-child {
+  box-shadow: none;
 }

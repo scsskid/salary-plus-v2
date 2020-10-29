@@ -13,7 +13,9 @@ export function FormRecordCreate({
 }) {
   return (
     <>
-      <h1>New Entry</h1>
+      <div className="component-header">
+        <h1>New Entry</h1>
+      </div>
       {settings.previousJobId}
       <FormRecord
         jobs={jobs}
@@ -187,7 +189,6 @@ export default function FormRecord({
 
   return (
     <>
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
       <form
         ref={form}
         onSubmit={handleSubmit}
@@ -196,94 +197,87 @@ export default function FormRecord({
         <input type="hidden" name="id" value={formData.id} />
 
         {jobs.length ? (
-          <div className="form-el">
-            <label htmlFor="entry-job">Job</label>
-            <select
-              name="jobId"
-              id="entry-job"
-              value={formData.jobId}
-              onBlur={handleSelectJobChange}
-              onChange={handleSelectJobChange}
-            >
-              <option key={`job-0`} disabled={true} value={0}>
-                Select Job...
-              </option>
-              <OptionsJob />
-            </select>
-          </div>
+          <fieldset>
+            <div className="form-el">
+              <label htmlFor="entry-job">Job</label>
+              <select
+                name="jobId"
+                id="entry-job"
+                value={formData.jobId}
+                onBlur={handleSelectJobChange}
+                onChange={handleSelectJobChange}
+              >
+                <option key={`job-0`} disabled={true} value={0}>
+                  Select Job...
+                </option>
+                <OptionsJob />
+              </select>
+            </div>
+          </fieldset>
         ) : (
-          <div className="form-el">
-            <label htmlFor="jobName">Job Name</label>
-            <input
-              name="jobName"
-              id="jobName"
-              type="text"
-              value={formData.jobName}
-              onChange={handleChange}
-            />
-            {/* <p>
+          <fieldset>
+            <div className="form-el">
+              <label htmlFor="jobName">Job Name</label>
+              <input
+                name="jobName"
+                id="jobName"
+                type="text"
+                value={formData.jobName}
+                onChange={handleChange}
+              />
+              {/* <p>
               <small>Job will be added to saved Jobs.</small>
             </p> */}
-          </div>
+            </div>
+          </fieldset>
         )}
-        <div className="form-el">
-          <label htmlFor="preset">Preset</label>
-          <select
-            name="preset"
-            value={formData.preset}
-            onBlur={handleSelectPresetChange}
-            onChange={handleSelectPresetChange}
-          >
-            <option key={`preset-0`} disabled={true} value={0}>
-              Select Preset to prefill fields...
-            </option>
-            <OptionsPreset />
-          </select>
-        </div>
-        <div className="form-el">
-          <label htmlFor="entry-date">Date</label>
-          <input
-            name="dateBegin"
-            id="entry-date"
-            type="date"
-            value={formData.dateBegin}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-el">
-          <label htmlFor="entry-begin-time">Begin Time</label>
-          <input
-            name="timeBegin"
-            id="entry-begin-time"
-            type="time"
-            value={formData.timeBegin}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-el">
-          <label htmlFor="entry-end-time">End Time</label>
-          <input
-            name="timeEnd"
-            id="entry-end-time"
-            type="time"
-            value={formData.timeEnd}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-el">
-          <label htmlFor="entry-rate">Rate</label>
-          <input
-            ref={inputRate}
-            inputMode="decimal"
-            name="rate"
-            id="entry-rate"
-            type="number"
-            step="0.01"
-            value={formData.rate}
-            onChange={handleChange}
-          />{' '}
-          €
-          {/* {jobs.length == 0 && (
+        <fieldset>
+          <div className="form-el">
+            <label htmlFor="entry-date">Date</label>
+            <input
+              name="dateBegin"
+              id="entry-date"
+              type="date"
+              value={formData.dateBegin}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-el">
+            <label htmlFor="entry-begin-time">Begin Time</label>
+            <input
+              name="timeBegin"
+              id="entry-begin-time"
+              type="time"
+              value={formData.timeBegin}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-el">
+            <label htmlFor="entry-end-time">End Time</label>
+            <input
+              name="timeEnd"
+              id="entry-end-time"
+              type="time"
+              value={formData.timeEnd}
+              onChange={handleChange}
+            />
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-el">
+            <label htmlFor="entry-rate">Rate</label>
+            <input
+              ref={inputRate}
+              inputMode="decimal"
+              name="rate"
+              id="entry-rate"
+              type="number"
+              step="0.01"
+              value={formData.rate}
+              onChange={handleChange}
+            />{' '}
+            €
+            {/* {jobs.length == 0 && (
             <p>
               <small>
                 Rate will linked to above entered jobName and preset in this
@@ -291,26 +285,30 @@ export default function FormRecord({
               </small>
             </p>
           )} */}
-        </div>
+          </div>
 
-        <div className="form-el">
-          <label htmlFor="entry-bonus">Bonus</label>
-          <input
-            inputMode="decimal"
-            name="bonus"
-            id="entry-bonus"
-            type="number"
-            step="0.01"
-            value={formData.bonus}
-            onChange={handleChange}
-          />{' '}
-          €
-        </div>
-        <div className="form-el">
-          <label htmlFor="entry-sick-leave">Sick Leave</label>
-          <input name="sickLeave" id="entry-sick-leave" type="checkbox" />
-        </div>
-
+          <div className="form-el">
+            <label htmlFor="entry-bonus">Bonus</label>
+            <input
+              inputMode="decimal"
+              name="bonus"
+              id="entry-bonus"
+              type="number"
+              step="0.01"
+              value={formData.bonus}
+              onChange={handleChange}
+            />{' '}
+            €
+          </div>
+        </fieldset>
+        <fieldset>
+          <div className="form-el">
+            <label htmlFor="entry-sick-leave">
+              <p>Sick Leave</p>
+              <input name="sickLeave" id="entry-sick-leave" type="checkbox" />
+            </label>
+          </div>
+        </fieldset>
         <div className="form-el">
           <Button type="submit" data-button-submit="">
             Save
@@ -328,6 +326,26 @@ export default function FormRecord({
 
         <div className="form-el"></div>
       </form>
+      <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
   );
 }
+
+/*
+
+        <div className="form-el">
+          <label htmlFor="preset">Preset</label>
+          <select
+            name="preset"
+            value={formData.preset}
+            onBlur={handleSelectPresetChange}
+            onChange={handleSelectPresetChange}
+          >
+            <option key={`preset-0`} disabled={true} value={0}>
+              Select Preset to prefill fields...
+            </option>
+            <OptionsPreset />
+          </select>
+        </div>
+
+        */

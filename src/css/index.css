@@ -2,11 +2,11 @@
 
 @import 'vendor/modern-normalize.css';
 @import 'base/fonts.css';
+@import 'components/App.css';
 @import 'base/typography.css';
 @import 'base/forms.css';
 @import 'base/misc.css';
 
-@import 'components/App.css';
 @import 'components/View.css';
 @import 'components/Calendar.css';
 @import 'components/Button.css';
