@@ -106,16 +106,8 @@ const formatDate = {
   }
 };
 
-// Input Handling
-
-// export function getDateFromFormInputDate(string) {
-//   const dateBeginSplit = string.split('/');
-//   const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
-//   return new Date(dateIsoString);
-// }
-
 export function mapFormDataToStorageObject(record) {
-  record.dateEnd = record.dateBegin;
+  record.dateEnd = Object.assign(new Date(), record.dateBegin);
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
   if (record.timeBegin > record.timeEnd) {

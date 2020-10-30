@@ -3,7 +3,6 @@ import Button from './Button';
 import FormElement from './FormElement';
 import DatesPickerCalendar from './DatesPickerCalendar';
 import { useHistory } from 'react-router-dom';
-import { formatDate } from '../utils/helpers';
 
 export default function FormRecord({
   saveRecord,
