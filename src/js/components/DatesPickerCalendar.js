@@ -17,16 +17,13 @@ export default function DatesPickerCalendar({
     const selectedDateObj = new Date(
       e.currentTarget.parentElement.dataset.dateString
     );
-    // if is already in selected -> remove
+
     const matchedExisting = state.dates.find((date) => {
-      // return isSameDay(date, selectedDateObj);
       return date.setHours(0, 0, 0, 0) === selectedDateObj.setHours(0, 0, 0, 0);
     });
 
-    console.log(matchedExisting);
-
     if (matchedExisting) {
-      // return;
+      // remove existing
       setState({
         ...state,
         dates: state.dates.filter((date) => {
@@ -36,17 +33,16 @@ export default function DatesPickerCalendar({
         })
       });
     } else {
+      // push new
       // Todo: if is updateForm, dont spread existing dates
       setState({
         ...state,
         dates: [...state.dates, selectedDateObj]
       });
     }
-    console.log('finished handleClick');
   }
 
   React.useEffect(() => {
-    console.log('Begin Effect', state);
     const allDateCells = document.querySelectorAll('[data-date-string]');
 
     allDateCells.forEach((cell) => {
@@ -74,6 +70,7 @@ export default function DatesPickerCalendar({
       <p>
         Dates Picker: {isUpdateForm ? `Allow One Date` : `Allow Multiple Dates`}
       </p>
+      <p>Selected Count: {state.dates.length}</p>
       <Button
         onClick={() => {
           setState({ ...state, dates: [] });
@@ -81,9 +78,7 @@ export default function DatesPickerCalendar({
       >
         Clear All Selected
       </Button>
-      {state.dates.map((date, i) => (
-        <p key={i}>{date.toLocaleDateString()}</p>
-      ))}
+
       <Calendar
         inputDate={inputDate}
         settings={settings}
