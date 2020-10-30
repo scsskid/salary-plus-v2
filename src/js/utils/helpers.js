@@ -125,7 +125,7 @@ export function parseFormData(formData) {
   return data;
 }
 
-const mapFormDataToStorageObject = (record) => {
+export function mapFormDataToStorageObject(record) {
   record.dateBegin = record.dateBegin.replace(/-/g, '/');
   record.dateEnd = record.dateBegin;
 
@@ -150,12 +150,12 @@ const mapFormDataToStorageObject = (record) => {
     end,
     bonus: record.bonus || '',
     note: record.note || '',
-    sickLeave: record.sickLeave == 'on' ? 'true' : '' || '',
+    sickLeave: record.sickLeave || '',
     status: record.status || '',
     rate: record.rate || '',
     interval: record.rateInterval || ''
   };
-};
+}
 
 /**
  * add object to or alter obj in array
@@ -173,7 +173,7 @@ export function mutateArrayWithObject(obj, array) {
 
 export function insertEntry() {}
 
-export { formatDate, mapFormDataToStorageObject };
+export { formatDate };
 
 // Development
 

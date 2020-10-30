@@ -9,9 +9,9 @@ function FormElement({
   inputMode,
   onChange,
   variant,
-  children
+  children,
+  checked
 }) {
-  console.log(variant);
   return (
     <div className="form-el">
       <label htmlFor={id}>
@@ -26,6 +26,7 @@ function FormElement({
           value={value}
           inputMode={inputMode}
           onChange={onChange}
+          checked={checked}
         />
       </label>
     </div>

@@ -79,7 +79,8 @@ export default function FormRecord({
         timeEnd: getTimeOfDate(new Date(record.end)),
         rate: record.rate,
         bonus: record.bonus,
-        preset: 0
+        // preset: 0,
+        sickLeave: record.sickLeave || false
       }
     : {
         jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
@@ -96,7 +97,8 @@ export default function FormRecord({
             : '02:00',
         rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
         bonus: 0,
-        preset: 0
+        // preset: 0
+        sickLeave: false
       };
 
   const history = useHistory();
@@ -131,8 +133,10 @@ export default function FormRecord({
   function handleChange(e) {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]:
+        e.target.type === 'checkbox' ? e.target.checked : e.target.value
     });
+    console.log(e.target.value);
   }
 
   function handleSelectJobChange(e) {
@@ -312,6 +316,7 @@ export default function FormRecord({
             type="checkbox"
             value={formData.sickLeave}
             onChange={handleChange}
+            checked={formData.sickLeave}
           >
             Sick Leave?
           </FormElement>
