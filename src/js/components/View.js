@@ -1,11 +1,9 @@
 import React from 'react';
 import InputDateControl from './InputDateControl';
-import Calendar from './Calendar';
 import ListView from './ListView';
-import CalendarHead from './CalendarHead';
-import CalendarBody from './CalendarBody';
+import Calendar from './Calendar';
 import DateDetails from './DateDetails';
-import CalendarContainer from './CalendarContainer';
+
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 
@@ -26,23 +24,22 @@ export default function View({
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
-      <Calendar>
-        <CalendarHead settings={settings} />
-        <CalendarBody
+      <>
+        <Calendar
           inputDate={inputDate}
           records={monthRecords}
           updateInputDate={updateInputDate}
           daysInMonth={daysInMonth}
           firstDay={firstDay}
+          settings={settings}
         />
-
         <DateDetails
           inputDate={inputDate}
           jobs={jobs}
           dateRecords={dateRecords}
           settings={settings}
         />
-      </Calendar>
+      </>
     ),
     List: (
       <ListView
