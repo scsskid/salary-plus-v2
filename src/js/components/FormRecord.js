@@ -25,7 +25,6 @@ export default function FormRecord({
         timeEnd: getTimeOfDate(new Date(record.end)),
         rate: record.rate,
         bonus: record.bonus,
-        // preset: 0,
         sickLeave: record.sickLeave || false
       }
     : {
@@ -43,7 +42,6 @@ export default function FormRecord({
             : '02:00',
         rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
         bonus: 0,
-        // preset: 0
         sickLeave: false
       };
 

@@ -7,7 +7,6 @@ export function FormRecordCreate({
   saveRecord,
   jobs,
   settings,
-  presets,
   dispatch,
   changeMonth
 }) {
@@ -22,7 +21,6 @@ export function FormRecordCreate({
       <FormRecord
         jobs={jobs}
         saveRecord={saveRecord}
-        presets={presets}
         inputDate={inputDate}
         settings={settings}
         dispatch={dispatch}
@@ -38,7 +36,6 @@ export function FormRecordUpdate({
   saveRecord,
   jobs,
   records,
-  presets,
   deleteItem,
   dispatch,
   settings,
@@ -57,7 +54,6 @@ export function FormRecordUpdate({
         jobs={jobs}
         saveRecord={saveRecord}
         deleteItem={deleteItem}
-        presets={presets}
         isUpdateForm={true}
         record={record}
         dispatch={dispatch}

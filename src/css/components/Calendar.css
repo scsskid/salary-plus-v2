@@ -107,6 +107,7 @@
 }
 
 /* DatesPickerCalendar */
+
 .dates-picker-calendar {
   background: var(--color-bg-light);
   @mixin padHor;
