@@ -1,5 +1,4 @@
 import React from 'react';
-import { formatDate, getTimeOfDate } from '../utils/helpers';
 import Button from './Button';
 import FormElement from './FormElement';
 import DatesPickerCalendar from './DatesPickerCalendar';
