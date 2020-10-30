@@ -6,45 +6,39 @@ import InputDateDisplay from './InputDateDisplay';
 
 export default function DatesPickerCalendar({
   inputDate,
+  dates = [],
+  setDates,
   settings,
   isUpdateForm,
   changeMonth,
   datePickerOpen
 }) {
   const datesPickerCalendarRef = React.useRef();
-  const [state, setState] = React.useState({
-    dates: [new Date(inputDate.setHours(0, 0, 0, 0))]
-  });
-  const datesCount = state.dates.length;
+  const datesCount = dates.length;
 
   function handleCalendarDateButtonClick(e) {
     const selectedDateObj = new Date(
       e.currentTarget.parentElement.dataset.dateString
     );
 
-    const matchedExisting = state.dates.find((date) => {
+    const matchedExisting = dates.find((date) => {
       return date.setHours(0, 0, 0, 0) === selectedDateObj.setHours(0, 0, 0, 0);
     });
 
     if (matchedExisting && !isUpdateForm) {
+      // Create Form:
       // remove existing
-      setState({
-        ...state,
-        dates: state.dates.filter((date) => {
+      setDates(
+        dates.filter((date) => {
           return (
             date.setHours(0, 0, 0, 0) !== selectedDateObj.setHours(0, 0, 0, 0)
           );
         })
-      });
+      );
     } else {
+      // Update Form:
       // push new
-      // Todo: if is updateForm, dont spread existing dates
-      setState({
-        ...state,
-        dates: isUpdateForm
-          ? [selectedDateObj]
-          : [...state.dates, selectedDateObj]
-      });
+      setDates(isUpdateForm ? [selectedDateObj] : [...dates, selectedDateObj]);
     }
   }
 
@@ -53,7 +47,7 @@ export default function DatesPickerCalendar({
 
     allDateCells.forEach((cell) => {
       const cellDateObj = new Date(cell.dataset.dateString);
-      state.dates.forEach((selectedDate) => {
+      dates.forEach((selectedDate) => {
         if (
           cellDateObj.setHours(0, 0, 0, 0) === selectedDate.setHours(0, 0, 0, 0)
         ) {
@@ -64,12 +58,11 @@ export default function DatesPickerCalendar({
 
     // Cleanup
     return () => {
-      // Remove previous Visual Selection
       allDateCells.forEach((cell) => {
         cell.dataset.selected = '';
       });
     };
-  }, [state, inputDate]);
+  }, [dates, inputDate]);
 
   return (
     <div
@@ -80,15 +73,12 @@ export default function DatesPickerCalendar({
       }
       ref={datesPickerCalendarRef}
     >
-      <p>
-        Dates Picker: {isUpdateForm ? `Allow One Date` : `Allow Multiple Dates`}
-      </p>
-      {datesCount === 1 && <p>{state.dates[0].toLocaleDateString()}</p>}
+      {datesCount === 1 && <p>{dates[0].toLocaleDateString()}</p>}
       {datesCount > 1 && <p>{datesCount} Dates</p>}
       {datesCount > 0 && (
         <Button
           onClick={() => {
-            setState({ ...state, dates: [] });
+            setDates([]);
           }}
         >
           Clear All Selected

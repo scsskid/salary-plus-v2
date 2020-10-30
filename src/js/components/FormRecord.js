@@ -3,6 +3,7 @@ import Button from './Button';
 import FormElement from './FormElement';
 import DatesPickerCalendar from './DatesPickerCalendar';
 import { useHistory } from 'react-router-dom';
+import { formatDate } from '../utils/helpers';
 
 export default function FormRecord({
   saveRecord,
@@ -18,11 +19,14 @@ export default function FormRecord({
   const [formData, setFormData] = React.useState(initialFormData);
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
   const form = React.useRef();
+  const [dates, setDates] = React.useState(initialFormData.dates);
 
-  function handleDispatch(formData) {
-    saveRecord(formData);
-    history.push('/');
-  }
+  React.useEffect(() => {
+    setFormData({
+      ...formData,
+      dates
+    });
+  }, [dates]);
 
   function OptionsJob() {
     return jobs.map((job) => {
@@ -62,6 +66,17 @@ export default function FormRecord({
   function handleSubmit(e) {
     e.preventDefault();
     handleDispatch(formData);
+  }
+
+  function handleDispatch(formData) {
+    formData.dates.forEach((date) => {
+      const singleDateFormData = {
+        ...formData,
+        dateBegin: date
+      };
+      saveRecord(singleDateFormData);
+    });
+    history.push('/');
   }
 
   function handleCalendarDateButtonClick() {
@@ -119,11 +134,11 @@ export default function FormRecord({
         )}
         <fieldset>
           <FormElement
-            name="dateBegin"
+            name="dates"
             id="entry-date-begin"
-            value={formData.dateBegin}
-            onChange={handleChange}
-            variant="button"
+            value={formData.dates[0]}
+            // onChange={handleChange}
+            variant="date picker value"
             readOnly={true}
             onClick={() => {
               console.log('click');
@@ -140,6 +155,8 @@ export default function FormRecord({
             isUpdateForm={isUpdateForm}
             changeMonth={changeMonth}
             datePickerOpen={datePickerOpen}
+            dates={dates}
+            setDates={setDates}
           />
           <FormElement
             name="timeBegin"

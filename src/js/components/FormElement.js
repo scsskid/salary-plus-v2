@@ -15,8 +15,6 @@ function FormElement({
   readOnly,
   onClick
 }) {
-  console.log(readOnly);
-
   return (
     <div className="form-el">
       <label htmlFor={id}>

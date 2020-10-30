@@ -108,37 +108,34 @@ const formatDate = {
 
 // Input Handling
 
-export function getDateFromFormInputDate(string) {
-  const dateBeginSplit = string.split('/');
-  const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
-  return new Date(dateIsoString);
-}
-
-export function parseFormData(formData) {
-  const formEntries = new FormData(formData).entries();
-  const data = {};
-
-  for (var [formElementName, value] of formEntries) {
-    data[formElementName] = value;
-  }
-
-  return data;
-}
+// export function getDateFromFormInputDate(string) {
+//   const dateBeginSplit = string.split('/');
+//   const dateIsoString = `${dateBeginSplit[0]}-${dateBeginSplit[1]}-${dateBeginSplit[2]}`;
+//   return new Date(dateIsoString);
+// }
 
 export function mapFormDataToStorageObject(record) {
-  record.dateBegin = record.dateBegin.replace(/-/g, '/');
   record.dateEnd = record.dateBegin;
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
   if (record.timeBegin > record.timeEnd) {
-    var recordedDate = new Date(record.dateEnd);
-    var recordedDay = recordedDate.getDate();
-    recordedDate.setDate(recordedDay + 1);
-    record.dateEnd = recordedDate.toDateString();
+    var recordedDateEnd = new Date(record.dateEnd);
+    var recordedDateEndDay = recordedDateEnd.getDate();
+    recordedDateEnd.setDate(recordedDateEndDay + 1);
+    record.dateEnd = recordedDateEnd;
   }
+  const timeSplits = {
+    begin: record.timeBegin.split(':'),
+    end: record.timeEnd.split(':')
+  };
 
-  let begin = new Date(record.dateBegin + ' ' + record.timeBegin).toISOString();
-  let end = new Date(record.dateEnd + ' ' + record.timeEnd).toISOString();
+  record.dateBegin.setHours(timeSplits.begin[0]);
+  record.dateBegin.setMinutes(timeSplits.begin[1]);
+  record.dateEnd.setHours(timeSplits.end[0]);
+  record.dateEnd.setMinutes(timeSplits.end[1]);
+
+  const begin = record.dateBegin.toISOString();
+  const end = record.dateEnd.toISOString();
 
   delete record.dateEnd; // ? otherwise it get returned, why?
 

@@ -16,7 +16,7 @@ export function FormRecordCreate({
   const initialFormData = {
     jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
     jobName: jobs?.find((job) => job.id == settings.previousJobId)?.name || '',
-    dateBegin: formatDate.rfc3339(inputDate),
+    dates: [inputDate],
     timeBegin:
       settings.previousTimeBegin !== null
         ? settings.previousTimeBegin
@@ -50,14 +50,14 @@ export function FormRecordCreate({
 }
 
 export function FormRecordUpdate({
+  inputDate,
   saveRecord,
   jobs,
   records,
   deleteItem,
   dispatch,
   settings,
-  changeMonth,
-  inputDate
+  changeMonth
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
@@ -65,7 +65,7 @@ export function FormRecordUpdate({
     id: record.id,
     jobId: parseInt(record.jobId),
     jobName: record.jobName || 'Was undefined!',
-    dateBegin: formatDate.rfc3339(new Date(record.begin)),
+    dates: [new Date(record.begin)],
     timeBegin: getTimeOfDate(new Date(record.begin)),
     timeEnd: getTimeOfDate(new Date(record.end)),
     rate: record.rate,

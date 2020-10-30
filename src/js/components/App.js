@@ -6,11 +6,7 @@ import NoMatch from './NoMatch';
 import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
-import {
-  getDateFromFormInputDate,
-  throttle,
-  setAppInnerHeight
-} from '../utils/helpers.js';
+import { throttle, setAppInnerHeight } from '../utils/helpers.js';
 import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
@@ -38,7 +34,7 @@ export default function App() {
       type: 'id' in formData ? 'updateRecord' : 'createRecord',
       payload: formData
     });
-    updateInputDate(getDateFromFormInputDate(formData.dateBegin));
+    updateInputDate(new Date(formData.dateBegin));
   }
 
   function saveJob(formData) {
