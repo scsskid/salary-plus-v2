@@ -137,13 +137,9 @@ export default function FormRecord({
             name="dates"
             id="entry-date-begin"
             value={formData.dates[0]}
-            // onChange={handleChange}
             variant="date picker value"
             readOnly={true}
-            onClick={() => {
-              console.log('click');
-              setDatePickerOpen(!datePickerOpen);
-            }}
+            onClick={() => setDatePickerOpen(!datePickerOpen)}
           >
             Date
           </FormElement>
