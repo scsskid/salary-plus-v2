@@ -10,45 +10,15 @@ export default function FormRecord({
   deleteItem,
   jobs,
   isUpdateForm,
-  record,
   settings,
   inputDate,
-  changeMonth
+  changeMonth,
+  initialFormData
 }) {
-  const initialFormData = record
-    ? {
-        id: record.id,
-        jobId: parseInt(record.jobId),
-        jobName: record.jobName || 'Was undefined!',
-        dateBegin: formatDate.rfc3339(new Date(record.begin)),
-        timeBegin: getTimeOfDate(new Date(record.begin)),
-        timeEnd: getTimeOfDate(new Date(record.end)),
-        rate: record.rate,
-        bonus: record.bonus,
-        sickLeave: record.sickLeave || false
-      }
-    : {
-        jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
-        jobName:
-          jobs?.find((job) => job.id == settings.previousJobId)?.name || '',
-        dateBegin: formatDate.rfc3339(inputDate),
-        timeBegin:
-          settings.previousTimeBegin !== null
-            ? settings.previousTimeBegin
-            : '15:00',
-        timeEnd:
-          settings.previousTimeEnd !== null
-            ? settings.previousTimeEnd
-            : '02:00',
-        rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
-        bonus: 0,
-        sickLeave: false
-      };
-
+  console.log(initialFormData);
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const [datePickerOpen, setDatePickerOpen] = React.useState(true);
-
   const form = React.useRef();
 
   function handleDispatch(formData) {
