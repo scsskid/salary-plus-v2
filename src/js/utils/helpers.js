@@ -107,7 +107,7 @@ const formatDate = {
 };
 
 export function mapFormDataToStorageObject(record) {
-  record.dateEnd = Object.assign(new Date(), record.dateBegin);
+  record.dateEnd = new Date(record.dateBegin.getTime());
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
   if (record.timeBegin > record.timeEnd) {
@@ -131,7 +131,7 @@ export function mapFormDataToStorageObject(record) {
 
   delete record.dateEnd; // ? otherwise it get returned, why?
 
-  return {
+  const payload = {
     id: parseInt(record.id),
     jobId: parseInt(record.jobId),
     jobName: record.jobName || '',
@@ -144,6 +144,8 @@ export function mapFormDataToStorageObject(record) {
     rate: record.rate || '',
     interval: record.rateInterval || ''
   };
+
+  return payload;
 }
 
 /**

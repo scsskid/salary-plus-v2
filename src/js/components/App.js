@@ -70,7 +70,10 @@ export default function App() {
 
   function changeMonth(summand = 0) {
     const newDate = new Date(inputDate);
+
     const now = new Date();
+    newDate.setHours(0, 0, 0, 0);
+    now.setHours(0, 0, 0, 0);
     newDate.setMonth(inputDate.getMonth() + summand);
 
     if (
