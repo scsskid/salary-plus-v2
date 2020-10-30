@@ -1,11 +1,10 @@
 import React from 'react';
 import InputDateControl from './InputDateControl';
 import ListView from './ListView';
-import Calendar from './Calendar';
 import DateDetails from './DateDetails';
-import { getDaysInMonth, getFirstDay } from '../utils/helpers';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
+import RecordsCalendar from './RecordsCalendar';
 
 export default function View({
   inputDate,
@@ -19,19 +18,14 @@ export default function View({
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
-  const daysInMonth = getDaysInMonth(inputDate);
-  const firstDay = getFirstDay(inputDate);
-
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
       <>
-        <Calendar
+        <RecordsCalendar
           inputDate={inputDate}
           records={monthRecords}
           updateInputDate={updateInputDate}
-          daysInMonth={daysInMonth}
-          firstDay={firstDay}
           settings={settings}
         />
         <DateDetails
@@ -48,7 +42,6 @@ export default function View({
         settings={settings}
         inputDate={inputDate}
         monthRecords={monthRecords}
-        daysInMonth={daysInMonth}
       />
     )
   };

@@ -142,6 +142,7 @@ export default function App() {
               saveRecord={saveRecord}
               deleteItem={deleteItem}
               dispatch={dispatch}
+              settings={settings}
             />
           </Route>
           <Route path="/jobs/add">

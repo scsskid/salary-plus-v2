@@ -2,45 +2,28 @@ import React from 'react';
 import {
   getShortIsoString,
   isSameDay,
-  getWeekDayNames
+  getWeekDayNames,
+  getFirstDay,
+  getDaysInMonth
 } from '../utils/helpers.js';
 
 function Calendar({
-  inputDate,
-  records,
-  updateInputDate,
-  daysInMonth,
-  firstDay,
+  inputDate = new Date(),
+  onCalendarDateButtonClick,
   settings
 }) {
-  const tbody = React.useRef();
-
-  const rows = getRows({ inputDate, daysInMonth, firstDay, updateInputDate });
-  const todayDate = new Date();
-  const todayShortString = getShortIsoString(todayDate);
-
-  React.useEffect(() => {
-    const allDateCells = document.querySelectorAll('[data-date-string]');
-    const todayCell = document.querySelector(
-      `[data-date-string="${todayShortString}"]`
-    );
-
-    if (todayCell) todayCell.dataset.today = '';
-    appendDates({ nodes: allDateCells, records });
-
-    // Cleanup
-    return () => {
-      tbody.current
-        .querySelectorAll('[data-records]')
-        .forEach((el) => (el.innerHTML = ``));
-
-      allDateCells.forEach((cell) => cell.removeAttribute('data-today'));
-    };
-  }, [inputDate]);
+  const daysInMonth = getDaysInMonth(inputDate);
+  const firstDay = getFirstDay(inputDate);
+  const rows = getRows({
+    inputDate,
+    daysInMonth,
+    firstDay,
+    onCalendarDateButtonClick
+  });
 
   return (
     <>
-      <div className="calendar-body" ref={tbody}>
+      <div className="calendar-body">
         <CalendarHead settings={settings} />
         {rows}
       </div>
@@ -50,7 +33,12 @@ function Calendar({
 
 export default Calendar;
 
-function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
+function getRows({
+  inputDate,
+  daysInMonth,
+  firstDay,
+  onCalendarDateButtonClick
+}) {
   const currentDate = new Date(inputDate);
   const rows = [];
   let date = 1;
@@ -78,7 +66,7 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
             dateString={getShortIsoString(currentDate)}
             date={date}
             key={`weekday-bodycell-${j}`}
-            updateInputDate={updateInputDate}
+            onCalendarDateButtonClick={onCalendarDateButtonClick}
             inputDate={inputDate}
           />
         );
@@ -96,15 +84,15 @@ function getRows({ inputDate, daysInMonth, firstDay, updateInputDate }) {
   return rows;
 }
 
-function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
+function CalendarCell({
+  dateString,
+  date,
+  onCalendarDateButtonClick,
+  inputDate
+}) {
   const rootEl = React.useRef();
   const cellDateObj = new Date(dateString);
-
   const cellMatchesInputDate = isSameDay(cellDateObj, inputDate);
-
-  function onClick() {
-    updateInputDate(new Date(rootEl.current.dataset.dateString));
-  }
 
   function onKeyUp() {
     return;
@@ -119,7 +107,7 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
     >
       <button
         className="calendar-date-button"
-        onClick={onClick}
+        onClick={onCalendarDateButtonClick}
         onKeyUp={onKeyUp}
       >
         <div className="calendar-date-button-figure">
@@ -129,26 +117,6 @@ function CalendarCell({ dateString, date, updateInputDate, inputDate }) {
       </button>
     </div>
   );
-}
-
-function appendDates({ nodes = [], records = [] }) {
-  nodes.forEach((cell) => {
-    records.filter((record) => {
-      const isMatch =
-        getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
-          ? record
-          : null;
-
-      if (isMatch) {
-        cell
-          .querySelector('[data-records]')
-          .insertAdjacentHTML(
-            'beforeend',
-            `<div class="calendar-date-event"><small>${record.id}</span></div>`
-          );
-      }
-    });
-  });
 }
 
 function CalendarHead({ settings }) {

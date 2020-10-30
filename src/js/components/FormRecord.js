@@ -3,6 +3,7 @@ import { formatDate, getTimeOfDate } from '../utils/helpers';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
 import FormElement from './FormElement';
+import Calendar from './Calendar';
 
 export function FormRecordCreate({
   inputDate,
@@ -36,7 +37,8 @@ export function FormRecordUpdate({
   records,
   presets,
   deleteItem,
-  dispatch
+  dispatch,
+  settings
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
@@ -54,6 +56,7 @@ export function FormRecordUpdate({
         isUpdateForm={true}
         record={record}
         dispatch={dispatch}
+        settings={settings}
       />
     </>
   );
@@ -120,15 +123,15 @@ export default function FormRecord({
     });
   }
 
-  function OptionsPreset() {
-    return presets.map((preset) => {
-      return (
-        <option key={`preset-${preset.id}`} value={preset.id}>
-          {preset.name} {preset.rate}
-        </option>
-      );
-    });
-  }
+  // function OptionsPreset() {
+  //   return presets.map((preset) => {
+  //     return (
+  //       <option key={`preset-${preset.id}`} value={preset.id}>
+  //         {preset.name} {preset.rate}
+  //       </option>
+  //     );
+  //   });
+  // }
 
   function handleChange(e) {
     setFormData({
@@ -155,24 +158,24 @@ export default function FormRecord({
     });
   }
 
-  function handleSelectPresetChange(e) {
-    if (e.target.value == 0) {
-      return;
-    }
-    const selectedPresetId = parseInt(e.target.value);
-    const presetData = presets.find((preset) => preset.id === selectedPresetId);
-    const presetFormData = {
-      timeBegin: presetData.timeBegin || formData.timeBegin,
-      timeEnd: presetData.timeEnd || formData.timeEnd,
-      rate: presetData.rate || formData.rate
-    };
+  // function handleSelectPresetChange(e) {
+  //   if (e.target.value == 0) {
+  //     return;
+  //   }
+  //   const selectedPresetId = parseInt(e.target.value);
+  //   const presetData = presets.find((preset) => preset.id === selectedPresetId);
+  //   const presetFormData = {
+  //     timeBegin: presetData.timeBegin || formData.timeBegin,
+  //     timeEnd: presetData.timeEnd || formData.timeEnd,
+  //     rate: presetData.rate || formData.rate
+  //   };
 
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-      ...presetFormData
-    });
-  }
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //     ...presetFormData
+  //   });
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -254,6 +257,7 @@ export default function FormRecord({
             </label>
           </div>
 
+          <Calendar inputDate={inputDate} settings={settings} />
           <FormElement
             name="timeBegin"
             id="entry-begin-time"
