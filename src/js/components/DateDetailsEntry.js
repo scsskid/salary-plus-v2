@@ -32,6 +32,7 @@ export default function DateDetailsEntry({ record, jobs }) {
   return (
     <>
       <button
+        type="button"
         className="date-details-entry"
         data-record-id={record.id}
         onClick={handleClick}

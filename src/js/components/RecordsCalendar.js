@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from './Calendar';
-import { getShortIsoString } from '../utils/helpers.js';
+import { getShortIsoString, isSameDay } from '../utils/helpers.js';
 
 export default function RecordsCalendar({
   inputDate,
@@ -9,35 +9,37 @@ export default function RecordsCalendar({
   settings
 }) {
   const recordsCalendarRef = React.useRef();
-  const todayDate = new Date();
-  const todayShortString = getShortIsoString(todayDate);
 
   function handleCalendarDateButtonClick(e) {
     updateInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
   React.useEffect(() => {
+    // Apend Records
     const allDateCells = document.querySelectorAll('[data-date-string]');
-    const todayCell = document.querySelector(
-      `[data-date-string="${todayShortString}"]`
-    );
+    appendRecords({ nodes: allDateCells, records });
 
-    if (todayCell) todayCell.dataset.today = '';
-    appendDates({ nodes: allDateCells, records });
+    // Auto Mark Selected
+    allDateCells.forEach((cell) => {
+      const cellDateObj = new Date(cell.dataset.dateString);
+      // console.log(cellDateObj);
+      cell.dataset.selected = isSameDay(cellDateObj, inputDate)
+        ? 'selected'
+        : '';
+    });
 
     // Cleanup
     return () => {
       recordsCalendarRef.current
         .querySelectorAll('[data-records]')
         .forEach((el) => (el.innerHTML = ``));
-
-      allDateCells.forEach((cell) => cell.removeAttribute('data-today'));
     };
   }, [inputDate]);
 
   return (
     <div className="records-calendar" ref={recordsCalendarRef}>
       <Calendar
+        inputDate={inputDate}
         settings={settings}
         onCalendarDateButtonClick={handleCalendarDateButtonClick}
       />
@@ -45,7 +47,7 @@ export default function RecordsCalendar({
   );
 }
 
-function appendDates({ nodes = [], records = [] }) {
+function appendRecords({ nodes = [], records = [] }) {
   nodes.forEach((cell) => {
     records.filter((record) => {
       const isMatch =

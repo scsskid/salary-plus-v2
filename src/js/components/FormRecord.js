@@ -74,7 +74,7 @@ export default function FormRecord({
   saveRecord,
   deleteItem,
   jobs,
-  presets,
+  // presets,
   isUpdateForm,
   record,
   settings,

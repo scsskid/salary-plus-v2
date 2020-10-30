@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   getShortIsoString,
-  isSameDay,
   getWeekDayNames,
   getFirstDay,
   getDaysInMonth
@@ -14,6 +13,21 @@ function Calendar({
 }) {
   const daysInMonth = getDaysInMonth(inputDate);
   const firstDay = getFirstDay(inputDate);
+
+  React.useEffect(() => {
+    const allDateCells = document.querySelectorAll('[data-date-string]');
+    const todayDate = new Date();
+    const todayShortString = getShortIsoString(todayDate);
+    const todayCell = document.querySelector(
+      `[data-date-string="${todayShortString}"]`
+    );
+
+    if (todayCell) todayCell.dataset.today = '';
+
+    return () => {
+      allDateCells.forEach((cell) => cell.removeAttribute('data-today'));
+    };
+  });
 
   return (
     <>
@@ -83,27 +97,15 @@ function CalendarRows({
   return rows;
 }
 
-function CalendarCell({
-  dateString,
-  date,
-  onCalendarDateButtonClick,
-  inputDate
-}) {
+function CalendarCell({ dateString, date, onCalendarDateButtonClick }) {
   const rootEl = React.useRef();
-  const cellDateObj = new Date(dateString);
-  const cellMatchesInputDate = isSameDay(cellDateObj, inputDate);
 
   function onKeyUp() {
     return;
   }
 
   return (
-    <div
-      className="calendar-date"
-      ref={rootEl}
-      data-date-string={dateString}
-      data-selected={cellMatchesInputDate ? `selected` : ``}
-    >
+    <div className="calendar-date" ref={rootEl} data-date-string={dateString}>
       <button
         type="button"
         className="calendar-date-button"
