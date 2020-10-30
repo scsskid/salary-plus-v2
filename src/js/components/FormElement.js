@@ -11,8 +11,12 @@ function FormElement({
   variant,
   children,
   checked,
-  disabled
+  disabled,
+  readOnly,
+  onClick
 }) {
+  console.log(readOnly);
+
   return (
     <div className="form-el">
       <label htmlFor={id}>
@@ -28,7 +32,9 @@ function FormElement({
           inputMode={inputMode}
           onChange={onChange}
           checked={checked}
+          readOnly={readOnly}
           disabled={disabled}
+          onClick={onClick}
         />
       </label>
     </div>

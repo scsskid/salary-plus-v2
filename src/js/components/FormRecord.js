@@ -15,10 +15,9 @@ export default function FormRecord({
   changeMonth,
   initialFormData
 }) {
-  console.log(initialFormData);
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
-  const [datePickerOpen, setDatePickerOpen] = React.useState(true);
+  const [datePickerOpen, setDatePickerOpen] = React.useState(false);
   const form = React.useRef();
 
   function handleDispatch(formData) {
@@ -126,7 +125,11 @@ export default function FormRecord({
             value={formData.dateBegin}
             onChange={handleChange}
             variant="button"
-            disabled={true}
+            readOnly={true}
+            onClick={() => {
+              console.log('click');
+              setDatePickerOpen(!datePickerOpen);
+            }}
           >
             Date
           </FormElement>
@@ -137,6 +140,7 @@ export default function FormRecord({
             onCalendarDateButtonClick={handleCalendarDateButtonClick}
             isUpdateForm={isUpdateForm}
             changeMonth={changeMonth}
+            datePickerOpen={datePickerOpen}
           />
           <FormElement
             name="timeBegin"

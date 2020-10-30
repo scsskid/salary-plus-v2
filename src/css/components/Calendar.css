@@ -109,9 +109,17 @@
 /* DatesPickerCalendar */
 
 .dates-picker-calendar {
+  display: none;
+}
+
+.dates-picker-calendar {
   background: var(--color-bg-light);
   @mixin padHor;
   @mixin bleedHor;
+}
+
+.dates-picker-calendar--is-open {
+  display: block;
 }
 
 .dates-picker-calendar [data-today] .calendar-date-button-figure {

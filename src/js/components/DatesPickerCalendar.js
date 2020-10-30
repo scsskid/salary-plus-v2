@@ -1,6 +1,5 @@
 import React from 'react';
 import Calendar from './Calendar';
-import { getShortIsoString, isSameDay } from '../utils/helpers.js';
 import Button from './Button';
 import InputDateControl from './InputDateControl';
 import InputDateDisplay from './InputDateDisplay';
@@ -9,11 +8,11 @@ export default function DatesPickerCalendar({
   inputDate,
   settings,
   isUpdateForm,
-  changeMonth
+  changeMonth,
+  datePickerOpen
 }) {
   const datesPickerCalendarRef = React.useRef();
   const [state, setState] = React.useState({
-    open: false,
     dates: [new Date(inputDate.setHours(0, 0, 0, 0))]
   });
   const datesCount = state.dates.length;
@@ -73,7 +72,14 @@ export default function DatesPickerCalendar({
   }, [state, inputDate]);
 
   return (
-    <div className="dates-picker-calendar" ref={datesPickerCalendarRef}>
+    <div
+      className={
+        datePickerOpen
+          ? 'dates-picker-calendar dates-picker-calendar--is-open'
+          : 'dates-picker-calendar'
+      }
+      ref={datesPickerCalendarRef}
+    >
       <p>
         Dates Picker: {isUpdateForm ? `Allow One Date` : `Allow Multiple Dates`}
       </p>
