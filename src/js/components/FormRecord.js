@@ -236,22 +236,6 @@ export default function FormRecord({
             Date
           </FormElement>
 
-          {/* <div className="form-el">
-            <label htmlFor="entry-date">Date</label>
-            <input
-              name="dateBegin"
-              id="entry-date"
-              type="date"
-              value={formData.dateBegin}
-              onChange={handleChange}
-            />
-          </div> */}
-          <div className="form-el">
-            <label htmlFor="entry-date">
-              <p>Date</p>
-              <button className="display-value">{formData.dateBegin}</button>
-            </label>
-          </div>
           <InputDateControl changeMonth={changeMonth} />
           <InputDateDisplay inputDate={inputDate} settings={settings} />
           <Calendar
@@ -270,7 +254,7 @@ export default function FormRecord({
           </FormElement>
 
           <FormElement
-            id="entry-date"
+            id="entry-end-time"
             name="timeEnd"
             type="time"
             value={formData.timeEnd}
@@ -303,8 +287,8 @@ export default function FormRecord({
           <FormElement
             inputMode="decimal"
             variant="currency"
-            name="rate"
-            id="entry-rate"
+            name="bonus"
+            id="entry-bonus"
             type="number"
             step="0.01"
             value={formData.bonus}
