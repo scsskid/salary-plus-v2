@@ -11,7 +11,7 @@ export default function DatesPickerCalendar({
   const datesPickerCalendarRef = React.useRef();
   const [state, setState] = React.useState({
     open: false,
-    dates: []
+    dates: [new Date(inputDate.setHours(0, 0, 0, 0))]
   });
   const datesCount = state.dates.length;
 
@@ -24,7 +24,7 @@ export default function DatesPickerCalendar({
       return date.setHours(0, 0, 0, 0) === selectedDateObj.setHours(0, 0, 0, 0);
     });
 
-    if (matchedExisting) {
+    if (matchedExisting && !isUpdateForm) {
       // remove existing
       setState({
         ...state,
@@ -39,7 +39,9 @@ export default function DatesPickerCalendar({
       // Todo: if is updateForm, dont spread existing dates
       setState({
         ...state,
-        dates: [...state.dates, selectedDateObj]
+        dates: isUpdateForm
+          ? [selectedDateObj]
+          : [...state.dates, selectedDateObj]
       });
     }
   }
@@ -68,19 +70,21 @@ export default function DatesPickerCalendar({
   }, [state, inputDate]);
 
   return (
-    <div className="records-calendar" ref={datesPickerCalendarRef}>
+    <div className="dates-picker-calendar" ref={datesPickerCalendarRef}>
       <p>
         Dates Picker: {isUpdateForm ? `Allow One Date` : `Allow Multiple Dates`}
       </p>
       {datesCount === 1 && <p>{state.dates[0].toLocaleDateString()}</p>}
       {datesCount > 1 && <p>{datesCount} Dates</p>}
-      <Button
-        onClick={() => {
-          setState({ ...state, dates: [] });
-        }}
-      >
-        Clear All Selected
-      </Button>
+      {datesCount > 0 && (
+        <Button
+          onClick={() => {
+            setState({ ...state, dates: [] });
+          }}
+        >
+          Clear All Selected
+        </Button>
+      )}
 
       <Calendar
         inputDate={inputDate}
