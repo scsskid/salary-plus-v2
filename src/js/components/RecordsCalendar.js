@@ -47,13 +47,14 @@ export default function RecordsCalendar({
   );
 }
 
+// What?? Rewrite.... 💩
 function appendRecords({ nodes = [], records = [] }) {
   nodes.forEach((cell) => {
     records.filter((record) => {
       const isMatch =
         getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
           ? record
-          : null;
+          : false;
 
       if (isMatch) {
         cell

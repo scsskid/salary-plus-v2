@@ -6,6 +6,7 @@ import FormElement from './FormElement';
 import Calendar from './Calendar';
 import InputDateControl from './InputDateControl';
 import InputDateDisplay from './InputDateDisplay';
+import DatesPickerCalendar from './DatesPickerCalendar';
 
 export function FormRecordCreate({
   inputDate,
@@ -16,6 +17,8 @@ export function FormRecordCreate({
   dispatch,
   changeMonth
 }) {
+  const [selectedDates, setSelectedDates] = React.useState([]);
+
   return (
     <>
       <div className="component-header">
@@ -30,6 +33,8 @@ export function FormRecordCreate({
         settings={settings}
         dispatch={dispatch}
         changeMonth={changeMonth}
+        selectedDates={selectedDates}
+        setSelectedDates={setSelectedDates}
       />
     </>
   );
@@ -115,6 +120,7 @@ export default function FormRecord({
 
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
+
   const form = React.useRef();
 
   function handleDispatch(formData) {
@@ -238,10 +244,11 @@ export default function FormRecord({
 
           <InputDateControl changeMonth={changeMonth} />
           <InputDateDisplay inputDate={inputDate} settings={settings} />
-          <Calendar
+          <DatesPickerCalendar
             inputDate={inputDate}
             settings={settings}
             onCalendarDateButtonClick={handleCalendarDateButtonClick}
+            isUpdateForm={isUpdateForm}
           />
           <FormElement
             name="timeBegin"
