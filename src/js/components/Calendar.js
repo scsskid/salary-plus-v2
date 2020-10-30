@@ -14,18 +14,17 @@ function Calendar({
 }) {
   const daysInMonth = getDaysInMonth(inputDate);
   const firstDay = getFirstDay(inputDate);
-  const rows = getRows({
-    inputDate,
-    daysInMonth,
-    firstDay,
-    onCalendarDateButtonClick
-  });
 
   return (
     <>
       <div className="calendar-body">
         <CalendarHead settings={settings} />
-        {rows}
+        <CalendarRows
+          inputDate={inputDate}
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          onCalendarDateButtonClick={onCalendarDateButtonClick}
+        />
       </div>
     </>
   );
@@ -33,7 +32,7 @@ function Calendar({
 
 export default Calendar;
 
-function getRows({
+function CalendarRows({
   inputDate,
   daysInMonth,
   firstDay,
