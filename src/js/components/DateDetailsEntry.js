@@ -57,7 +57,7 @@ export default function DateDetailsEntry({ record, jobs }) {
             {/* {timeElapsed} / */}
             {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
             <span>{salaryOfShift(record)}</span>{' '}
-            <span>{round(hoursElapsed)}h</span>
+            <span>{round(hoursElapsed, 2)}h</span>
             {record.sickLeave && <span> [sick]</span>}
             {/* / Recorded Rate:{record.rate} */}
           </p>

@@ -121,10 +121,8 @@ export function mapFormDataToStorageObject(record) {
     end: record.timeEnd.split(':')
   };
 
-  record.dateBegin.setHours(timeSplits.begin[0]);
-  record.dateBegin.setMinutes(timeSplits.begin[1]);
-  record.dateEnd.setHours(timeSplits.end[0]);
-  record.dateEnd.setMinutes(timeSplits.end[1]);
+  record.dateBegin.setHours(timeSplits.begin[0], timeSplits.begin[1], 0, 0);
+  record.dateEnd.setHours(timeSplits.end[0], timeSplits.end[1], 0, 0);
 
   const begin = record.dateBegin.toISOString();
   const end = record.dateEnd.toISOString();
