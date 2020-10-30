@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function Button({ className, ...props }) {
   const defaultProps = {
-    className: `btn ${className}`,
+    className: className ? `btn ${className}` : 'btn',
+    type: 'button',
     children: `Unlabelled Button`
   };
 

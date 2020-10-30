@@ -105,6 +105,7 @@ function CalendarCell({
       data-selected={cellMatchesInputDate ? `selected` : ``}
     >
       <button
+        type="button"
         className="calendar-date-button"
         onClick={onCalendarDateButtonClick}
         onKeyUp={onKeyUp}

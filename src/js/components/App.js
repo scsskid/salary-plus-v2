@@ -132,6 +132,7 @@ export default function App() {
               settings={settings}
               saveRecord={saveRecord}
               dispatch={dispatch}
+              changeMonth={changeMonth}
             />
           </Route>
           <Route path="/records/:id">
@@ -143,6 +144,8 @@ export default function App() {
               deleteItem={deleteItem}
               dispatch={dispatch}
               settings={settings}
+              changeMonth={changeMonth}
+              inputDate={inputDate}
             />
           </Route>
           <Route path="/jobs/add">
@@ -153,6 +156,7 @@ export default function App() {
               jobs={jobs}
               saveJob={saveJob}
               deleteItem={deleteItem}
+              changeMonth={changeMonth}
             />
           </Route>
           <Route path="/presets/add">

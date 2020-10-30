@@ -10,7 +10,8 @@ function FormElement({
   onChange,
   variant,
   children,
-  checked
+  checked,
+  disabled
 }) {
   return (
     <div className="form-el">
@@ -27,6 +28,7 @@ function FormElement({
           inputMode={inputMode}
           onChange={onChange}
           checked={checked}
+          disabled={disabled}
         />
       </label>
     </div>

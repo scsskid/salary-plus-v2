@@ -88,11 +88,7 @@ export default function View({
       <div className="component-body">
         <header className="component-body-header">
           <InputDateDisplay inputDate={inputDate} settings={settings} />
-          <InputDateControl
-            inputDate={inputDate}
-            changeMonth={changeMonth}
-            settings={settings}
-          />
+          <InputDateControl changeMonth={changeMonth} />
         </header>
         {Views[state.activeSegement]}
       </div>

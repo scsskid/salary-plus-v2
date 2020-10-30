@@ -61,7 +61,7 @@ export default function FormJob({
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   function handleDelete(e) {
-    e.preventDefault();
+    // e.preventDefault();
     deleteItem({ type: 'job', id: formData.id });
     history.push('/settings');
   }

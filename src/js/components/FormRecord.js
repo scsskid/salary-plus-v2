@@ -4,6 +4,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
 import FormElement from './FormElement';
 import Calendar from './Calendar';
+import InputDateControl from './InputDateControl';
+import InputDateDisplay from './InputDateDisplay';
 
 export function FormRecordCreate({
   inputDate,
@@ -11,14 +13,15 @@ export function FormRecordCreate({
   jobs,
   settings,
   presets,
-  dispatch
+  dispatch,
+  changeMonth
 }) {
   return (
     <>
       <div className="component-header">
         <h1>New Entry</h1>
       </div>
-      {settings.previousJobId}
+
       <FormRecord
         jobs={jobs}
         saveRecord={saveRecord}
@@ -26,6 +29,7 @@ export function FormRecordCreate({
         inputDate={inputDate}
         settings={settings}
         dispatch={dispatch}
+        changeMonth={changeMonth}
       />
     </>
   );
@@ -38,7 +42,9 @@ export function FormRecordUpdate({
   presets,
   deleteItem,
   dispatch,
-  settings
+  settings,
+  changeMonth,
+  inputDate
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
@@ -57,6 +63,8 @@ export function FormRecordUpdate({
         record={record}
         dispatch={dispatch}
         settings={settings}
+        changeMonth={changeMonth}
+        inputDate={inputDate}
       />
     </>
   );
@@ -70,7 +78,8 @@ export default function FormRecord({
   isUpdateForm,
   record,
   settings,
-  inputDate
+  inputDate,
+  changeMonth
 }) {
   const initialFormData = record
     ? {
@@ -123,16 +132,6 @@ export default function FormRecord({
     });
   }
 
-  // function OptionsPreset() {
-  //   return presets.map((preset) => {
-  //     return (
-  //       <option key={`preset-${preset.id}`} value={preset.id}>
-  //         {preset.name} {preset.rate}
-  //       </option>
-  //     );
-  //   });
-  // }
-
   function handleChange(e) {
     setFormData({
       ...formData,
@@ -158,25 +157,6 @@ export default function FormRecord({
     });
   }
 
-  // function handleSelectPresetChange(e) {
-  //   if (e.target.value == 0) {
-  //     return;
-  //   }
-  //   const selectedPresetId = parseInt(e.target.value);
-  //   const presetData = presets.find((preset) => preset.id === selectedPresetId);
-  //   const presetFormData = {
-  //     timeBegin: presetData.timeBegin || formData.timeBegin,
-  //     timeEnd: presetData.timeEnd || formData.timeEnd,
-  //     rate: presetData.rate || formData.rate
-  //   };
-
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //     ...presetFormData
-  //   });
-  // }
-
   function handleSubmit(e) {
     e.preventDefault();
     // via useMemo
@@ -189,8 +169,13 @@ export default function FormRecord({
     handleDispatch(formData);
   }
 
+  function handleCalendarDateButtonClick(e) {
+    // e.preventDefault();
+    console.log('Date Click');
+  }
+
   function handleDelete(e) {
-    e.preventDefault();
+    // e.preventDefault();
     deleteItem({ type: 'record', id: formData.id });
     history.push('/');
   }
@@ -240,6 +225,17 @@ export default function FormRecord({
           </fieldset>
         )}
         <fieldset>
+          <FormElement
+            name="dateBegin"
+            id="entry-date-begin"
+            value={formData.dateBegin}
+            onChange={handleChange}
+            variant="button"
+            disabled={true}
+          >
+            Date
+          </FormElement>
+
           {/* <div className="form-el">
             <label htmlFor="entry-date">Date</label>
             <input
@@ -256,8 +252,13 @@ export default function FormRecord({
               <button className="display-value">{formData.dateBegin}</button>
             </label>
           </div>
-
-          <Calendar inputDate={inputDate} settings={settings} />
+          <InputDateControl changeMonth={changeMonth} />
+          <InputDateDisplay inputDate={inputDate} settings={settings} />
+          <Calendar
+            inputDate={inputDate}
+            settings={settings}
+            onCalendarDateButtonClick={handleCalendarDateButtonClick}
+          />
           <FormElement
             name="timeBegin"
             id="entry-begin-time"
@@ -361,3 +362,32 @@ export default function FormRecord({
         </div>
 
         */
+
+// function OptionsPreset() {
+//   return presets.map((preset) => {
+//     return (
+//       <option key={`preset-${preset.id}`} value={preset.id}>
+//         {preset.name} {preset.rate}
+//       </option>
+//     );
+//   });
+// }
+
+// function handleSelectPresetChange(e) {
+//   if (e.target.value == 0) {
+//     return;
+//   }
+//   const selectedPresetId = parseInt(e.target.value);
+//   const presetData = presets.find((preset) => preset.id === selectedPresetId);
+//   const presetFormData = {
+//     timeBegin: presetData.timeBegin || formData.timeBegin,
+//     timeEnd: presetData.timeEnd || formData.timeEnd,
+//     rate: presetData.rate || formData.rate
+//   };
+
+//   setFormData({
+//     ...formData,
+//     [e.target.name]: e.target.value,
+//     ...presetFormData
+//   });
+// }

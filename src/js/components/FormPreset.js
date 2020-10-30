@@ -66,7 +66,7 @@ export default function FormPreset({
   }
 
   function handleDelete(e) {
-    e.preventDefault();
+    // e.preventDefault();
     deleteItem({ type: 'preset', id: formData.id });
     history.push('/settings');
   }

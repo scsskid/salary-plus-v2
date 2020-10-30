@@ -8,7 +8,7 @@ export default function RecordsCalendar({
   updateInputDate,
   settings
 }) {
-  const tbody = React.useRef();
+  const recordsCalendarRef = React.useRef();
   const todayDate = new Date();
   const todayShortString = getShortIsoString(todayDate);
 
@@ -27,7 +27,7 @@ export default function RecordsCalendar({
 
     // Cleanup
     return () => {
-      tbody.current
+      recordsCalendarRef.current
         .querySelectorAll('[data-records]')
         .forEach((el) => (el.innerHTML = ``));
 
@@ -36,7 +36,7 @@ export default function RecordsCalendar({
   }, [inputDate]);
 
   return (
-    <div ref={tbody}>
+    <div className="records-calendar" ref={recordsCalendarRef}>
       <Calendar
         settings={settings}
         onCalendarDateButtonClick={handleCalendarDateButtonClick}
