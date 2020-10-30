@@ -7,8 +7,6 @@ import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
 import {
-  getDaysInMonth,
-  getFirstDay,
   getDateFromFormInputDate,
   throttle,
   setAppInnerHeight
@@ -73,9 +71,6 @@ export default function App() {
     records: monthRecords,
     date: inputDate
   });
-  const firstDay = getFirstDay(inputDate);
-
-  const daysInMonth = getDaysInMonth(inputDate);
 
   function changeMonth(summand = 0) {
     const newDate = new Date(inputDate);
@@ -124,9 +119,7 @@ export default function App() {
               settings={settings}
               changeMonth={changeMonth}
               monthRecords={monthRecords}
-              daysInMonth={daysInMonth}
               updateInputDate={updateInputDate}
-              firstDay={firstDay}
               jobs={jobs}
               dateRecords={dateRecords}
             />
