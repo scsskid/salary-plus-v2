@@ -13,6 +13,8 @@ export default function DatesPickerCalendar({
     open: false,
     dates: []
   });
+  const datesCount = state.dates.length;
+
   function handleCalendarDateButtonClick(e) {
     const selectedDateObj = new Date(
       e.currentTarget.parentElement.dataset.dateString
@@ -63,14 +65,15 @@ export default function DatesPickerCalendar({
         cell.dataset.selected = '';
       });
     };
-  }, [state]);
+  }, [state, inputDate]);
 
   return (
     <div className="records-calendar" ref={datesPickerCalendarRef}>
       <p>
         Dates Picker: {isUpdateForm ? `Allow One Date` : `Allow Multiple Dates`}
       </p>
-      <p>Selected Count: {state.dates.length}</p>
+      {datesCount === 1 && <p>{state.dates[0].toLocaleDateString()}</p>}
+      {datesCount > 1 && <p>{datesCount} Dates</p>}
       <Button
         onClick={() => {
           setState({ ...state, dates: [] });
