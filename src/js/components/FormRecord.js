@@ -136,7 +136,6 @@ export default function FormRecord({
       [e.target.name]:
         e.target.type === 'checkbox' ? e.target.checked : e.target.value
     });
-    console.log(e.target.value);
   }
 
   function handleSelectJobChange(e) {
