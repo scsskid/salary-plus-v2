@@ -2,11 +2,14 @@ import React from 'react';
 import Calendar from './Calendar';
 import { getShortIsoString, isSameDay } from '../utils/helpers.js';
 import Button from './Button';
+import InputDateControl from './InputDateControl';
+import InputDateDisplay from './InputDateDisplay';
 
 export default function DatesPickerCalendar({
   inputDate,
   settings,
-  isUpdateForm
+  isUpdateForm,
+  changeMonth
 }) {
   const datesPickerCalendarRef = React.useRef();
   const [state, setState] = React.useState({
@@ -85,7 +88,8 @@ export default function DatesPickerCalendar({
           Clear All Selected
         </Button>
       )}
-
+      <InputDateControl changeMonth={changeMonth} />
+      <InputDateDisplay inputDate={inputDate} settings={settings} />
       <Calendar
         inputDate={inputDate}
         settings={settings}

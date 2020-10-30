@@ -12,7 +12,7 @@ import {
   setAppInnerHeight
 } from '../utils/helpers.js';
 import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
-import { FormRecordCreate, FormRecordUpdate } from './FormRecord';
+import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
 import Debug from './Debug';

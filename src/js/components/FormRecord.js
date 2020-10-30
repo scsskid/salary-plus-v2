@@ -1,85 +1,14 @@
 import React from 'react';
 import { formatDate, getTimeOfDate } from '../utils/helpers';
-import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
 import FormElement from './FormElement';
-import Calendar from './Calendar';
-import InputDateControl from './InputDateControl';
-import InputDateDisplay from './InputDateDisplay';
 import DatesPickerCalendar from './DatesPickerCalendar';
-
-export function FormRecordCreate({
-  inputDate,
-  saveRecord,
-  jobs,
-  settings,
-  presets,
-  dispatch,
-  changeMonth
-}) {
-  const [selectedDates, setSelectedDates] = React.useState([]);
-
-  return (
-    <>
-      <div className="component-header">
-        <h1>New Entry</h1>
-      </div>
-
-      <FormRecord
-        jobs={jobs}
-        saveRecord={saveRecord}
-        presets={presets}
-        inputDate={inputDate}
-        settings={settings}
-        dispatch={dispatch}
-        changeMonth={changeMonth}
-        selectedDates={selectedDates}
-        setSelectedDates={setSelectedDates}
-      />
-    </>
-  );
-}
-
-export function FormRecordUpdate({
-  saveRecord,
-  jobs,
-  records,
-  presets,
-  deleteItem,
-  dispatch,
-  settings,
-  changeMonth,
-  inputDate
-}) {
-  const params = useParams();
-  const record = records?.find((record) => record.id === parseInt(params?.id));
-
-  return (
-    <>
-      <div className="component-header">
-        <h1>Update Entry</h1>
-      </div>
-      <FormRecord
-        jobs={jobs}
-        saveRecord={saveRecord}
-        deleteItem={deleteItem}
-        presets={presets}
-        isUpdateForm={true}
-        record={record}
-        dispatch={dispatch}
-        settings={settings}
-        changeMonth={changeMonth}
-        inputDate={inputDate}
-      />
-    </>
-  );
-}
+import { useHistory } from 'react-router-dom';
 
 export default function FormRecord({
   saveRecord,
   deleteItem,
   jobs,
-  // presets,
   isUpdateForm,
   record,
   settings,
@@ -120,6 +49,7 @@ export default function FormRecord({
 
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
+  const [datePickerOpen, setDatePickerOpen] = React.useState(true);
 
   const form = React.useRef();
 
@@ -165,23 +95,14 @@ export default function FormRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
-    // via useMemo
-    // if (!jobs.length) {
-    //   dispatch({
-    //     type: 'createJob',
-    //     payload: { name: formData.name, rate: formData.rate }
-    //   });
-    // }
     handleDispatch(formData);
   }
 
-  function handleCalendarDateButtonClick(e) {
-    // e.preventDefault();
+  function handleCalendarDateButtonClick() {
     console.log('Date Click');
   }
 
-  function handleDelete(e) {
-    // e.preventDefault();
+  function handleDelete() {
     deleteItem({ type: 'record', id: formData.id });
     history.push('/');
   }
@@ -242,13 +163,12 @@ export default function FormRecord({
             Date
           </FormElement>
 
-          <InputDateControl changeMonth={changeMonth} />
-          <InputDateDisplay inputDate={inputDate} settings={settings} />
           <DatesPickerCalendar
             inputDate={inputDate}
             settings={settings}
             onCalendarDateButtonClick={handleCalendarDateButtonClick}
             isUpdateForm={isUpdateForm}
+            changeMonth={changeMonth}
           />
           <FormElement
             name="timeBegin"
@@ -334,51 +254,3 @@ export default function FormRecord({
     </>
   );
 }
-
-/*
-
-        <div className="form-el">
-          <label htmlFor="preset">Preset</label>
-          <select
-            name="preset"
-            value={formData.preset}
-            onBlur={handleSelectPresetChange}
-            onChange={handleSelectPresetChange}
-          >
-            <option key={`preset-0`} disabled={true} value={0}>
-              Select Preset to prefill fields...
-            </option>
-            <OptionsPreset />
-          </select>
-        </div>
-
-        */
-
-// function OptionsPreset() {
-//   return presets.map((preset) => {
-//     return (
-//       <option key={`preset-${preset.id}`} value={preset.id}>
-//         {preset.name} {preset.rate}
-//       </option>
-//     );
-//   });
-// }
-
-// function handleSelectPresetChange(e) {
-//   if (e.target.value == 0) {
-//     return;
-//   }
-//   const selectedPresetId = parseInt(e.target.value);
-//   const presetData = presets.find((preset) => preset.id === selectedPresetId);
-//   const presetFormData = {
-//     timeBegin: presetData.timeBegin || formData.timeBegin,
-//     timeEnd: presetData.timeEnd || formData.timeEnd,
-//     rate: presetData.rate || formData.rate
-//   };
-
-//   setFormData({
-//     ...formData,
-//     [e.target.name]: e.target.value,
-//     ...presetFormData
-//   });
-// }
