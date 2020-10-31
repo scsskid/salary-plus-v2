@@ -107,6 +107,14 @@ function reducer(state, { type, payload }) {
           previousJobId: payload.id
         }
       };
+    case 'setPreviousJobName':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          previousJobName: payload.name
+        }
+      };
     case 'setPreviousTimeBegin':
       return {
         ...state,

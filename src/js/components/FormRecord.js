@@ -13,7 +13,8 @@ export default function FormRecord({
   settings,
   inputDate,
   changeMonth,
-  initialFormData
+  initialFormData,
+  dispatch
 }) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
@@ -50,6 +51,13 @@ export default function FormRecord({
   }
 
   function handleChange(e) {
+    if (e.target.name === 'jobName') {
+      console.log(e.target.value);
+      dispatch({
+        type: 'setPreviousJobName',
+        payload: { name: e.target.value }
+      });
+    }
     setFormData({
       ...formData,
       [e.target.name]:
@@ -63,8 +71,8 @@ export default function FormRecord({
     }
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
-    // Causes Bug
-    // dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
+
+    dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
 
     setFormData({
       ...formData,

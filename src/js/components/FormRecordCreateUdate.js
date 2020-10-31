@@ -15,7 +15,7 @@ export function FormRecordCreate({
 
   const initialFormData = {
     jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
-    jobName: jobs?.find((job) => job.id == settings.previousJobId)?.name || '',
+    jobName: settings.previousJobName || '',
     dates: [inputDate],
     timeBegin:
       settings.previousTimeBegin !== null
