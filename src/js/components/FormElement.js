@@ -13,7 +13,8 @@ function FormElement({
   checked,
   disabled,
   readOnly,
-  onClick
+  onClick,
+  placeholder
 }) {
   return (
     <div className="form-el">
@@ -34,6 +35,7 @@ function FormElement({
           readOnly={readOnly}
           disabled={disabled}
           onClick={onClick}
+          placeholder={placeholder}
         />
       </label>
     </div>

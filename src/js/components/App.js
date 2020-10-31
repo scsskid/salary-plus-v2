@@ -122,7 +122,6 @@ export default function App() {
     <Router>
       {isLoggedIn && <Navigation />}
       <main className="main">
-        {inputDate.toLocaleDateString()}
         <Switch>
           <Route exact path="/">
             <View

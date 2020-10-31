@@ -199,6 +199,7 @@ export default function FormRecord({
               step="0.1"
               value={formData.unpaidTime}
               onChange={handleChange}
+              placeholder="0"
             >
               Unpaid Time
             </FormElement>
@@ -214,6 +215,7 @@ export default function FormRecord({
               step="0.01"
               value={formData.rate}
               onChange={handleChange}
+              placeholder="0"
             >
               Rate
             </FormElement>
@@ -226,6 +228,7 @@ export default function FormRecord({
               step="0.01"
               value={formData.bonus}
               onChange={handleChange}
+              placeholder="0"
             >
               Bonus
             </FormElement>

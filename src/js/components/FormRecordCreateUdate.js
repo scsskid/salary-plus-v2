@@ -23,8 +23,8 @@ export function FormRecordCreate({
         : '15:00',
     timeEnd:
       settings.previousTimeEnd !== null ? settings.previousTimeEnd : '02:00',
-    rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || 0,
-    bonus: 0,
+    rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || '',
+    bonus: '',
     sickLeave: false
   };
 

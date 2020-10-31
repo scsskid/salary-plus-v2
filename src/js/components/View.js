@@ -60,11 +60,11 @@ export default function View({
           </header> */}
           <div className="widget-reporting-figures">
             <figure className="widget-reporting-figures-el">
-              <b>96,5</b>
+              <b>0</b>
               <figcaption>Hours</figcaption>
             </figure>
             <figure className="widget-reporting-figures-el">
-              <b>352,10€</b>
+              <b>0,00€</b>
               <figcaption>Earned</figcaption>
             </figure>
           </div>
