@@ -1,15 +1,10 @@
 import React from 'react';
 import { getRecordsByDate } from '../utils/dataHelpers.js';
 import DateDetails from './DateDetails';
+import { getDaysInMonth } from '../utils/helpers.js';
 
-export default function ListView({
-  inputDate,
-  monthRecords,
-  daysInMonth,
-  jobs,
-  settings
-}) {
-  const dateList = Array(daysInMonth)
+export default function ListView({ inputDate, monthRecords, jobs, settings }) {
+  const dateList = Array(getDaysInMonth(inputDate))
     .fill()
     .map((_, i) => {
       const date = new Date(inputDate.getTime());
