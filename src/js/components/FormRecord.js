@@ -195,7 +195,8 @@ export default function FormRecord({
             <FormElement
               name="timeUnpaid"
               id="entry-unpaid-time"
-              type="time"
+              type="number"
+              step="0.1"
               value={formData.unpaidTime}
               onChange={handleChange}
             >

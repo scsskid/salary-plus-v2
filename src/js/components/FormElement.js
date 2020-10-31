@@ -19,7 +19,8 @@ function FormElement({
     <div className="form-el">
       <label htmlFor={id}>
         <p>
-          {children} {variant ? `(${variant})` : ''}
+          {children}
+          {/* {variant ? `(${variant})` : ''} */}
         </p>
         <input
           name={name}
