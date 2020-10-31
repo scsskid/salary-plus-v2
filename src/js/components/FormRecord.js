@@ -73,13 +73,16 @@ export default function FormRecord({
     const selectedJobId = parseInt(e.target.value);
     const job = jobs.find((job) => job.id === selectedJobId);
 
-    dispatch({ type: 'setPreviousJobId', payload: { id: selectedJobId } });
+    dispatch({
+      type: 'setPreviousFormDataProp',
+      payload: { jobId: selectedJobId }
+    });
 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
       ['rate']: job?.rate || formData.rate,
-      ['jobName']: job?.name || ''
+      ['jobName']: job?.name || formData.jobName
     });
   }
 
