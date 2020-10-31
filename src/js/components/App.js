@@ -14,7 +14,11 @@ import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
 import Debug from './Debug';
 
 export default function App() {
-  const [inputDate, setInputDate] = React.useState(new Date());
+  const [inputDate, setInputDate] = React.useState(() => {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    return now;
+  });
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = [], jobs = [], presets = [] } = appData;
@@ -69,23 +73,30 @@ export default function App() {
   });
 
   function changeMonth(summand = 0) {
-    const newDate = new Date(inputDate);
+    const inputDateCopy = (function () {
+      const date = new Date(inputDate.getTime());
+      date.setHours(0, 0, 0, 0);
+      date.setDate(1);
+      return date;
+    })();
+    const today = (function () {
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      return now;
+    })();
 
-    const now = new Date();
-    newDate.setHours(0, 0, 0, 0);
-    now.setHours(0, 0, 0, 0);
-    newDate.setMonth(inputDate.getMonth() + summand);
+    inputDateCopy.setMonth(inputDateCopy.getMonth() + summand);
 
     if (
-      now.getMonth() == newDate.getMonth() &&
-      now.getFullYear() == newDate.getFullYear()
+      today.getMonth() == inputDateCopy.getMonth() &&
+      today.getFullYear() == inputDateCopy.getFullYear()
     ) {
-      newDate.setDate(now.getDate());
+      inputDateCopy.setDate(today.getDate());
     } else {
-      newDate.setDate(1);
+      inputDateCopy.setDate(1);
     }
 
-    setInputDate(summand === 0 ? now : newDate);
+    setInputDate(summand === 0 ? today : inputDateCopy);
   }
 
   if (!isLoggedIn) {
@@ -111,6 +122,7 @@ export default function App() {
     <Router>
       {isLoggedIn && <Navigation />}
       <main className="main">
+        {inputDate.toLocaleDateString()}
         <Switch>
           <Route exact path="/">
             <View
