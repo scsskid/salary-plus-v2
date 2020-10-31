@@ -12,18 +12,16 @@ export function FormRecordCreate({
   changeMonth
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
+  const { jobId, jobName, timeBegin, timeEnd, rate } =
+    settings.previousFormData || '';
 
   const initialFormData = {
-    jobId: settings.previousJobId !== null ? settings.previousJobId : 0,
-    jobName: settings.previousJobName || '',
+    jobId,
+    jobName,
     dates: [inputDate],
-    timeBegin:
-      settings.previousTimeBegin !== null
-        ? settings.previousTimeBegin
-        : '15:00',
-    timeEnd:
-      settings.previousTimeEnd !== null ? settings.previousTimeEnd : '02:00',
-    rate: jobs.find((job) => job.id === settings.previousJobId)?.rate || '',
+    timeBegin,
+    timeEnd,
+    rate,
     bonus: '',
     sickLeave: false
   };

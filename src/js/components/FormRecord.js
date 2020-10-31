@@ -51,18 +51,19 @@ export default function FormRecord({
   }
 
   function handleChange(e) {
-    if (e.target.name === 'jobName') {
-      console.log(e.target.value);
-      dispatch({
-        type: 'setPreviousJobName',
-        payload: { name: e.target.value }
-      });
-    }
     setFormData({
       ...formData,
       [e.target.name]:
         e.target.type === 'checkbox' ? e.target.checked : e.target.value
     });
+
+    // Save as Previous FromData
+    if (!isUpdateForm) {
+      dispatch({
+        type: 'setPreviousFormDataProp',
+        payload: { [e.target.name]: e.target.value }
+      });
+    }
   }
 
   function handleSelectJobChange(e) {

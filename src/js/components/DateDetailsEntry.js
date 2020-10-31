@@ -50,7 +50,7 @@ export default function DateDetailsEntry({ record, jobs }) {
         </div>
         <div className="date-details-entry-content">
           <h2>
-            {record.jobName} {job ? '' : '⚠️ Job not found / was deleted'}
+            {record.jobName} {job ? '' : ''}
           </h2>
 
           <p className="date-details-entry-meta">

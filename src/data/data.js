@@ -1,12 +1,7 @@
 const settings = {
   timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   locale: 'en',
-  currency: 'EUR',
-  previousJobId: null,
-  previousJobName: null,
-  previousRate: null,
-  previousTimeBegin: null,
-  previousTimeEnd: null
+  currency: 'EUR'
 };
 
 export const bootstrapData = {

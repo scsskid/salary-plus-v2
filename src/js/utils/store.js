@@ -99,36 +99,16 @@ function reducer(state, { type, payload }) {
           return preset.id != payload.id;
         })
       };
-    case 'setPreviousJobId':
+
+    case 'setPreviousFormDataProp':
       return {
         ...state,
         settings: {
           ...state.settings,
-          previousJobId: payload.id
-        }
-      };
-    case 'setPreviousJobName':
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          previousJobName: payload.name
-        }
-      };
-    case 'setPreviousTimeBegin':
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          previousTimeBegin: payload.timeBegin
-        }
-      };
-    case 'setPreviousTimeEnd':
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          previousTimeEnd: payload.timeEnd
+          previousFormData: {
+            ...state.settings.previousFormData,
+            ...payload
+          }
         }
       };
 
