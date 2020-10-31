@@ -19,12 +19,23 @@ export default function FormRecord({
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
   const form = React.useRef();
   const [dates, setDates] = React.useState(initialFormData.dates);
+  const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
+    ''
+  );
 
   React.useEffect(() => {
     setFormData({
       ...formData,
       dates
     });
+
+    if (dates.length === 0) {
+      setDatePickerDisplayValue('please select a date');
+    } else if (dates.length === 1) {
+      setDatePickerDisplayValue(dates[0]?.toLocaleDateString());
+    } else if (dates.length > 0) {
+      setDatePickerDisplayValue(`${dates.length} Dates`);
+    }
   }, [dates]);
 
   function OptionsJob() {
@@ -133,10 +144,10 @@ export default function FormRecord({
         )}
         <fieldset>
           <FormElement
-            name="dates"
-            id="entry-date-begin"
-            value={formData.dates[0]}
-            variant="date picker value"
+            name="dates-field"
+            id="dates-field"
+            value={datePickerDisplayValue}
+            variant="dates field value"
             readOnly={true}
             onClick={() => setDatePickerOpen(!datePickerOpen)}
           >
