@@ -3,6 +3,7 @@ import Button from './Button';
 import FormElement from './FormElement';
 import DatesPickerCalendar from './DatesPickerCalendar';
 import { useHistory } from 'react-router-dom';
+import FormElementSet from './FormElementSet';
 
 export default function FormRecord({
   saveRecord,
@@ -101,6 +102,7 @@ export default function FormRecord({
   return (
     <>
       <form
+        className="form-record"
         ref={form}
         onSubmit={handleSubmit}
         data-record-id={formData.recordId}
@@ -164,59 +166,69 @@ export default function FormRecord({
             dates={dates}
             setDates={setDates}
           />
-          <FormElement
-            name="timeBegin"
-            id="entry-begin-time"
-            type="time"
-            value={formData.timeBegin}
-            onChange={handleChange}
-          >
-            Begin Time
-          </FormElement>
 
-          <FormElement
-            id="entry-end-time"
-            name="timeEnd"
-            type="time"
-            value={formData.timeEnd}
-            onChange={handleChange}
-          >
-            End Time
-          </FormElement>
+          <FormElementSet>
+            <FormElement
+              name="timeBegin"
+              id="entry-begin-time"
+              type="time"
+              value={formData.timeBegin}
+              onChange={handleChange}
+            >
+              Starts
+            </FormElement>
+
+            <FormElement
+              id="entry-end-time"
+              name="timeEnd"
+              type="time"
+              value={formData.timeEnd}
+              onChange={handleChange}
+            >
+              Ends
+            </FormElement>
+          </FormElementSet>
         </fieldset>
+
         <fieldset>
-          <FormElement
-            inputMode="decimal"
-            variant="currency"
-            name="rate"
-            id="entry-rate"
-            type="number"
-            step="0.01"
-            value={formData.rate}
-            onChange={handleChange}
-          >
-            Rate
-          </FormElement>
-          {/* {jobs.length == 0 && (
-            <p>
-              <small>
-                Rate will linked to above entered jobName and preset in this
-                form when selecting this job.
-              </small>
-            </p>
-          )} */}
-          <FormElement
-            inputMode="decimal"
-            variant="currency"
-            name="bonus"
-            id="entry-bonus"
-            type="number"
-            step="0.01"
-            value={formData.bonus}
-            onChange={handleChange}
-          >
-            Bonus
-          </FormElement>{' '}
+          <FormElementSet>
+            <FormElement
+              name="timeUnpaid"
+              id="entry-unpaid-time"
+              type="time"
+              value={formData.unpaidTime}
+              onChange={handleChange}
+            >
+              Unpaid Time
+            </FormElement>
+          </FormElementSet>
+
+          <FormElementSet>
+            <FormElement
+              inputMode="decimal"
+              variant="currency"
+              name="rate"
+              id="entry-rate"
+              type="number"
+              step="0.01"
+              value={formData.rate}
+              onChange={handleChange}
+            >
+              Rate
+            </FormElement>
+            <FormElement
+              inputMode="decimal"
+              variant="currency"
+              name="bonus"
+              id="entry-bonus"
+              type="number"
+              step="0.01"
+              value={formData.bonus}
+              onChange={handleChange}
+            >
+              Bonus
+            </FormElement>
+          </FormElementSet>
         </fieldset>
         <fieldset>
           <FormElement
