@@ -88,8 +88,51 @@ export default function FormRecord({
     }
   }
 
-  function handleBlur() {
-    console.log('blur');
+  function validateJobName(name, value) {
+    console.log('validateJobName:', name, value);
+
+    if (value.trim() === '') {
+      console.log('is empty');
+      return 'jobName is required (is empty)';
+    }
+    return null;
+  }
+
+  function validateTime(name, value) {
+    const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+
+    if (!value.match(timeRegex)) {
+      return `${value} not in HH:mm format`;
+    }
+
+    return null;
+  }
+
+  function validateNumber(name, value) {
+    console.log('validateNumber:', name, value);
+  }
+
+  const validate = {
+    jobName: validateJobName,
+    timeBegin: validateTime,
+    timeEnd: validateTime,
+    hoursUnpaid: validateNumber,
+    rate: validateNumber,
+    bonus: validateNumber
+  };
+
+  function handleBlur(e) {
+    const { name, value } = e.target;
+    const error = validate[name](name, value);
+
+    //spread existing errors: possibly existing error of current field, and ...rest
+    const { [name]: removedErrorWhatever, ...restErrors } = errors;
+    console.log('blur, validate', name, value, error);
+
+    setErrors({
+      ...restErrors,
+      ...(error && { [name]: error })
+    });
   }
 
   function handleSelectJobChange(e) {
@@ -133,15 +176,9 @@ export default function FormRecord({
     history.push('/');
   }
 
-  function jobNameValidation(jobName) {
-    if (!jobName) {
-      return 'jobName is required';
-    }
-    return null;
-  }
-
   return (
     <>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
       <form
         className="form-record"
         ref={form}
@@ -185,8 +222,8 @@ export default function FormRecord({
         </fieldset>
         <fieldset>
           <FormElement
-            name="dates-field"
-            id="dates-field"
+            name="dates"
+            id="dates"
             value={datePickerDisplayValue}
             variant="dates field value"
             readOnly={true}
@@ -194,7 +231,6 @@ export default function FormRecord({
             handleChange={() => {
               console.log('handleChange dates-field');
             }}
-            handleBlur={handleBlur}
           >
             Date
           </FormElement>
@@ -224,7 +260,7 @@ export default function FormRecord({
             <FormElement
               id="entry-end-time"
               name="timeEnd"
-              type="time"
+              type="text"
               value={formData.timeEnd}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -237,11 +273,11 @@ export default function FormRecord({
         <fieldset>
           <FormElementSet>
             <FormElement
-              name="timeUnpaid"
-              id="entry-unpaid-time"
+              name="hoursUnpaid"
+              id="entry-unpaid-hours"
               type="number"
               step="0.1"
-              value={formData.unpaidTime}
+              value={formData.hoursUnpaid}
               handleChange={handleChange}
               handleBlur={handleBlur}
               placeholder="0"
@@ -288,7 +324,6 @@ export default function FormRecord({
             type="checkbox"
             value={formData.sickLeave}
             handleChange={handleChange}
-            handleBlur={handleBlur}
             checked={formData.sickLeave}
           >
             Sick Leave?
