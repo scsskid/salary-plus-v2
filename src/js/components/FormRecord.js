@@ -102,10 +102,6 @@ export default function FormRecord({
     history.push('/');
   }
 
-  function handleCalendarDateButtonClick() {
-    console.log('Date Click');
-  }
-
   function handleDelete() {
     deleteItem({ type: 'record', id: formData.id });
     history.push('/');
@@ -171,7 +167,6 @@ export default function FormRecord({
           <DatesPickerCalendar
             inputDate={inputDate}
             settings={settings}
-            onCalendarDateButtonClick={handleCalendarDateButtonClick}
             isUpdateForm={isUpdateForm}
             changeMonth={changeMonth}
             datePickerOpen={datePickerOpen}
