@@ -19,7 +19,7 @@ html {
 }
 
 #root {
-  /* height: 100vh; */
+  height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
   /* height: -webkit-fill-available; */
   display: grid;
@@ -33,5 +33,6 @@ html {
 }
 
 .main-navigation {
+  position: fixed;
   grid-row: 2 / 3;
 }
