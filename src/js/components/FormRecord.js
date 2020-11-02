@@ -43,16 +43,6 @@ export default function FormRecord({
     }
   }, [dates]);
 
-  function OptionsJob() {
-    return jobs.map((job) => {
-      return (
-        <option key={`job-${job.id}`} value={job.id}>
-          {job.name} {job.rate}
-        </option>
-      );
-    });
-  }
-
   function handleChange(e) {
     const { name, value: tempValue, checked, type } = e.target;
     let value;
@@ -112,8 +102,6 @@ export default function FormRecord({
   }
 
   function validateJobId(name, value) {
-    console.log('validateJobId:', name, value);
-
     if (parseInt(value) === 0 && formData.jobName === '') {
       return 'Select a Job or Provide a Custom JobName';
     }
@@ -121,12 +109,17 @@ export default function FormRecord({
   }
 
   function validateJobName(name, value) {
-    console.log('validateJobName:', name, value);
-
     if (value.trim() === '') {
-      console.log('is empty');
       return 'jobName is required (is empty)';
     }
+    return null;
+  }
+
+  function validateDates(name, value) {
+    if (!value?.length) {
+      return 'no dates selected';
+    }
+
     return null;
   }
 
@@ -147,6 +140,7 @@ export default function FormRecord({
   const validate = {
     jobId: validateJobId,
     jobName: validateJobName,
+    dates: validateDates,
     timeBegin: validateTime,
     timeEnd: validateTime,
     hoursUnpaid: validateNumber,
@@ -154,18 +148,26 @@ export default function FormRecord({
     bonus: validateNumber
   };
 
-  function handleBlur(e) {
-    const { name, value } = e.target;
+  function handleValidation({ name, value }) {
     const error = validate[name](name, value);
 
     //spread existing errors: possibly existing error of current field, and ...rest
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
-    console.log('blur, validate', name, value, error);
 
     setErrors({
       ...restErrors,
       ...(error && { [name]: error })
     });
+  }
+
+  function handleBlur(e) {
+    console.log('blur, validate', e.target.name, e.target.value);
+    handleValidation(e.target);
+  }
+
+  function handleDatesChange(newDates) {
+    setDates(newDates);
+    handleValidation({ name: 'dates', value: newDates });
   }
 
   function handleSubmit(e) {
@@ -214,7 +216,11 @@ export default function FormRecord({
                 <option key={`job-0`} disabled={true} value={0}>
                   Select Job...
                 </option>
-                <OptionsJob />
+                {jobs.map((job) => (
+                  <option key={`job-${job.id}`} value={job.id}>
+                    {job.name} {job.rate}
+                  </option>
+                ))}
               </select>
             </div>
           </fieldset>
@@ -241,9 +247,6 @@ export default function FormRecord({
             variant="dates field value"
             readOnly={true}
             handleClick={() => setDatePickerOpen(!datePickerOpen)}
-            handleChange={() => {
-              console.log('handleChange dates-field');
-            }}
           >
             Date
           </FormElement>
@@ -255,7 +258,7 @@ export default function FormRecord({
             changeMonth={changeMonth}
             datePickerOpen={datePickerOpen}
             dates={dates}
-            setDates={setDates}
+            updateDates={handleDatesChange}
           />
 
           <FormElementSet>

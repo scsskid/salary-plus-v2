@@ -7,7 +7,7 @@ import InputDateDisplay from './InputDateDisplay';
 export default function DatesPickerCalendar({
   inputDate,
   dates = [],
-  setDates,
+  updateDates,
   settings,
   isUpdateForm,
   changeMonth,
@@ -28,7 +28,8 @@ export default function DatesPickerCalendar({
     if (matchedExisting && !isUpdateForm) {
       // Create Form:
       // remove existing
-      setDates(
+
+      updateDates(
         dates.filter((date) => {
           return (
             date.setHours(0, 0, 0, 0) !== selectedDateObj.setHours(0, 0, 0, 0)
@@ -38,7 +39,9 @@ export default function DatesPickerCalendar({
     } else {
       // Update Form:
       // push new
-      setDates(isUpdateForm ? [selectedDateObj] : [...dates, selectedDateObj]);
+      updateDates(
+        isUpdateForm ? [selectedDateObj] : [...dates, selectedDateObj]
+      );
     }
   }
 
@@ -78,7 +81,7 @@ export default function DatesPickerCalendar({
       {datesCount > 0 && (
         <Button
           onClick={() => {
-            setDates([]);
+            updateDates([]);
           }}
         >
           Clear All Selected
