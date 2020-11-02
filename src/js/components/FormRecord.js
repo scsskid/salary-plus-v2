@@ -88,6 +88,15 @@ export default function FormRecord({
     }
   }
 
+  function validateJobId(name, value) {
+    console.log('validateJobId:', name, value);
+
+    if (parseInt(value) === 0 && formData.jobName === '') {
+      return 'Select a Job or Provide a Custom JobName';
+    }
+    return null;
+  }
+
   function validateJobName(name, value) {
     console.log('validateJobName:', name, value);
 
@@ -113,6 +122,7 @@ export default function FormRecord({
   }
 
   const validate = {
+    jobId: validateJobId,
     jobName: validateJobName,
     timeBegin: validateTime,
     timeEnd: validateTime,
@@ -197,7 +207,7 @@ export default function FormRecord({
                 name="jobId"
                 id="entry-job"
                 value={formData.jobId}
-                onBlur={handleSelectJobChange}
+                onBlur={handleBlur}
                 onChange={handleSelectJobChange}
               >
                 <option key={`job-0`} disabled={true} value={0}>
