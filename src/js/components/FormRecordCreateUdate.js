@@ -13,19 +13,13 @@ export function FormRecordCreate({
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
   const {
-    jobId,
-    jobName,
-    timeBegin,
-    timeEnd,
-    rate,
-    bonus
-  } = settings.previousFormData || {
-    jobId: undefined,
-    jobName: '',
-    timeBegin: '08:00',
-    timeEnd: '17:00',
-    rate: 0
-  };
+    jobId = 0,
+    jobName = '',
+    timeBegin = '08:00',
+    timeEnd = '17:00',
+    rate = 0,
+    bonus = 0
+  } = { ...settings.previousFormData };
 
   const initialFormData = {
     jobId,
@@ -71,16 +65,17 @@ export function FormRecordUpdate({
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
+  const { id, jobId, jobName, begin, end, rate, bonus, sickLeave } = record;
   const initialFormData = {
-    id: record.id,
-    jobId: parseInt(record.jobId),
-    jobName: record.jobName || 'Was undefined!',
+    id,
+    jobId,
+    jobName,
     dates: [new Date(record.begin)],
-    timeBegin: getTimeOfDate(new Date(record.begin)) || '',
-    timeEnd: getTimeOfDate(new Date(record.end)) || '',
-    rate: record.rate || '',
-    bonus: record.bonus || '',
-    sickLeave: record.sickLeave || false
+    timeBegin: getTimeOfDate(new Date(begin)),
+    timeEnd: getTimeOfDate(new Date(end)),
+    rate,
+    bonus,
+    sickLeave
   };
 
   return (
