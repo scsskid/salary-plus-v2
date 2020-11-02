@@ -27,6 +27,7 @@ export default function FormRecord({
     ''
   );
 
+  // Include dates directly in formData?
   React.useEffect(() => {
     setFormData({
       ...formData,
@@ -85,6 +86,10 @@ export default function FormRecord({
         payload: { [e.target.name]: e.target.value }
       });
     }
+  }
+
+  function handleBlur() {
+    console.log('blur');
   }
 
   function handleSelectJobChange(e) {
@@ -164,22 +169,20 @@ export default function FormRecord({
             </div>
           </fieldset>
         ) : (
-          <fieldset>
-            <div className="form-el">
-              <label htmlFor="jobName">Job Name</label>
-              <input
-                name="jobName"
-                id="jobName"
-                type="text"
-                value={formData.jobName}
-                onChange={handleChange}
-              />
-              {/* <p>
-              <small>Job will be added to saved Jobs.</small>
-            </p> */}
-            </div>
-          </fieldset>
+          <></>
         )}
+
+        <fieldset>
+          <FormElement
+            name="jobName"
+            id="jobName"
+            value={formData.jobName}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+          >
+            Job Name
+          </FormElement>
+        </fieldset>
         <fieldset>
           <FormElement
             name="dates-field"
@@ -187,7 +190,11 @@ export default function FormRecord({
             value={datePickerDisplayValue}
             variant="dates field value"
             readOnly={true}
-            onClick={() => setDatePickerOpen(!datePickerOpen)}
+            handleClick={() => setDatePickerOpen(!datePickerOpen)}
+            handleChange={() => {
+              console.log('handleChange dates-field');
+            }}
+            handleBlur={handleBlur}
           >
             Date
           </FormElement>
@@ -208,7 +215,8 @@ export default function FormRecord({
               id="entry-begin-time"
               type="time"
               value={formData.timeBegin}
-              onChange={handleChange}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
             >
               Starts
             </FormElement>
@@ -218,7 +226,8 @@ export default function FormRecord({
               name="timeEnd"
               type="time"
               value={formData.timeEnd}
-              onChange={handleChange}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
             >
               Ends
             </FormElement>
@@ -233,7 +242,8 @@ export default function FormRecord({
               type="number"
               step="0.1"
               value={formData.unpaidTime}
-              onChange={handleChange}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               placeholder="0"
             >
               Unpaid Time
@@ -249,7 +259,8 @@ export default function FormRecord({
               type="number"
               step="0.01"
               value={formData.rate}
-              onChange={handleChange}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               placeholder="0"
             >
               Rate
@@ -262,7 +273,8 @@ export default function FormRecord({
               type="number"
               step="0.01"
               value={formData.bonus}
-              onChange={handleChange}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
               placeholder="0"
             >
               Bonus
@@ -275,7 +287,8 @@ export default function FormRecord({
             id="entry-sick-leave"
             type="checkbox"
             value={formData.sickLeave}
-            onChange={handleChange}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
             checked={formData.sickLeave}
           >
             Sick Leave?

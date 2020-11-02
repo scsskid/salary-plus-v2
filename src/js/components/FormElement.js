@@ -5,16 +5,18 @@ function FormElement({
   id,
   type,
   value,
+  defaultValue,
   step,
   inputMode,
-  onChange,
   variant,
-  children,
   checked,
   disabled,
   readOnly,
-  onClick,
-  placeholder
+  handleClick,
+  handleChange,
+  handleBlur,
+  placeholder,
+  children
 }) {
   return (
     <div className="form-el">
@@ -23,18 +25,21 @@ function FormElement({
           {children}
           {/* {variant ? `(${variant})` : ''} */}
         </p>
+
         <input
           name={name}
           id={id}
           type={type}
           step={step}
           value={value}
+          defaultValue={defaultValue}
           inputMode={inputMode}
-          onChange={onChange}
           checked={checked}
           readOnly={readOnly}
           disabled={disabled}
-          onClick={onClick}
+          onChange={handleChange}
+          onClick={handleClick}
+          onBlur={handleBlur}
           placeholder={placeholder}
         />
       </label>
