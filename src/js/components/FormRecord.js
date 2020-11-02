@@ -106,7 +106,7 @@ export default function FormRecord({
     if (!isUpdateForm) {
       dispatch({
         type: 'setPreviousFormDataProp',
-        payload: { jobId: selectedJobId, jobName: job?.name }
+        payload: { jobId: selectedJobId, jobName: job?.name, rate: job?.rate }
       });
     }
   }
