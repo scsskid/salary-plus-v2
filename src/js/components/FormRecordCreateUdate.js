@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import FormRecord from './FormRecord';
-import { formatDate, getTimeOfDate } from '../utils/helpers';
+import { getTimeOfDate } from '../utils/helpers';
 
 export function FormRecordCreate({
   inputDate,
