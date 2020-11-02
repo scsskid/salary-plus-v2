@@ -88,6 +88,29 @@ export default function FormRecord({
     }
   }
 
+  function handleSelectJobChange(e) {
+    const { name, value } = e.target;
+    if (value == 0) {
+      return;
+    }
+    const selectedJobId = parseInt(value);
+    const job = jobs.find((job) => job.id === selectedJobId);
+
+    setFormData({
+      ...formData,
+      [name]: value,
+      ['rate']: job?.rate || formData.rate,
+      ['jobName']: job?.name || formData.jobName
+    });
+
+    if (!isUpdateForm) {
+      dispatch({
+        type: 'setPreviousFormDataProp',
+        payload: { jobId: selectedJobId, jobName: job?.name }
+      });
+    }
+  }
+
   function validateJobId(name, value) {
     console.log('validateJobId:', name, value);
 
@@ -143,28 +166,6 @@ export default function FormRecord({
       ...restErrors,
       ...(error && { [name]: error })
     });
-  }
-
-  function handleSelectJobChange(e) {
-    if (e.target.value == 0) {
-      return;
-    }
-    const selectedJobId = parseInt(e.target.value);
-    const job = jobs.find((job) => job.id === selectedJobId);
-
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-      ['rate']: job?.rate || formData.rate,
-      ['jobName']: job?.name || formData.jobName
-    });
-
-    if (!isUpdateForm) {
-      dispatch({
-        type: 'setPreviousFormDataProp',
-        payload: { jobId: selectedJobId }
-      });
-    }
   }
 
   function handleSubmit(e) {
