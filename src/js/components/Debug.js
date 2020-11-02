@@ -5,6 +5,7 @@ export default function Debug({ isLoggedIn, settings, dispatch }) {
     <footer style={{ paddingTop: 40 }}>
       {isLoggedIn && (
         <>
+          <pre>{JSON.stringify(settings, null, 2)}</pre>
           <button className="btn" onClick={() => dispatch({ type: 'reset' })}>
             Reset App (Bootstrap)
           </button>
