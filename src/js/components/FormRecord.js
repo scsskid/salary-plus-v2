@@ -101,42 +101,6 @@ export default function FormRecord({
     }
   }
 
-  function validateJobId(name, value) {
-    if (parseInt(value) === 0 && formData.jobName === '') {
-      return 'Select a Job or Provide a Custom JobName';
-    }
-    return null;
-  }
-
-  function validateJobName(name, value) {
-    if (value.trim() === '') {
-      return 'jobName is required (is empty)';
-    }
-    return null;
-  }
-
-  function validateDates(name, value) {
-    if (!value?.length) {
-      return 'no dates selected';
-    }
-
-    return null;
-  }
-
-  function validateTime(name, value) {
-    const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
-
-    if (!value.match(timeRegex)) {
-      return `${value} not in HH:mm format`;
-    }
-
-    return null;
-  }
-
-  function validateNumber(name, value) {
-    console.log('validateNumber:', name, value);
-  }
-
   const validate = {
     jobId: validateJobId,
     jobName: validateJobName,
@@ -362,4 +326,40 @@ export default function FormRecord({
       <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
   );
+}
+
+function validateJobId(name, value) {
+  if (parseInt(value) === 0 && formData.jobName === '') {
+    return 'Select a Job or Provide a Custom JobName';
+  }
+  return null;
+}
+
+function validateJobName(name, value) {
+  if (value.trim() === '') {
+    return 'jobName is required (is empty)';
+  }
+  return null;
+}
+
+function validateDates(name, value) {
+  if (!value?.length) {
+    return 'no dates selected';
+  }
+
+  return null;
+}
+
+function validateTime(name, value) {
+  const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+
+  if (!value.match(timeRegex)) {
+    return `${value} not in HH:mm format`;
+  }
+
+  return null;
+}
+
+function validateNumber(name, value) {
+  console.log('validateNumber:', name, value);
 }
