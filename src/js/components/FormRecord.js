@@ -18,6 +18,8 @@ export default function FormRecord({
 }) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
+  const [errors, setErrors] = React.useState({});
+  const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
   const form = React.useRef();
   const [dates, setDates] = React.useState(initialFormData.dates);
@@ -51,10 +53,29 @@ export default function FormRecord({
   }
 
   function handleChange(e) {
+    const { name, value: tempValue, checked, type } = e.target;
+    let value;
+
+    switch (type) {
+      case 'checkbox':
+        value = checked;
+        break;
+      case 'number':
+        value = +tempValue;
+        break;
+      default:
+        value = tempValue;
+        break;
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]:
-        e.target.type === 'checkbox' ? e.target.checked : e.target.value
+      [name]: value
+    });
+
+    setTouched({
+      ...touched,
+      [name]: true
     });
 
     // Save as Previous FromData
@@ -105,6 +126,13 @@ export default function FormRecord({
   function handleDelete() {
     deleteItem({ type: 'record', id: formData.id });
     history.push('/');
+  }
+
+  function jobNameValidation(jobName) {
+    if (!jobName) {
+      return 'jobName is required';
+    }
+    return null;
   }
 
   return (
