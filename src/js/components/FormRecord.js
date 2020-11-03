@@ -143,25 +143,24 @@ export default function FormRecord({
     const formValidation = formDataKeys.reduce(
       (acc, key) => {
         const hasValidationFunction = typeof validate[key] === 'function';
-
-        // 🔥 try filliung up the validation
-        // console.log(key, acc, acc.errors[key]);
-        const error = hasValidationFunction
+        const error = hasValidationFunction // validation whole form
           ? validate[key](null, formData[key])
           : null;
-
-        console.log(error);
-        console.log();
 
         return {
           errors: {
             ...acc.errors,
             [key]: error
+          },
+          touched: {
+            ...acc.touched,
+            [key]: true
           }
         };
       },
       {
-        errors: { ...errors }
+        errors: { ...errors },
+        touched: { ...touched }
       }
     );
 
