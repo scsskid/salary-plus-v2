@@ -17,6 +17,7 @@ export function FormRecordCreate({
     jobName = '',
     timeBegin = '08:00',
     timeEnd = '17:00',
+    hoursUnpaid = 0,
     rate = 0,
     bonus = 0
   } = { ...settings.previousFormData };
@@ -27,6 +28,7 @@ export function FormRecordCreate({
     dates: [inputDate],
     timeBegin,
     timeEnd,
+    hoursUnpaid,
     rate,
     bonus,
     sickLeave: false
@@ -65,7 +67,17 @@ export function FormRecordUpdate({
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
-  const { id, jobId, jobName, begin, end, rate, bonus, sickLeave } = record;
+  const {
+    id,
+    jobId,
+    jobName,
+    begin,
+    end,
+    hoursUnpaid,
+    rate,
+    bonus,
+    sickLeave
+  } = record;
   const initialFormData = {
     id,
     jobId,
@@ -73,6 +85,7 @@ export function FormRecordUpdate({
     dates: [new Date(record.begin)],
     timeBegin: getTimeOfDate(new Date(begin)),
     timeEnd: getTimeOfDate(new Date(end)),
+    hoursUnpaid,
     rate,
     bonus,
     sickLeave

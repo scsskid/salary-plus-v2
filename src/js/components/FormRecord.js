@@ -113,14 +113,14 @@ export default function FormRecord({
   };
 
   function handleValidation({ name, value }) {
-    const error = validate[name](name, value);
-
-    //spread existing errors: possibly existing error of current field, and ...rest
+    //spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
+
+    const error = validate[name](name, value);
 
     setErrors({
       ...restErrors,
-      ...(error && { [name]: error })
+      ...(error && { [name]: touched[name] && error })
     });
   }
 
@@ -132,11 +132,41 @@ export default function FormRecord({
   function handleDatesChange(newDates) {
     setDates(newDates);
     handleValidation({ name: 'dates', value: newDates });
+    setTouched({ ...touched, dates: true });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleDispatch(formData);
+
+    const formDataKeys = Object.keys(formData);
+
+    const formValidation = formDataKeys.reduce(
+      (acc, key) => {
+        const hasValidationFunction = typeof validate[key] === 'function';
+
+        // 🔥 try filliung up the validation
+        // console.log(key, acc, acc.errors[key]);
+        const error = hasValidationFunction
+          ? validate[key](null, formData[key])
+          : null;
+
+        console.log(error);
+        console.log();
+
+        return {
+          errors: {
+            ...acc.errors,
+            [key]: error
+          }
+        };
+      },
+      {
+        errors: { ...errors }
+      }
+    );
+
+    console.log(formValidation);
+    // handleDispatch(formData);
   }
 
   function handleDispatch(formData) {
@@ -157,6 +187,9 @@ export default function FormRecord({
 
   return (
     <>
+      <pre>touched</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
+      <pre>errors</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
       <form
         className="form-record"
@@ -199,6 +232,8 @@ export default function FormRecord({
             value={formData.jobName}
             handleChange={handleChange}
             handleBlur={handleBlur}
+            error={errors.jobName}
+            touched={touched.jobName}
           >
             Job Name
           </FormElement>
@@ -233,6 +268,8 @@ export default function FormRecord({
               value={formData.timeBegin}
               handleChange={handleChange}
               handleBlur={handleBlur}
+              error={errors.timeBegin}
+              touched={touched.timeBegin}
             >
               Starts
             </FormElement>
@@ -244,6 +281,8 @@ export default function FormRecord({
               value={formData.timeEnd}
               handleChange={handleChange}
               handleBlur={handleBlur}
+              error={errors.timeEnd}
+              touched={touched.timeEnd}
             >
               Ends
             </FormElement>
@@ -261,6 +300,8 @@ export default function FormRecord({
               handleChange={handleChange}
               handleBlur={handleBlur}
               placeholder="0"
+              error={errors.hoursUnpaid}
+              touched={touched.hoursUnpaid}
             >
               Unpaid Time
             </FormElement>
@@ -278,6 +319,8 @@ export default function FormRecord({
               handleChange={handleChange}
               handleBlur={handleBlur}
               placeholder="0"
+              error={errors.rate}
+              touched={touched.rate}
             >
               Rate
             </FormElement>
@@ -292,6 +335,8 @@ export default function FormRecord({
               handleChange={handleChange}
               handleBlur={handleBlur}
               placeholder="0"
+              error={errors.bonus}
+              touched={touched.bonus}
             >
               Bonus
             </FormElement>
