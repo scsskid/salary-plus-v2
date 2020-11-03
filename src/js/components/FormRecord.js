@@ -126,7 +126,6 @@ export default function FormRecord({
   }
 
   function handleBlur(e) {
-    console.log('blur, validate', e.target.name, e.target.value);
     handleValidation(e.target);
   }
 
@@ -138,25 +137,23 @@ export default function FormRecord({
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const formDataKeys = Object.keys(formData);
-    console.log(formData);
-
     const formValidation = formDataKeys.reduce(
       (acc, key) => {
         const hasValidationFunction = typeof validate[key] === 'function';
-        const error = hasValidationFunction // validation whole form
+        const newError = hasValidationFunction // validation whole form
           ? validate[key](null, formData[key])
           : null;
+        const newTouched = { [key]: true };
 
         return {
           errors: {
             ...acc.errors,
-            [key]: error
+            ...(newError && { [key]: newError })
           },
           touched: {
             ...acc.touched,
-            [key]: true
+            ...newTouched
           }
         };
       },
@@ -165,12 +162,18 @@ export default function FormRecord({
         touched: { ...touched }
       }
     );
+    setErrors(formValidation.errors);
+    setTouched(formValidation.touched);
 
-    console.log(formValidation);
-    console.log(Object.keys(formValidation.errors));
-    console.log(Object.values(formValidation.errors));
-    console.log(formData);
-    // handleDispatch(formData);
+    if (
+      !Object.values(formValidation.errors).length && // errors object is empty
+      Object.values(formValidation.touched).length ===
+        Object.values(formData).length && // all fields were touched
+      Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
+    ) {
+      alert(JSON.stringify(formData, null, 2));
+      handleDispatch(formData);
+    }
   }
 
   function handleDispatch(formData) {
@@ -222,7 +225,6 @@ export default function FormRecord({
   }
 
   function validateNumber(name, value) {
-    console.log('validateNumber:', name, value);
     const valueToString = '' + value;
     // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
     const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
@@ -410,6 +412,7 @@ export default function FormRecord({
         <Button type="submit" data-button-submit="">
           Save
         </Button>
+        {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
         {isUpdateForm && (
           <Button
             onClick={handleDelete}
