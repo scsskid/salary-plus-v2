@@ -140,6 +140,7 @@ export default function FormRecord({
     e.preventDefault();
 
     const formDataKeys = Object.keys(formData);
+    console.log(formData);
 
     const formValidation = formDataKeys.reduce(
       (acc, key) => {
@@ -186,6 +187,51 @@ export default function FormRecord({
   function handleDelete() {
     deleteItem({ type: 'record', id: formData.id });
     history.push('/');
+  }
+
+  function validateJobId(name, value) {
+    if (parseInt(value) === 0 && formData.jobName === '') {
+      return 'Select a Job or Provide a Custom JobName';
+    }
+    return null;
+  }
+
+  function validateJobName(name, value) {
+    if (value.trim() === '') {
+      return 'jobName is required (is empty)';
+    }
+    return null;
+  }
+
+  function validateDates(name, value) {
+    if (!value?.length) {
+      return 'no dates selected';
+    }
+
+    return null;
+  }
+
+  function validateTime(name, value) {
+    const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
+
+    if (!value.match(timeRegex)) {
+      return `${value} not in HH:mm format`;
+    }
+
+    return null;
+  }
+
+  function validateNumber(name, value) {
+    console.log('validateNumber:', name, value);
+    const valueToString = '' + value;
+    // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
+    const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
+
+    if (!valueToString.match(numberRegex)) {
+      return 'Not a Valid Positive Number';
+    }
+
+    return null;
   }
 
   return (
@@ -377,49 +423,4 @@ export default function FormRecord({
       <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
   );
-}
-
-function validateJobId(name, value) {
-  if (parseInt(value) === 0 && formData.jobName === '') {
-    return 'Select a Job or Provide a Custom JobName';
-  }
-  return null;
-}
-
-function validateJobName(name, value) {
-  if (value.trim() === '') {
-    return 'jobName is required (is empty)';
-  }
-  return null;
-}
-
-function validateDates(name, value) {
-  if (!value?.length) {
-    return 'no dates selected';
-  }
-
-  return null;
-}
-
-function validateTime(name, value) {
-  const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
-
-  if (!value.match(timeRegex)) {
-    return `${value} not in HH:mm format`;
-  }
-
-  return null;
-}
-
-function validateNumber(name, value) {
-  console.log('validateNumber:', name, value);
-
-  // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
-  const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
-
-  if (!value.match(numberRegex)) {
-    return 'Not a Valid Positive Number';
-  }
-
-  return null;
 }
