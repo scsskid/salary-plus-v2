@@ -112,7 +112,8 @@ export default function FormRecord({
     bonus: validateNumber
   };
 
-  function handleValidation({ name, value }) {
+  function handleValidation({ type, name, value, valueAsNumber }) {
+    // console.log(type, name, value, valueAsNumber);
     //spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
@@ -165,6 +166,9 @@ export default function FormRecord({
     );
 
     console.log(formValidation);
+    console.log(Object.keys(formValidation.errors));
+    console.log(Object.values(formValidation.errors));
+    console.log(formData);
     // handleDispatch(formData);
   }
 
@@ -276,7 +280,7 @@ export default function FormRecord({
             <FormElement
               id="entry-end-time"
               name="timeEnd"
-              type="text"
+              type="time"
               value={formData.timeEnd}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -295,6 +299,7 @@ export default function FormRecord({
               id="entry-unpaid-hours"
               type="number"
               step="0.1"
+              min="0"
               value={formData.hoursUnpaid}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -314,6 +319,7 @@ export default function FormRecord({
               id="entry-rate"
               type="number"
               step="0.01"
+              min="0"
               value={formData.rate}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -330,6 +336,7 @@ export default function FormRecord({
               id="entry-bonus"
               type="number"
               step="0.01"
+              min="0"
               value={formData.bonus}
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -406,4 +413,13 @@ function validateTime(name, value) {
 
 function validateNumber(name, value) {
   console.log('validateNumber:', name, value);
+
+  // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
+  const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
+
+  if (!value.match(numberRegex)) {
+    return 'Not a Valid Positive Number';
+  }
+
+  return null;
 }

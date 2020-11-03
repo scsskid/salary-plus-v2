@@ -18,7 +18,9 @@ function FormElement({
   placeholder,
   children,
   touched,
-  error
+  error,
+  min,
+  max
 }) {
   return (
     <>
@@ -43,6 +45,8 @@ function FormElement({
             onClick={handleClick}
             onBlur={handleBlur}
             placeholder={placeholder}
+            min={min}
+            max={max}
           />
         </label>
       </div>
