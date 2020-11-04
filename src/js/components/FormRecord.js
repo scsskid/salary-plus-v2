@@ -88,6 +88,7 @@ export default function FormRecord({
 
     // Save as Previous FromData
     if (!isUpdateForm) {
+      // validate before?
       dispatch({
         type: 'setPreviousFormDataProp',
         payload: { [e.target.name]: e.target.value }
@@ -269,10 +270,10 @@ export default function FormRecord({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      <pre>touched</pre>
+      {/* <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre> */}
       <form
         className="form-record"
         ref={form}
