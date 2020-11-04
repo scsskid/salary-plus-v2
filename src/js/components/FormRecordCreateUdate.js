@@ -17,9 +17,9 @@ export function FormRecordCreate({
     jobName = '',
     timeBegin = '08:00',
     timeEnd = '17:00',
-    hoursUnpaid = 0,
-    rate = 0,
-    bonus = 0
+    hoursUnpaid = '',
+    rate = '',
+    bonus = ''
   } = { ...settings.previousFormData };
 
   const initialFormData = {

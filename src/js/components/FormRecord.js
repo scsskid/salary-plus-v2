@@ -177,6 +177,9 @@ export default function FormRecord({
   }
 
   function validateNumber(name, value) {
+    if (!value) {
+      return null;
+    }
     const valueToString = '' + value;
     // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
     const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
