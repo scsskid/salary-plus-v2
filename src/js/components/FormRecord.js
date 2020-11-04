@@ -132,8 +132,7 @@ export default function FormRecord({
     bonus: validateNumber
   };
 
-  function handleValidation({ type, name, value, valueAsNumber }) {
-    // console.log(type, name, value, valueAsNumber);
+  function handleValidation({ name, value }) {
     //spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
