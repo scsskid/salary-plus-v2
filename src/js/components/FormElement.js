@@ -50,7 +50,6 @@ function FormElement({
           />
         </label>
       </div>
-      <p>Error: {error}</p>
       <p>
         <b>{touched && error}</b>
       </p>
