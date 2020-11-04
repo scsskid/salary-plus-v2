@@ -28,9 +28,9 @@ export function FormRecordCreate({
     dates: [inputDate],
     timeBegin,
     timeEnd,
-    hoursUnpaid,
-    rate,
-    bonus,
+    hoursUnpaid: hoursUnpaid == 0 ? '' : hoursUnpaid,
+    rate: rate == 0 ? '' : rate,
+    bonus: bonus == 0 ? '' : bonus,
     sickLeave: false
   };
 
@@ -73,10 +73,10 @@ export function FormRecordUpdate({
     jobName,
     begin,
     end,
-    hoursUnpaid,
-    rate,
-    bonus,
-    sickLeave
+    hoursUnpaid = '',
+    rate = '',
+    bonus = '',
+    sickLeave = ''
   } = record;
   const initialFormData = {
     id,
