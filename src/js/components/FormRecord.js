@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button';
 import FormElement from './FormElement';
 import DatesPickerCalendar from './DatesPickerCalendar';
+import { Prompt } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import FormElementSet from './FormElementSet';
 
@@ -26,6 +27,11 @@ export default function FormRecord({
   const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
     ''
   );
+  const [submit, setSubmit] = React.useState();
+
+  const formIsHalfTouched =
+    Object.values(touched).length > 0 &&
+    Object.values(touched).length != Object.values(formData).length;
 
   // Include dates directly in formData?
   React.useEffect(() => {
@@ -42,6 +48,15 @@ export default function FormRecord({
       setDatePickerDisplayValue(`${dates.length} Dates`);
     }
   }, [dates]);
+
+  React.useEffect(() => {
+    if (submit) {
+      console.log('submit effect');
+      console.log(touched, formIsHalfTouched);
+
+      handleDispatch(formData);
+    }
+  }, [submit]);
 
   // Change Handlers
 
@@ -229,8 +244,9 @@ export default function FormRecord({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
+      console.log({ ...touched });
       alert(JSON.stringify(formData, null, 2));
-      handleDispatch(formData);
+      setSubmit(true);
     }
   }
 
@@ -252,6 +268,7 @@ export default function FormRecord({
 
   return (
     <>
+      <Prompt message="really navigate away?" when={formIsHalfTouched} />
       <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>
@@ -422,7 +439,7 @@ export default function FormRecord({
             Sick Leave?
           </FormElement>
         </fieldset>
-
+        <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre>
         <Button type="submit" data-button-submit="">
           Save
         </Button>
