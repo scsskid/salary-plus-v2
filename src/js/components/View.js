@@ -5,6 +5,7 @@ import DateDetails from './DateDetails';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 import RecordsCalendar from './RecordsCalendar';
+import { useHistory } from 'react-router-dom';
 
 export default function View({
   inputDate,
@@ -17,7 +18,7 @@ export default function View({
 }) {
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
-
+  const history = useHistory();
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
@@ -54,7 +55,12 @@ export default function View({
           {/* {state.activeSegement} */}
         </div>
 
-        <button className="widget-reporting">
+        <button
+          className="widget-reporting"
+          onClick={() => {
+            history.push('/reports');
+          }}
+        >
           {/* <header className="widget-reporting-figures">
             <div>[Month] Report →</div>
           </header> */}

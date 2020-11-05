@@ -17,3 +17,7 @@ export function timeToDecimal(t) {
 
   return parseFloat(parseInt(arr[0], 10) + '.' + (dec < 10 ? '0' : '') + dec);
 }
+
+export function getHoursElapsed(duration) {
+  return duration / (1000 * 60 * 60);
+}

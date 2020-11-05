@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString, round } from '../utils/helpers';
-import { getTimeElapsed, timeToDecimal } from '../utils/date-fns';
+import { getHoursElapsed } from '../utils/date-fns';
+import { getEarned } from '../utils/reporting-fns';
 
 export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
@@ -11,19 +12,14 @@ export default function DateDetailsEntry({ record, jobs }) {
     end: getLocaleTimeString(new Date(record.end))
   };
 
-  // HH:mm
-  // var timeElapsed = getTimeElapsed(
-  //   new Date(record.end) - new Date(record.begin)
-  // );
-
-  // 1,000000011H
-  function getHoursElapsed(duration) {
-    return duration / (1000 * 60 * 60);
-  }
-
   const hoursElapsed = getHoursElapsed(
     new Date(record.end) - new Date(record.begin)
   );
+
+  const earned = new Intl.NumberFormat([], {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(getEarned(record));
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -54,12 +50,9 @@ export default function DateDetailsEntry({ record, jobs }) {
           </h2>
 
           <p className="date-details-entry-meta">
-            {/* {timeElapsed} / */}
             {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
-            <span>{salaryOfShift(record)}</span>{' '}
-            <span>{round(hoursElapsed, 2)}h</span>
+            <span>{earned}</span> <span>{round(hoursElapsed, 2)}h</span>
             {record.sickLeave && <span> [sick]</span>}
-            {/* / Recorded Rate:{record.rate} */}
           </p>
         </div>
       </button>
@@ -67,16 +60,4 @@ export default function DateDetailsEntry({ record, jobs }) {
       {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
     </>
   );
-}
-
-function salaryOfShift(record) {
-  var timeElapsed = getTimeElapsed(
-    new Date(record.end) - new Date(record.begin)
-  );
-  var earnedNumber = timeToDecimal(timeElapsed) * record.rate;
-  var earned = new Intl.NumberFormat([], {
-    style: 'currency',
-    currency: 'EUR'
-  }).format(earnedNumber);
-  return earned;
 }

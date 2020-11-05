@@ -12,6 +12,7 @@ import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
 import Debug from './Debug';
+import Reports from './Reports';
 
 export default function App() {
   const [inputDate, setInputDate] = React.useState(() => {
@@ -128,6 +129,17 @@ export default function App() {
         <Switch>
           <Route exact path="/">
             <View
+              inputDate={inputDate}
+              settings={settings}
+              changeMonth={changeMonth}
+              monthRecords={monthRecords}
+              updateInputDate={updateInputDate}
+              jobs={jobs}
+              dateRecords={dateRecords}
+            />
+          </Route>
+          <Route exact path="/reports">
+            <Reports
               inputDate={inputDate}
               settings={settings}
               changeMonth={changeMonth}
