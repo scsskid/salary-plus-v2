@@ -10,7 +10,7 @@ const Navigaton = () => {
       <ul>
         <NavEl route="/">
           <IconView />
-          <span>View</span>
+          View
         </NavEl>
         <NavEl route="/records/add">
           <IconAdd />

@@ -1,5 +1,5 @@
 .main-navigation {
-  height: calc(12 * var(--b));
+  height: calc(10 * var(--b));
   background: #fff;
   padding: 0 1rem;
   box-shadow: 0 0 10px hsl(0deg 5% 85%);
@@ -25,20 +25,26 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   text-decoration: none;
   color: var(--color-text);
+  padding-top: calc(1 * var(--b));
   @mixin fontSize 10;
+
+  & svg {
+    width: 26px;
+    height: auto;
+  }
+
+  & path {
+    fill: currentColor;
+  }
 }
 
 .main-navigation-el--is-current a {
   background: #f7f7f7;
-
   color: var(--color-highlight);
-  & path {
-    fill: currentColor;
-  }
 }
 
 .main-navigation a:hover {
