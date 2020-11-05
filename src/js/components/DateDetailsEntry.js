@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
+import FigureBonus from './FigureBonus';
 import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
 
@@ -35,6 +36,7 @@ export default function DateDetailsEntry({ record, jobs }) {
             {time.end}
           </time>
         </div>
+
         <div className="date-details-entry-content">
           <h2>
             {record.jobName} {job ? '' : ''}
@@ -43,6 +45,7 @@ export default function DateDetailsEntry({ record, jobs }) {
           <p className="date-details-entry-meta">
             {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
             <FigureEarned records={[record]} />
+            {/* <FigureBonus records={[record]} /> */}
             <FigureHoursElapsed records={[record]} />
             {record.sickLeave && <span> [sick]</span>}
           </p>

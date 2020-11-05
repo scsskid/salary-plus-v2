@@ -4,6 +4,7 @@ import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
+import FigureBonus from './FigureBonus';
 
 export default function Reports({
   inputDate,
@@ -18,13 +19,74 @@ export default function Reports({
     Week: <div>W E E K</div>,
     Month: (
       <>
-        <h2>M O N T H</h2>
         <div>Records: {monthRecords.length}</div>
-        <div>
-          Hours: <FigureHoursElapsed records={monthRecords} />
-        </div>
-        <div>
-          Earned: <FigureEarned records={monthRecords} />
+
+        <div className="table-reporting-container">
+          <table className="table-reporting-helper-head">
+            <colgroup>
+              <col className="col-heading" />
+              <col className="col-hours" />
+              <col className="col-earned" />
+            </colgroup>
+            <thead>
+              <tr>
+                <td></td>
+                <th>H</th>
+                <th>€</th>
+              </tr>
+            </thead>
+          </table>
+
+          <table className="table-reporting">
+            <colgroup>
+              <col className="col-heading" />
+              <col className="col-hours" />
+              <col className="col-earned" />
+            </colgroup>
+
+            <tbody>
+              <tr className="table-reporting-row">
+                <th>Regular</th>
+                <td>
+                  <FigureHoursElapsed records={monthRecords} />
+                </td>
+                <td>
+                  <FigureEarned records={monthRecords} />
+                </td>
+              </tr>
+              <tr className="table-reporting-row">
+                <th>Overtime</th>
+                <td>
+                  <FigureHoursElapsed records={[]} />
+                </td>
+                <td>
+                  <FigureEarned records={[]} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Total Salary <b>X €</b>
+          </p>
+          <table className="table-reporting">
+            <colgroup>
+              <col className="col-heading" />
+              <col className="col-hours" />
+              <col className="col-earned" />
+            </colgroup>
+            <tbody>
+              <tr className="table-reporting-row">
+                <th>Bonus / Tips</th>
+                <td></td>
+                <td>
+                  <FigureBonus records={monthRecords} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Total Salary <b>X €</b>
+          </p>
         </div>
       </>
     ),
