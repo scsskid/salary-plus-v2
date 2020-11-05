@@ -17,11 +17,9 @@ function Welcome({ seedFunctions }) {
       <p>
         <button className="btn" onClick={insertSampleData}>
           Insert Sample Data
-        </button>
-      </p>
-      <p>
+        </button>{' '}
         <button className="btn" onClick={insertBootstrapData}>
-          Start with empty calendar
+          Start as new User
         </button>
       </p>
     </>
