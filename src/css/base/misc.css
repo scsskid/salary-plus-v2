@@ -20,3 +20,7 @@ figure {
 /* button:active {
   transform: scale(0.99);
 } */
+
+table {
+  border-collapse: collapse;
+}

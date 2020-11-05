@@ -1,0 +1,35 @@
+.table-reporting-helper-head {
+  width: 100%;
+  margin-bottom: var(--bx);
+}
+
+.table-reporting {
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 1.5px hsla(0, 0%, 0%, 0.15);
+  background-color: #fff;
+
+  & td,
+  & th {
+    padding: 0.8rem;
+  }
+
+  & th {
+    font-weight: normal;
+  }
+
+  & td {
+    text-align: right;
+  }
+
+  margin-bottom: var(--bx);
+}
+
+.table-reporting-row th {
+  text-align: left;
+}
+
+.table-reporting-row {
+  box-shadow: inset 0 -1px 0 var(--color-bg-light);
+}

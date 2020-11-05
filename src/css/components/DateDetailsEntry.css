@@ -39,6 +39,10 @@
   opacity: 0.7;
 }
 
-.date-details-entry-meta span:first-child {
+.date-details-entry-meta span {
   margin-right: 1rem;
+}
+
+.date-details-entry-meta span:last-child {
+  margin-right: 0;
 }
