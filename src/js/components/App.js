@@ -102,18 +102,21 @@ export default function App() {
   if (!isLoggedIn) {
     return (
       <Router>
-        <Switch>
-          <Route exact path="/">
-            <Welcome
-              seedFunctions={{
-                insertSampleData: () => dispatch({ type: 'insertSampleData' }),
-                insertBootstrapData: () => dispatch({ type: 'reset' })
-              }}
-            />
-            <Debug />
-          </Route>
-          <Route path="*" component={NoMatch} />
-        </Switch>
+        <main className="main">
+          <Switch>
+            <Route exact path="/">
+              <Welcome
+                seedFunctions={{
+                  insertSampleData: () =>
+                    dispatch({ type: 'insertSampleData' }),
+                  insertBootstrapData: () => dispatch({ type: 'reset' })
+                }}
+              />
+              <Debug />
+            </Route>
+            <Route path="*" component={NoMatch} />
+          </Switch>
+        </main>
       </Router>
     );
   }

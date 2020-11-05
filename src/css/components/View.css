@@ -5,11 +5,6 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.component-header {
-  padding-top: var(--bx);
-  padding-bottom: calc(2 * var(--b));
-}
-
 .component-header .segment-nav {
   grid-column: 1 / 3;
 }

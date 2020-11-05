@@ -4,8 +4,10 @@ function Welcome({ seedFunctions }) {
   const { insertSampleData, insertBootstrapData } = seedFunctions;
 
   return (
-    <div>
-      <h1>Welcome</h1>
+    <>
+      <header className="component-header">
+        <h1>Welcome</h1>
+      </header>
       <p>
         Thank you for trying out Salary Calendar.{' '}
         <span style={{ display: 'none' }} role="img" aria-label="bowing emoji">
@@ -22,7 +24,7 @@ function Welcome({ seedFunctions }) {
           Start with empty calendar
         </button>
       </p>
-    </div>
+    </>
   );
 }
 

@@ -5,9 +5,11 @@ const Settings = ({ jobs, presets, children }) => {
   const history = useHistory();
 
   return (
-    <div>
-      <h1>Settings</h1>
-      <hr></hr>
+    <>
+      <header className="component-header">
+        <h1>Settings</h1>
+      </header>
+
       {/* <h2>General</h2>
       <label htmlFor="language">Languge</label>
       <select name="language">
@@ -64,7 +66,7 @@ const Settings = ({ jobs, presets, children }) => {
 
       <hr />
       {children}
-    </div>
+    </>
   );
 };
 
