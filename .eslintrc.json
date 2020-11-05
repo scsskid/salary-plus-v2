@@ -9,8 +9,8 @@
   ],
   "parser": "babel-eslint",
   "rules": {
-    "react/prop-types": 0,
-    "ignoreRestSiblings": true
+    "react/prop-types": 0
+    // "ignoreRestSiblings": true
   },
   "plugins": ["react", "import", "jsx-a11y"],
   "parserOptions": {
