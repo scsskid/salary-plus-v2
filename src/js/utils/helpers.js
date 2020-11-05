@@ -107,7 +107,7 @@ const formatDate = {
 };
 
 function getRecordBeginEnd({ dateBegin, timeBegin, timeEnd }) {
-  const dateEnd = new Date(dateBegin.getTime());
+  let dateEnd = new Date(dateBegin.getTime());
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
   if (timeBegin > timeEnd) {
