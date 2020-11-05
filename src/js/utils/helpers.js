@@ -106,29 +106,7 @@ const formatDate = {
   }
 };
 
-// function getRecordBeginEnd({
-//   dateBegin,
-//   timeBegin,
-//   timeEnd,
-// }) {
-
-// }
-
-export function mapFormDataToStorageObject({
-  id,
-  dateBegin,
-  timeBegin,
-  timeEnd,
-  jobId,
-  jobName,
-  bonus,
-  note,
-  sickLeave,
-  status,
-  rate,
-  rateInterval,
-  hoursUnpaid
-}) {
+function getRecordBeginEnd({ dateBegin, timeBegin, timeEnd }) {
   const dateEnd = new Date(dateBegin.getTime());
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
@@ -146,8 +124,25 @@ export function mapFormDataToStorageObject({
   dateBegin.setHours(timeSplits.begin[0], timeSplits.begin[1], 0, 0);
   dateEnd.setHours(timeSplits.end[0], timeSplits.end[1], 0, 0);
 
-  const begin = dateBegin.toISOString();
-  const end = dateEnd.toISOString();
+  return [dateBegin.toISOString(), dateEnd.toISOString()];
+}
+
+export function mapFormDataToStorageObject({
+  id,
+  dateBegin,
+  timeBegin,
+  timeEnd,
+  jobId,
+  jobName,
+  bonus,
+  note,
+  sickLeave,
+  status,
+  rate,
+  rateInterval,
+  hoursUnpaid
+}) {
+  const [begin, end] = getRecordBeginEnd({ dateBegin, timeBegin, timeEnd });
 
   const payload = {
     id: parseInt(id),
@@ -160,7 +155,7 @@ export function mapFormDataToStorageObject({
     sickLeave,
     status,
     rate,
-    interval,
+    rateInterval,
     hoursUnpaid
   };
 
