@@ -10,8 +10,10 @@ function NoMatch() {
   }
 
   return (
-    <div>
-      <h1>404</h1>
+    <>
+      <header class="component-header">
+        <h1>404</h1>
+      </header>
       <p>
         Not found: <code>{location.pathname}</code>
       </p>
@@ -20,7 +22,7 @@ function NoMatch() {
           Go To Start
         </button>
       </p>
-    </div>
+    </>
   );
 }
 
