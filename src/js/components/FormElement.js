@@ -13,8 +13,6 @@ export default function FormElement({
     ? `${defaultClassName} form-el--hasError`
     : defaultClassName;
 
-  console.log(children, inputError, touched, error);
-
   return (
     <>
       <div className={className}>

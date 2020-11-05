@@ -149,7 +149,8 @@ export default function FormRecord({
   };
 
   function handleValidation({ name, value }) {
-    //spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
+    // spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
+    // eslint-disable-next-line no-unused-vars
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
     const error = validate[name](name, value);
@@ -317,8 +318,8 @@ export default function FormRecord({
                   name="jobName"
                   id="jobName"
                   value={formData.jobName}
-                  handleChange={handleChange}
-                  handleBlur={handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </FormElement>
             )}
