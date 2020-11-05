@@ -6,6 +6,8 @@ import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 import RecordsCalendar from './RecordsCalendar';
 import { useHistory } from 'react-router-dom';
+import FigureHoursElapsed from './FigureHoursElapsed';
+import FigureEarned from './FigureEarned';
 
 export default function View({
   inputDate,
@@ -66,11 +68,15 @@ export default function View({
           </header> */}
           <div className="widget-reporting-figures">
             <figure className="widget-reporting-figures-el">
-              <b>0</b>
+              <b>
+                <FigureHoursElapsed records={monthRecords} />
+              </b>
               <figcaption>Hours</figcaption>
             </figure>
             <figure className="widget-reporting-figures-el">
-              <b>0,00€</b>
+              <b>
+                <FigureEarned records={monthRecords} />
+              </b>
               <figcaption>Earned</figcaption>
             </figure>
           </div>

@@ -2,15 +2,14 @@ import React from 'react';
 import InputDateControl from './InputDateControl';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
-import DateDetailsEntry from './DateDetailsEntry';
 import FigureHoursElapsed from './FigureHoursElapsed';
+import FigureEarned from './FigureEarned';
 
 export default function Reports({
   inputDate,
   settings,
   changeMonth,
-  monthRecords,
-  jobs
+  monthRecords
 }) {
   const segements = ['Week', 'Month', 'Custom'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
@@ -24,16 +23,9 @@ export default function Reports({
         <div>
           Hours: <FigureHoursElapsed records={monthRecords} />
         </div>
-        <div></div>
-
-        {monthRecords.map((record) => (
-          <DateDetailsEntry
-            key={`record-details-${record.id}`}
-            record={record}
-            jobs={jobs}
-            settings={settings}
-          />
-        ))}
+        <div>
+          Earned: <FigureEarned records={monthRecords} />
+        </div>
       </>
     ),
     Custom: <p>C U S T O M</p>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getLocaleTimeString, round } from '../utils/helpers';
-import { getHoursElapsed } from '../utils/date-fns';
-import { getEarned } from '../utils/reporting-fns';
+import { getLocaleTimeString } from '../utils/helpers';
+import FigureEarned from './FigureEarned';
+import FigureHoursElapsed from './FigureHoursElapsed';
 
 export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
@@ -11,15 +11,6 @@ export default function DateDetailsEntry({ record, jobs }) {
     begin: getLocaleTimeString(new Date(record.begin)),
     end: getLocaleTimeString(new Date(record.end))
   };
-
-  const hoursElapsed = getHoursElapsed(
-    new Date(record.end) - new Date(record.begin)
-  );
-
-  const earned = new Intl.NumberFormat([], {
-    style: 'currency',
-    currency: 'EUR'
-  }).format(getEarned(record));
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -51,7 +42,8 @@ export default function DateDetailsEntry({ record, jobs }) {
 
           <p className="date-details-entry-meta">
             {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
-            <span>{earned}</span> <span>{round(hoursElapsed, 2)}h</span>
+            <FigureEarned records={[record]} />
+            <FigureHoursElapsed records={[record]} />
             {record.sickLeave && <span> [sick]</span>}
           </p>
         </div>

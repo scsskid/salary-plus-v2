@@ -1,7 +1,14 @@
 import * as React from 'react';
-import { addRecordHoursElapsed } from '../utils/reporting-fns';
-import { round } from '../utils/helpers';
+import { getEarned } from '../utils/reporting-fns';
 
-export default function FigureHoursElapsed({ records }) {
-  return <>{round(records.reduce(addRecordHoursElapsed, 0), 2)}</>;
+export default function FigureEarned({ records }) {
+  const earnedNumber = records.reduce((acc, record) => {
+    return acc + getEarned(record);
+  }, 0);
+  const earned = new Intl.NumberFormat([], {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(earnedNumber);
+
+  return <span>{earned}</span>;
 }
