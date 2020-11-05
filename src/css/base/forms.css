@@ -1,18 +1,12 @@
 /* Forms */
 
-select {
-  /* background: #fff; */
-}
-
 input,
 select,
 .display-value {
   border: none;
   cursor: pointer;
-  padding-top: var(--b);
-  padding-bottom: var(--b);
   @mixin fontSize 16;
-  /* max-width: 100%; */
+  max-width: 50%;
 }
 
 .display-value {
@@ -23,8 +17,8 @@ fieldset {
   background: #fff;
   @mixin padHor;
   @mixin bleedHor;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: var(--b);
+  padding-bottom: var(--b);
   border: none;
   margin-bottom: var(--bx);
   min-width: 0;
@@ -41,23 +35,26 @@ fieldset {
   & .form-el {
     padding-left: 1rem;
     flex: 1;
-    /* width: 50%; */
   }
 }
 
 .form-el {
   display: flex;
   align-items: center;
-  box-shadow: inset 0 -1px 0 hsl(0deg 0% 90%);
+
   position: relative;
+}
+
+.form-el label {
+  box-shadow: inset 0 -1px 0 hsl(0deg 0% 90%);
+}
+
+.form-element-set:last-child label {
+  box-shadow: none;
 }
 
 .form-el--hasError {
   color: red;
-}
-
-.form-el:last-child {
-  /* box-shadow: none; */
 }
 
 .form-el-error {
@@ -79,14 +76,8 @@ label {
 
 label p {
   margin-bottom: 0;
-  /* background: #eee; */
   display: flex;
   align-items: center;
-  /* background-color: lightcyan; */
-}
-
-label input {
-  /* background: lavender; */
 }
 
 /* Record Form  */

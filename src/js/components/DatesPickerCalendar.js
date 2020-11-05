@@ -76,9 +76,7 @@ export default function DatesPickerCalendar({
       }
       ref={datesPickerCalendarRef}
     >
-      {datesCount === 1 && <p>{dates[0].toLocaleDateString()}</p>}
-      {datesCount > 1 && <p>{datesCount} Dates</p>}
-      {datesCount > 0 && (
+      {datesCount > 0 && !isUpdateForm && (
         <Button
           onClick={() => {
             updateDates([]);
@@ -94,6 +92,13 @@ export default function DatesPickerCalendar({
         settings={settings}
         onCalendarDateButtonClick={handleCalendarDateButtonClick}
       />
+      {!isUpdateForm && (
+        <p>
+          <small>
+            Select <b>one or more</b> dates
+          </small>
+        </p>
+      )}
     </div>
   );
 }

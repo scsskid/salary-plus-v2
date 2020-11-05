@@ -270,10 +270,10 @@ export default function FormRecord({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      <pre>touched</pre>
+      {/* <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre> */}
       <form
         className="form-record"
         ref={form}
@@ -283,45 +283,47 @@ export default function FormRecord({
         <input type="hidden" name="id" value={formData.id} />
 
         <fieldset>
-          {jobs.length ? (
-            <FormElement
-              label="Select Job (id)"
-              error={errors.jobId}
-              htmlFor="entry-job"
-            >
-              <select
-                name="jobId"
-                id="entry-job"
-                value={formData.jobId}
-                onBlur={handleBlur}
-                onChange={handleSelectJobChange}
+          <FormElementSet>
+            {jobs.length ? (
+              <FormElement
+                label="Select Job (id)"
+                error={errors.jobId}
+                htmlFor="entry-job"
               >
-                <option key={`job-0`} disabled={true} value={0}>
-                  Select Job...
-                </option>
-                {jobs.map((job) => (
-                  <option key={`job-${job.id}`} value={job.id}>
-                    {job.name}
+                <select
+                  name="jobId"
+                  id="entry-job"
+                  value={formData.jobId}
+                  onBlur={handleBlur}
+                  onChange={handleSelectJobChange}
+                >
+                  <option key={`job-0`} disabled={true} value={0}>
+                    Select Job...
                   </option>
-                ))}
-              </select>
-            </FormElement>
-          ) : (
-            <FormElement
-              htmlFor="jobName"
-              error={errors.jobName}
-              touched={touched.jobName}
-              label="Job Name"
-            >
-              <input
-                name="jobName"
-                id="jobName"
-                value={formData.jobName}
-                handleChange={handleChange}
-                handleBlur={handleBlur}
-              />
-            </FormElement>
-          )}
+                  {jobs.map((job) => (
+                    <option key={`job-${job.id}`} value={job.id}>
+                      {job.name}
+                    </option>
+                  ))}
+                </select>
+              </FormElement>
+            ) : (
+              <FormElement
+                htmlFor="jobName"
+                error={errors.jobName}
+                touched={touched.jobName}
+                label="Job Name"
+              >
+                <input
+                  name="jobName"
+                  id="jobName"
+                  value={formData.jobName}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                />
+              </FormElement>
+            )}
+          </FormElementSet>
         </fieldset>
 
         <fieldset>
@@ -449,19 +451,21 @@ export default function FormRecord({
           </FormElementSet>
         </fieldset>
         <fieldset>
-          <FormElement label="Sick LEAVE" htmlFor="sickLeave">
-            <input
-              type="checkbox"
-              checked={formData.sickLeave}
-              name="sickLeave"
-              id="sickLeave"
-              value={formData.sickLeave}
-              onChange={handleChange}
-              // handleBlur={handleBlur}
-            />
-          </FormElement>
+          <FormElementSet>
+            <FormElement label="Sick Leave?" htmlFor="sickLeave">
+              <input
+                type="checkbox"
+                checked={formData.sickLeave}
+                name="sickLeave"
+                id="sickLeave"
+                value={formData.sickLeave}
+                onChange={handleChange}
+                // handleBlur={handleBlur}
+              />
+            </FormElement>
+          </FormElementSet>
         </fieldset>
-        <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre>
+        {/* <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre> */}
         <Button type="submit" data-button-submit="">
           Save
         </Button>
