@@ -1,26 +1,11 @@
 import * as React from 'react';
 
-function FormElement({
-  name,
-  id,
-  type,
-  value,
-  defaultValue,
-  step,
-  inputMode,
-  variant,
-  checked,
-  disabled,
-  readOnly,
-  handleClick,
-  handleChange,
-  handleBlur,
-  placeholder,
-  children,
+export default function FormElement({
+  htmlFor,
   touched,
   error,
-  min,
-  max
+  children,
+  label = 'Unnamed Form Element'
 }) {
   const inputError = touched && error;
   const defaultClassName = 'form-el';
@@ -28,40 +13,21 @@ function FormElement({
     ? `${defaultClassName} form-el--hasError`
     : defaultClassName;
 
-  console.log(inputError, touched, error);
+  console.log(children, inputError, touched, error);
 
   return (
     <>
       <div className={className}>
-        <label htmlFor={id}>
+        <label htmlFor={htmlFor}>
           <p>
-            {children}
+            {label}
 
             {/* {variant ? `(${variant})` : ''} */}
           </p>
-          <input
-            name={name}
-            id={id}
-            type={type}
-            step={step}
-            value={value}
-            defaultValue={defaultValue}
-            inputMode={inputMode}
-            checked={checked}
-            readOnly={readOnly}
-            disabled={disabled}
-            onChange={handleChange}
-            onClick={handleClick}
-            onBlur={handleBlur}
-            placeholder={placeholder}
-            min={min}
-            max={max}
-          />
+          {children}
         </label>
         {touched && error && <div className="form-el-error">{error}</div>}
       </div>
     </>
   );
 }
-
-export default FormElement;

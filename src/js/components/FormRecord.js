@@ -270,10 +270,10 @@ export default function FormRecord({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      {/* <pre>touched</pre>
+      <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre> */}
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
       <form
         className="form-record"
         ref={form}
@@ -282,56 +282,58 @@ export default function FormRecord({
       >
         <input type="hidden" name="id" value={formData.id} />
 
-        {jobs.length ? (
-          <fieldset>
-            <div className="form-el">
-              <label htmlFor="entry-job">
-                <p>Job</p>
-                <select
-                  name="jobId"
-                  id="entry-job"
-                  value={formData.jobId}
-                  onBlur={handleBlur}
-                  onChange={handleSelectJobChange}
-                >
-                  <option key={`job-0`} disabled={true} value={0}>
-                    Select Job...
-                  </option>
-                  {jobs.map((job) => (
-                    <option key={`job-${job.id}`} value={job.id}>
-                      {job.name} {job.rate}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-          </fieldset>
-        ) : (
-          <fieldset>
+        <fieldset>
+          {jobs.length ? (
             <FormElement
-              name="jobName"
-              id="jobName"
-              value={formData.jobName}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
+              label="Select Job (id)"
+              error={errors.jobId}
+              htmlFor="entry-job"
+            >
+              <select
+                name="jobId"
+                id="entry-job"
+                value={formData.jobId}
+                onBlur={handleBlur}
+                onChange={handleSelectJobChange}
+              >
+                <option key={`job-0`} disabled={true} value={0}>
+                  Select Job...
+                </option>
+                {jobs.map((job) => (
+                  <option key={`job-${job.id}`} value={job.id}>
+                    {job.name}
+                  </option>
+                ))}
+              </select>
+            </FormElement>
+          ) : (
+            <FormElement
+              htmlFor="jobName"
               error={errors.jobName}
               touched={touched.jobName}
+              label="Job Name"
             >
-              Job Name
+              <input
+                name="jobName"
+                id="jobName"
+                value={formData.jobName}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+              />
             </FormElement>
-          </fieldset>
-        )}
+          )}
+        </fieldset>
 
         <fieldset>
-          <FormElement
-            name="dates"
-            id="dates"
-            value={datePickerDisplayValue}
-            variant="dates field value"
-            readOnly={true}
-            handleClick={() => setDatePickerOpen(!datePickerOpen)}
-          >
-            Date
+          <FormElement label="Select Dates...">
+            <input
+              name="dates"
+              id="dates"
+              value={datePickerDisplayValue}
+              variant="dates field value"
+              readOnly={true}
+              onClick={() => setDatePickerOpen(!datePickerOpen)}
+            />
           </FormElement>
 
           <DatesPickerCalendar
@@ -346,99 +348,117 @@ export default function FormRecord({
 
           <FormElementSet>
             <FormElement
-              name="timeBegin"
-              id="entry-begin-time"
-              type="time"
-              value={formData.timeBegin}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
               error={errors.timeBegin}
               touched={touched.timeBegin}
+              htmlFor="timeBegin"
+              label="Starts"
             >
-              Starts
+              <input
+                name="timeBegin"
+                id="timeBegin"
+                type="time"
+                value={formData.timeBegin}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
             </FormElement>
 
             <FormElement
-              id="entry-end-time"
-              name="timeEnd"
-              type="time"
-              value={formData.timeEnd}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
               error={errors.timeEnd}
               touched={touched.timeEnd}
+              htmlFor="timeEnd"
+              label="Ends"
             >
-              Ends
+              <input
+                name="timeEnd"
+                id="timeEnd"
+                type="time"
+                value={formData.timeEnd}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
             </FormElement>
           </FormElementSet>
         </fieldset>
+        <p>Select one or multiple dates</p>
 
         <fieldset>
           <FormElementSet>
             <FormElement
-              name="hoursUnpaid"
-              id="entry-unpaid-hours"
-              type="number"
-              step="0.1"
-              min="0"
-              value={formData.hoursUnpaid}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              placeholder="0"
+              label="Hours unpaid"
               error={errors.hoursUnpaid}
               touched={touched.hoursUnpaid}
+              htmlFor="hoursUnpaid"
             >
-              Unpaid Time
+              <input
+                name="hoursUnpaid"
+                id="hoursUnpaid"
+                type="number"
+                step="0.1"
+                min="0"
+                value={formData.hoursUnpaid}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
             </FormElement>
           </FormElementSet>
 
           <FormElementSet>
             <FormElement
-              inputMode="decimal"
-              variant="currency"
-              name="rate"
-              id="entry-rate"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.rate}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              placeholder="0"
+              label="Rate"
               error={errors.rate}
               touched={touched.rate}
+              htmlFor="rate"
             >
-              Rate
+              <input
+                inputMode="decimal"
+                variant="currency"
+                name="rate"
+                id="rate"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.rate}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
             </FormElement>
+
             <FormElement
-              inputMode="decimal"
-              variant="currency"
-              name="bonus"
-              id="entry-bonus"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.bonus}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              placeholder="0"
+              label="Bonus"
               error={errors.bonus}
               touched={touched.bonus}
+              htmlFor="bonus"
             >
-              Bonus
+              <input
+                inputMode="decimal"
+                variant="currency"
+                name="bonus"
+                id="bonus"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.bonus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
             </FormElement>
           </FormElementSet>
         </fieldset>
         <fieldset>
-          <FormElement
-            name="sickLeave"
-            id="entry-sick-leave"
-            type="checkbox"
-            value={formData.sickLeave}
-            handleChange={handleChange}
-            checked={formData.sickLeave}
-          >
-            Sick Leave?
+          <FormElement label="Sick LEAVE" htmlFor="sickLeave">
+            <input
+              type="checkbox"
+              checked={formData.sickLeave}
+              name="sickLeave"
+              id="sickLeave"
+              value={formData.sickLeave}
+              onChange={handleChange}
+              // handleBlur={handleBlur}
+            />
           </FormElement>
         </fieldset>
         <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre>
