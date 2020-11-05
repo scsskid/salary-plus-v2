@@ -285,42 +285,43 @@ export default function FormRecord({
         {jobs.length ? (
           <fieldset>
             <div className="form-el">
-              <label htmlFor="entry-job">Job</label>
-              <select
-                name="jobId"
-                id="entry-job"
-                value={formData.jobId}
-                onBlur={handleBlur}
-                onChange={handleSelectJobChange}
-              >
-                <option key={`job-0`} disabled={true} value={0}>
-                  Select Job...
-                </option>
-                {jobs.map((job) => (
-                  <option key={`job-${job.id}`} value={job.id}>
-                    {job.name} {job.rate}
+              <label htmlFor="entry-job">
+                <p>Job</p>
+                <select
+                  name="jobId"
+                  id="entry-job"
+                  value={formData.jobId}
+                  onBlur={handleBlur}
+                  onChange={handleSelectJobChange}
+                >
+                  <option key={`job-0`} disabled={true} value={0}>
+                    Select Job...
                   </option>
-                ))}
-              </select>
+                  {jobs.map((job) => (
+                    <option key={`job-${job.id}`} value={job.id}>
+                      {job.name} {job.rate}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
           </fieldset>
         ) : (
-          <></>
+          <fieldset>
+            <FormElement
+              name="jobName"
+              id="jobName"
+              value={formData.jobName}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              error={errors.jobName}
+              touched={touched.jobName}
+            >
+              Job Name
+            </FormElement>
+          </fieldset>
         )}
 
-        <fieldset>
-          <FormElement
-            name="jobName"
-            id="jobName"
-            value={formData.jobName}
-            handleChange={handleChange}
-            handleBlur={handleBlur}
-            error={errors.jobName}
-            touched={touched.jobName}
-          >
-            Job Name
-          </FormElement>
-        </fieldset>
         <fieldset>
           <FormElement
             name="dates"

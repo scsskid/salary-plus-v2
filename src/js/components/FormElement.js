@@ -22,12 +22,21 @@ function FormElement({
   min,
   max
 }) {
+  const inputError = touched && error;
+  const defaultClassName = 'form-el';
+  const className = inputError
+    ? `${defaultClassName} form-el--hasError`
+    : defaultClassName;
+
+  console.log(inputError, touched, error);
+
   return (
     <>
-      <div className="form-el">
+      <div className={className}>
         <label htmlFor={id}>
           <p>
             {children}
+
             {/* {variant ? `(${variant})` : ''} */}
           </p>
           <input
@@ -49,10 +58,8 @@ function FormElement({
             max={max}
           />
         </label>
+        {touched && error && <div className="form-el-error">{error}</div>}
       </div>
-      <p>
-        <b>{touched && error}</b>
-      </p>
     </>
   );
 }
