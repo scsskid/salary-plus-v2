@@ -51,7 +51,9 @@ export default function Reports({
                   <FigureHoursElapsed records={monthRecords} />
                 </td>
                 <td>
-                  <FigureEarned records={monthRecords} />
+                  <b>
+                    <FigureEarned records={monthRecords} />
+                  </b>
                 </td>
               </tr>
               <tr className="table-reporting-row">

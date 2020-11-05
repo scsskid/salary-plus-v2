@@ -1,13 +1,25 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import IconView from './../../icons/icon-view.svg';
+import IconAdd from './../../icons/icon-add.svg';
+import IconSettings from './../../icons/icon-settings.svg';
 
 const Navigaton = () => {
   return (
     <nav className="main-navigation">
       <ul>
-        <NavEl route="/">View</NavEl>
-        <NavEl route="/records/add">Add</NavEl>
-        <NavEl route="/settings">Settings</NavEl>
+        <NavEl route="/">
+          <IconView />
+          <span>View</span>
+        </NavEl>
+        <NavEl route="/records/add">
+          <IconAdd />
+          Add
+        </NavEl>
+        <NavEl route="/settings">
+          <IconSettings />
+          Settings
+        </NavEl>
       </ul>
     </nav>
   );

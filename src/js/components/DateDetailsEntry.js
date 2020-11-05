@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
-import FigureBonus from './FigureBonus';
+// import FigureBonus from './FigureBonus';
 import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
 
