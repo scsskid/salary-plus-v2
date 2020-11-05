@@ -1,7 +1,7 @@
 .main-navigation {
   height: calc(10 * var(--b));
   background: #fff;
-  padding: 0 1rem;
+  padding: 0 18px;
   box-shadow: 0 0 10px hsl(0deg 5% 85%);
   position: relative;
   z-index: 1;
