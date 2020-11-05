@@ -245,8 +245,7 @@ export default function FormRecord({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      console.log({ ...touched });
-      alert(JSON.stringify(formData, null, 2));
+      // alert(JSON.stringify(formData, null, 2));
       setSubmit(true);
     }
   }
@@ -382,7 +381,6 @@ export default function FormRecord({
             </FormElement>
           </FormElementSet>
         </fieldset>
-        <p>Select one or multiple dates</p>
 
         <fieldset>
           <FormElementSet>
