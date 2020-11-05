@@ -1,6 +1,7 @@
 import React from 'react';
+import Button from './Button';
 
-function Welcome({ seedFunctions }) {
+export default function Welcome({ seedFunctions }) {
   const { insertSampleData, insertBootstrapData } = seedFunctions;
 
   return (
@@ -15,15 +16,13 @@ function Welcome({ seedFunctions }) {
         </span>
       </p>
       <p>
-        <button className="btn" onClick={insertSampleData}>
+        <Button className="btn" onClick={insertSampleData}>
           Insert Sample Data
-        </button>{' '}
-        <button className="btn" onClick={insertBootstrapData}>
+        </Button>{' '}
+        <Button className="btn" onClick={insertBootstrapData}>
           Start as new User
-        </button>
+        </Button>
       </p>
     </>
   );
 }
-
-export default Welcome;
