@@ -106,41 +106,62 @@ const formatDate = {
   }
 };
 
-export function mapFormDataToStorageObject(record) {
-  record.dateEnd = new Date(record.dateBegin.getTime());
+// function getRecordBeginEnd({
+//   dateBegin,
+//   timeBegin,
+//   timeEnd,
+// }) {
+
+// }
+
+export function mapFormDataToStorageObject({
+  id,
+  dateBegin,
+  timeBegin,
+  timeEnd,
+  jobId,
+  jobName,
+  bonus,
+  note,
+  sickLeave,
+  status,
+  rate,
+  rateInterval,
+  hoursUnpaid
+}) {
+  const dateEnd = new Date(dateBegin.getTime());
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
-  if (record.timeBegin > record.timeEnd) {
-    var recordedDateEnd = new Date(record.dateEnd);
+  if (timeBegin > timeEnd) {
+    var recordedDateEnd = new Date(dateEnd);
     var recordedDateEndDay = recordedDateEnd.getDate();
     recordedDateEnd.setDate(recordedDateEndDay + 1);
-    record.dateEnd = recordedDateEnd;
+    dateEnd = recordedDateEnd;
   }
   const timeSplits = {
-    begin: record.timeBegin.split(':'),
-    end: record.timeEnd.split(':')
+    begin: timeBegin.split(':'),
+    end: timeEnd.split(':')
   };
 
-  record.dateBegin.setHours(timeSplits.begin[0], timeSplits.begin[1], 0, 0);
-  record.dateEnd.setHours(timeSplits.end[0], timeSplits.end[1], 0, 0);
+  dateBegin.setHours(timeSplits.begin[0], timeSplits.begin[1], 0, 0);
+  dateEnd.setHours(timeSplits.end[0], timeSplits.end[1], 0, 0);
 
-  const begin = record.dateBegin.toISOString();
-  const end = record.dateEnd.toISOString();
-
-  delete record.dateEnd; // ? otherwise it get returned, why?
+  const begin = dateBegin.toISOString();
+  const end = dateEnd.toISOString();
 
   const payload = {
-    id: parseInt(record.id),
-    jobId: parseInt(record.jobId),
-    jobName: record.jobName || '',
+    id: parseInt(id),
+    jobId: parseInt(jobId),
+    jobName,
     begin,
     end,
-    bonus: record.bonus || '',
-    note: record.note || '',
-    sickLeave: record.sickLeave || '',
-    status: record.status || '',
-    rate: record.rate || '',
-    interval: record.rateInterval || ''
+    bonus,
+    note,
+    sickLeave,
+    status,
+    rate,
+    interval,
+    hoursUnpaid
   };
 
   return payload;
