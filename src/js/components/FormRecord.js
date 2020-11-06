@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from './Button';
 import FormElement from './FormElement';
+import FormElementSet from './FormElementSet';
 import DatesPickerCalendar from './DatesPickerCalendar';
 import { Prompt } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import FormElementSet from './FormElementSet';
 
 export default function FormRecord({
   saveRecord,
@@ -279,6 +279,7 @@ export default function FormRecord({
         ref={form}
         onSubmit={handleSubmit}
         data-record-id={formData.recordId}
+        autoComplete="off"
       >
         <input type="hidden" name="id" value={formData.id} />
 
