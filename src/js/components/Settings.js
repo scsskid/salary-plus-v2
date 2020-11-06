@@ -13,7 +13,20 @@ const Settings = ({ jobs, children }) => {
       </header>
       <fieldset>
         <FormElementSet>
+          <FormElement label="Language">
+            <select>
+              <option>English</option>
+              <option>Deutsch</option>
+            </select>
+          </FormElement>
+        </FormElementSet>
+        <FormElementSet>
           <FormElement label="Allow override jobs Settings in Records Entry">
+            <input type="checkbox" />
+          </FormElement>
+        </FormElementSet>
+        <FormElementSet>
+          <FormElement label="Display Sick Leave when adding new record">
             <input type="checkbox" />
           </FormElement>
         </FormElementSet>
@@ -27,13 +40,6 @@ const Settings = ({ jobs, children }) => {
           </FormElement>
         </FormElementSet>
       </fieldset>
-      {/* <h2>General</h2>
-      <label htmlFor="language">Languge</label>
-      <select name="language">
-        <option>DE</option>
-        <option>EN</option>
-      </select> 
-      <hr></hr>*/}
 
       {children}
     </>
