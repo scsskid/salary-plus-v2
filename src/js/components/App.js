@@ -12,6 +12,7 @@ import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
 import Reports from './Reports';
+import JobsList from './JobsList';
 
 export default function App() {
   const [inputDate, setInputDate] = React.useState(() => {
@@ -175,7 +176,10 @@ export default function App() {
               changeMonth={changeMonth}
             />
           </Route>
-          <Route path="/Settings">
+          <Route path="/jobs/">
+            <JobsList jobs={jobs} />
+          </Route>
+          <Route path="/settings">
             <Settings settings={settings} jobs={jobs}>
               <Debug
                 settings={settings}

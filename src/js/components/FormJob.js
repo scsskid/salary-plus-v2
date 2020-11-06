@@ -1,19 +1,14 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
+import { Prompt } from 'react-router';
 import Button from './Button';
 import Dialog from './Dialog';
 import FormElementSet from './FormElementSet';
 import FormElement from './FormElement';
-// eslint-disable-next-line no-unused-vars
-import { Prompt } from 'react-router';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
-
-  function handleDispatch(formData) {
-    saveJob(formData);
-    history.push('/settings');
-  }
 
   const initialFormData = {
     name: '',
@@ -24,10 +19,13 @@ export function FormJobCreate({ saveJob }) {
 
   return (
     <>
-      <h1>Add New Job</h1>
+      <div className="component-header">
+        <h1>New Job</h1>
+      </div>
       <FormJob
-        handleDispatch={handleDispatch}
         initialFormData={initialFormData}
+        saveJob={saveJob}
+        history={history}
       />
     </>
   );
@@ -37,11 +35,6 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
   const { jobId } = useParams();
   const history = useHistory();
   const job = jobs.find((job) => job.id === parseInt(jobId));
-
-  function handleDispatch(formData) {
-    saveJob(formData);
-    history.push('/settings');
-  }
 
   const initialFormData = {
     id: job.id,
@@ -53,44 +46,44 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
 
   return (
     <>
-      <h1>Update Job</h1>
+      <div className="component-header">
+        <h1>Update Job</h1>
+      </div>
       {children}
       <FormJob
-        handleDispatch={handleDispatch}
         job={job}
         deleteItem={deleteItem}
         history={history}
         isUpdateForm={true}
         initialFormData={initialFormData}
+        saveJob={saveJob}
       />
     </>
   );
 }
 
 export default function FormJob({
-  handleDispatch,
   deleteItem,
   history,
   isUpdateForm,
-  initialFormData
+  initialFormData,
+  saveJob
 }) {
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
-  // eslint-disable-next-line no-unused-vars
-  function handleDelete(e) {
-    // e.preventDefault();
+  function handleDelete() {
     deleteItem({ type: 'job', id: formData.id });
     history.push('/settings');
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleDispatch(formData);
+    saveJob(formData);
+    history.push('/jobs');
   }
 
   function handleChange(e) {
-    // console.log(e.target.name);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value

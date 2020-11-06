@@ -9,6 +9,7 @@
 
 @import 'components/View.css';
 @import 'components/Calendar.css';
+@import 'components/JobsList.css';
 @import 'components/Button.css';
 @import 'components/SegmentNav.css';
 @import 'components/Dialog.css';
