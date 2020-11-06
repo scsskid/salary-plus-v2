@@ -2,6 +2,9 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from './Button';
 import Dialog from './Dialog';
+import FormElementSet from './FormElementSet';
+import FormElement from './FormElement';
+import { Prompt } from 'react-router';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -11,10 +14,20 @@ export function FormJobCreate({ saveJob }) {
     history.push('/settings');
   }
 
+  const initialFormData = {
+    name: '',
+    rate: '',
+    dayHours: '',
+    hoursUnpaid: ''
+  };
+
   return (
     <>
       <h1>Add New Job</h1>
-      <FormJob handleDispatch={handleDispatch} />
+      <FormJob
+        handleDispatch={handleDispatch}
+        initialFormData={initialFormData}
+      />
     </>
   );
 }
@@ -22,13 +35,20 @@ export function FormJobCreate({ saveJob }) {
 export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
   const { jobId } = useParams();
   const history = useHistory();
-
   const job = jobs.find((job) => job.id === parseInt(jobId));
 
   function handleDispatch(formData) {
     saveJob(formData);
     history.push('/settings');
   }
+
+  const initialFormData = {
+    id: job.id,
+    name: job.name || 'X',
+    rate: job.rate || '',
+    dayHours: job.dayHours || '',
+    hoursUnpaid: job.hoursUnpaid || ''
+  };
 
   return (
     <>
@@ -40,6 +60,7 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
         deleteItem={deleteItem}
         history={history}
         isUpdateForm={true}
+        initialFormData={initialFormData}
       />
     </>
   );
@@ -47,17 +68,12 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
 
 export default function FormJob({
   handleDispatch,
-  job,
   deleteItem,
   history,
-  isUpdateForm
+  isUpdateForm,
+  initialFormData
 }) {
-  const [formData, setFormData] = React.useState(
-    job || {
-      name: 'Unnamed Job',
-      rate: 0
-    }
-  );
+  const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   function handleDelete(e) {
@@ -81,29 +97,71 @@ export default function FormJob({
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <p>ID: {formData.id}</p>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            placeholder="Enter a job name..."
-          />
-        </div>
+        <fieldset>
+          <FormElementSet>
+            <FormElement htmlFor="name" label="Job Name">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                placeholder="Enter a job name..."
+              />
+            </FormElement>
+          </FormElementSet>
+        </fieldset>
+        <fieldset>
+          <FormElementSet>
+            <FormElement htmlFor="rate" label="Job Rate">
+              <input
+                id="rate"
+                type="number"
+                step="0.01"
+                name="rate"
+                value={formData.rate}
+                onChange={handleChange}
+                placeholder="Enter optional rate..."
+              />
+            </FormElement>
+          </FormElementSet>
+          <FormElementSet>
+            <FormElement htmlFor="dayHours" label="Regular Hours per Day">
+              <input
+                id="dayHours"
+                name="dayHours"
+                type="number"
+                step="0.1"
+                min="0"
+                value={formData.dayHours}
+                onChange={handleChange}
+                placeholder="0"
+              />
+            </FormElement>
+          </FormElementSet>
+          <FormElementSet>
+            <FormElement
+              htmlFor="hoursUnpaid"
+              label="Default Unpaid Hours per Day"
+            >
+              <input
+                id="hoursUnpaid"
+                name="hoursUnpaid"
+                type="number"
+                step="0.1"
+                min="0"
+                value={formData.hoursUnpaid}
+                onChange={handleChange}
+                placeholder="0"
+              />
+            </FormElement>
+          </FormElementSet>
+        </fieldset>
+
         <div>
           <label htmlFor="name">Rate</label>
-          <input
-            type="number"
-            step="0.01"
-            name="rate"
-            value={formData.rate}
-            onChange={handleChange}
-            placeholder="Enter optional rate..."
-          />
         </div>
 
         <div>
@@ -125,6 +183,8 @@ export default function FormJob({
           )}
         </div>
       </form>
+      <pre>{JSON.stringify(formData, null, 2)}</pre>
+
       <Dialog
         dialogOpen={dialogOpen}
         setDialogOpen={setDialogOpen}
