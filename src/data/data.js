@@ -2116,19 +2116,25 @@ export const sampleData = {
     {
       id: 1,
       name: "Hell's Kitchen™️",
-      rate: 25.0,
+      rate: 35.0,
+      dayHours: 4,
+      hoursUnpaid: 0.5,
       status: 'active'
     },
     {
       id: 2,
       name: 'OBI',
       rate: 17.5,
+      dayHours: '',
+      hoursUnpaid: 0,
       status: 'active'
     },
     {
       id: 3,
       name: 'Benedikts Teufelsküche',
-      rate: 75.0,
+      dayHours: '',
+      hoursUnpaid: 0,
+      rate: 80.0,
       status: 'active'
     }
   ]
