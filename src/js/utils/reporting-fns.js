@@ -1,14 +1,41 @@
-import { getHoursElapsed } from './date-fns';
-import { getTimeElapsed, timeToDecimal } from '../utils/date-fns';
+import { getHoursElapsed, getTimeElapsed, timeToDecimal } from './date-fns';
+import { round } from './helpers';
 
-export function addRecordHoursElapsed(acc, record) {
-  return acc + getHoursElapsed(new Date(record.end) - new Date(record.begin));
+function getTotalBonusNumberOfRecords(records) {
+  return records.reduce((acc, record) => {
+    const bonusNumber = parseFloat(record.bonus);
+    const bonus = !isNaN(bonusNumber) ? bonusNumber : 0;
+    return acc + bonus;
+  }, 0);
 }
 
-export function getEarned(record) {
+function getTotalEarnedNumberOfRecords(records) {
+  return records.reduce((acc, record) => {
+    return acc + getEarned(record);
+  }, 0);
+}
+
+function getTotalHoursElapsedOfRecords(records) {
+  return round(
+    records.reduce((acc, record) => {
+      return (
+        acc + getHoursElapsed(new Date(record.end) - new Date(record.begin))
+      );
+    }, 0),
+    2
+  );
+}
+
+function getEarned(record) {
   return (
     timeToDecimal(
       getTimeElapsed(new Date(record.end) - new Date(record.begin))
     ) * record.rate
   );
 }
+
+export {
+  getTotalBonusNumberOfRecords,
+  getTotalEarnedNumberOfRecords,
+  getTotalHoursElapsedOfRecords
+};

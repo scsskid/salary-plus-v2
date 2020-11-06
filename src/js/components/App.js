@@ -55,7 +55,7 @@ export default function App() {
     });
   }
 
-  // Props To Drill
+  // InputDate Derived Values
 
   const monthRecords = getRecordsByMonth({
     records,

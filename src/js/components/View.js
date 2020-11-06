@@ -21,6 +21,7 @@ export default function View({
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
   const history = useHistory();
+
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
