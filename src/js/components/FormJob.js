@@ -4,6 +4,7 @@ import Button from './Button';
 import Dialog from './Dialog';
 import FormElementSet from './FormElementSet';
 import FormElement from './FormElement';
+// eslint-disable-next-line no-unused-vars
 import { Prompt } from 'react-router';
 
 export function FormJobCreate({ saveJob }) {
@@ -44,7 +45,7 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
 
   const initialFormData = {
     id: job.id,
-    name: job.name || 'X',
+    name: job.name,
     rate: job.rate || '',
     dayHours: job.dayHours || '',
     hoursUnpaid: job.hoursUnpaid || ''
@@ -76,6 +77,7 @@ export default function FormJob({
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
+  // eslint-disable-next-line no-unused-vars
   function handleDelete(e) {
     // e.preventDefault();
     deleteItem({ type: 'job', id: formData.id });
