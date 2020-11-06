@@ -14,7 +14,7 @@ export default function View({
   settings,
   changeMonth,
   monthRecords,
-  updateInputDate,
+  setInputDate,
   jobs,
   dateRecords
 }) {
@@ -28,7 +28,7 @@ export default function View({
         <RecordsCalendar
           inputDate={inputDate}
           records={monthRecords}
-          updateInputDate={updateInputDate}
+          setInputDate={setInputDate}
           settings={settings}
         />
         <DateDetails

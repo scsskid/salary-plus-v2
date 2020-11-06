@@ -5,13 +5,13 @@ import { getShortIsoString, isSameDay } from '../utils/helpers.js';
 export default function RecordsCalendar({
   inputDate,
   records,
-  updateInputDate,
+  setInputDate,
   settings
 }) {
   const recordsCalendarRef = React.useRef();
 
   function handleCalendarDateButtonClick(e) {
-    updateInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
+    setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
   React.useEffect(() => {

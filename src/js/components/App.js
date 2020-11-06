@@ -23,14 +23,14 @@ export default function App() {
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = [], jobs = [] } = appData;
 
-  function updateInputDate(date) {
-    setInputDate(date);
-  }
+  // Effects
 
   React.useEffect(() => {
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
   }, []);
+
+  // Store CRUD
 
   // make higher order fn
   function saveRecord(formData) {
@@ -38,7 +38,7 @@ export default function App() {
       type: 'id' in formData ? 'updateRecord' : 'createRecord',
       payload: formData
     });
-    updateInputDate(new Date(formData.dateBegin));
+    setInputDate(new Date(formData.dateBegin));
   }
 
   function saveJob(formData) {
@@ -55,6 +55,8 @@ export default function App() {
     });
   }
 
+  // Props To Drill
+
   const monthRecords = getRecordsByMonth({
     records,
     date: inputDate
@@ -64,6 +66,8 @@ export default function App() {
     records: monthRecords,
     date: inputDate
   });
+
+  // Fns to Drill
 
   function changeMonth(summand = 0) {
     const inputDateCopy = (function () {
@@ -125,7 +129,7 @@ export default function App() {
               settings={settings}
               changeMonth={changeMonth}
               monthRecords={monthRecords}
-              updateInputDate={updateInputDate}
+              setInputDate={setInputDate}
               jobs={jobs}
               dateRecords={dateRecords}
             />
@@ -136,9 +140,6 @@ export default function App() {
               settings={settings}
               changeMonth={changeMonth}
               monthRecords={monthRecords}
-              updateInputDate={updateInputDate}
-              jobs={jobs}
-              dateRecords={dateRecords}
             />
           </Route>
           <Route path="/records/add">
