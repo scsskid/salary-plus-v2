@@ -5,6 +5,7 @@ import InputDateDisplay from './InputDateDisplay';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
+import FigureIncome from './FigureIncome';
 
 export default function Reports({
   inputDate,
@@ -87,7 +88,7 @@ export default function Reports({
             </tbody>
           </table>
           <p>
-            Total Salary <b>X €</b>
+            Total Salary <FigureIncome records={monthRecords} />
           </p>
         </div>
       </>

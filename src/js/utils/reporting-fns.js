@@ -26,6 +26,13 @@ function getTotalHoursElapsedOfRecords(records) {
   );
 }
 
+function getTotalIncomeOfRecords(records) {
+  return (
+    getTotalEarnedNumberOfRecords(records) +
+    getTotalBonusNumberOfRecords(records)
+  );
+}
+
 function getEarned(record) {
   return (
     timeToDecimal(
@@ -37,5 +44,6 @@ function getEarned(record) {
 export {
   getTotalBonusNumberOfRecords,
   getTotalEarnedNumberOfRecords,
-  getTotalHoursElapsedOfRecords
+  getTotalHoursElapsedOfRecords,
+  getTotalIncomeOfRecords
 };
