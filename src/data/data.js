@@ -12,11 +12,9 @@ export const bootstrapData = {
   },
   records: [],
   jobs: [],
-  presets: [],
   settings: {
     ...settings,
     incrementIdRecords: 0,
-    incrementIdPresets: 0,
     incrementIdJobs: 1
   }
 };
@@ -30,7 +28,6 @@ export const sampleData = {
   settings: {
     ...settings,
     incrementIdRecords: 159,
-    incrementIdPresets: 2,
     incrementIdJobs: 3
   },
   records: [
@@ -2113,24 +2110,6 @@ export const sampleData = {
       status: '',
       rate: '20.00',
       interval: 'hourly'
-    }
-  ],
-  presets: [
-    {
-      id: 1,
-      jobId: 1,
-      name: 'Frühschicht',
-      rate: 18.5,
-      timeBegin: '06:00',
-      timeEnd: '14:00'
-    },
-    {
-      id: 2,
-      jobId: 1,
-      name: 'Spätschicht',
-      rate: 20.0,
-      timeBegin: '20:00',
-      timeEnd: '04:00'
     }
   ],
   jobs: [

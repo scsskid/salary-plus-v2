@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-const Settings = ({ jobs, presets, children }) => {
+const Settings = ({ jobs, children }) => {
   const history = useHistory();
 
   return (
@@ -39,32 +39,7 @@ const Settings = ({ jobs, presets, children }) => {
           Add New Job
         </button>
       </div>
-      <hr></hr>
-      <h2>Presets</h2>
-      {presets.map((preset) => (
-        <div key={preset.id}>
-          {preset.name}
-          <br /> ({preset.timeBegin} - {preset.timeEnd},{' '}
-          {new Intl.NumberFormat('de-DE', {
-            style: 'currency',
-            currency: 'EUR'
-          }).format(preset.rate)}
-          ){' '}
-          <button
-            className="btn"
-            onClick={() => history.push(`/presets/${preset.id}`)}
-          >
-            Edit
-          </button>
-        </div>
-      ))}
-      <div>
-        <button className="btn" onClick={() => history.push(`/presets/add`)}>
-          Add New Preset
-        </button>
-      </div>
 
-      <hr />
       {children}
     </>
   );

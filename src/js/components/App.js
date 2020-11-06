@@ -10,7 +10,6 @@ import { throttle, setAppInnerHeight } from '../utils/helpers.js';
 import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
-import { FormPresetCreate, FormPresetUpdate } from './FormPreset';
 import Debug from './Debug';
 import Reports from './Reports';
 
@@ -22,7 +21,7 @@ export default function App() {
   });
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
-  const { settings = {}, records = [], jobs = [], presets = [] } = appData;
+  const { settings = {}, records = [], jobs = [] } = appData;
 
   function updateInputDate(date) {
     setInputDate(date);
@@ -45,13 +44,6 @@ export default function App() {
   function saveJob(formData) {
     dispatch({
       type: 'id' in formData ? 'updateJob' : 'createJob',
-      payload: formData
-    });
-  }
-
-  function savePreset(formData) {
-    dispatch({
-      type: 'id' in formData ? 'updatePreset' : 'createPreset',
       payload: formData
     });
   }
@@ -153,7 +145,6 @@ export default function App() {
             <FormRecordCreate
               inputDate={inputDate}
               jobs={jobs}
-              presets={presets}
               settings={settings}
               saveRecord={saveRecord}
               dispatch={dispatch}
@@ -163,7 +154,6 @@ export default function App() {
           <Route path="/records/:id">
             <FormRecordUpdate
               jobs={jobs}
-              presets={presets}
               records={records}
               saveRecord={saveRecord}
               deleteItem={deleteItem}
@@ -184,19 +174,8 @@ export default function App() {
               changeMonth={changeMonth}
             />
           </Route>
-          <Route path="/presets/add">
-            <FormPresetCreate savePreset={savePreset} />
-          </Route>
-          <Route path="/presets/:presetId">
-            <FormPresetUpdate
-              presets={presets}
-              savePreset={savePreset}
-              deleteItem={deleteItem}
-            />
-          </Route>
-
           <Route path="/Settings">
-            <Settings settings={settings} jobs={jobs} presets={presets}>
+            <Settings settings={settings} jobs={jobs}>
               <Debug
                 settings={settings}
                 dispatch={dispatch}

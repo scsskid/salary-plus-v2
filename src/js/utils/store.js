@@ -10,7 +10,6 @@ function reducer(state, { type, payload }) {
   console.log(`reducer: [ ${type} ]`, payload);
 
   // const freshNess = new Date().toISOString();
-  const nextPresetId = state?.settings?.incrementIdPresets + 1;
   const nextJobId = state?.settings?.incrementIdJobs + 1;
   const nextRecordId = state?.settings?.incrementIdRecords + 1;
 
@@ -68,28 +67,6 @@ function reducer(state, { type, payload }) {
         //       ? null
         //       : state.settings.previousJobId
         // }
-      };
-    case 'createPreset':
-      payload.id = nextPresetId;
-      return {
-        ...state,
-        presets: [...state.presets, payload],
-        settings: {
-          ...state.settings,
-          incrementIdPresets: nextPresetId
-        }
-      };
-    case 'updatePreset':
-      return {
-        ...state,
-        presets: mutateArrayWithObject(payload, state.presets)
-      };
-    case 'deletePreset':
-      return {
-        ...state,
-        presets: state.presets.filter((preset) => {
-          return preset.id != payload.id;
-        })
       };
 
     case 'setPreviousFormDataProp':
