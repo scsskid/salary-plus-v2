@@ -4,6 +4,10 @@ import { getLocaleTimeString } from '../utils/helpers';
 // import FigureBonus from './FigureBonus';
 import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
+import {
+  getTotalUnpaidHours,
+  getOverTimeOfRecord
+} from './../utils/reporting-fns';
 
 export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
@@ -48,6 +52,10 @@ export default function DateDetailsEntry({ record, jobs }) {
             {/* <FigureBonus records={[record]} /> */}
             <FigureHoursElapsed records={[record]} />
             {record.sickLeave && <span> [sick]</span>}
+            <br></br>
+            getTotalUnpaidHours {getTotalUnpaidHours([record])}
+            <br></br>
+            getOverTimeOfRecord {getOverTimeOfRecord(record, 8)}
           </p>
         </div>
       </button>
