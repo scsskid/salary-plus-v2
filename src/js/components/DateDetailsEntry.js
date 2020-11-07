@@ -4,10 +4,7 @@ import { getLocaleTimeString } from '../utils/helpers';
 // import FigureBonus from './FigureBonus';
 import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
-import {
-  getTotalUnpaidHours,
-  getOverTimeOfRecord
-} from './../utils/reporting-fns';
+import * as utils from './../utils/reporting-fns';
 
 export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
@@ -20,6 +17,13 @@ export default function DateDetailsEntry({ record, jobs }) {
   function handleClick() {
     history.push(`/records/${record.id}`);
   }
+
+  const meta = {
+    getTotalUnpaidHours: utils.getTotalUnpaidHours([record]),
+    getOverTimeOfRecord: utils.getOverTimeOfRecord(record, 8),
+    getEarnedOfRecordBRUTTO: utils.getEarnedOfRecord(record, 'brutto'),
+    getEarnedOfRecordNETTO: utils.getEarnedOfRecord(record)
+  };
 
   return (
     <>
@@ -52,14 +56,10 @@ export default function DateDetailsEntry({ record, jobs }) {
             {/* <FigureBonus records={[record]} /> */}
             <FigureHoursElapsed records={[record]} />
             {record.sickLeave && <span> [sick]</span>}
-            <br></br>
-            getTotalUnpaidHours {getTotalUnpaidHours([record])}
-            <br></br>
-            getOverTimeOfRecord {getOverTimeOfRecord(record, 8)}
           </p>
         </div>
       </button>
-
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(meta, null, 2)}</pre>
       {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
     </>
   );
