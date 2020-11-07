@@ -129,34 +129,20 @@ function getRecordBeginEnd({ dateBegin, timeBegin, timeEnd }) {
 
 export function mapFormDataToStorageObject({
   id,
+  jobId,
   dateBegin,
   timeBegin,
   timeEnd,
-  jobId,
-  jobName,
-  bonus,
-  note,
-  sickLeave,
-  status,
-  rate,
-  rateInterval,
-  hoursUnpaid
+  ...rest
 }) {
   const [begin, end] = getRecordBeginEnd({ dateBegin, timeBegin, timeEnd });
 
   const payload = {
     id: parseInt(id),
     jobId: parseInt(jobId),
-    jobName,
     begin,
     end,
-    bonus,
-    note,
-    sickLeave,
-    status,
-    rate,
-    rateInterval,
-    hoursUnpaid
+    ...rest
   };
 
   return payload;
