@@ -1,6 +1,6 @@
 import { round } from './helpers';
 
-// time New
+// hours
 
 function timeToHours(duration) {
   return duration / (1000 * 60 * 60);
@@ -59,6 +59,10 @@ function getOvertimeEarned(records) {
   return getEarned(records, getOvertimeHours);
 }
 
+function getPaidHoursWithoutOvertimeEarned(records) {
+  return getEarned(records, getPaidHoursWithoutOvertime);
+}
+
 // Bonus
 
 function getBonusEarned(records) {
@@ -74,5 +78,6 @@ export {
   getOvertimeHours,
   getPaidHoursWithoutOvertime,
   getOvertimeEarned,
-  getBonusEarned
+  getBonusEarned,
+  getPaidHoursWithoutOvertimeEarned
 };

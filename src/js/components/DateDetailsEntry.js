@@ -1,12 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
-// import FigureBonus from './FigureBonus';
-import FigureEarned from './FigureEarned';
-import FigureHoursElapsed from './FigureHoursElapsed';
-import * as utils from './../utils/reporting-fns';
+import * as reportingFns from './../utils/reporting-fns';
 
-export default function DateDetailsEntry({ record, jobs, settings }) {
+export default function DateDetailsEntry({ record, jobs }) {
   const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
   const time = {
@@ -18,14 +15,25 @@ export default function DateDetailsEntry({ record, jobs, settings }) {
     history.push(`/records/${record.id}`);
   }
 
-  const meta = {
-    job,
+  const reporting = {
+    contractEarned: reportingFns.getPaidHoursWithoutOvertimeEarned([record]),
+    paidHours: reportingFns.getPaidHours([record]),
+    includedOvertime: reportingFns.getOvertimeHours([record])
+  };
+
+  const debug = {
+    // job,
     rate: record.rate,
-    getPaidHours: utils.getPaidHours([record]),
-    getOvertimeHours: utils.getOvertimeHours([record]),
-    getPaidHoursWithoutOvertime: utils.getPaidHoursWithoutOvertime([record]),
-    reporting: {
-      getOvertimeEarned: utils.getOvertimeEarned([record])
+    getPaidHours: reportingFns.getPaidHours([record]),
+    getOvertimeHours: reportingFns.getOvertimeHours([record]),
+    getPaidHoursWithoutOvertime: reportingFns.getPaidHoursWithoutOvertime([
+      record
+    ]),
+    earned: {
+      getOvertimeEarned: reportingFns.getOvertimeEarned([record]),
+      getPaidHoursWithoutOvertimeEarned: reportingFns.getPaidHoursWithoutOvertimeEarned(
+        [record]
+      )
     }
   };
 
@@ -55,17 +63,15 @@ export default function DateDetailsEntry({ record, jobs, settings }) {
           </h2>
 
           <p className="date-details-entry-meta">
-            {/* Todo: Duration String: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time  */}{' '}
-            <FigureEarned records={[record]} />
-            {/* <FigureBonus records={[record]} /> */}
-            <FigureHoursElapsed records={[record]} />
+            <span>{reporting.contractEarned}€</span>
+            <span>{reporting.paidHours}h</span> (
+            <span>{reporting.includedOvertime}h</span>)
             {record.sickLeave && <span> [sick]</span>}
           </p>
         </div>
       </button>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(meta, null, 2)}</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre>
-      {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(debug, null, 2)}</pre>
+      {/* <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre> */}
     </>
   );
 }
