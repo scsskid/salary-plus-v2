@@ -2443,7 +2443,7 @@ export const sampleData = {
       id: 2,
       name: 'OBI',
       rate: 17.5,
-      dayHours: '',
+      dayHours: 7,
       hoursUnpaid: 0.75,
       status: 'active'
     },

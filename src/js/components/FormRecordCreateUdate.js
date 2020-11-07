@@ -18,6 +18,7 @@ export function FormRecordCreate({
     timeBegin = '08:00',
     timeEnd = '17:00',
     hoursUnpaid = '',
+    dayHours = '',
     rate = '',
     bonus = ''
   } = { ...settings.previousFormData };
@@ -29,6 +30,7 @@ export function FormRecordCreate({
     timeBegin,
     timeEnd,
     hoursUnpaid: hoursUnpaid == 0 ? '' : hoursUnpaid,
+    dayHours: dayHours == 0 ? '' : dayHours,
     rate: rate == 0 ? '' : rate,
     bonus: bonus == 0 ? '' : bonus,
     sickLeave: false
@@ -74,6 +76,7 @@ export function FormRecordUpdate({
     begin,
     end,
     hoursUnpaid = '',
+    dayHours = '',
     rate = '',
     bonus = '',
     sickLeave = ''
@@ -86,6 +89,7 @@ export function FormRecordUpdate({
     timeBegin: getTimeOfDate(new Date(begin)),
     timeEnd: getTimeOfDate(new Date(end)),
     hoursUnpaid,
+    dayHours,
     rate,
     bonus,
     sickLeave

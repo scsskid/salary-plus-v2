@@ -103,18 +103,26 @@ export default function FormRecord({
 
     setFormData({
       ...formData,
-      [name]: value,
-      ['rate']: job?.rate || formData.rate,
-      ['jobName']: job?.name || formData.jobName
+      [name]: value, // jobId
+      ['rate']: job?.rate,
+      ['jobName']: job?.name,
+      ['dayHours']: job?.dayHours,
+      ['hoursUnpaid']: job?.hoursUnpaid
     });
 
     handleValidation({ name: 'jobId', value: value });
     handleValidation({ name: 'jobName', value: job?.name });
+    handleValidation({ name: 'rate', value: job?.rate });
+    handleValidation({ name: 'hoursUnpaid', value: job?.hoursUnpaid });
+    handleValidation({ name: 'dayHours', value: job?.dayHours });
 
     setTouched({
       ...touched,
       jobId: true,
-      jobName: true
+      jobName: true,
+      rate: true,
+      dayHours: true,
+      hoursUnpaid: true
     });
 
     if (!isUpdateForm) {
@@ -144,6 +152,7 @@ export default function FormRecord({
     timeBegin: validateTime,
     timeEnd: validateTime,
     hoursUnpaid: validateNumber,
+    dayHours: validateNumber,
     rate: validateNumber,
     bonus: validateNumber
   };
@@ -386,6 +395,24 @@ export default function FormRecord({
 
         <fieldset>
           <FormElementSet>
+            <FormElement
+              label="dayHours"
+              error={errors.dayHours}
+              touched={touched.dayHours}
+              htmlFor="dayHours"
+            >
+              <input
+                name="dayHours"
+                id="dayHours"
+                type="number"
+                step="0.1"
+                min="0"
+                value={formData.dayHours}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
+            </FormElement>
             <FormElement
               label="Hours unpaid"
               error={errors.hoursUnpaid}
