@@ -17,6 +17,7 @@ export default function DateDetailsEntry({ record, jobs }) {
 
   const reporting = {
     contractEarned: reportingFns.getPaidHoursWithoutOvertimeEarned([record]),
+    actualEarned: reportingFns.getPaidHoursEarned([record]),
     paidHours: reportingFns.getPaidHours([record]),
     includedOvertime: reportingFns.getOvertimeHours([record])
   };
@@ -63,9 +64,14 @@ export default function DateDetailsEntry({ record, jobs }) {
           </h2>
 
           <p className="date-details-entry-meta">
-            <span>{reporting.contractEarned}€</span>
-            <span>{reporting.paidHours}h</span> (
-            <span>{reporting.includedOvertime}h</span>)
+            <span>{reporting.actualEarned}€</span>
+            <span>{reporting.paidHours}h</span>
+            {reporting.includedOvertime > 0 && (
+              <span style={{ color: 'red' }}>
+                (+{reporting.includedOvertime}h)
+              </span>
+            )}
+
             {record.sickLeave && <span> [sick]</span>}
           </p>
         </div>

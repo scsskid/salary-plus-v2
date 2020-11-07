@@ -63,6 +63,10 @@ function getPaidHoursWithoutOvertimeEarned(records) {
   return getEarned(records, getPaidHoursWithoutOvertime);
 }
 
+function getPaidHoursEarned(records) {
+  return getEarned(records, getPaidHours);
+}
+
 // Bonus
 
 function getBonusEarned(records) {
@@ -79,5 +83,6 @@ export {
   getPaidHoursWithoutOvertime,
   getOvertimeEarned,
   getBonusEarned,
-  getPaidHoursWithoutOvertimeEarned
+  getPaidHoursWithoutOvertimeEarned,
+  getPaidHoursEarned
 };
