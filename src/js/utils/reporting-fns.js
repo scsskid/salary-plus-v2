@@ -51,8 +51,6 @@ function getPaidHoursWithoutOvertime(records) {
 
 function getEarned(records, hourCalculationFn) {
   return records.reduce((acc, record) => {
-    console.log(acc, record.rate, hourCalculationFn(records));
-
     return acc + record.rate * hourCalculationFn(records);
   }, 0);
 }
