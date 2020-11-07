@@ -41,7 +41,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -54,7 +55,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -67,7 +69,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -80,7 +83,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -93,7 +97,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -106,7 +111,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -119,7 +125,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -132,7 +139,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -141,11 +149,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-01-15T09:00:00.000Z',
       end: '2020-01-15T15:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -158,7 +167,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -171,7 +181,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -184,7 +195,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -197,7 +209,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -210,7 +223,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -223,7 +237,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -236,7 +251,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -249,7 +265,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -262,7 +279,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -271,11 +289,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-02-02T12:00:00.000Z',
       end: '2020-02-02T16:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -288,7 +307,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -301,7 +321,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -314,7 +335,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -323,11 +345,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-02-10T14:00:00.000Z',
       end: '2020-02-10T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -340,7 +363,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -353,7 +377,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -366,7 +391,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -379,7 +405,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -392,7 +419,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -401,11 +429,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-02-23T13:00:00.000Z',
       end: '2020-02-23T18:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -418,7 +447,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -444,7 +474,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -457,7 +488,8 @@ export const sampleData = {
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -466,11 +498,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-06T13:00:00.000Z',
       end: '2020-03-06T22:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -479,11 +512,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-07T13:00:00.000Z',
       end: '2020-03-07T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -492,11 +526,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-08T14:00:00.000Z',
       end: '2020-03-08T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -505,11 +540,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-09T14:00:00.000Z',
       end: '2020-03-09T22:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -518,11 +554,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-10T14:00:00.000Z',
       end: '2020-03-10T23:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -531,11 +568,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-13T12:00:00.000Z',
       end: '2020-03-13T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -544,11 +582,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-15T13:00:00.000Z',
       end: '2020-03-15T22:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -557,11 +596,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-16T13:00:00.000Z',
       end: '2020-03-16T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -570,11 +610,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-17T14:00:00.000Z',
       end: '2020-03-17T23:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -583,11 +624,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-20T12:00:00.000Z',
       end: '2020-03-20T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -596,11 +638,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-22T13:00:00.000Z',
       end: '2020-03-22T23:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -609,11 +652,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-23T14:00:00.000Z',
       end: '2020-03-23T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -622,11 +666,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-27T12:00:00.000Z',
       end: '2020-03-27T22:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -635,11 +680,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-30T13:00:00.000Z',
       end: '2020-03-30T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -648,11 +694,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-03-31T13:00:00.000Z',
       end: '2020-03-31T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -661,11 +708,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-03T11:30:00.000Z',
       end: '2020-04-03T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -674,11 +722,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-05T12:00:00.000Z',
       end: '2020-04-05T20:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -687,11 +736,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-06T13:00:00.000Z',
       end: '2020-04-06T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -700,11 +750,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-07T13:30:00.000Z',
       end: '2020-04-07T20:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -713,11 +764,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-10T12:00:00.000Z',
       end: '2020-04-10T15:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -726,11 +778,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-12T13:00:00.000Z',
       end: '2020-04-12T21:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -739,11 +792,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-13T12:30:00.000Z',
       end: '2020-04-13T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -752,11 +806,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-14T12:00:00.000Z',
       end: '2020-04-14T22:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -765,11 +820,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-17T11:00:00.000Z',
       end: '2020-04-17T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -778,11 +834,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-18T12:00:00.000Z',
       end: '2020-04-18T20:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -791,11 +848,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-19T13:00:00.000Z',
       end: '2020-04-19T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -804,11 +862,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-20T13:00:00.000Z',
       end: '2020-04-20T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -817,11 +876,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-21T12:00:00.000Z',
       end: '2020-04-21T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -830,11 +890,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-24T11:00:00.000Z',
       end: '2020-04-24T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -843,11 +904,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-25T12:00:00.000Z',
       end: '2020-04-25T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -856,11 +918,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-26T12:30:00.000Z',
       end: '2020-04-26T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -869,11 +932,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-27T13:00:00.000Z',
       end: '2020-04-27T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -882,11 +946,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-04-28T14:00:00.000Z',
       end: '2020-04-28T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -895,11 +960,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-03T12:00:00.000Z',
       end: '2020-05-03T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -908,11 +974,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-04T12:00:00.000Z',
       end: '2020-05-04T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -921,11 +988,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-05T14:00:00.000Z',
       end: '2020-05-05T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -934,11 +1002,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-11T12:00:00.000Z',
       end: '2020-05-11T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -947,11 +1016,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-12T12:00:00.000Z',
       end: '2020-05-12T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -960,11 +1030,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-17T13:00:00.000Z',
       end: '2020-05-17T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -973,11 +1044,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-18T12:00:00.000Z',
       end: '2020-05-18T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -986,11 +1058,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-19T12:00:00.000Z',
       end: '2020-05-19T23:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -999,11 +1072,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-22T11:00:00.000Z',
       end: '2020-05-22T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1012,11 +1086,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-24T12:30:00.000Z',
       end: '2020-05-24T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1025,11 +1100,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-25T12:00:00.000Z',
       end: '2020-05-25T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1038,11 +1114,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-05-31T12:30:00.000Z',
       end: '2020-05-31T21:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1051,11 +1128,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-01T12:00:00.000Z',
       end: '2020-06-01T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1064,11 +1142,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-02T12:00:00.000Z',
       end: '2020-06-02T22:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1077,11 +1156,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-05T11:00:00.000Z',
       end: '2020-06-05T20:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1090,11 +1170,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-06T13:00:00.000Z',
       end: '2020-06-06T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: 'Krank',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1103,11 +1184,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-07T12:00:00.000Z',
       end: '2020-06-07T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1116,11 +1198,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-09T11:30:00.000Z',
       end: '2020-06-09T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1129,11 +1212,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-12T11:00:00.000Z',
       end: '2020-06-12T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1142,11 +1226,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-13T12:00:00.000Z',
       end: '2020-06-13T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1155,11 +1240,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-14T12:00:00.000Z',
       end: '2020-06-14T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1168,11 +1254,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-19T11:00:00.000Z',
       end: '2020-06-19T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1181,11 +1268,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-20T12:00:00.000Z',
       end: '2020-06-20T21:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1194,11 +1282,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-21T13:00:00.000Z',
       end: '2020-06-21T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1207,11 +1296,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-23T12:00:00.000Z',
       end: '2020-06-23T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1220,11 +1310,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-26T11:00:00.000Z',
       end: '2020-06-26T15:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1233,11 +1324,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-27T13:00:00.000Z',
       end: '2020-06-27T22:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1246,11 +1338,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-28T12:00:00.000Z',
       end: '2020-06-28T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1259,11 +1352,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-06-30T12:00:00.000Z',
       end: '2020-06-30T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1272,11 +1366,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-01T14:00:00.000Z',
       end: '2020-07-01T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1285,11 +1380,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-03T11:00:00.000Z',
       end: '2020-07-03T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1298,11 +1394,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-06T12:00:00.000Z',
       end: '2020-07-06T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1311,11 +1408,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-07T12:00:00.000Z',
       end: '2020-07-07T22:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1324,11 +1422,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-11T12:30:00.000Z',
       end: '2020-07-11T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1337,11 +1436,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-12T12:00:00.000Z',
       end: '2020-07-12T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1350,11 +1450,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-17T16:00:00.000Z',
       end: '2020-07-17T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1363,11 +1464,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-19T12:30:00.000Z',
       end: '2020-07-19T21:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1376,11 +1478,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-20T12:00:00.000Z',
       end: '2020-07-20T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1389,11 +1492,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-07-21T14:00:00.000Z',
       end: '2020-07-22T00:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1402,11 +1506,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-06T11:00:00.000Z',
       end: '2020-08-06T17:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1415,11 +1520,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-07T15:00:00.000Z',
       end: '2020-08-07T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1428,11 +1534,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-09T13:00:00.000Z',
       end: '2020-08-09T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1441,11 +1548,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-11T12:30:00.000Z',
       end: '2020-08-11T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1454,11 +1562,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-14T16:00:00.000Z',
       end: '2020-08-14T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1467,11 +1576,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-15T13:00:00.000Z',
       end: '2020-08-15T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1480,11 +1590,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-18T08:00:00.000Z',
       end: '2020-08-18T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1493,11 +1604,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-21T16:00:00.000Z',
       end: '2020-08-21T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1506,11 +1618,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-22T12:00:00.000Z',
       end: '2020-08-22T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1519,11 +1632,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-23T12:00:00.000Z',
       end: '2020-08-23T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1532,11 +1646,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-25T14:00:00.000Z',
       end: '2020-08-25T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1545,11 +1660,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-28T16:00:00.000Z',
       end: '2020-08-28T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1558,11 +1674,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-29T13:00:00.000Z',
       end: '2020-08-29T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1571,11 +1688,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-08-30T13:00:00.000Z',
       end: '2020-08-30T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1584,11 +1702,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-01T08:00:00.000Z',
       end: '2020-09-01T14:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1597,11 +1716,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-04T16:00:00.000Z',
       end: '2020-09-04T21:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1610,11 +1730,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-06T12:00:00.000Z',
       end: '2020-09-06T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1623,11 +1744,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-07T12:00:00.000Z',
       end: '2020-09-07T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1636,11 +1758,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-08T14:00:00.000Z',
       end: '2020-09-08T22:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1649,11 +1772,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-11T16:00:00.000Z',
       end: '2020-09-11T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1662,11 +1786,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-13T12:00:00.000Z',
       end: '2020-09-13T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1675,11 +1800,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-15T12:00:00.000Z',
       end: '2020-09-15T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1688,11 +1814,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-18T16:00:00.000Z',
       end: '2020-09-18T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1701,11 +1828,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-20T11:00:00.000Z',
       end: '2020-09-20T22:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1714,11 +1842,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-21T11:15:00.000Z',
       end: '2020-09-21T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1727,11 +1856,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-22T07:45:00.000Z',
       end: '2020-09-22T14:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1740,11 +1870,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-25T16:00:00.000Z',
       end: '2020-09-25T21:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1753,11 +1884,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-28T12:30:00.000Z',
       end: '2020-09-28T21:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1766,11 +1898,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-09-29T07:30:00.000Z',
       end: '2020-09-30T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1779,11 +1912,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-03T11:00:00.000Z',
       end: '2020-10-03T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1792,11 +1926,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-04T13:00:00.000Z',
       end: '2020-10-04T21:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1805,11 +1940,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-04T17:00:00.000Z',
       end: '2020-10-05T00:30:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1818,11 +1954,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-07T12:00:00.000Z',
       end: '2020-10-07T22:15:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1831,11 +1968,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-12T12:00:00.000Z',
       end: '2020-10-12T20:40:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1844,11 +1982,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-13T12:00:00.000Z',
       end: '2020-10-13T20:45:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1857,11 +1996,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-17T11:00:00.000Z',
       end: '2020-10-17T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1870,11 +2010,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-19T12:00:00.000Z',
       end: '2020-10-19T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1883,11 +2024,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-21T08:00:00.000Z',
       end: '2020-10-21T14:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1896,11 +2038,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-24T16:00:00.000Z',
       end: '2020-10-24T22:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1909,11 +2052,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-26T13:00:00.000Z',
       end: '2020-10-26T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1922,11 +2066,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-27T13:00:00.000Z',
       end: '2020-10-27T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1935,11 +2080,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-28T13:00:00.000Z',
       end: '2020-10-28T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1948,11 +2094,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-10-31T17:00:00.000Z',
       end: '2020-10-31T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1961,11 +2108,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-01T13:00:00.000Z',
       end: '2020-11-01T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1974,11 +2122,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-03T13:00:00.000Z',
       end: '2020-11-03T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -1987,11 +2136,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-04T09:00:00.000Z',
       end: '2020-11-04T15:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2000,11 +2150,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-07T17:00:00.000Z',
       end: '2020-11-07T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2013,11 +2164,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-10T13:00:00.000Z',
       end: '2020-11-10T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2026,11 +2178,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-11T13:00:00.000Z',
       end: '2020-11-11T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2039,11 +2192,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-14T12:00:00.000Z',
       end: '2020-11-14T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2052,11 +2206,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-15T13:00:00.000Z',
       end: '2020-11-15T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2065,11 +2220,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-18T09:00:00.000Z',
       end: '2020-11-18T15:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2078,11 +2234,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-21T12:00:00.000Z',
       end: '2020-11-21T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2091,11 +2248,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-23T12:00:00.000Z',
       end: '2020-11-23T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     },
     {
@@ -2104,11 +2262,12 @@ export const sampleData = {
       jobName: "Hell's Kitchen™️",
       begin: '2020-11-25T13:00:00.000Z',
       end: '2020-11-25T23:00:00.000Z',
-      bonus: '0.00',
+      bonus: '',
       note: '',
       sickLeave: '',
       status: '',
-      rate: '20.00',
+      rate: 20,
+      hoursUnpaid: 0.5,
       interval: 'hourly'
     }
   ],
