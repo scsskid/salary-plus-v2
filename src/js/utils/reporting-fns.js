@@ -12,19 +12,18 @@ function getHoursElapsed(records, precision = false) {
     return acc + hours;
   }, 0);
 
-  return precision ? round(hoursElapsed, round.decimalPlaces) : hoursElapsed;
+  return precision ? round(hoursElapsed, precision) : hoursElapsed;
 }
 
 function getPaidHours(records, precision = false) {
+  console.log(precision);
   const paidHoursElapsed = records.reduce((acc, record) => {
     const hoursElapsed = getHoursElapsed([record]);
 
     return acc + hoursElapsed - (record.hoursUnpaid ?? 0);
   }, 0);
 
-  return precision
-    ? round(paidHoursElapsed, round.decimalPlaces)
-    : paidHoursElapsed;
+  return precision ? round(paidHoursElapsed, precision) : paidHoursElapsed;
 }
 
 function getOvertimeHours(records, precision = false) {
@@ -39,7 +38,7 @@ function getOvertimeHours(records, precision = false) {
   return overtimeHours <= 0
     ? 0
     : precision
-    ? round(overtimeHours, round.decimalPlaces)
+    ? round(overtimeHours, precision)
     : overtimeHours;
 }
 
@@ -49,22 +48,28 @@ function getPaidHoursWithoutOvertime(records) {
 
 // earned
 
-function getEarned(records, hourCalculationFn) {
+function getEarned(records, { hourCalculationFn, precision }) {
   return records.reduce((acc, record) => {
-    return acc + record.rate * hourCalculationFn(records);
+    return acc + record.rate * hourCalculationFn(records, precision);
   }, 0);
 }
 
+function getPaidHoursEarned(records) {
+  return getEarned(records, { hourCalculationFn: getPaidHours, precision: 2 });
+}
+
 function getOvertimeEarned(records) {
-  return getEarned(records, getOvertimeHours);
+  return getEarned(records, {
+    hourCalculationFn: getOvertimeHours,
+    precision: 2
+  });
 }
 
 function getPaidHoursWithoutOvertimeEarned(records) {
-  return getEarned(records, getPaidHoursWithoutOvertime);
-}
-
-function getPaidHoursEarned(records) {
-  return getEarned(records, getPaidHours);
+  return getEarned(records, {
+    hourCalculationFn: getPaidHoursWithoutOvertime,
+    precision: 2
+  });
 }
 
 // Bonus

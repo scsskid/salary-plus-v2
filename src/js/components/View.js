@@ -6,7 +6,7 @@ import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
 import RecordsCalendar from './RecordsCalendar';
 import { useHistory } from 'react-router-dom';
-import FigureHoursElapsed from './FigureHoursElapsed';
+import * as reportingFns from './../utils/reporting-fns';
 import FigureEarned from './FigureEarned';
 
 export default function View({
@@ -64,14 +64,9 @@ export default function View({
             history.push('/reports');
           }}
         >
-          {/* <header className="widget-reporting-figures">
-            <div>[Month] Report →</div>
-          </header> */}
           <div className="widget-reporting-figures">
             <figure className="widget-reporting-figures-el">
-              <b>
-                <FigureHoursElapsed records={monthRecords} />
-              </b>
+              <b>{Math.round(reportingFns.getPaidHours(monthRecords))}h</b>
               <figcaption>Hours</figcaption>
             </figure>
             <figure className="widget-reporting-figures-el">
