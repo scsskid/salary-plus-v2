@@ -43,6 +43,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -57,6 +58,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -71,6 +73,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -85,6 +88,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -99,6 +103,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -113,6 +118,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -127,6 +133,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -141,6 +148,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -155,6 +163,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -169,6 +178,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -183,6 +193,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -197,6 +208,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -211,6 +223,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -225,6 +238,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -239,6 +253,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -253,6 +268,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -267,6 +283,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -281,6 +298,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -295,6 +313,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -309,6 +328,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -323,6 +343,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -337,6 +358,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -351,6 +373,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -365,6 +388,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -379,6 +403,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -393,6 +418,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -407,6 +433,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -421,6 +448,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -435,6 +463,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -449,6 +478,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -476,6 +506,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -490,6 +521,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -504,6 +536,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -518,6 +551,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -532,6 +566,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -546,6 +581,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -560,6 +596,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -574,6 +611,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -588,6 +626,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -602,6 +641,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -616,6 +656,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -630,6 +671,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -644,6 +686,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -658,6 +701,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -672,6 +716,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -686,6 +731,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -700,6 +746,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -714,6 +761,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -728,6 +776,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -742,6 +791,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -756,6 +806,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -770,6 +821,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -784,6 +836,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -798,6 +851,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -812,6 +866,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -826,6 +881,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -840,6 +896,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -854,6 +911,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -868,6 +926,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -882,6 +941,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -896,6 +956,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -910,6 +971,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -924,6 +986,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -938,6 +1001,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -952,6 +1016,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -966,6 +1031,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -980,6 +1046,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -994,6 +1061,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1008,6 +1076,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1022,6 +1091,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1036,6 +1106,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1050,6 +1121,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1064,6 +1136,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1078,6 +1151,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1092,6 +1166,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1106,6 +1181,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1120,6 +1196,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1134,6 +1211,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1148,6 +1226,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1162,6 +1241,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1176,6 +1256,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1190,6 +1271,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1204,6 +1286,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1218,6 +1301,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1232,6 +1316,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1246,6 +1331,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1260,6 +1346,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1274,6 +1361,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1288,6 +1376,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1302,6 +1391,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1316,6 +1406,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1330,6 +1421,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1344,6 +1436,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1358,6 +1451,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1372,6 +1466,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1386,6 +1481,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1400,6 +1496,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1414,6 +1511,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1428,6 +1526,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1442,6 +1541,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1456,6 +1556,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1470,6 +1571,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1484,6 +1586,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1498,6 +1601,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1512,6 +1616,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1526,6 +1631,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1540,6 +1646,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1554,6 +1661,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1568,6 +1676,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1582,6 +1691,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1596,6 +1706,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1610,6 +1721,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1624,6 +1736,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1638,6 +1751,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1652,6 +1766,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1666,6 +1781,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1680,6 +1796,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1694,6 +1811,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1708,6 +1826,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1722,6 +1841,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1736,6 +1856,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1750,6 +1871,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1764,6 +1886,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1778,6 +1901,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1792,6 +1916,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1806,6 +1931,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1820,6 +1946,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1834,6 +1961,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1848,6 +1976,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1862,6 +1991,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1876,6 +2006,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1890,6 +2021,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1904,6 +2036,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1918,6 +2051,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1932,6 +2066,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1946,6 +2081,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1960,6 +2096,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1974,6 +2111,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -1988,6 +2126,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2002,6 +2141,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2016,6 +2156,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2030,6 +2171,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2044,6 +2186,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2058,6 +2201,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2072,6 +2216,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2086,6 +2231,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2100,6 +2246,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2114,6 +2261,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2128,6 +2276,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2142,6 +2291,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2156,6 +2306,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2170,6 +2321,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2184,6 +2336,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2198,6 +2351,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2212,6 +2366,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2226,6 +2381,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2240,6 +2396,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2254,6 +2411,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     },
     {
@@ -2268,6 +2426,7 @@ export const sampleData = {
       status: '',
       rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       interval: 'hourly'
     }
   ],
@@ -2275,9 +2434,9 @@ export const sampleData = {
     {
       id: 1,
       name: "Hell's Kitchen™️",
-      rate: 35.0,
-      dayHours: 4,
+      rate: 20,
       hoursUnpaid: 0.5,
+      dayHours: 8,
       status: 'active'
     },
     {
@@ -2285,15 +2444,15 @@ export const sampleData = {
       name: 'OBI',
       rate: 17.5,
       dayHours: '',
-      hoursUnpaid: 0,
+      hoursUnpaid: 0.75,
       status: 'active'
     },
     {
       id: 3,
       name: 'Benedikts Teufelsküche',
       dayHours: '',
-      hoursUnpaid: 0,
-      rate: 80.0,
+      hoursUnpaid: 1,
+      rate: 80,
       status: 'active'
     }
   ]
