@@ -84,9 +84,22 @@ export default function FormJob({
   }
 
   function handleChange(e) {
+    const { name, value } = e.target;
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
+    });
+  }
+
+  function handleNumberChange(e) {
+    const value = Number(
+      parseFloat(e.target.value) === 0 ? '' : e.target.value
+    ).toString();
+
+    setFormData({
+      ...formData,
+      [e.target.name]: value
     });
   }
 
@@ -117,7 +130,7 @@ export default function FormJob({
                 step="0.01"
                 name="rate"
                 value={formData.rate}
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 placeholder="Enter optional rate..."
               />
             </FormElement>
@@ -131,7 +144,7 @@ export default function FormJob({
                 step="0.1"
                 min="0"
                 value={formData.dayHours}
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 placeholder="0"
               />
             </FormElement>
@@ -148,7 +161,7 @@ export default function FormJob({
                 step="0.1"
                 min="0"
                 value={formData.hoursUnpaid}
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 placeholder="0"
               />
             </FormElement>
