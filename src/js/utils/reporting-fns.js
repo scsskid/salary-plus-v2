@@ -1,61 +1,69 @@
-import { getHoursElapsed, getTimeElapsed, timeToDecimal } from './date-fns';
 import { round } from './helpers';
 
-//Time
+// time New
 
-function getTotalHoursElapsedOfRecords(records) {
+function timeToHours(duration) {
+  return duration / (1000 * 60 * 60);
+}
+
+function getHoursElapsed(records, precision = false) {
   const hoursElapsed = records.reduce((acc, record) => {
+    const hours = timeToHours(new Date(record.end) - new Date(record.begin));
+    return acc + hours;
+  }, 0);
+
+  return precision ? round(hoursElapsed, round.decimalPlaces) : hoursElapsed;
+}
+
+function getPaidHours(records, precision = false) {
+  const paidHoursElapsed = records.reduce((acc, record) => {
+    const hoursElapsed = getHoursElapsed([record]);
+
+    return acc + hoursElapsed - (record.hoursUnpaid ?? 0);
+  }, 0);
+
+  return precision
+    ? round(paidHoursElapsed, round.decimalPlaces)
+    : paidHoursElapsed;
+}
+
+function getOvertimeHours(records, precision = false) {
+  const overtimeHours = records.reduce((acc, record) => {
+    const hoursElapsed = getHoursElapsed([record]);
+
     return (
-      acc + getHoursElapsed(new Date(record.end) - new Date(record.begin)) // - hoursUnpaid
+      acc + hoursElapsed - (record.hoursUnpaid ?? 0) - (record.dayHours ?? 0)
     );
   }, 0);
 
-  return round(hoursElapsed, 2);
+  return overtimeHours <= 0
+    ? 0
+    : precision
+    ? round(overtimeHours, round.decimalPlaces)
+    : overtimeHours;
 }
 
-function getTotalUnpaidHours(records) {
-  return records.reduce((acc, record) => {
-    return acc + (record.hoursUnpaid ?? 0);
-  }, 0);
-}
-
-function getOverTimeOfRecord(record, dayHours = 0) {
-  const totalHours = getHoursElapsed(
-    new Date(record.end) - new Date(record.begin)
-  );
-
-  return totalHours - dayHours;
+function getPaidHoursWithoutOvertime(records) {
+  return getPaidHours(records) - getOvertimeHours(records);
 }
 
 // earned
 
-function getEarnedOfRecord(record, type = 'netto') {
-  const earnedBrutto =
-    timeToDecimal(
-      getTimeElapsed(new Date(record.end) - new Date(record.begin))
-    ) * record.rate;
-
-  const earnedNetto = earnedBrutto - (record.hoursUnpaid ?? 0) * record.rate;
-
-  return type === 'brutto' ? earnedBrutto : earnedNetto;
-}
-
-function getTotalEarnedNumberOfRecords(records) {
+function getEarned(records, hourCalculationFn) {
   return records.reduce((acc, record) => {
-    return acc + getEarnedOfRecord(record);
+    console.log(acc, record.rate, hourCalculationFn(records));
+
+    return acc + record.rate * hourCalculationFn(records);
   }, 0);
 }
 
-function getTotalIncomeOfRecords(records) {
-  return (
-    getTotalEarnedNumberOfRecords(records) +
-    getTotalBonusNumberOfRecords(records)
-  );
+function getOvertimeEarned(records) {
+  return getEarned(records, getOvertimeHours);
 }
 
 // Bonus
 
-function getTotalBonusNumberOfRecords(records) {
+function getBonusEarned(records) {
   return records.reduce((acc, record) => {
     const bonusNumber = parseFloat(record.bonus);
     const bonus = !isNaN(bonusNumber) ? bonusNumber : 0;
@@ -64,11 +72,9 @@ function getTotalBonusNumberOfRecords(records) {
 }
 
 export {
-  getTotalBonusNumberOfRecords,
-  getTotalEarnedNumberOfRecords,
-  getTotalHoursElapsedOfRecords,
-  getTotalIncomeOfRecords,
-  getTotalUnpaidHours,
-  getOverTimeOfRecord,
-  getEarnedOfRecord
+  getPaidHours,
+  getOvertimeHours,
+  getPaidHoursWithoutOvertime,
+  getOvertimeEarned,
+  getBonusEarned
 };

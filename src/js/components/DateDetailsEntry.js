@@ -6,7 +6,7 @@ import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import * as utils from './../utils/reporting-fns';
 
-export default function DateDetailsEntry({ record, jobs }) {
+export default function DateDetailsEntry({ record, jobs, settings }) {
   const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
   const time = {
@@ -19,10 +19,14 @@ export default function DateDetailsEntry({ record, jobs }) {
   }
 
   const meta = {
-    getTotalUnpaidHours: utils.getTotalUnpaidHours([record]),
-    getOverTimeOfRecord: utils.getOverTimeOfRecord(record, 8),
-    getEarnedOfRecordBRUTTO: utils.getEarnedOfRecord(record, 'brutto'),
-    getEarnedOfRecordNETTO: utils.getEarnedOfRecord(record)
+    job,
+    rate: record.rate,
+    getPaidHours: utils.getPaidHours([record]),
+    getOvertimeHours: utils.getOvertimeHours([record]),
+    getPaidHoursWithoutOvertime: utils.getPaidHoursWithoutOvertime([record]),
+    reporting: {
+      getOvertimeEarned: utils.getOvertimeEarned([record])
+    }
   };
 
   return (
@@ -60,6 +64,7 @@ export default function DateDetailsEntry({ record, jobs }) {
         </div>
       </button>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(meta, null, 2)}</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre>
       {/* <pre>{JSON.stringify(record, null, 2)}</pre> */}
     </>
   );

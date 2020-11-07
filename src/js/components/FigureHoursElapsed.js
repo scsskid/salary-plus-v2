@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { getTotalHoursElapsedOfRecords } from '../utils/reporting-fns';
+import { getPaidHours } from '../utils/reporting-fns';
 
 export default function FigureHoursElapsed({ records }) {
-  return <span>{getTotalHoursElapsedOfRecords(records)}h</span>;
+  return <span>{getPaidHours(records)}h</span>;
 }
