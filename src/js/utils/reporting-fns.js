@@ -9,7 +9,7 @@ function getTotalBonusNumberOfRecords(records) {
   }, 0);
 }
 
-function getEarned(record, type = 'netto') {
+function getEarnedOfRecord(record, type = 'netto') {
   const earnedBrutto =
     timeToDecimal(
       getTimeElapsed(new Date(record.end) - new Date(record.begin))
@@ -17,12 +17,12 @@ function getEarned(record, type = 'netto') {
 
   const earnedNetto = earnedBrutto - (record.hoursUnpaid ?? 0) * record.rate;
 
-  return type === 'brutto' ? earnedNetto : earnedNetto;
+  return type === 'brutto' ? earnedBrutto : earnedNetto;
 }
 
 function getTotalEarnedNumberOfRecords(records) {
   return records.reduce((acc, record) => {
-    return acc + getEarned(record);
+    return acc + getEarnedOfRecord(record);
   }, 0);
 }
 
@@ -63,5 +63,6 @@ export {
   getTotalHoursElapsedOfRecords,
   getTotalIncomeOfRecords,
   getTotalUnpaidHours,
-  getOverTimeOfRecord
+  getOverTimeOfRecord,
+  getEarnedOfRecord
 };
