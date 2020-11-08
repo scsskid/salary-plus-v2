@@ -5,7 +5,6 @@ import InputDateDisplay from './InputDateDisplay';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
-import FigureIncome from './FigureIncome';
 import FigureTotals from './FigureTotals';
 
 export default function Reports({
