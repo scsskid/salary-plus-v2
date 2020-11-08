@@ -2,6 +2,10 @@ import { round } from './helpers';
 
 // hours
 
+function withPresicion(value, precision) {
+  return value <= 0 ? 0 : precision ? round(value, precision) : value;
+}
+
 function timeToHours(duration) {
   return duration / (1000 * 60 * 60);
 }
@@ -12,18 +16,17 @@ function getHoursElapsed(records, precision = false) {
     return acc + hours;
   }, 0);
 
-  return precision ? round(hoursElapsed, precision) : hoursElapsed;
+  return withPresicion(hoursElapsed, precision);
 }
 
 function getPaidHours(records, precision = false) {
-  console.log(precision);
   const paidHoursElapsed = records.reduce((acc, record) => {
     const hoursElapsed = getHoursElapsed([record]);
 
     return acc + hoursElapsed - (record.hoursUnpaid ?? 0);
   }, 0);
 
-  return precision ? round(paidHoursElapsed, precision) : paidHoursElapsed;
+  return withPresicion(paidHoursElapsed, precision);
 }
 
 function getOvertimeHours(records, precision = false) {
@@ -35,15 +38,13 @@ function getOvertimeHours(records, precision = false) {
     );
   }, 0);
 
-  return overtimeHours <= 0
-    ? 0
-    : precision
-    ? round(overtimeHours, precision)
-    : overtimeHours;
+  return withPresicion(overtimeHours, precision);
 }
 
-function getPaidHoursWithoutOvertime(records) {
-  return getPaidHours(records) - getOvertimeHours(records);
+function getPaidHoursWithoutOvertime(records, precision) {
+  const paidHoursWithoutOvertime =
+    getPaidHours(records) - getOvertimeHours(records);
+  return withPresicion(paidHoursWithoutOvertime, precision);
 }
 
 // earned
