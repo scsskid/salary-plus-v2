@@ -18,8 +18,8 @@ export default function DateDetailsEntry({ record, jobs }) {
   const reporting = {
     contractEarned: reportingFns.getPaidHoursWithoutOvertimeEarned([record]),
     actualEarned: reportingFns.getPaidHoursEarned([record]),
-    paidHours: reportingFns.getPaidHours([record]),
-    includedOvertime: reportingFns.getOvertimeHours([record])
+    paidHours: reportingFns.getPaidHours([record], 2),
+    includedOvertime: reportingFns.getOvertimeHours([record], 2)
   };
 
   const debug = {
@@ -77,7 +77,7 @@ export default function DateDetailsEntry({ record, jobs }) {
         </div>
       </button>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(debug, null, 2)}</pre>
-      {/* <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre> */}
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre>
     </>
   );
 }
