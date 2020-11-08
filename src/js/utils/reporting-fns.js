@@ -31,6 +31,10 @@ function getPaidHours(records, precision = false) {
 
 function getOvertimeHours(records, precision = false) {
   const overtimeHours = records.reduce((acc, record) => {
+    const dayHours = parseInt(record.dayHours);
+    if (isNaN(dayHours) || dayHours === 0) {
+      return acc;
+    }
     const hoursElapsed = getHoursElapsed([record]);
 
     return (
