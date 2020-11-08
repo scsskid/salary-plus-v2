@@ -3,7 +3,8 @@ import { round } from './helpers';
 // hours
 
 function withPrecision(value, precision) {
-  return value <= 0 ? 0 : precision ? round(value, precision) : value;
+  return precision ? round(value, precision) : value;
+  // return value <= 0 ? 0 : precision ? round(value, precision) : value;
 }
 
 function timeToHours(duration) {
