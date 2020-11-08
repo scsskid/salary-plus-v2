@@ -51,9 +51,6 @@ export default function FormRecord({
 
   React.useEffect(() => {
     if (submit) {
-      console.log('submit effect');
-      console.log(touched, formIsHalfTouched);
-
       handleDispatch(formData);
     }
   }, [submit]);
