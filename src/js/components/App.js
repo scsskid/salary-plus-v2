@@ -120,77 +120,79 @@ export default function App() {
   }
 
   return (
-    <Router>
-      {isLoggedIn && <Navigation />}
-      <main className="main">
-        <Switch>
-          <Route exact path="/">
-            <View
-              inputDate={inputDate}
-              settings={settings}
-              changeMonth={changeMonth}
-              monthRecords={monthRecords}
-              setInputDate={setInputDate}
-              jobs={jobs}
-              dateRecords={dateRecords}
-            />
-          </Route>
-          <Route exact path="/reports">
-            <Reports
-              inputDate={inputDate}
-              settings={settings}
-              changeMonth={changeMonth}
-              monthRecords={monthRecords}
-            />
-          </Route>
-          <Route path="/records/add">
-            <FormRecordCreate
-              inputDate={inputDate}
-              jobs={jobs}
-              settings={settings}
-              saveRecord={saveRecord}
-              dispatch={dispatch}
-              changeMonth={changeMonth}
-            />
-          </Route>
-          <Route path="/records/:id">
-            <FormRecordUpdate
-              jobs={jobs}
-              records={records}
-              saveRecord={saveRecord}
-              deleteItem={deleteItem}
-              dispatch={dispatch}
-              settings={settings}
-              changeMonth={changeMonth}
-              inputDate={inputDate}
-            />
-          </Route>
-          <Route path="/jobs/add">
-            <FormJobCreate saveJob={saveJob} />
-          </Route>
-          <Route path="/jobs/:jobId">
-            <FormJobUpdate
-              jobs={jobs}
-              saveJob={saveJob}
-              deleteItem={deleteItem}
-              changeMonth={changeMonth}
-            />
-          </Route>
-          <Route path="/jobs/">
-            <JobsList jobs={jobs} />
-          </Route>
-          <Route path="/settings">
-            <Settings settings={settings} jobs={jobs}>
-              <Debug
+    <React.StrictMode>
+      <Router>
+        {isLoggedIn && <Navigation />}
+        <main className="main">
+          <Switch>
+            <Route exact path="/">
+              <View
+                inputDate={inputDate}
                 settings={settings}
-                dispatch={dispatch}
-                isLoggedIn={isLoggedIn}
+                changeMonth={changeMonth}
+                monthRecords={monthRecords}
+                setInputDate={setInputDate}
+                jobs={jobs}
+                dateRecords={dateRecords}
               />
-            </Settings>
-          </Route>
-          <Route path="*" component={NoMatch} />
-        </Switch>
-      </main>
-    </Router>
+            </Route>
+            <Route exact path="/reports">
+              <Reports
+                inputDate={inputDate}
+                settings={settings}
+                changeMonth={changeMonth}
+                monthRecords={monthRecords}
+              />
+            </Route>
+            <Route path="/records/add">
+              <FormRecordCreate
+                inputDate={inputDate}
+                jobs={jobs}
+                settings={settings}
+                saveRecord={saveRecord}
+                dispatch={dispatch}
+                changeMonth={changeMonth}
+              />
+            </Route>
+            <Route path="/records/:id">
+              <FormRecordUpdate
+                jobs={jobs}
+                records={records}
+                saveRecord={saveRecord}
+                deleteItem={deleteItem}
+                dispatch={dispatch}
+                settings={settings}
+                changeMonth={changeMonth}
+                inputDate={inputDate}
+              />
+            </Route>
+            <Route path="/jobs/add">
+              <FormJobCreate saveJob={saveJob} />
+            </Route>
+            <Route path="/jobs/:jobId">
+              <FormJobUpdate
+                jobs={jobs}
+                saveJob={saveJob}
+                deleteItem={deleteItem}
+                changeMonth={changeMonth}
+              />
+            </Route>
+            <Route path="/jobs/">
+              <JobsList jobs={jobs} />
+            </Route>
+            <Route path="/settings">
+              <Settings settings={settings} jobs={jobs}>
+                <Debug
+                  settings={settings}
+                  dispatch={dispatch}
+                  isLoggedIn={isLoggedIn}
+                />
+              </Settings>
+            </Route>
+            <Route path="*" component={NoMatch} />
+          </Switch>
+        </main>
+      </Router>
+    </React.StrictMode>
   );
 }
