@@ -66,10 +66,19 @@ export default function DateDetailsEntry({ record, jobs }) {
           <p className="date-details-entry-meta">
             <span>{reporting.actualEarned}€</span>
             <span>{reporting.paidHours}h</span>
-            {reporting.includedOvertime > 0 && (
-              <span style={{ color: 'red' }}>
-                (+{reporting.includedOvertime}h)
-              </span>
+            {reporting.includedOvertime !== 0 && (
+              <p>
+                Overtime:{' '}
+                <span
+                  style={
+                    reporting.includedOvertime > 0
+                      ? { color: 'green' }
+                      : { color: 'red' }
+                  }
+                >
+                  {reporting.includedOvertime}h
+                </span>
+              </p>
             )}
 
             {record.sickLeave && <span> [sick]</span>}
