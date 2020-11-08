@@ -405,7 +405,7 @@ export default function FormRecord({
                 name="dayHours"
                 id="dayHours"
                 type="number"
-                step="0.1"
+                step="0.01"
                 min="0"
                 value={formData.dayHours}
                 onChange={handleChange}
@@ -423,7 +423,7 @@ export default function FormRecord({
                 name="hoursUnpaid"
                 id="hoursUnpaid"
                 type="number"
-                step="0.1"
+                step="0.01"
                 min="0"
                 value={formData.hoursUnpaid}
                 onChange={handleChange}
