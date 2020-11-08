@@ -58,7 +58,7 @@ function CalendarRows({
 
   for (let i = 0; i < 6; i++) {
     let cells = [];
-    if (date >= daysInMonth) {
+    if (date > daysInMonth) {
       break;
     }
     for (let j = 0; j < 7; j++) {
