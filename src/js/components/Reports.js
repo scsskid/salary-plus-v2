@@ -6,6 +6,7 @@ import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
 import FigureIncome from './FigureIncome';
+import FigureTotals from './FigureTotals';
 
 export default function Reports({
   inputDate,
@@ -49,27 +50,33 @@ export default function Reports({
               <tr className="table-reporting-row">
                 <th>Regular</th>
                 <td>
-                  <FigureHoursElapsed records={monthRecords} />
+                  <FigureHoursElapsed records={monthRecords} type="contract" />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} />
+                    <FigureEarned records={monthRecords} type="contract" />
                   </b>
                 </td>
               </tr>
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHoursElapsed records={[]} />
+                  <FigureHoursElapsed records={monthRecords} type="overtime" />
                 </td>
                 <td>
-                  <FigureEarned records={[]} />
+                  <b>
+                    <FigureEarned records={monthRecords} type="overtime" />
+                  </b>
                 </td>
               </tr>
             </tbody>
           </table>
           <p>
-            Total Salary <b>X €</b>
+            Claimable Salary{' '}
+            <b>
+              <FigureEarned records={monthRecords} type="actual" />
+            </b>{' '}
+            (<FigureHoursElapsed records={monthRecords} type="actual" />)
           </p>
           <table className="table-reporting">
             <colgroup>
@@ -82,13 +89,18 @@ export default function Reports({
                 <th>Bonus / Tips</th>
                 <td></td>
                 <td>
-                  <FigureBonus records={monthRecords} />
+                  <b>
+                    <FigureBonus records={monthRecords} />
+                  </b>
                 </td>
               </tr>
             </tbody>
           </table>
           <p>
-            Total Salary <FigureIncome records={monthRecords} />
+            Total{' '}
+            <b>
+              <FigureTotals records={monthRecords} />
+            </b>
           </p>
         </div>
       </>
