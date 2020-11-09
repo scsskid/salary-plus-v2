@@ -1,0 +1,18 @@
+.widget-reporting {
+  display: flex;
+  align-items: flex-start;
+}
+
+.widget-reporting-figures {
+  display: flex;
+}
+
+.widget-reporting-figures-el {
+  margin-bottom: 0;
+  margin-right: 1rem;
+
+  & figcaption {
+    @mixin fontSize 10;
+    opacity: 0.7;
+  }
+}

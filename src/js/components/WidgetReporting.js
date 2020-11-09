@@ -15,8 +15,9 @@ export default function WidgetReporting({ records }) {
     >
       <div className="widget-reporting-figures">
         <figure className="widget-reporting-figures-el">
-          <FigureHoursElapsed records={records} />
-
+          <b>
+            <FigureHoursElapsed records={records} />
+          </b>
           <figcaption>Hours</figcaption>
         </figure>
         <figure className="widget-reporting-figures-el">
