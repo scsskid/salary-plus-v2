@@ -63,7 +63,7 @@ export default function DateDetailsEntry({ record, jobs }) {
             {record.jobName} {job ? '' : ''}
           </h2>
 
-          <p className="date-details-entry-meta">
+          <div className="date-details-entry-meta">
             <span>{reporting.actualEarned}€</span>
             <span>{reporting.paidHours}h</span>
             {reporting.includedOvertime !== 0 && (
@@ -82,7 +82,7 @@ export default function DateDetailsEntry({ record, jobs }) {
             )}
 
             {record.sickLeave && <span> [sick]</span>}
-          </p>
+          </div>
         </div>
       </button>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(debug, null, 2)}</pre>
