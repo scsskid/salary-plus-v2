@@ -37,6 +37,10 @@ html {
   padding-bottom: calc(2 * var(--b));
 }
 
+.component-meta {
+  height: calc(16 * var(--b));
+}
+
 .main-navigation {
   position: fixed;
   grid-row: 2 / 3;

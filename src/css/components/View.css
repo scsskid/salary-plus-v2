@@ -10,6 +10,8 @@
 }
 
 .widget-reporting {
+  display: flex;
+  align-items: flex-start;
 }
 
 .view-header :--heading {
@@ -18,17 +20,7 @@
 
 /* Reporting Widget */
 
-.main-component {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100%;
-}
-
-.component-body {
-  /* overflow: scroll; */
-}
-
-.component-body-header {
+.input-date-display-control {
   display: flex;
   justify-content: space-between;
   margin-bottom: var(--bx);
