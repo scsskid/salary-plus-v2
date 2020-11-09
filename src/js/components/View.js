@@ -54,7 +54,6 @@ export default function View({
         <h1>View</h1>
         <WidgetReporting records={monthRecords} />
       </AppHeader>
-      <div className="component-meta"></div>
 
       <SegmentNav>
         {segements.map((segment, i) => (

@@ -6,6 +6,7 @@ import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
 import FigureTotals from './FigureTotals';
+import AppHeader from './AppHeader';
 
 export default function Reports({
   inputDate,
@@ -109,26 +110,24 @@ export default function Reports({
 
   return (
     <div className="reporting main-component">
-      <header className="component-header">
-        <div className="component-meta">
-          <h1>Reporting</h1>
-        </div>
+      <AppHeader>
+        <h1>Reporting</h1>
+      </AppHeader>
+      <SegmentNav>
+        {segements.map((segment, i) => (
+          <SegmentNavEl
+            id={segment}
+            key={i}
+            isActive={state.activeSegement === segment ? true : false}
+            onClick={(event) =>
+              setState({ activeSegement: event.currentTarget.id })
+            }
+          >
+            <b>{segment}</b>
+          </SegmentNavEl>
+        ))}
+      </SegmentNav>
 
-        <SegmentNav>
-          {segements.map((segment, i) => (
-            <SegmentNavEl
-              id={segment}
-              key={i}
-              isActive={state.activeSegement === segment ? true : false}
-              onClick={(event) =>
-                setState({ activeSegement: event.currentTarget.id })
-              }
-            >
-              <b>{segment}</b>
-            </SegmentNavEl>
-          ))}
-        </SegmentNav>
-      </header>
       <div className="component-body">
         <header className="component-body-header">
           <InputDateDisplay inputDate={inputDate} settings={settings} />
