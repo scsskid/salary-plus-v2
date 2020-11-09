@@ -7,6 +7,7 @@ import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
 import FigureTotals from './FigureTotals';
 import AppHeader from './AppHeader';
+import WidgetInputDate from './WidgetInputDate';
 
 export default function Reports({
   inputDate,
@@ -128,11 +129,11 @@ export default function Reports({
         ))}
       </SegmentNav>
 
-      <div className="component-body">
-        <header className="component-body-header">
+      <div className="app-body">
+        <WidgetInputDate>
           <InputDateDisplay inputDate={inputDate} settings={settings} />
           <InputDateControl changeMonth={changeMonth} />
-        </header>
+        </WidgetInputDate>
         {Views[state.activeSegement]}
       </div>
     </div>

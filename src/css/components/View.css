@@ -12,24 +12,3 @@
 .view-header :--heading {
   margin-bottom: 0;
 }
-
-.input-date-display-control {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--bx);
-}
-
-.input-date-display {
-  color: var(--color-highlight);
-}
-
-/* List view */
-
-.view-list-date {
-  margin-bottom: var(--bx);
-}
-
-.view-list-date-title {
-  @mixin fontSize 14;
-  margin-bottom: var(--b);
-}

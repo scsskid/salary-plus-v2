@@ -7,6 +7,7 @@ import InputDateDisplay from './InputDateDisplay';
 import RecordsCalendar from './RecordsCalendar';
 import AppHeader from './AppHeader';
 import WidgetReporting from './WidgetReporting';
+import WidgetInputDate from './WidgetInputDate';
 
 export default function View({
   inputDate,
@@ -70,10 +71,10 @@ export default function View({
         ))}
       </SegmentNav>
       <div className="app-body">
-        <div className="input-date-display-control">
+        <WidgetInputDate>
           <InputDateDisplay inputDate={inputDate} settings={settings} />
           <InputDateControl changeMonth={changeMonth} />
-        </div>
+        </WidgetInputDate>
         {Views[state.activeSegement]}
       </div>
     </div>
