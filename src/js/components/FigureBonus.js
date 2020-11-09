@@ -1,10 +1,17 @@
 import * as React from 'react';
 import { getBonusEarned } from '../utils/reporting-fns';
 
-export default function FigureBonus({ records }) {
+export default function FigureBonus({
+  records,
+  fractionDigits = {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }
+}) {
   const bonus = new Intl.NumberFormat([], {
     style: 'currency',
-    currency: 'EUR'
+    currency: 'EUR',
+    ...fractionDigits
   }).format(getBonusEarned(records));
 
   return (

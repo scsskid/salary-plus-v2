@@ -5,7 +5,14 @@ import {
   getPaidHoursWithoutOvertimeEarned
 } from '../utils/reporting-fns';
 
-export default function FigureEarned({ records, type = 'actual' }) {
+export default function FigureEarned({
+  records,
+  type = 'actual',
+  fractionDigits = {
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  }
+}) {
   let earnedCalculationFn;
 
   switch (type) {
@@ -27,8 +34,7 @@ export default function FigureEarned({ records, type = 'actual' }) {
   const earned = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0
+    ...fractionDigits
   }).format(earnedCalculationFn(records));
 
   return <span>{earned}</span>;

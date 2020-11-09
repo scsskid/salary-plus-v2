@@ -5,24 +5,33 @@ import {
   getOvertimeHours
 } from '../utils/reporting-fns';
 
-export default function FigureHoursElapsed({ records, type = 'actual' }) {
-  let hourCalculationFn;
+export default function FigureHoursElapsed({
+  records,
+  type = 'actual',
+  fractionDigits = { maximumFractionDigits: 2, minimumFractionDigits: 0 }
+}) {
+  let hoursNumber;
 
   switch (type) {
     case 'actual':
-      hourCalculationFn = getPaidHours;
+      hoursNumber = getPaidHours(records);
       break;
     case 'overtime':
-      hourCalculationFn = getOvertimeHours;
+      hoursNumber = getOvertimeHours(records);
       break;
     case 'contract':
-      hourCalculationFn = getPaidHoursWithoutOvertime;
+      hoursNumber = getPaidHoursWithoutOvertime(records);
       break;
     default:
-      hourCalculationFn = () => {
+      hoursNumber = () => {
         return 'Error: no Fn specified';
       };
   }
 
-  return <span>{hourCalculationFn(records, 2)}h</span>;
+  const hoursFormatted = new Intl.NumberFormat('de-DE', {
+    style: 'decimal',
+    ...fractionDigits
+  }).format(hoursNumber);
+
+  return <span>{hoursFormatted}</span>;
 }
