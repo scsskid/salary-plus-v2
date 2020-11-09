@@ -17,7 +17,8 @@ module.exports = {
     historyApiFallback: true,
     host: '0.0.0.0',
     open: false,
-    hot: true
+    hot: true,
+    clientLogLevel: 'warning'
   },
   module: {
     rules: [
