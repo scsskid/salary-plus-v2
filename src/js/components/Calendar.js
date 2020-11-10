@@ -3,7 +3,8 @@ import {
   getShortIsoString,
   getWeekDayNames,
   getFirstDay,
-  getDaysInMonth
+  getDaysInMonth,
+  isSameMonth
 } from '../utils/helpers.js';
 
 export default function Calendar({
@@ -42,27 +43,20 @@ export default function Calendar({
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          inputDate={new Date('2020-11-01')}
+          angleDate={new Date('2020-11-01')}
+          inputDate={inputDate}
         />
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          inputDate={new Date('2020-11-03')}
+          angleDate={new Date('2020-11-25')}
+          inputDate={inputDate}
         />
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          inputDate={new Date('2020-11-28')}
-        />
-        <WeekRow
-          daysInMonth={daysInMonth}
-          firstDay={firstDay}
-          inputDate={new Date('2020-11-30')}
-        />
-        <WeekRow
-          daysInMonth={daysInMonth}
-          firstDay={firstDay}
-          inputDate={new Date('2020-07-17')}
+          angleDate={new Date('2020-11-30')}
+          inputDate={inputDate}
         />
       </div>
     </>
@@ -73,17 +67,30 @@ function WeekRow({
   daysInMonth,
   firstDay,
   inputDate,
-  weekStartsOn = 'monday'
+  angleDate,
+  weekStartsOn = 'monday',
+  bleedMonth
 }) {
   const cells = [];
-  const date = inputDate.getDate();
-  const day = inputDate.getDay();
+  const date = angleDate.getDate();
+  const day = angleDate.getDay();
   const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
   const walkerInput = startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
-  const dateWalker = new Date(inputDate.setDate(walkerInput));
+  const dateWalker = new Date(angleDate.setDate(walkerInput));
+
+  console.log(firstDay);
 
   for (let i = 0; i < 7; i++) {
-    cells.push(<div key={i}>{dateWalker.toLocaleDateString()}</div>);
+    if (!bleedMonth && !isSameMonth(dateWalker, inputDate)) {
+      cells.push(<div key={i}>{i} - empty</div>);
+    } else {
+      cells.push(
+        <div key={i}>
+          {i} - {dateWalker.toLocaleDateString()}
+        </div>
+      );
+    }
+
     dateWalker.setDate(dateWalker.getDate() + 1);
   }
 

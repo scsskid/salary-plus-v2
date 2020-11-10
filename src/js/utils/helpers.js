@@ -96,6 +96,12 @@ export function isSameDay(d1, d2) {
   );
 }
 
+export function isSameMonth(d1, d2) {
+  return (
+    d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth()
+  );
+}
+
 const formatDate = {
   rfc3339: (date) => {
     // target: YYYY-MM-DD
