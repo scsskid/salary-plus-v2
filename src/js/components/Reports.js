@@ -25,6 +25,7 @@ export default function Reports({
         <div>Records: {monthRecords.length}</div>
 
         <div className="table-reporting-container">
+          {/* Table Header Helper */}
           <table className="table-reporting-helper-head">
             <colgroup>
               <col className="col-heading" />
@@ -34,8 +35,8 @@ export default function Reports({
             <thead>
               <tr>
                 <td></td>
-                <th>H</th>
-                <th>€</th>
+                <th>Hours</th>
+                <th>Earned</th>
               </tr>
             </thead>
           </table>
@@ -72,12 +73,12 @@ export default function Reports({
               </tr>
             </tbody>
           </table>
-          <p>
-            Claimable Salary{' '}
+          <p className="totals">
+            Claimable Salary (
+            <FigureHoursElapsed records={monthRecords} type="actual" /> hours)
             <b>
               <FigureEarned records={monthRecords} type="actual" />
             </b>{' '}
-            (<FigureHoursElapsed records={monthRecords} type="actual" />)
           </p>
           <table className="table-reporting">
             <colgroup>
@@ -97,7 +98,7 @@ export default function Reports({
               </tr>
             </tbody>
           </table>
-          <p>
+          <p className="totals">
             Total{' '}
             <b>
               <FigureTotals records={monthRecords} />
