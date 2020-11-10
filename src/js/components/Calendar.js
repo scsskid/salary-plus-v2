@@ -42,50 +42,49 @@ export default function Calendar({
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          startDateObj={{ date: 1, month: 8, fullYear: 2020 }}
+          inputDate={new Date('2020-11-01')}
         />
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          startDateObj={{ date: 2, month: 8, fullYear: 2020 }}
+          inputDate={new Date('2020-11-03')}
         />
         <WeekRow
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          // startDate={new Date('2020-11-09')}
-          startDateObj={{ date: 9, month: 8, fullYear: 2020 }}
+          inputDate={new Date('2020-11-28')}
+        />
+        <WeekRow
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          inputDate={new Date('2020-11-30')}
+        />
+        <WeekRow
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          inputDate={new Date('2020-07-17')}
         />
       </div>
     </>
   );
 }
 
-function WeekRow({ daysInMonth, firstDay, startDateObj }) {
-  let date = startDateObj.date;
-
-  console.log(firstDay, daysInMonth);
-  let cells = [];
+function WeekRow({
+  daysInMonth,
+  firstDay,
+  inputDate,
+  weekStartsOn = 'monday'
+}) {
+  const cells = [];
+  const date = inputDate.getDate();
+  const day = inputDate.getDay();
+  const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
+  const walkerInput = startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
+  const dateWalker = new Date(inputDate.setDate(walkerInput));
 
   for (let i = 0; i < 7; i++) {
-    const isLeadingCell = i < firstDay && date < 6;
-    const isTrailingCell = date > daysInMonth;
-
-    if (isLeadingCell || isTrailingCell) {
-      cells.push(
-        <div key={i}>
-          empty lead: {isLeadingCell.toString()} trail:{' '}
-          {isTrailingCell.toString()}
-        </div>
-      );
-    } else {
-      cells.push(
-        <div key={i}>
-          {date} lead: {isLeadingCell.toString()} trail:{' '}
-          {isTrailingCell.toString()}
-        </div>
-      );
-      date++;
-    }
+    cells.push(<div key={i}>{dateWalker.toLocaleDateString()}</div>);
+    dateWalker.setDate(dateWalker.getDate() + 1);
   }
 
   return (
