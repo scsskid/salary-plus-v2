@@ -8,7 +8,7 @@ export default function FigureBonus({
     maximumFractionDigits: 0
   }
 }) {
-  const bonus = new Intl.NumberFormat([], {
+  const bonus = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
     ...fractionDigits
