@@ -40,23 +40,11 @@ export default function Calendar({
           firstDay={firstDay}
           onCalendarDateButtonClick={onCalendarDateButtonClick}
         />
-        <WeekRow
+        <Month
+          inputDate={inputDate}
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          angleDate={new Date('2020-11-01')}
-          inputDate={inputDate}
-        />
-        <WeekRow
-          daysInMonth={daysInMonth}
-          firstDay={firstDay}
-          angleDate={new Date('2020-11-25')}
-          inputDate={inputDate}
-        />
-        <WeekRow
-          daysInMonth={daysInMonth}
-          firstDay={firstDay}
-          angleDate={new Date('2020-11-30')}
-          inputDate={inputDate}
+          onCalendarDateButtonClick={onCalendarDateButtonClick}
         />
       </div>
     </>
@@ -64,7 +52,6 @@ export default function Calendar({
 }
 
 function WeekRow({
-  daysInMonth,
   firstDay,
   inputDate,
   angleDate,
@@ -100,6 +87,42 @@ function WeekRow({
       <br />
     </>
   );
+}
+
+function Month({
+  inputDate,
+  daysInMonth,
+  firstDay,
+  onCalendarDateButtonClick
+}) {
+  const weeks = [];
+  const dateWalker = new Date(inputDate.getTime());
+  // firstDay: 6
+  // daysInMonth : 30
+
+  // 6 rows
+
+  // first day: 2
+  // daysInMonth : 30
+
+  // 5 rows
+
+  // daysInMoth / firstday
+
+  for (let i = 1; i < 42; i = i + 7) {
+    weeks.push(
+      <WeekRow
+        key={i}
+        daysInMonth={daysInMonth}
+        firstDay={firstDay}
+        angleDate={new Date(dateWalker.setDate(i))}
+        inputDate={inputDate}
+      />
+    );
+    console.log(dateWalker);
+  }
+
+  return weeks;
 }
 
 function CalendarRows({
