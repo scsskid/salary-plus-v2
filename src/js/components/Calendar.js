@@ -6,7 +6,7 @@ import {
   getDaysInMonth
 } from '../utils/helpers.js';
 
-function Calendar({
+export default function Calendar({
   inputDate = new Date(),
   onCalendarDateButtonClick,
   settings
@@ -39,12 +39,62 @@ function Calendar({
           firstDay={firstDay}
           onCalendarDateButtonClick={onCalendarDateButtonClick}
         />
+        <WeekRow
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          startDateObj={{ date: 1, month: 8, fullYear: 2020 }}
+        />
+        <WeekRow
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          startDateObj={{ date: 2, month: 8, fullYear: 2020 }}
+        />
+        <WeekRow
+          daysInMonth={daysInMonth}
+          firstDay={firstDay}
+          // startDate={new Date('2020-11-09')}
+          startDateObj={{ date: 9, month: 8, fullYear: 2020 }}
+        />
       </div>
     </>
   );
 }
 
-export default Calendar;
+function WeekRow({ daysInMonth, firstDay, startDateObj }) {
+  let date = startDateObj.date;
+
+  console.log(firstDay, daysInMonth);
+  let cells = [];
+
+  for (let i = 0; i < 7; i++) {
+    const isLeadingCell = i < firstDay && date < 6;
+    const isTrailingCell = date > daysInMonth;
+
+    if (isLeadingCell || isTrailingCell) {
+      cells.push(
+        <div key={i}>
+          empty lead: {isLeadingCell.toString()} trail:{' '}
+          {isTrailingCell.toString()}
+        </div>
+      );
+    } else {
+      cells.push(
+        <div key={i}>
+          {date} lead: {isLeadingCell.toString()} trail:{' '}
+          {isTrailingCell.toString()}
+        </div>
+      );
+      date++;
+    }
+  }
+
+  return (
+    <>
+      <div className="week-row">{cells}</div>
+      <br />
+    </>
+  );
+}
 
 function CalendarRows({
   inputDate,
