@@ -2,13 +2,7 @@ import * as React from 'react';
 import Week from './Week';
 import { getWeekStartDateOffset } from '../utils/helpers.js';
 
-export default function Month({
-  inputDate,
-  daysInMonth,
-  firstDay,
-  handleDateClick,
-  records
-}) {
+export default function Month({ inputDate, handleDateClick, records }) {
   const weeks = [];
   const dateWalker = new Date(inputDate.getTime());
 
@@ -22,8 +16,6 @@ export default function Month({
     weeks.push(
       <Week
         key={i}
-        daysInMonth={daysInMonth}
-        firstDay={firstDay}
         dateWalker={currentDate}
         inputDate={inputDate}
         handleDateClick={handleDateClick}

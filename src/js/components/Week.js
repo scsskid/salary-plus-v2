@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { getShortIsoString, isSameMonth } from '../utils/helpers.js';
+import { isSameMonth } from '../utils/helpers.js';
 import DateCell from './DateCell.js';
-import { useEvents, useWeekEvents } from '../utils/hooks';
 
 export default function Week({
   inputDate,
@@ -11,7 +10,6 @@ export default function Week({
   handleDateClick
 }) {
   const cells = [];
-  // useWeekEvents({ records, inputDate });
   // bleedMonth = true;
 
   for (let i = 0; i < 7; i++) {
@@ -26,8 +24,7 @@ export default function Week({
       cells.push(
         <DateCell
           key={i}
-          dateString={getShortIsoString(dateWalker)}
-          date={dateWalker.getDate()}
+          date={new Date(dateWalker.getTime())}
           handleDateClick={handleDateClick}
           inputDate={inputDate}
           records={records}

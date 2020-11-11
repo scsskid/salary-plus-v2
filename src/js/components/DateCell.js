@@ -1,44 +1,44 @@
 import * as React from 'react';
-import { useEvents } from '../utils/hooks';
-import { getShortIsoString, isSameDay } from '../utils/helpers.js';
-import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
+import * as helpers from '../utils/helpers.js';
+import { getRecordsByDate } from '../utils/dataHelpers.js';
 
 export default function DateCell({
-  dateString,
-  date: dateFigure,
+  date,
   inputDate,
   records,
-  handleDateClick
+  handleDateClick: handleClick
 }) {
-  const rootEl = React.useRef();
-  const cellDateObj = new Date(dateString);
-
-  const matchesInputDate = isSameDay(cellDateObj, inputDate);
-
+  const todayDate = (function () {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    return now;
+  })();
+  const matchesTodayDate = helpers.isSameDay(date, todayDate);
+  const matchesInputDate = helpers.isSameDay(date, inputDate);
   const dateRecords = getRecordsByDate({
     records,
-    date: cellDateObj
+    date
   });
 
-  function onKeyUp() {
+  function handleKeyUp() {
     return;
   }
 
   return (
     <div
       className="calendar-date"
-      ref={rootEl}
-      data-date-string={dateString}
+      data-date-string={date.toISOString()}
       data-selected={matchesInputDate ? 'selected' : ''}
+      data-today={matchesTodayDate ? 'today' : 'foo'}
     >
       <button
         type="button"
         className="calendar-date-button"
-        onClick={handleDateClick}
-        onKeyUp={onKeyUp}
+        onClick={handleClick}
+        onKeyUp={handleKeyUp}
       >
         <div className="calendar-date-button-figure">
-          <span>{dateFigure}</span>
+          <span>{date.getDate()}</span>
         </div>
         {dateRecords.length > 0 && (
           <div data-records>
@@ -55,7 +55,7 @@ export default function DateCell({
 function DateCellEventIndicator({ record }) {
   return (
     <div className="calendar-date-event">
-      <small>{record.id} </small>
+      <small>{record.id}</small>
     </div>
   );
 }
