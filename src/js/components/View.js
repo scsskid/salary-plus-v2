@@ -21,7 +21,7 @@ export default function View({
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
-  function handleCalendarDateButtonClick(e) {
+  function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
@@ -36,7 +36,7 @@ export default function View({
         <Calendar
           inputDate={inputDate}
           settings={settings}
-          onCalendarDateButtonClick={handleCalendarDateButtonClick}
+          handleDateClick={handleDateClick}
           setInputDate={setInputDate}
           records={records}
         />

@@ -7,17 +7,13 @@ export default function DateCell({
   dateString,
   date: dateFigure,
   inputDate,
-  setInputDate,
-  records
+  records,
+  handleDateClick
 }) {
   const rootEl = React.useRef();
   const cellDateObj = new Date(dateString);
 
   const matchesInputDate = isSameDay(cellDateObj, inputDate);
-
-  function handleClick(e) {
-    setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
-  }
 
   const dateRecords = getRecordsByDate({
     records,
@@ -38,7 +34,7 @@ export default function DateCell({
       <button
         type="button"
         className="calendar-date-button"
-        onClick={handleClick}
+        onClick={handleDateClick}
         onKeyUp={onKeyUp}
       >
         <div className="calendar-date-button-figure">

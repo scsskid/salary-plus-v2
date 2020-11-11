@@ -9,10 +9,9 @@ import Weekdays from './Weekdays.js';
 
 export default function Calendar({
   inputDate = new Date(),
-  onCalendarDateButtonClick,
+  handleDateClick,
   settings,
-  records,
-  setInputDate
+  records = []
 }) {
   const daysInMonth = getDaysInMonth(inputDate);
   const firstDay = getFirstDay(inputDate);
@@ -42,9 +41,8 @@ export default function Calendar({
           inputDate={inputDate}
           daysInMonth={daysInMonth}
           firstDay={firstDay}
-          onCalendarDateButtonClick={onCalendarDateButtonClick}
+          handleDateClick={handleDateClick}
           records={records}
-          setInputDate={setInputDate}
         />
       </div>
     </>
