@@ -4,9 +4,11 @@ import DateCell from './DateCell.js';
 
 export default function Week({
   inputDate,
-  dateWalker,
-  bleedMonth,
-  onCalendarDateButtonClick
+  dateWalker = inputDate,
+  bleedMonth = false,
+  onCalendarDateButtonClick = () => {
+    return;
+  }
 }) {
   const cells = [];
   // bleedMonth = true;

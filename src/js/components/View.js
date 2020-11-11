@@ -8,6 +8,7 @@ import RecordsCalendar from './RecordsCalendar';
 import AppHeader from './AppHeader';
 import WidgetReporting from './WidgetReporting';
 import WidgetInputDate from './WidgetInputDate';
+import Week from './Week';
 
 export default function View({
   inputDate,
@@ -22,7 +23,11 @@ export default function View({
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
   const Views = {
-    Week: <div>W E E K</div>,
+    Week: (
+      <div>
+        <Week inputDate={inputDate} />
+      </div>
+    ),
     Month: (
       <>
         <RecordsCalendar

@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from './Calendar';
-import { getShortIsoString, isSameDay } from '../utils/helpers.js';
+import { useEvents } from '../utils/hooks';
 
 export default function RecordsCalendar({
   inputDate,
@@ -8,36 +8,14 @@ export default function RecordsCalendar({
   setInputDate,
   settings
 }) {
-  const recordsCalendarRef = React.useRef();
-
   function handleCalendarDateButtonClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  React.useEffect(() => {
-    // Apend Records
-    const allDateCells = document.querySelectorAll('[data-date-string]');
-    appendRecords({ nodes: allDateCells, records });
-
-    // Auto Mark Selected
-    allDateCells.forEach((cell) => {
-      const cellDateObj = new Date(cell.dataset.dateString);
-      // console.log(cellDateObj);
-      cell.dataset.selected = isSameDay(cellDateObj, inputDate)
-        ? 'selected'
-        : '';
-    });
-
-    // Cleanup
-    return () => {
-      recordsCalendarRef.current
-        .querySelectorAll('[data-records]')
-        .forEach((el) => (el.innerHTML = ``));
-    };
-  }, [inputDate]);
+  useEvents({ records, inputDate });
 
   return (
-    <div className="records-calendar" ref={recordsCalendarRef}>
+    <div className="records-calendar">
       <Calendar
         inputDate={inputDate}
         settings={settings}
@@ -45,25 +23,4 @@ export default function RecordsCalendar({
       />
     </div>
   );
-}
-
-// What?? Rewrite.... 💩
-function appendRecords({ nodes = [], records = [] }) {
-  nodes.forEach((cell) => {
-    records.filter((record) => {
-      const isMatch =
-        getShortIsoString(new Date(record.begin)) == cell.dataset.dateString
-          ? record
-          : false;
-
-      if (isMatch) {
-        cell
-          .querySelector('[data-records]')
-          .insertAdjacentHTML(
-            'beforeend',
-            `<div class="calendar-date-event"><small>${record.id}</span></div>`
-          );
-      }
-    });
-  });
 }
