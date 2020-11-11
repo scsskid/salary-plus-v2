@@ -1,34 +1,46 @@
 import React from 'react';
-import InputDateControl from './InputDateControl';
 import ListView from './ListView';
 import DateDetails from './DateDetails';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
-import InputDateDisplay from './InputDateDisplay';
 import AppHeader from './AppHeader';
 import WidgetReporting from './WidgetReporting';
 import WidgetInputDate from './WidgetInputDate';
 import Week from './Week';
 import Calendar from './Calendar';
+import { getWeekStartDateOffset } from '../utils/helpers.js';
 
 export default function View({
   inputDate,
   settings,
   changeMonth,
+  changeDate,
   records,
   setInputDate,
-  jobs
+  jobs,
+  initialState = { activeSegement: 'Week' }
 }) {
   const segements = ['Week', 'Month', 'List'];
-  const [state, setState] = React.useState({ activeSegement: 'Month' });
+  const [state, setState] = React.useState(initialState);
 
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
+  // for week
+
+  const currentDate = new Date(inputDate.getTime());
+  const weekStartOffset = getWeekStartDateOffset(currentDate);
+  currentDate.setDate(weekStartOffset);
+
   const Views = {
     Week: (
       <div>
-        <Week inputDate={inputDate} records={records} />
+        <Week
+          inputDate={inputDate}
+          dateWalker={currentDate}
+          records={records}
+          bleedMonth="true"
+        />
       </div>
     ),
     Month: (
@@ -80,10 +92,15 @@ export default function View({
         ))}
       </SegmentNav>
       <div className="app-body">
-        <WidgetInputDate>
-          <InputDateDisplay inputDate={inputDate} settings={settings} />
-          <InputDateControl changeMonth={changeMonth} />
-        </WidgetInputDate>
+        <WidgetInputDate
+          inputDate={inputDate}
+          settings={settings}
+          changeMonth={changeMonth}
+          setInputDate={setInputDate}
+          type={state.activeSegement.toLowerCase()}
+          changeDate={changeDate}
+        />
+
         {Views[state.activeSegement]}
       </div>
     </div>

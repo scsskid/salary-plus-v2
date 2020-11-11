@@ -6,8 +6,12 @@ import NoMatch from './NoMatch';
 import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
-import { throttle, setAppInnerHeight } from '../utils/helpers.js';
-import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
+import {
+  throttle,
+  setAppInnerHeight,
+  getWeekStartDateOffset
+} from '../utils/helpers.js';
+import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
@@ -92,6 +96,19 @@ export default function App() {
     setInputDate(summand === 0 ? today : inputDateCopy);
   }
 
+  function changeDate(summand = 0) {
+    const inputDateCopy = (function () {
+      const date = new Date(inputDate.getTime());
+      date.setHours(0, 0, 0, 0);
+      date.setDate(1);
+      return date;
+    })();
+
+    inputDateCopy.setDate(inputDate.getDate() + summand);
+    inputDateCopy.setDate(getWeekStartDateOffset(inputDateCopy));
+    setInputDate(inputDateCopy);
+  }
+
   if (!isLoggedIn) {
     return (
       <Router>
@@ -125,6 +142,7 @@ export default function App() {
                 inputDate={inputDate}
                 settings={settings}
                 changeMonth={changeMonth}
+                changeDate={changeDate}
                 records={monthRecords}
                 setInputDate={setInputDate}
                 jobs={jobs}
@@ -136,6 +154,8 @@ export default function App() {
                 settings={settings}
                 changeMonth={changeMonth}
                 records={monthRecords}
+                setInputDate={setInputDate}
+                changeDate={changeDate}
               />
             </Route>
             <Route path="/records/add">

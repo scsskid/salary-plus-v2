@@ -1,7 +1,5 @@
 import React from 'react';
-import InputDateControl from './InputDateControl';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
-import InputDateDisplay from './InputDateDisplay';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
@@ -9,9 +7,15 @@ import FigureTotals from './FigureTotals';
 import AppHeader from './AppHeader';
 import WidgetInputDate from './WidgetInputDate';
 
-export default function Reports({ inputDate, settings, changeMonth, records }) {
+export default function Reports({
+  inputDate,
+  settings,
+  changeMonth,
+  records,
+  initialState = { activeSegement: 'Week' }
+}) {
   const segements = ['Week', 'Month', 'Custom'];
-  const [state, setState] = React.useState({ activeSegement: 'Month' });
+  const [state, setState] = React.useState(initialState);
 
   const Views = {
     Week: <div>W E E K</div>,
@@ -126,10 +130,13 @@ export default function Reports({ inputDate, settings, changeMonth, records }) {
       </SegmentNav>
 
       <div className="app-body">
-        <WidgetInputDate>
-          <InputDateDisplay inputDate={inputDate} settings={settings} />
-          <InputDateControl changeMonth={changeMonth} />
-        </WidgetInputDate>
+        <WidgetInputDate
+          inputDate={inputDate}
+          settings={settings}
+          changeMonth={changeMonth}
+          changeDate={changeMonth}
+          type={state.activeSegement.toLowerCase()}
+        />
         {Views[state.activeSegement]}
       </div>
     </div>
