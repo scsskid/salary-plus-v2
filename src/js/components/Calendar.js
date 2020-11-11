@@ -51,21 +51,8 @@ export default function Calendar({
   );
 }
 
-function WeekRow({
-  firstDay,
-  inputDate,
-  angleDate,
-  weekStartsOn = 'monday',
-  bleedMonth
-}) {
+function WeekRow({ inputDate, dateWalker, bleedMonth }) {
   const cells = [];
-  const date = angleDate.getDate();
-  const day = angleDate.getDay();
-  const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
-  const walkerInput = startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
-  const dateWalker = new Date(angleDate.setDate(walkerInput));
-
-  console.log(firstDay);
 
   for (let i = 0; i < 7; i++) {
     if (!bleedMonth && !isSameMonth(dateWalker, inputDate)) {
@@ -77,7 +64,6 @@ function WeekRow({
         </div>
       );
     }
-
     dateWalker.setDate(dateWalker.getDate() + 1);
   }
 
@@ -97,29 +83,24 @@ function Month({
 }) {
   const weeks = [];
   const dateWalker = new Date(inputDate.getTime());
-  // firstDay: 6
-  // daysInMonth : 30
-
-  // 6 rows
-
-  // first day: 2
-  // daysInMonth : 30
-
-  // 5 rows
-
-  // daysInMoth / firstday
 
   for (let i = 1; i < 42; i = i + 7) {
+    const currentDate = new Date(dateWalker.setDate(i));
+    const weekStartOffset = getWeekStartDateOffset(currentDate);
+    currentDate.setDate(weekStartOffset);
+
+    if (currentDate.getMonth() > inputDate.getMonth()) {
+      break;
+    }
     weeks.push(
       <WeekRow
         key={i}
         daysInMonth={daysInMonth}
         firstDay={firstDay}
-        angleDate={new Date(dateWalker.setDate(i))}
+        dateWalker={currentDate}
         inputDate={inputDate}
       />
     );
-    console.log(dateWalker);
   }
 
   return weeks;
@@ -211,4 +192,11 @@ function CalendarHead({ settings }) {
   }
 
   return <div className="calendar-weekdays">{cells}</div>;
+}
+
+function getWeekStartDateOffset(angleDate, weekStartsOn = 'monday') {
+  const date = angleDate.getDate();
+  const day = angleDate.getDay();
+  const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
+  return startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
 }
