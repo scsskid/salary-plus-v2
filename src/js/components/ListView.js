@@ -1,14 +1,15 @@
 import React from 'react';
 import DateDetails from './DateDetails';
 import { getDaysInMonth } from '../utils/helpers.js';
+import { getRecordsByDate } from '../utils/dataHelpers';
 
-export default function ListView({ inputDate, monthRecords, jobs, settings }) {
+export default function ListView({ inputDate, records, jobs, settings }) {
   const dateList = Array(getDaysInMonth(inputDate))
     .fill()
     .map((_, i) => {
       const date = new Date(inputDate.getTime());
       date.setDate(i + 1);
-      const dateRecords = getRecordsByDate({ records: monthRecords, date });
+      const dateRecords = getRecordsByDate({ records, date });
       const hasRecords = dateRecords.length > 0;
 
       return (
@@ -25,7 +26,7 @@ export default function ListView({ inputDate, monthRecords, jobs, settings }) {
             <DateDetails
               inputDate={inputDate}
               jobs={jobs}
-              dateRecords={dateRecords}
+              records={records}
               settings={settings}
             />
           </div>

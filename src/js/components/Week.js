@@ -8,12 +8,10 @@ export default function Week({
   dateWalker = inputDate,
   bleedMonth = false,
   records,
-  onCalendarDateButtonClick = () => {
-    return;
-  }
+  handleDateClick
 }) {
   const cells = [];
-  useWeekEvents({ records, inputDate });
+  // useWeekEvents({ records, inputDate });
   // bleedMonth = true;
 
   for (let i = 0; i < 7; i++) {
@@ -30,7 +28,7 @@ export default function Week({
           key={i}
           dateString={getShortIsoString(dateWalker)}
           date={dateWalker.getDate()}
-          onCalendarDateButtonClick={onCalendarDateButtonClick}
+          handleDateClick={handleDateClick}
           inputDate={inputDate}
           records={records}
         />

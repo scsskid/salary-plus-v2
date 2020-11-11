@@ -21,14 +21,14 @@ export default function View({
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
-  function handleCalendarDateButtonClick(e) {
+  function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
   const Views = {
     Week: (
       <div>
-        <Week inputDate={inputDate} records={records.byDate} />
+        <Week inputDate={inputDate} records={records} />
       </div>
     ),
     Month: (
@@ -36,12 +36,14 @@ export default function View({
         <Calendar
           inputDate={inputDate}
           settings={settings}
-          onCalendarDateButtonClick={handleCalendarDateButtonClick}
+          handleDateClick={handleDateClick}
+          setInputDate={setInputDate}
+          records={records}
         />
         <DateDetails
           inputDate={inputDate}
           jobs={jobs}
-          records={records.byDate}
+          records={records}
           settings={settings}
         />
       </>
@@ -51,7 +53,7 @@ export default function View({
         jobs={jobs}
         settings={settings}
         inputDate={inputDate}
-        records={records.byMonth}
+        records={records}
       />
     )
   };
@@ -60,7 +62,7 @@ export default function View({
     <div className="view">
       <AppHeader>
         <h1>View</h1>
-        <WidgetReporting records={records.byMonth} />
+        <WidgetReporting records={records} />
       </AppHeader>
 
       <SegmentNav>

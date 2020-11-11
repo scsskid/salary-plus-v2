@@ -6,7 +6,8 @@ export default function Month({
   inputDate,
   daysInMonth,
   firstDay,
-  onCalendarDateButtonClick
+  handleDateClick,
+  records
 }) {
   const weeks = [];
   const dateWalker = new Date(inputDate.getTime());
@@ -25,7 +26,8 @@ export default function Month({
         firstDay={firstDay}
         dateWalker={currentDate}
         inputDate={inputDate}
-        onCalendarDateButtonClick={onCalendarDateButtonClick}
+        handleDateClick={handleDateClick}
+        records={records}
       />
     );
   }

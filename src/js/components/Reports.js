@@ -9,12 +9,7 @@ import FigureTotals from './FigureTotals';
 import AppHeader from './AppHeader';
 import WidgetInputDate from './WidgetInputDate';
 
-export default function Reports({
-  inputDate,
-  settings,
-  changeMonth,
-  monthRecords
-}) {
+export default function Reports({ inputDate, settings, changeMonth, records }) {
   const segements = ['Week', 'Month', 'Custom'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
 
@@ -22,7 +17,7 @@ export default function Reports({
     Week: <div>W E E K</div>,
     Month: (
       <>
-        <div>Records: {monthRecords.length}</div>
+        <div>Records: {records.length}</div>
 
         <div className="table-reporting-container">
           {/* Table Header Helper */}
@@ -52,22 +47,22 @@ export default function Reports({
               <tr className="table-reporting-row">
                 <th>Regular</th>
                 <td>
-                  <FigureHoursElapsed records={monthRecords} type="contract" />
+                  <FigureHoursElapsed records={records} type="contract" />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} type="contract" />
+                    <FigureEarned records={records} type="contract" />
                   </b>
                 </td>
               </tr>
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHoursElapsed records={monthRecords} type="overtime" />
+                  <FigureHoursElapsed records={records} type="overtime" />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} type="overtime" />
+                    <FigureEarned records={records} type="overtime" />
                   </b>
                 </td>
               </tr>
@@ -75,9 +70,9 @@ export default function Reports({
           </table>
           <p className="totals">
             Claimable Salary (
-            <FigureHoursElapsed records={monthRecords} type="actual" /> hours)
+            <FigureHoursElapsed records={records} type="actual" /> hours)
             <b>
-              <FigureEarned records={monthRecords} type="actual" />
+              <FigureEarned records={records} type="actual" />
             </b>{' '}
           </p>
           <table className="table-reporting">
@@ -92,7 +87,7 @@ export default function Reports({
                 <td></td>
                 <td>
                   <b>
-                    <FigureBonus records={monthRecords} />
+                    <FigureBonus records={records} />
                   </b>
                 </td>
               </tr>
@@ -101,7 +96,7 @@ export default function Reports({
           <p className="totals">
             Total{' '}
             <b>
-              <FigureTotals records={monthRecords} />
+              <FigureTotals records={records} />
             </b>
           </p>
         </div>

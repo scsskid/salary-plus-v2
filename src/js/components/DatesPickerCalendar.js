@@ -16,7 +16,7 @@ export default function DatesPickerCalendar({
   const datesPickerCalendarRef = React.useRef();
   const datesCount = dates.length;
 
-  function handleCalendarDateButtonClick(e) {
+  function handleDateClick(e) {
     const selectedDateObj = new Date(
       e.currentTarget.parentElement.dataset.dateString
     );
@@ -90,7 +90,7 @@ export default function DatesPickerCalendar({
       <Calendar
         inputDate={inputDate}
         settings={settings}
-        onCalendarDateButtonClick={handleCalendarDateButtonClick}
+        handleDateClick={handleDateClick}
       />
       {!isUpdateForm && (
         <p>
