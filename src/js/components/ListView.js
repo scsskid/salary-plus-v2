@@ -3,7 +3,7 @@ import DateDetails from './DateDetails';
 import { getDaysInMonth } from '../utils/helpers.js';
 import { getRecordsByDate } from '../utils/dataHelpers';
 
-export default function ListView({ inputDate, monthRecords, jobs, settings }) {
+export default function ListView({ inputDate, records, jobs, settings }) {
   const dateList = Array(getDaysInMonth(inputDate))
     .fill()
     .map((_, i) => {

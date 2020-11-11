@@ -28,7 +28,7 @@ export default function View({
   const Views = {
     Week: (
       <div>
-        <Week inputDate={inputDate} records={records.byDate} />
+        <Week inputDate={inputDate} records={records} />
       </div>
     ),
     Month: (
@@ -53,7 +53,7 @@ export default function View({
         jobs={jobs}
         settings={settings}
         inputDate={inputDate}
-        records={records.byMonth}
+        records={records}
       />
     )
   };
