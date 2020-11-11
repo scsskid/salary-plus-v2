@@ -51,17 +51,32 @@ export default function Calendar({
   );
 }
 
-function WeekRow({ inputDate, dateWalker, bleedMonth }) {
+function WeekRow({
+  inputDate,
+  dateWalker,
+  bleedMonth,
+  onCalendarDateButtonClick
+}) {
   const cells = [];
+  // bleedMonth = true;
 
   for (let i = 0; i < 7; i++) {
     if (!bleedMonth && !isSameMonth(dateWalker, inputDate)) {
-      cells.push(<div key={i}>{i} - empty</div>);
+      cells.push(
+        <div
+          className="calendar-date calendar-date--empty"
+          key={`weekday-bodycell-${i}`}
+        ></div>
+      );
     } else {
       cells.push(
-        <div key={i}>
-          {i} - {dateWalker.toLocaleDateString()}
-        </div>
+        <CalendarCell
+          key={i}
+          dateString={getShortIsoString(dateWalker)}
+          date={dateWalker.getDate()}
+          onCalendarDateButtonClick={onCalendarDateButtonClick}
+          inputDate={inputDate}
+        />
       );
     }
     dateWalker.setDate(dateWalker.getDate() + 1);
@@ -69,8 +84,7 @@ function WeekRow({ inputDate, dateWalker, bleedMonth }) {
 
   return (
     <>
-      <div className="week-row">{cells}</div>
-      <br />
+      <div className="week-row calendar-week">{cells}</div>
     </>
   );
 }
@@ -99,6 +113,7 @@ function Month({
         firstDay={firstDay}
         dateWalker={currentDate}
         inputDate={inputDate}
+        onCalendarDateButtonClick={onCalendarDateButtonClick}
       />
     );
   }
