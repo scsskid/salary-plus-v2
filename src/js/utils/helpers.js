@@ -228,3 +228,10 @@ export function setAppInnerHeight() {
     window.innerHeight * 0.01 + 'px'
   );
 }
+
+export function getWeekStartDateOffset(angleDate, weekStartsOn = 'monday') {
+  const date = angleDate.getDate();
+  const day = angleDate.getDay();
+  const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
+  return startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
+}
