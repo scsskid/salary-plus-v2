@@ -4,11 +4,12 @@ import ListView from './ListView';
 import DateDetails from './DateDetails';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import InputDateDisplay from './InputDateDisplay';
-import RecordsCalendar from './RecordsCalendar';
 import AppHeader from './AppHeader';
 import WidgetReporting from './WidgetReporting';
 import WidgetInputDate from './WidgetInputDate';
 import Week from './Week';
+import Calendar from './Calendar';
+import { useEvents } from '../utils/hooks';
 
 export default function View({
   inputDate,
@@ -21,6 +22,11 @@ export default function View({
 }) {
   const segements = ['Week', 'Month', 'List'];
   const [state, setState] = React.useState({ activeSegement: 'Month' });
+  useEvents({ records: monthRecords, inputDate });
+
+  function handleCalendarDateButtonClick(e) {
+    setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
+  }
 
   const Views = {
     Week: (
@@ -30,11 +36,10 @@ export default function View({
     ),
     Month: (
       <>
-        <RecordsCalendar
+        <Calendar
           inputDate={inputDate}
-          records={monthRecords}
-          setInputDate={setInputDate}
           settings={settings}
+          onCalendarDateButtonClick={handleCalendarDateButtonClick}
         />
         <DateDetails
           inputDate={inputDate}
