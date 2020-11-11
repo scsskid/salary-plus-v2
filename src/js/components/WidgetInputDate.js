@@ -36,7 +36,7 @@ export default function WidgetInputDate({
     })()
   };
   const handlers = {
-    today: () => changeMonth(-1),
+    today: () => changeMonth(0),
     month: {
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)
@@ -54,7 +54,7 @@ export default function WidgetInputDate({
 
       <div className="input-date-control">
         <Button onClick={handlers[type].prev}>Prev</Button>{' '}
-        <Button onClick={handlers['month'].today}>Today</Button>{' '}
+        <Button onClick={handlers.today}>Today</Button>{' '}
         <Button onClick={handlers[type].next}>Next</Button>
       </div>
     </div>
