@@ -6,13 +6,13 @@ import {
 } from '../utils/helpers.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
-import { useEvents } from '../utils/hooks';
 
 export default function Calendar({
   inputDate = new Date(),
   onCalendarDateButtonClick,
   settings,
-  records
+  records,
+  setInputDate
 }) {
   const daysInMonth = getDaysInMonth(inputDate);
   const firstDay = getFirstDay(inputDate);
@@ -43,6 +43,8 @@ export default function Calendar({
           daysInMonth={daysInMonth}
           firstDay={firstDay}
           onCalendarDateButtonClick={onCalendarDateButtonClick}
+          records={records}
+          setInputDate={setInputDate}
         />
       </div>
     </>

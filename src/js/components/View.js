@@ -37,11 +37,13 @@ export default function View({
           inputDate={inputDate}
           settings={settings}
           onCalendarDateButtonClick={handleCalendarDateButtonClick}
+          setInputDate={setInputDate}
+          records={records}
         />
         <DateDetails
           inputDate={inputDate}
           jobs={jobs}
-          records={records.byDate}
+          records={records}
           settings={settings}
         />
       </>
@@ -60,7 +62,7 @@ export default function View({
     <div className="view">
       <AppHeader>
         <h1>View</h1>
-        <WidgetReporting records={records.byMonth} />
+        <WidgetReporting records={records} />
       </AppHeader>
 
       <SegmentNav>

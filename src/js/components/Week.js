@@ -10,10 +10,11 @@ export default function Week({
   records,
   onCalendarDateButtonClick = () => {
     return;
-  }
+  },
+  setInputDate
 }) {
   const cells = [];
-  useWeekEvents({ records, inputDate });
+  // useWeekEvents({ records, inputDate });
   // bleedMonth = true;
 
   for (let i = 0; i < 7; i++) {
@@ -33,6 +34,7 @@ export default function Week({
           onCalendarDateButtonClick={onCalendarDateButtonClick}
           inputDate={inputDate}
           records={records}
+          setInputDate={setInputDate}
         />
       );
     }

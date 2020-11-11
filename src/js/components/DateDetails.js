@@ -1,9 +1,12 @@
 import React from 'react';
 import DateDetailsEntry from './DateDetailsEntry';
+import { getRecordsByDate, getRecordsByMonth } from '../utils/dataHelpers.js';
 
-export default function DateDetails({ records, jobs, settings }) {
+export default function DateDetails({ records, jobs, settings, inputDate }) {
   const defaultClassName = 'date-details';
-  const content = records.map((record) => {
+  const dateRecords = getRecordsByDate({ records, inputDate });
+
+  const content = dateRecords.map((record) => {
     return (
       <DateDetailsEntry
         key={`record-details-${record.id}`}
