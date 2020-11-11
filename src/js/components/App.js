@@ -22,7 +22,7 @@ export default function App() {
   });
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
-  const { settings = {}, records = [], jobs = [] } = appData;
+  const { settings = {}, jobs = [] } = appData;
 
   // Effects
 
@@ -58,15 +58,17 @@ export default function App() {
 
   // InputDate Derived Values
 
-  const monthRecords = getRecordsByMonth({
-    records,
-    date: inputDate
-  });
-
-  const dateRecords = getRecordsByDate({
-    records: monthRecords,
-    date: inputDate
-  });
+  const records = {
+    all: appData.records,
+    byMonth: getRecordsByMonth({
+      records: appData.records,
+      date: inputDate
+    }),
+    byDate: getRecordsByDate({
+      records: appData.records,
+      date: inputDate
+    })
+  };
 
   // Fns to Drill
 
@@ -130,10 +132,9 @@ export default function App() {
                 inputDate={inputDate}
                 settings={settings}
                 changeMonth={changeMonth}
-                monthRecords={monthRecords}
+                records={records}
                 setInputDate={setInputDate}
                 jobs={jobs}
-                dateRecords={dateRecords}
               />
             </Route>
             <Route exact path="/reports">
@@ -141,7 +142,7 @@ export default function App() {
                 inputDate={inputDate}
                 settings={settings}
                 changeMonth={changeMonth}
-                monthRecords={monthRecords}
+                records={records}
               />
             </Route>
             <Route path="/records/add">

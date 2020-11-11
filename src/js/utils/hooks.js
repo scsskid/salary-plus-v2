@@ -25,7 +25,7 @@ function useEvents({ records, inputDate }) {
   }, [inputDate]);
 }
 
-export { useEvents };
+function useWeekEvents({ records, inputDate }) {}
 
 // Todo: Refactor
 function appendRecords({ nodes = [], records = [] }) {
@@ -47,3 +47,5 @@ function appendRecords({ nodes = [], records = [] }) {
     });
   });
 }
+
+export { useEvents, useWeekEvents };

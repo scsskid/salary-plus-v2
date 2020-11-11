@@ -1,5 +1,4 @@
 import React from 'react';
-import { getRecordsByDate } from '../utils/dataHelpers.js';
 import DateDetails from './DateDetails';
 import { getDaysInMonth } from '../utils/helpers.js';
 

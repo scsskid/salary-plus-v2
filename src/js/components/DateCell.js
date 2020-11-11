@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useEvents } from '../utils/hooks';
 
 export default function DateCell({
   dateString,
   date,
-  onCalendarDateButtonClick
+  onCalendarDateButtonClick,
+  records
 }) {
   const rootEl = React.useRef();
 

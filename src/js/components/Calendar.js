@@ -6,14 +6,18 @@ import {
 } from '../utils/helpers.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
+import { useEvents } from '../utils/hooks';
 
 export default function Calendar({
   inputDate = new Date(),
   onCalendarDateButtonClick,
-  settings
+  settings,
+  records
 }) {
   const daysInMonth = getDaysInMonth(inputDate);
   const firstDay = getFirstDay(inputDate);
+
+  // useEvents({ records, inputDate });
 
   React.useEffect(() => {
     const allDateCells = document.querySelectorAll('[data-date-string]');

@@ -1,9 +1,9 @@
 import React from 'react';
 import DateDetailsEntry from './DateDetailsEntry';
 
-export default function DateDetails({ dateRecords, jobs, settings }) {
+export default function DateDetails({ records, jobs, settings }) {
   const defaultClassName = 'date-details';
-  const content = dateRecords.map((record) => {
+  const content = records.map((record) => {
     return (
       <DateDetailsEntry
         key={`record-details-${record.id}`}
