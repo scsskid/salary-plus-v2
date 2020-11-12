@@ -9,6 +9,7 @@ import Week from './Week';
 import Calendar from './Calendar';
 import { getWeekStartDate } from '../utils/helpers.js';
 import DateDetailsEntry from './DateDetailsEntry';
+import Weekdays from './Weekdays';
 
 export default function View({
   inputDate,
@@ -34,8 +35,6 @@ export default function View({
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  console.log(todayDate);
-
   const Views = {
     Dashboard: (
       <div className="view-dashboard">
@@ -46,7 +45,7 @@ export default function View({
         <h2>3 days ago / yesterday</h2>
         <DateDetailsEntry />
         <h2>Upcoming</h2>
-        Week Days
+        <Weekdays dayStart={inputDate.getDay()} settings={settings} />
         <Week records={records} />
         <ListView
           jobs={jobs}
