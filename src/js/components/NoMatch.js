@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import AppHeader from './AppHeader';
 
 function NoMatch() {
   const location = useLocation();
@@ -11,9 +12,9 @@ function NoMatch() {
 
   return (
     <>
-      <header class="component-header">
-        <h1>404</h1>
-      </header>
+      <AppHeader>
+        <h1>Sorry</h1>
+      </AppHeader>
       <p>
         Not found: <code>{location.pathname}</code>
       </p>

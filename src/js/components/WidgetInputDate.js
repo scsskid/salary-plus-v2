@@ -24,6 +24,11 @@ export default function WidgetInputDate({
       year: 'numeric',
       timeZone: settings.timeZone
     }),
+    month: date.toLocaleDateString(undefined, {
+      month: 'long',
+      year: 'numeric',
+      timeZone: settings.timeZone
+    }),
     list: date.toLocaleDateString(undefined, {
       month: 'long',
       year: 'numeric',
@@ -52,6 +57,10 @@ export default function WidgetInputDate({
       next: () => changeMonth(-1)
     },
     calendar: {
+      prev: () => changeMonth(-1),
+      next: () => changeMonth(-1)
+    },
+    month: {
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)
     },

@@ -1,3 +1,15 @@
+/* Reporting Common */
+
+.reporting-component {
+  padding-top: var(--bx);
+}
+
+.reporting .input-date-display-control {
+  margin-bottom: var(--bx);
+}
+
+/* Table Reporting */
+
 .table-reporting-helper-head {
   width: 100%;
   /* margin-bottom: var(--bx); */

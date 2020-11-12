@@ -15,7 +15,7 @@ import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
-import Reports from './Reports';
+import Reporting from './Reporting';
 import JobsList from './JobsList';
 
 export default function App() {
@@ -150,8 +150,8 @@ export default function App() {
                 todayDate={todayDate}
               />
             </Route>
-            <Route exact path="/reports">
-              <Reports
+            <Route exact path="/reporting">
+              <Reporting
                 inputDate={inputDate}
                 settings={settings}
                 changeMonth={changeMonth}

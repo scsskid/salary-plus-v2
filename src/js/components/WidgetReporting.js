@@ -10,7 +10,7 @@ export default function WidgetReporting({ records, figures = [] }) {
     <button
       className="widget-reporting"
       onClick={() => {
-        history.push('/reports');
+        history.push('/reporting');
       }}
     >
       <div className="widget-reporting-figures">

@@ -20,7 +20,16 @@ export default function Reports({
   const Views = {
     Week: <div>W E E K</div>,
     Month: (
-      <>
+      <div className="reporting-month | reporting-component">
+        <div className="reporting-calendar-controls | main-calendar-controls">
+          <WidgetInputDate
+            inputDate={inputDate}
+            settings={settings}
+            changeMonth={changeMonth}
+            changeDate={changeMonth}
+            type={state.activeSegement.toLowerCase()}
+          />
+        </div>
         <div>Records: {records.length}</div>
 
         <div className="table-reporting-container">
@@ -104,7 +113,7 @@ export default function Reports({
             </b>
           </p>
         </div>
-      </>
+      </div>
     ),
     Custom: <p>C U S T O M</p>
   };
@@ -129,16 +138,7 @@ export default function Reports({
         ))}
       </SegmentNav>
 
-      <div className="app-body">
-        <WidgetInputDate
-          inputDate={inputDate}
-          settings={settings}
-          changeMonth={changeMonth}
-          changeDate={changeMonth}
-          type={state.activeSegement.toLowerCase()}
-        />
-        {Views[state.activeSegement]}
-      </div>
+      <div className="app-body">{Views[state.activeSegement]}</div>
     </div>
   );
 }
