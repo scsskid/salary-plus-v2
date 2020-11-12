@@ -8,6 +8,7 @@ import WidgetInputDate from './WidgetInputDate';
 import Week from './Week';
 import Calendar from './Calendar';
 import { getWeekStartDate } from '../utils/helpers.js';
+import DateDetailsEntry from './DateDetailsEntry';
 
 export default function View({
   inputDate,
@@ -18,17 +19,43 @@ export default function View({
   monthRecords,
   setInputDate,
   jobs,
+  todayDate,
   initialState = { activeSegement: 'Dashboard' }
 }) {
   const segements = ['Dashboard', 'Month', 'List'];
   const [state, setState] = React.useState(initialState);
 
+  const weekRange = {
+    start: new Date(todayDate),
+    end: new Date(todayDate.getTime() + 7 * 24 * 60 * 60 * 1000)
+  };
+
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
+  console.log(todayDate);
+
   const Views = {
-    Dashboard: <div>Dashboard</div>,
+    Dashboard: (
+      <div className="view-dashboard">
+        <WidgetReporting
+          records={monthRecords}
+          figures={['dates', 'hours', 'earned']}
+        />
+        <h2>3 days ago / yesterday</h2>
+        <DateDetailsEntry />
+        <h2>Upcoming</h2>
+        Week Days
+        <Week records={records} />
+        <ListView
+          jobs={jobs}
+          settings={settings}
+          datesRange={weekRange}
+          records={records}
+        />
+      </div>
+    ),
     Week: (
       <div>
         <Week
@@ -69,8 +96,23 @@ export default function View({
   return (
     <div className="view">
       <AppHeader>
-        <h1>View</h1>
-        <WidgetReporting records={monthRecords} />
+        <div className="app-header-title-controls">
+          <h1>View</h1>
+          <WidgetInputDate
+            inputDate={inputDate}
+            settings={settings}
+            changeMonth={changeMonth}
+            setInputDate={setInputDate}
+            type={state.activeSegement.toLowerCase()}
+            changeDate={changeDate}
+          />
+        </div>
+        {['Off', ''].includes(state.activeSegement) && (
+          <WidgetReporting
+            records={monthRecords}
+            figures={['hours', 'earned']}
+          />
+        )}
       </AppHeader>
 
       <SegmentNav>
@@ -87,19 +129,7 @@ export default function View({
           </SegmentNavEl>
         ))}
       </SegmentNav>
-      <div className="app-body">
-        {state.activeSegement !== 'Dashboard' && (
-          <WidgetInputDate
-            inputDate={inputDate}
-            settings={settings}
-            changeMonth={changeMonth}
-            setInputDate={setInputDate}
-            type={state.activeSegement.toLowerCase()}
-            changeDate={changeDate}
-          />
-        )}
-        {Views[state.activeSegement]}
-      </div>
+      <div className="app-body">{Views[state.activeSegement]}</div>
     </div>
   );
 }

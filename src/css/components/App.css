@@ -32,11 +32,6 @@ html {
   overflow: scroll;
 }
 
-.component-header {
-  padding-top: var(--bx);
-  padding-bottom: calc(2 * var(--b));
-}
-
 .main-navigation {
   position: fixed;
   grid-row: 2 / 3;

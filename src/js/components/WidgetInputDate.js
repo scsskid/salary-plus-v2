@@ -14,6 +14,11 @@ export default function WidgetInputDate({
   // date.setDate(getWeekStartDateOffset(inputDate));
 
   const display = {
+    dashboard: date.toLocaleDateString(undefined, {
+      month: 'long',
+      year: 'numeric',
+      timeZone: settings.timeZone
+    }),
     month: date.toLocaleDateString(undefined, {
       month: 'long',
       year: 'numeric',
@@ -42,6 +47,10 @@ export default function WidgetInputDate({
   };
   const handlers = {
     today: () => changeMonth(0),
+    dashboard: {
+      prev: () => changeMonth(-1),
+      next: () => changeMonth(-1)
+    },
     month: {
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)

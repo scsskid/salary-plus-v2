@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
 import * as reportingFns from './../utils/reporting-fns';
 
-export default function DateDetailsEntry({ record, jobs }) {
+export default function DateDetailsEntry({
+  record = {},
+  jobs = [],
+  showDebugInfo = false
+}) {
   const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
   const time = {
@@ -85,8 +89,16 @@ export default function DateDetailsEntry({ record, jobs }) {
           </div>
         </div>
       </button>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(debug, null, 2)}</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(record, null, 2)}</pre>
+      {showDebugInfo && (
+        <>
+          <pre style={{ fontSize: '12px' }}>
+            {JSON.stringify(debug, null, 2)}
+          </pre>
+          <pre style={{ fontSize: '12px' }}>
+            {JSON.stringify(record, null, 2)}
+          </pre>
+        </>
+      )}
     </>
   );
 }

@@ -1,6 +1,12 @@
 .app-header {
-  height: calc(14 * var(--b));
+  height: calc(16 * var(--b));
   padding-top: calc(4 * var(--b));
   display: flex;
   justify-content: space-between;
+}
+
+.app-header-title-controls {
+  & h1 {
+    margin-bottom: 0;
+  }
 }

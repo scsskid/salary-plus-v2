@@ -3,7 +3,7 @@ import FigureEarned from './FigureEarned';
 import FigureHoursElapsed from './FigureHoursElapsed';
 import { useHistory } from 'react-router-dom';
 
-export default function WidgetReporting({ records }) {
+export default function WidgetReporting({ records, figures = [] }) {
   const history = useHistory();
 
   return (
@@ -14,18 +14,28 @@ export default function WidgetReporting({ records }) {
       }}
     >
       <div className="widget-reporting-figures">
-        <figure className="widget-reporting-figures-el">
-          <b>
-            <FigureHoursElapsed records={records} />
-          </b>
-          <figcaption>Hours</figcaption>
-        </figure>
-        <figure className="widget-reporting-figures-el">
-          <b>
-            <FigureEarned records={records} />
-          </b>
-          <figcaption>Earned</figcaption>
-        </figure>
+        {figures.includes('dates') && (
+          <figure className="widget-reporting-figures-el">
+            <b>{records.length}</b>
+            <figcaption>Dates</figcaption>
+          </figure>
+        )}
+        {figures.includes('hours') && (
+          <figure className="widget-reporting-figures-el">
+            <b>
+              <FigureHoursElapsed records={records} />
+            </b>
+            <figcaption>Hours</figcaption>
+          </figure>
+        )}
+        {figures.includes('earned') && (
+          <figure className="widget-reporting-figures-el">
+            <b>
+              <FigureEarned records={records} />
+            </b>
+            <figcaption>Earned</figcaption>
+          </figure>
+        )}
       </div>
     </button>
   );

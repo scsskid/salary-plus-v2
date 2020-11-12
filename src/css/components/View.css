@@ -1,14 +1,23 @@
-.view-header {
+/* .view-header {
   display: grid;
   grid-gap: var(--b);
   grid-template-rows: auto auto;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
-.component-header .segment-nav {
-  grid-column: 1 / 3;
-}
-
 .view-header :--heading {
   margin-bottom: 0;
+} */
+
+.view-dashboard {
+  padding-top: var(--bx);
+}
+
+.view-dashboard .widget-reporting {
+  width: 100%;
+  margin-bottom: var(--bx);
+  justify-content: center;
+}
+
+.view-dashboard .widget-reporting-figure {
 }

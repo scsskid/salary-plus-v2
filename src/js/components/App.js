@@ -24,6 +24,11 @@ export default function App() {
     now.setHours(0, 0, 0, 0);
     return now;
   });
+  const todayDate = (function () {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    return now;
+  })();
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = {}, jobs = [] } = appData;
@@ -76,24 +81,19 @@ export default function App() {
       date.setDate(1);
       return date;
     })();
-    const today = (function () {
-      const now = new Date();
-      now.setHours(0, 0, 0, 0);
-      return now;
-    })();
 
     inputDateCopy.setMonth(inputDateCopy.getMonth() + summand);
 
     if (
-      today.getMonth() == inputDateCopy.getMonth() &&
-      today.getFullYear() == inputDateCopy.getFullYear()
+      todayDate.getMonth() == inputDateCopy.getMonth() &&
+      todayDate.getFullYear() == inputDateCopy.getFullYear()
     ) {
-      inputDateCopy.setDate(today.getDate());
+      inputDateCopy.setDate(todayDate.getDate());
     } else {
       inputDateCopy.setDate(1);
     }
 
-    setInputDate(summand === 0 ? today : inputDateCopy);
+    setInputDate(summand === 0 ? todayDate : inputDateCopy);
   }
 
   function changeDate(summand = 0) {
@@ -147,6 +147,7 @@ export default function App() {
                 monthRecords={monthRecords}
                 setInputDate={setInputDate}
                 jobs={jobs}
+                todayDate={todayDate}
               />
             </Route>
             <Route exact path="/reports">
