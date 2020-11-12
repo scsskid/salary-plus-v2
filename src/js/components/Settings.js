@@ -7,6 +7,10 @@ import FormElementSet from './FormElementSet';
 export default function Settings({ jobs, children }) {
   const history = useHistory();
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [history]);
+
   return (
     <>
       <AppHeader>
