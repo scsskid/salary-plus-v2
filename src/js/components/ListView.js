@@ -19,11 +19,9 @@ export default function ListView({
     };
   }
 
-  var datesRangeCount =
+  const datesRangeCount =
     Math.floor((datesRange.start - datesRange.end) / (24 * 60 * 60 * 1000)) *
     -1;
-
-  console.log(datesRange, datesRangeCount);
 
   const dateList = Array(datesRangeCount)
     .fill()
