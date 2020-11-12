@@ -20,6 +20,7 @@ export default function Month({ inputDate, handleDateClick, records }) {
         inputDate={inputDate}
         handleDateClick={handleDateClick}
         records={records}
+        // bleedMonth="true"
       />
     );
   }

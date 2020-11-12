@@ -235,3 +235,11 @@ export function getWeekStartDateOffset(angleDate, weekStartsOn = 'monday') {
   const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
   return startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
 }
+
+export function getWeekStartDate(inputDate, weekStartsOn = 'monday') {
+  const currentDate = new Date(inputDate.getTime());
+  const weekStartOffset = getWeekStartDateOffset(currentDate, weekStartsOn);
+  currentDate.setDate(weekStartOffset);
+
+  return currentDate;
+}

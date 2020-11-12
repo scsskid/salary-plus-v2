@@ -143,7 +143,8 @@ export default function App() {
                 settings={settings}
                 changeMonth={changeMonth}
                 changeDate={changeDate}
-                records={monthRecords}
+                records={records}
+                monthRecords={monthRecords}
                 setInputDate={setInputDate}
                 jobs={jobs}
               />

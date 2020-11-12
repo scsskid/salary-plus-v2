@@ -19,6 +19,11 @@ export default function WidgetInputDate({
       year: 'numeric',
       timeZone: settings.timeZone
     }),
+    list: date.toLocaleDateString(undefined, {
+      month: 'long',
+      year: 'numeric',
+      timeZone: settings.timeZone
+    }),
     week: (function () {
       let string = date.toLocaleDateString(undefined, {
         month: 'short',
@@ -41,6 +46,10 @@ export default function WidgetInputDate({
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)
     },
+    list: {
+      prev: () => changeMonth(-1),
+      next: () => changeMonth(-1)
+    },
     week: {
       prev: () => changeDate(-7),
       next: () => changeDate(7)
@@ -53,9 +62,9 @@ export default function WidgetInputDate({
       <div className="input-date-display">{display[type]}</div>
 
       <div className="input-date-control">
-        <Button onClick={handlers[type].prev}>Prev</Button>{' '}
+        <Button onClick={handlers[type]?.prev}>Prev</Button>{' '}
         <Button onClick={handlers.today}>Today</Button>{' '}
-        <Button onClick={handlers[type].next}>Next</Button>
+        <Button onClick={handlers[type]?.next}>Next</Button>
       </div>
     </div>
   );
