@@ -46,5 +46,29 @@ export function getMinMaxDateBeginOfRecords(records) {
     return record.begin > acc.begin ? record : acc;
   });
 
-  return [new Date(oldestRecord.begin), new Date(newestRecord.begin)];
+  const oldestRecordDate = new Date(oldestRecord.begin);
+  oldestRecordDate.setHours(0, 0, 0, 0);
+  const newestRecordDate = new Date(newestRecord.begin);
+  newestRecordDate.setHours(0, 0, 0, 0);
+  newestRecordDate.setDate(newestRecordDate.getDate() + 1);
+
+  return [oldestRecordDate, newestRecordDate];
+}
+
+export function getPastRecords(records = [], angleDate = new Date()) {
+  return records.filter((record) => {
+    return new Date(record.begin) < angleDate;
+  });
+}
+
+export function getRecentRecords(
+  records = [],
+  limit = 1,
+  angleDate = new Date()
+) {
+  return getPastRecords(records, angleDate)
+    .sort((a, b) => {
+      return new Date(b.begin) - new Date(a.begin);
+    })
+    .splice(0, limit);
 }
