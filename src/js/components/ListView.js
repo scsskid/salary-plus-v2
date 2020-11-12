@@ -11,7 +11,6 @@ export default function ListView({
   settings = {}
 }) {
   const tempDate = new Date(inputDate);
-  let hasResults = false;
   if (!datesRange) {
     datesRange = {
       start: new Date(tempDate.setDate(1)),
