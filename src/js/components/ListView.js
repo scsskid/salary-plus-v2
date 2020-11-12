@@ -10,6 +10,7 @@ export default function ListView({ inputDate, records, jobs, settings }) {
       const date = new Date(inputDate.getTime());
       date.setDate(i + 1);
       const dateRecords = getRecordsByDate({ records, date });
+
       const hasRecords = dateRecords.length > 0;
 
       return (
@@ -24,7 +25,7 @@ export default function ListView({ inputDate, records, jobs, settings }) {
             </h1>
 
             <DateDetails
-              inputDate={inputDate}
+              date={date}
               jobs={jobs}
               records={records}
               settings={settings}
