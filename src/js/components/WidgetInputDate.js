@@ -19,7 +19,7 @@ export default function WidgetInputDate({
       year: 'numeric',
       timeZone: settings.timeZone
     }),
-    month: date.toLocaleDateString(undefined, {
+    calendar: date.toLocaleDateString(undefined, {
       month: 'long',
       year: 'numeric',
       timeZone: settings.timeZone
@@ -51,7 +51,7 @@ export default function WidgetInputDate({
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)
     },
-    month: {
+    calendar: {
       prev: () => changeMonth(-1),
       next: () => changeMonth(-1)
     },
@@ -71,9 +71,9 @@ export default function WidgetInputDate({
       <div className="input-date-display">{display[type]}</div>
 
       <div className="input-date-control">
-        <Button onClick={handlers[type]?.prev}>Prev</Button>{' '}
+        <Button onClick={handlers[type]?.prev}>◀</Button>{' '}
         <Button onClick={handlers.today}>Today</Button>{' '}
-        <Button onClick={handlers[type]?.next}>Next</Button>
+        <Button onClick={handlers[type]?.next}>▶</Button>
       </div>
     </div>
   );

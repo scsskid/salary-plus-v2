@@ -23,7 +23,7 @@ export default function View({
   todayDate,
   initialState = { activeSegement: 'Dashboard' }
 }) {
-  const segements = ['Dashboard', 'Month', 'List'];
+  const segements = ['Dashboard', 'Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
 
   const weekRange = {
@@ -35,6 +35,8 @@ export default function View({
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
+  // todayDate = new Date('2020-06-06'); // doest update week or list view?
+
   const Views = {
     Dashboard: (
       <div className="view-dashboard">
@@ -45,7 +47,7 @@ export default function View({
         <h2>3 days ago / yesterday</h2>
         <DateDetailsEntry />
         <h2>Upcoming</h2>
-        <Weekdays dayStart={inputDate.getDay()} settings={settings} />
+        <Weekdays dayStart={todayDate.getDay()} settings={settings} />
         <Week records={records} />
         <ListView
           jobs={jobs}
@@ -65,8 +67,16 @@ export default function View({
         />
       </div>
     ),
-    Month: (
+    Calendar: (
       <>
+        <WidgetInputDate
+          inputDate={inputDate}
+          settings={settings}
+          changeMonth={changeMonth}
+          setInputDate={setInputDate}
+          type={state.activeSegement.toLowerCase()}
+          changeDate={changeDate}
+        />
         <Calendar
           inputDate={inputDate}
           settings={settings}
@@ -83,29 +93,29 @@ export default function View({
       </>
     ),
     List: (
-      <ListView
-        jobs={jobs}
-        settings={settings}
-        inputDate={inputDate}
-        records={records}
-      />
+      <>
+        <WidgetInputDate
+          inputDate={inputDate}
+          settings={settings}
+          changeMonth={changeMonth}
+          setInputDate={setInputDate}
+          type={state.activeSegement.toLowerCase()}
+          changeDate={changeDate}
+        />
+        <ListView
+          jobs={jobs}
+          settings={settings}
+          inputDate={inputDate}
+          records={records}
+        />
+      </>
     )
   };
 
   return (
     <div className="view">
       <AppHeader>
-        <div className="app-header-title-controls">
-          <h1>View</h1>
-          <WidgetInputDate
-            inputDate={inputDate}
-            settings={settings}
-            changeMonth={changeMonth}
-            setInputDate={setInputDate}
-            type={state.activeSegement.toLowerCase()}
-            changeDate={changeDate}
-          />
-        </div>
+        <h1>View</h1>
         {['Off', ''].includes(state.activeSegement) && (
           <WidgetReporting
             records={monthRecords}

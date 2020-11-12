@@ -1,12 +1,9 @@
 .app-header {
-  height: calc(16 * var(--b));
+  height: calc(12 * var(--b));
   padding-top: calc(4 * var(--b));
-  display: flex;
-  justify-content: space-between;
-}
 
-.app-header-title-controls {
   & h1 {
+    @mixin fontSize 22;
     margin-bottom: 0;
   }
 }
