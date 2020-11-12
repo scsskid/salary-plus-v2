@@ -33,3 +33,14 @@ export function getRecordsByRange(
     );
   });
 }
+
+export function getMinMaxDateBeginOfRecords(records) {
+  const oldestRecord = records.reduce((acc, record) => {
+    return record.begin < acc.begin ? record : acc;
+  });
+  const newestRecord = records.reduce((acc, record) => {
+    return record.begin > acc.begin ? record : acc;
+  });
+
+  return [new Date(oldestRecord.begin), new Date(newestRecord.begin)];
+}
