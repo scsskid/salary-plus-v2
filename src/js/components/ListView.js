@@ -6,7 +6,6 @@ import {
 } from '../utils/dataHelpers';
 
 export default function ListView({ records = [], jobs = [], settings = {} }) {
-  console.log(records);
   const [start, end] = getMinMaxDateBeginOfRecords(records) || [0, 0];
   const dateRange = { start, end };
 
