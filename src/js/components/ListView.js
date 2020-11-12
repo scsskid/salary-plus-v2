@@ -4,28 +4,27 @@ import { getDaysInMonth } from '../utils/helpers.js';
 import { getRecordsByDate } from '../utils/dataHelpers';
 
 export default function ListView({
-  datesRange = false,
+  dateRange = false,
   inputDate = new Date(),
   records = [],
   jobs = [],
   settings = {}
 }) {
   const tempDate = new Date(inputDate);
-  if (!datesRange) {
-    datesRange = {
+  if (!dateRange) {
+    dateRange = {
       start: new Date(tempDate.setDate(1)),
       end: new Date(tempDate.setDate(getDaysInMonth(tempDate)))
     };
   }
 
-  const datesRangeCount =
-    Math.floor((datesRange.start - datesRange.end) / (24 * 60 * 60 * 1000)) *
-    -1;
+  const dateRangeCount =
+    Math.floor((dateRange.start - dateRange.end) / (24 * 60 * 60 * 1000)) * -1;
 
-  const dateList = Array(datesRangeCount)
+  const dateList = Array(dateRangeCount)
     .fill()
     .map((_, i) => {
-      const date = new Date(datesRange.start.getTime());
+      const date = new Date(dateRange.start.getTime());
       date.setDate(date.getDate() + i);
       const dateRecords = getRecordsByDate({ records, date });
       const hasRecords = dateRecords.length > 0;

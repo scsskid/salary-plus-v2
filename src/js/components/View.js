@@ -61,7 +61,7 @@ export default function View({
             <ListView
               jobs={jobs}
               settings={settings}
-              datesRange={weekRange}
+              dateRange={weekRange}
               records={records}
             />
           </div>
