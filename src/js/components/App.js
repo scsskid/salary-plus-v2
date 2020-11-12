@@ -109,13 +109,6 @@ export default function App() {
     setInputDate(inputDateCopy);
   }
 
-  const myRecords = getRecordsByRange(records, {
-    start: new Date('2020/09/01'),
-    end: new Date('2020/09/15')
-  });
-
-  console.log(myRecords);
-
   if (!isLoggedIn) {
     return (
       <Router>
