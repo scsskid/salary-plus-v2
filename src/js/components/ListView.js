@@ -6,7 +6,8 @@ import {
 } from '../utils/dataHelpers';
 
 export default function ListView({ records = [], jobs = [], settings = {} }) {
-  const [start, end] = getMinMaxDateBeginOfRecords(records);
+  console.log(records);
+  const [start, end] = getMinMaxDateBeginOfRecords(records) || [0, 0];
   const dateRange = { start, end };
 
   const dateRangeCount =
@@ -44,7 +45,7 @@ export default function ListView({ records = [], jobs = [], settings = {} }) {
 
   return (
     <div className="view-list">
-      {dateList.length > 0 ? dateList : <div>empty</div>}
+      {dateList.length > 0 ? dateList : <div>No Records</div>}
     </div>
   );
 }

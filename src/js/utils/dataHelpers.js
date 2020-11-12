@@ -35,6 +35,10 @@ export function getRecordsByRange(
 }
 
 export function getMinMaxDateBeginOfRecords(records) {
+  if (records.length === 0) {
+    return;
+  }
+
   const oldestRecord = records.reduce((acc, record) => {
     return record.begin < acc.begin ? record : acc;
   });
