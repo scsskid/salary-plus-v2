@@ -10,7 +10,11 @@ import Calendar from './Calendar';
 import { getWeekStartDate } from '../utils/helpers.js';
 import DateDetailsEntry from './DateDetailsEntry';
 import Weekdays from './Weekdays';
-import { getRecordsByRange } from '../utils/dataHelpers';
+import {
+  getRecentRecords,
+  getRecordsByRange,
+  getPastRecords
+} from '../utils/dataHelpers.js';
 
 export default function View({
   inputDate,
@@ -32,6 +36,8 @@ export default function View({
     end: new Date(todayDate.getTime() + 7 * 24 * 60 * 60 * 1000)
   };
 
+  const latestRecord = getRecentRecords(getPastRecords(records), 1, todayDate);
+
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
@@ -49,7 +55,7 @@ export default function View({
         </div>
         <div className="view-dashboard-recent">
           <h2>3 days ago / yesterday</h2>
-          <DateDetailsEntry />
+          <ListView jobs={jobs} settings={settings} records={latestRecord} />
         </div>
 
         <div className="view-dashboard-upcoming">

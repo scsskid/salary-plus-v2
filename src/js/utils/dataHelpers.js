@@ -61,14 +61,10 @@ export function getPastRecords(records = [], angleDate = new Date()) {
   });
 }
 
-export function getRecentRecords(
-  records = [],
-  limit = 1,
-  angleDate = new Date()
-) {
-  return getPastRecords(records, angleDate)
-    .sort((a, b) => {
-      return new Date(b.begin) - new Date(a.begin);
-    })
-    .splice(0, limit);
+export function getRecentRecords(records = [], limit = 1) {
+  return [...records].sort(sortByDateDesc).splice(0, limit);
+}
+
+function sortByDateDesc(a, b) {
+  return new Date(b.begin) - new Date(a.begin);
 }
