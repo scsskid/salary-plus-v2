@@ -1,22 +1,13 @@
 import React from 'react';
 import DateDetails from './DateDetails';
-import { getDaysInMonth } from '../utils/helpers.js';
-import { getRecordsByDate } from '../utils/dataHelpers';
+import {
+  getRecordsByDate,
+  getMinMaxDateBeginOfRecords
+} from '../utils/dataHelpers';
 
-export default function ListView({
-  dateRange = false,
-  inputDate = new Date(),
-  records = [],
-  jobs = [],
-  settings = {}
-}) {
-  const tempDate = new Date(inputDate);
-  if (!dateRange) {
-    dateRange = {
-      start: new Date(tempDate.setDate(1)),
-      end: new Date(tempDate.setDate(getDaysInMonth(tempDate)))
-    };
-  }
+export default function ListView({ records = [], jobs = [], settings = {} }) {
+  const [start, end] = getMinMaxDateBeginOfRecords(records);
+  const dateRange = { start, end };
 
   const dateRangeCount =
     Math.floor((dateRange.start - dateRange.end) / (24 * 60 * 60 * 1000)) * -1;

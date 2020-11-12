@@ -10,6 +10,7 @@ import Calendar from './Calendar';
 import { getWeekStartDate } from '../utils/helpers.js';
 import DateDetailsEntry from './DateDetailsEntry';
 import Weekdays from './Weekdays';
+import { getRecordsByRange } from '../utils/dataHelpers';
 
 export default function View({
   inputDate,
@@ -61,8 +62,7 @@ export default function View({
             <ListView
               jobs={jobs}
               settings={settings}
-              dateRange={weekRange}
-              records={records}
+              records={getRecordsByRange(records, weekRange)}
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function View({
           jobs={jobs}
           settings={settings}
           inputDate={inputDate}
-          records={records}
+          records={monthRecords}
         />
       </div>
     )

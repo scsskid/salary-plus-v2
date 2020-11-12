@@ -11,7 +11,7 @@ import {
   setAppInnerHeight,
   getWeekStartDateOffset
 } from '../utils/helpers.js';
-import { getRecordsByMonth } from '../utils/dataHelpers.js';
+import { getRecordsByMonth, getRecordsByRange } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
@@ -108,6 +108,13 @@ export default function App() {
     inputDateCopy.setDate(getWeekStartDateOffset(inputDateCopy));
     setInputDate(inputDateCopy);
   }
+
+  const myRecords = getRecordsByRange(records, {
+    start: new Date('2020/09/01'),
+    end: new Date('2020/09/15')
+  });
+
+  console.log(myRecords);
 
   if (!isLoggedIn) {
     return (
