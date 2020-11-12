@@ -54,19 +54,19 @@ export default function WidgetInputDate({
     today: () => changeMonth(0),
     dashboard: {
       prev: () => changeMonth(-1),
-      next: () => changeMonth(-1)
+      next: () => changeMonth(1)
     },
     calendar: {
       prev: () => changeMonth(-1),
-      next: () => changeMonth(-1)
+      next: () => changeMonth(1)
     },
     month: {
       prev: () => changeMonth(-1),
-      next: () => changeMonth(-1)
+      next: () => changeMonth(1)
     },
     list: {
       prev: () => changeMonth(-1),
-      next: () => changeMonth(-1)
+      next: () => changeMonth(1)
     },
     week: {
       prev: () => changeDate(-7),
