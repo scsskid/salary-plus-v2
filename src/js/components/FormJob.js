@@ -6,6 +6,7 @@ import Button from './Button';
 import Dialog from './Dialog';
 import FormElementSet from './FormElementSet';
 import FormElement from './FormElement';
+import AppHeader from './AppHeader';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -46,9 +47,9 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
 
   return (
     <>
-      <div className="component-header">
+      <AppHeader>
         <h1>Update Job</h1>
-      </div>
+      </AppHeader>
       {children}
       <FormJob
         job={job}

@@ -11,7 +11,7 @@ export default function ListView({
   settings = {}
 }) {
   const tempDate = new Date(inputDate);
-
+  let hasResults = false;
   if (!datesRange) {
     datesRange = {
       start: new Date(tempDate.setDate(1)),
@@ -53,5 +53,9 @@ export default function ListView({
       );
     });
 
-  return <div>{dateList}</div>;
+  return (
+    <div className="view-list">
+      {dateList.length > 0 ? dateList : <div>empty</div>}
+    </div>
+  );
 }

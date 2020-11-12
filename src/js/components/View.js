@@ -39,22 +39,33 @@ export default function View({
 
   const Views = {
     Dashboard: (
-      <div className="view-dashboard">
-        <WidgetReporting
-          records={monthRecords}
-          figures={['dates', 'hours', 'earned']}
-        />
-        <h2>3 days ago / yesterday</h2>
-        <DateDetailsEntry />
-        <h2>Upcoming</h2>
-        <Weekdays dayStart={todayDate.getDay()} settings={settings} />
-        <Week records={records} />
-        <ListView
-          jobs={jobs}
-          settings={settings}
-          datesRange={weekRange}
-          records={records}
-        />
+      <div className="view-dashboard | view-component">
+        <div className="view-dashboard-reporting">
+          <WidgetReporting
+            records={monthRecords}
+            figures={['dates', 'hours', 'earned']}
+          />
+        </div>
+        <div className="view-dashboard-recent">
+          <h2>3 days ago / yesterday</h2>
+          <DateDetailsEntry />
+        </div>
+
+        <div className="view-dashboard-upcoming">
+          <h2>Upcoming</h2>
+          <div className="view-dashboard-upcoming-week">
+            <Weekdays dayStart={todayDate.getDay()} settings={settings} />
+            <Week records={records} />
+          </div>
+          <div className="view-dashboard-upcoming-list">
+            <ListView
+              jobs={jobs}
+              settings={settings}
+              datesRange={weekRange}
+              records={records}
+            />
+          </div>
+        </div>
       </div>
     ),
     Week: (
@@ -68,15 +79,17 @@ export default function View({
       </div>
     ),
     Calendar: (
-      <>
-        <WidgetInputDate
-          inputDate={inputDate}
-          settings={settings}
-          changeMonth={changeMonth}
-          setInputDate={setInputDate}
-          type={state.activeSegement.toLowerCase()}
-          changeDate={changeDate}
-        />
+      <div className="view-calendar | view-component">
+        <div className="view-calendar-controls">
+          <WidgetInputDate
+            inputDate={inputDate}
+            settings={settings}
+            changeMonth={changeMonth}
+            setInputDate={setInputDate}
+            type={state.activeSegement.toLowerCase()}
+            changeDate={changeDate}
+          />
+        </div>
         <Calendar
           inputDate={inputDate}
           settings={settings}
@@ -90,10 +103,10 @@ export default function View({
           records={records}
           settings={settings}
         />
-      </>
+      </div>
     ),
     List: (
-      <>
+      <div className="view-list | view-component">
         <WidgetInputDate
           inputDate={inputDate}
           settings={settings}
@@ -108,7 +121,7 @@ export default function View({
           inputDate={inputDate}
           records={records}
         />
-      </>
+      </div>
     )
   };
 

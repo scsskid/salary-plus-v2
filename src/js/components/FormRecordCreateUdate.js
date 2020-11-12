@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import FormRecord from './FormRecord';
 import { getTimeOfDate } from '../utils/helpers';
+import AppHeader from './AppHeader';
 
 export function FormRecordCreate({
   inputDate,
@@ -38,9 +39,9 @@ export function FormRecordCreate({
 
   return (
     <>
-      <div className="component-header">
+      <AppHeader>
         <h1>New Entry</h1>
-      </div>
+      </AppHeader>
 
       <FormRecord
         jobs={jobs}
@@ -97,9 +98,9 @@ export function FormRecordUpdate({
 
   return (
     <>
-      <div className="component-header">
+      <AppHeader>
         <h1>Update Entry</h1>
-      </div>
+      </AppHeader>
       <FormRecord
         jobs={jobs}
         saveRecord={saveRecord}

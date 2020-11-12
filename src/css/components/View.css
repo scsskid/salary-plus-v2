@@ -1,13 +1,14 @@
-/* .view-header {
-  display: grid;
-  grid-gap: var(--b);
-  grid-template-rows: auto auto;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+/* View Common */
+
+.view-component {
+  padding-top: var(--bx);
 }
 
-.view-header :--heading {
-  margin-bottom: 0;
-} */
+.view .input-date-display-control {
+  margin-bottom: var(--bx);
+}
+
+/* View DashBoard */
 
 .view-dashboard {
   padding-top: var(--bx);
@@ -19,5 +20,14 @@
   justify-content: center;
 }
 
-.view-dashboard .widget-reporting-figure {
+.view-dashboard-recent,
+.view-dashboard-upcoming-week {
+  margin-bottom: var(--bx);
+}
+
+/* View Calendar */
+
+.segment-nav {
+  position: sticky;
+  top: 10px;
 }
