@@ -35,6 +35,8 @@
 }
 
 .table-reporting-container {
+  /* lint my ass */
+
   & td,
   & th {
     padding: 0.8rem;
