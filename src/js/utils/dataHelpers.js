@@ -9,7 +9,7 @@ export function getRecordsByDate({ records, date }) {
   });
 }
 
-export function getRecordsByMonth({ records, date }) {
+export function getRecordsByMonth({ records = [], date = new Date() }) {
   return records.filter((record) => {
     const dateBegin = new Date(record.begin);
     return (

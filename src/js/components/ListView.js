@@ -5,14 +5,19 @@ import {
   getMinMaxDateBeginOfRecords
 } from '../utils/dataHelpers';
 
-export default function ListView({ records = [], jobs = [], settings = {} }) {
+export default function ListView({
+  records = [],
+  jobs = [],
+  settings = {},
+  reverse = false
+}) {
   const [start, end] = getMinMaxDateBeginOfRecords(records) || [0, 0];
   const dateRange = { start, end };
-
+  console.log(reverse);
   const dateRangeCount =
     Math.floor((dateRange.start - dateRange.end) / (24 * 60 * 60 * 1000)) * -1;
 
-  const dateList = Array(dateRangeCount)
+  let dateList = Array(dateRangeCount)
     .fill()
     .map((_, i) => {
       const date = new Date(dateRange.start.getTime());
@@ -44,7 +49,15 @@ export default function ListView({ records = [], jobs = [], settings = {} }) {
 
   return (
     <div className="view-list">
-      {dateList.length > 0 ? dateList : <div>No Records</div>}
+      {dateList.length > 0 ? (
+        reverse ? (
+          dateList.reverse()
+        ) : (
+          dateList
+        )
+      ) : (
+        <div>No Records</div>
+      )}
     </div>
   );
 }

@@ -14,6 +14,7 @@ import {
   getRecordsByRange,
   getPastRecords
 } from '../utils/dataHelpers.js';
+import Clock from './Clock';
 
 export default function View({
   inputDate,
@@ -29,28 +30,38 @@ export default function View({
 }) {
   const segements = ['Dashboard', 'Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
-
   const weekRange = {
     start: new Date(clock.today),
     end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
   };
-
-  const latestRecord = getRecentRecords(
-    getPastRecords(records),
-    1,
-    clock.today
-  );
+  const latestRecord = getRecordsByRange(records, {
+    start: new Date('1900'),
+    end: clock.now
+  })
+    .sort(function sortByDateDesc(a, b) {
+      return new Date(a.begin) - new Date(b.begin);
+    })
+    .splice(0, 1);
 
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  // clock.today = new Date('2020-06-06'); // doest update week or list view?
+  React.useEffect(() => {
+    // console.log('clock', latestRecord);
+  }, [clock]);
 
   const Views = {
     Dashboard: (
       <div className="view-dashboard | view-component">
         <div className="view-dashboard-reporting">
+          <h2>
+            Earned{' '}
+            {clock.today.toLocaleDateString('de-DE', {
+              month: 'long',
+              year: 'numeric'
+            })}
+          </h2>
           <WidgetReporting
             records={monthRecords}
             figures={['dates', 'hours', 'earned']}
@@ -138,6 +149,7 @@ export default function View({
     <div className="view">
       <AppHeader>
         <h1>View</h1>
+        <Clock />
         {['Off', ''].includes(state.activeSegement) && (
           <WidgetReporting
             records={monthRecords}

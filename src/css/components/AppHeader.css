@@ -1,8 +1,11 @@
 .app-header {
   height: calc(12 * var(--b));
-  padding-top: calc(4 * var(--b));
+
+  display: flex;
+  justify-content: space-between;
 
   & h1 {
+    padding-top: calc(4 * var(--b));
     @mixin fontSize 22;
     margin-bottom: 0;
   }

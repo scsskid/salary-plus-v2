@@ -17,39 +17,21 @@ import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
 import Reporting from './Reporting';
 import JobsList from './JobsList';
+import { useClock } from '../utils/hooks.js';
 
 export default function App() {
-  const [clock, setClock] = React.useState(buildClockObj);
+  const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
-  const { settings = {}, records = {}, jobs = [] } = appData;
+  const { settings = {}, records = [], jobs = [] } = appData;
 
   // Effects
 
-  function buildClockObj() {
-    const now = new Date();
-    const today = new Date(now.getTime());
-    today.setHours(0, 0, 0, 0);
-
-    return {
-      now: new Date(),
-      today
-    };
-  }
-
   React.useEffect(() => {
-    // to hook:
+    // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
-
-    const clockInterval = setInterval(() => {
-      setClock(buildClockObj());
-    }, 1000);
-
-    return () => {
-      clearInterval(clockInterval);
-    };
   }, []);
 
   // Store CRUD
@@ -81,7 +63,7 @@ export default function App() {
 
   const monthRecords = getRecordsByMonth({
     records,
-    date: inputDate
+    date: clock.today
   });
 
   // Fns to Drill
@@ -150,10 +132,6 @@ export default function App() {
       <Router>
         {isLoggedIn && <Navigation />}
         <main className="main">
-          {clock.now.toTimeString()}
-          <br />
-          {clock.today.toTimeString()}
-          <br />
           <Switch>
             <Route exact path="/">
               <View
