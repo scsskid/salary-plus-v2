@@ -46,3 +46,36 @@
 .date-details-entry-meta span:last-child {
   margin-right: 0;
 }
+
+.is-ongoing {
+  margin-left: 0.2rem;
+  padding: 2px 0.5rem 2px;
+  color: #fff;
+  background-color: #222;
+  animation-name: color;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  text-transform: uppercase;
+  @mixin fontSize 10;
+  letter-spacing: 0.05em;
+  display: inline;
+  border-radius: 100px;
+  position: relative;
+  bottom: 1px;
+}
+
+@keyframes color {
+  /* . */
+
+  0% {
+    background-color: var(--color-text);
+  }
+
+  50% {
+    background-color: var(--color-highlight);
+  }
+
+  100% {
+    background-color: var(--color-text);
+  }
+}

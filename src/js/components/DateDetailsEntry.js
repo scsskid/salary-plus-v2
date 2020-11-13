@@ -2,18 +2,26 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
 import * as reportingFns from './../utils/reporting-fns';
+import { useClock } from '../utils/hooks';
 
 export default function DateDetailsEntry({
   record = {},
-  jobs = [],
+  // jobs = [],
   showDebugInfo = false
 }) {
-  const job = jobs.find((job) => job.id == record.jobId);
+  const clock = useClock();
+  // const clock = { now: new Date('2020/11/14 13:00') };
+  // const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
-  const time = {
-    begin: getLocaleTimeString(new Date(record.begin)),
-    end: getLocaleTimeString(new Date(record.end))
+  const datesObj = {
+    begin: new Date(record.begin),
+    end: new Date(record.end)
   };
+  const time = {
+    begin: getLocaleTimeString(datesObj.begin),
+    end: getLocaleTimeString(datesObj.end)
+  };
+  const ongoing = clock.now >= datesObj.begin && clock.now <= datesObj.end;
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -64,7 +72,8 @@ export default function DateDetailsEntry({
 
         <div className="date-details-entry-content">
           <h2>
-            {record.jobName} {job ? '' : ''}
+            {record.jobName}{' '}
+            {ongoing && <span className="is-ongoing">live</span>}
           </h2>
 
           <div className="date-details-entry-meta">
