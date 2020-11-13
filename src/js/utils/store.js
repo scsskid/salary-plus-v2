@@ -60,15 +60,7 @@ function reducer(state, { type, payload }) {
         jobs: state.jobs.filter((job) => {
           return job.id != payload.id;
         })
-        // settings: {
-        //   ...state.settings,
-        //   previousJobId:
-        //     state.settings.previousJobId == payload.id
-        //       ? null
-        //       : state.settings.previousJobId
-        // }
       };
-
     case 'setPreviousFormDataProp':
       return {
         ...state,
@@ -80,7 +72,6 @@ function reducer(state, { type, payload }) {
           }
         }
       };
-
     case 'reset':
       return init({ ...bootstrapData });
     case 'deleteAppData':
@@ -102,7 +93,6 @@ function useLocalStorageReducer() {
   );
 
   React.useEffect(() => {
-    // console.log('appData write', appData);
     window.localStorage.setItem(key, JSON.stringify(appData));
   }, [appData]);
 
