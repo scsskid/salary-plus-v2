@@ -19,20 +19,9 @@ import Reporting from './Reporting';
 import JobsList from './JobsList';
 
 export default function App() {
-  const [inputDate, setInputDate] = React.useState(() => {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    return now;
-  });
-  const todayDate = (function () {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    return now;
-  })();
-
   const [clock, setClock] = React.useState(buildClockObj);
-
   const [appData, dispatch] = useLocalStorageReducer();
+  const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = {}, jobs = [] } = appData;
 
@@ -108,15 +97,15 @@ export default function App() {
     inputDateCopy.setMonth(inputDateCopy.getMonth() + summand);
 
     if (
-      todayDate.getMonth() == inputDateCopy.getMonth() &&
-      todayDate.getFullYear() == inputDateCopy.getFullYear()
+      clock.today.getMonth() == inputDateCopy.getMonth() &&
+      clock.today.getFullYear() == inputDateCopy.getFullYear()
     ) {
-      inputDateCopy.setDate(todayDate.getDate());
+      inputDateCopy.setDate(clock.today.getDate());
     } else {
       inputDateCopy.setDate(1);
     }
 
-    setInputDate(summand === 0 ? todayDate : inputDateCopy);
+    setInputDate(summand === 0 ? clock.today : inputDateCopy);
   }
 
   function changeDate(summand = 0) {
@@ -176,7 +165,7 @@ export default function App() {
                 monthRecords={monthRecords}
                 setInputDate={setInputDate}
                 jobs={jobs}
-                todayDate={todayDate}
+                clock={clock}
               />
             </Route>
             <Route exact path="/reporting">

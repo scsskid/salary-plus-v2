@@ -24,24 +24,28 @@ export default function View({
   monthRecords,
   setInputDate,
   jobs,
-  todayDate,
+  clock,
   initialState = { activeSegement: 'Dashboard' }
 }) {
   const segements = ['Dashboard', 'Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
 
   const weekRange = {
-    start: new Date(todayDate),
-    end: new Date(todayDate.getTime() + 7 * 24 * 60 * 60 * 1000)
+    start: new Date(clock.today),
+    end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
   };
 
-  const latestRecord = getRecentRecords(getPastRecords(records), 1, todayDate);
+  const latestRecord = getRecentRecords(
+    getPastRecords(records),
+    1,
+    clock.today
+  );
 
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  // todayDate = new Date('2020-06-06'); // doest update week or list view?
+  // clock.today = new Date('2020-06-06'); // doest update week or list view?
 
   const Views = {
     Dashboard: (
@@ -53,14 +57,14 @@ export default function View({
           />
         </div>
         <div className="view-dashboard-recent">
-          <h2>3 days ago / yesterday</h2>
+          <h2>Most Recent</h2>
           <ListView jobs={jobs} settings={settings} records={latestRecord} />
         </div>
 
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
           <div className="view-dashboard-upcoming-week">
-            <Weekdays dayStart={todayDate.getDay()} settings={settings} />
+            <Weekdays dayStart={clock.today.getDay()} settings={settings} />
             <Week records={records} />
           </div>
           <div className="view-dashboard-upcoming-list">
