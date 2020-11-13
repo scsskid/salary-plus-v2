@@ -8,7 +8,6 @@ import WidgetInputDate from './WidgetInputDate';
 import Week from './Week';
 import Calendar from './Calendar';
 import { getWeekStartDate } from '../utils/helpers.js';
-import DateDetailsEntry from './DateDetailsEntry';
 import Weekdays from './Weekdays';
 import {
   getRecentRecords,

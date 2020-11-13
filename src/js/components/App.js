@@ -29,15 +29,38 @@ export default function App() {
     now.setHours(0, 0, 0, 0);
     return now;
   })();
+
+  const [clock, setClock] = React.useState(buildClockObj);
+
   const [appData, dispatch] = useLocalStorageReducer();
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = {}, jobs = [] } = appData;
 
   // Effects
 
+  function buildClockObj() {
+    const now = new Date();
+    const today = new Date(now.getTime());
+    today.setHours(0, 0, 0, 0);
+
+    return {
+      now: new Date(),
+      today
+    };
+  }
+
   React.useEffect(() => {
+    // to hook:
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
+
+    const clockInterval = setInterval(() => {
+      setClock(buildClockObj());
+    }, 1000);
+
+    return () => {
+      clearInterval(clockInterval);
+    };
   }, []);
 
   // Store CRUD
@@ -131,11 +154,17 @@ export default function App() {
     );
   }
 
+  // console.log(clock);
+
   return (
     <React.StrictMode>
       <Router>
         {isLoggedIn && <Navigation />}
         <main className="main">
+          {clock.now.toTimeString()}
+          <br />
+          {clock.today.toTimeString()}
+          <br />
           <Switch>
             <Route exact path="/">
               <View
