@@ -1,6 +1,6 @@
 import React from 'react';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
-import FigureHoursElapsed from './FigureHoursElapsed';
+import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
 import FigureTotals from './FigureTotals';
@@ -60,7 +60,7 @@ export default function Reports({
               <tr className="table-reporting-row">
                 <th>Regular</th>
                 <td>
-                  <FigureHoursElapsed records={records} type="contract" />
+                  <FigureHours records={records} type="contract" />
                 </td>
                 <td>
                   <b>
@@ -71,7 +71,7 @@ export default function Reports({
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHoursElapsed records={records} type="overtime" />
+                  <FigureHours records={records} type="overtime" />
                 </td>
                 <td>
                   <b>
@@ -83,7 +83,7 @@ export default function Reports({
           </table>
           <p className="totals">
             Claimable Salary (
-            <FigureHoursElapsed records={records} type="actual" /> hours)
+            <FigureHours records={records} type="actual" /> hours)
             <b>
               <FigureEarned records={records} type="actual" />
             </b>{' '}

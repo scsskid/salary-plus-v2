@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { getLocaleTimeString } from '../utils/helpers';
 import * as reportingFns from './../utils/reporting-fns';
 import { useClock } from '../utils/hooks';
+import FigureEarned from './FigureEarned';
+import FigureHours from './FigureHours';
 
 export default function DateDetailsEntry({
   record = {},
@@ -73,27 +75,22 @@ export default function DateDetailsEntry({
         <div className="date-details-entry-content">
           <h2>
             {record.jobName}{' '}
-            {ongoing && <span className="is-ongoing">live</span>}
+            {ongoing && <span className="is-ongoing">now</span>}
           </h2>
 
           <div className="date-details-entry-meta">
-            <span>{reporting.actualEarned}€</span>
-            <span>{reporting.paidHours}h</span>
+            <FigureEarned records={[record]} />
+            <FigureHours colorize={true} records={[record]} />
             {reporting.includedOvertime !== 0 && (
               <p>
                 Overtime:{' '}
-                <span
-                  style={
-                    reporting.includedOvertime > 0
-                      ? { color: 'green' }
-                      : { color: 'red' }
-                  }
-                >
-                  {reporting.includedOvertime}h
-                </span>
+                <FigureHours
+                  type="overtime"
+                  colorize={true}
+                  records={[record]}
+                />
               </p>
             )}
-
             {record.sickLeave && <span> [sick]</span>}
           </div>
         </div>

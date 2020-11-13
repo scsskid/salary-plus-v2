@@ -1,0 +1,6 @@
+.value-colorize.value-not-negative {
+  color: green;
+}
+.value-colorize.value-negative {
+  color: red;
+}
