@@ -24,12 +24,14 @@ export function getRecordsByRange(
   dateRange = {
     start: new Date(),
     end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-  }
+  },
+  compareDateRangeEndToRecordEnd = false
 ) {
   return records.filter((record) => {
     return (
       record.begin > dateRange.start.toISOString() &&
-      record.begin < dateRange.end.toISOString()
+      (compareDateRangeEndToRecordEnd ? record.end : record.begin) <
+        dateRange.end.toISOString()
     );
   });
 }

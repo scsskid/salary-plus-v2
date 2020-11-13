@@ -30,18 +30,23 @@ export default function View({
 }) {
   const segements = ['Dashboard', 'Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
-  const weekRange = {
-    start: new Date(clock.today),
-    end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
-  };
-  const latestRecord = getRecordsByRange(records, {
-    start: new Date('1900'),
-    end: clock.now
-  })
+  const latestRecord = getRecordsByRange(
+    records,
+    {
+      start: new Date('1900'),
+      end: clock.now
+    },
+    true
+  )
     .sort(function sortByDateDesc(a, b) {
-      return new Date(a.begin) - new Date(b.begin);
+      return new Date(b.begin) - new Date(a.begin);
     })
     .splice(0, 1);
+
+  const next7DaysRecords = getRecordsByRange(records, {
+    start: new Date(clock.today),
+    end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
+  });
 
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
@@ -82,7 +87,7 @@ export default function View({
             <ListView
               jobs={jobs}
               settings={settings}
-              records={getRecordsByRange(records, weekRange)}
+              records={next7DaysRecords}
             />
           </div>
         </div>

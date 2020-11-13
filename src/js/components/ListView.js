@@ -13,7 +13,6 @@ export default function ListView({
 }) {
   const [start, end] = getMinMaxDateBeginOfRecords(records) || [0, 0];
   const dateRange = { start, end };
-  console.log(reverse);
   const dateRangeCount =
     Math.floor((dateRange.start - dateRange.end) / (24 * 60 * 60 * 1000)) * -1;
 
