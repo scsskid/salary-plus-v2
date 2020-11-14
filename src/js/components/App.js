@@ -18,6 +18,11 @@ import Debug from './Debug';
 import Reporting from './Reporting';
 import JobsList from './JobsList';
 import { useClock } from '../utils/hooks.js';
+import Dashboard from './Dashboard';
+import SegmentNav, { SegmentNavEl } from './SegmentNav';
+import AppHeader from './AppHeader';
+import Clock from './Clock';
+import WidgetReporting from './WidgetReporting';
 
 export default function App() {
   const clock = useClock();
@@ -127,6 +132,10 @@ export default function App() {
       <Router>
         {isLoggedIn && <Navigation />}
         <main className="main">
+          <AppHeader>
+            <h1>View</h1>
+            <Clock />
+          </AppHeader>
           <Switch>
             <Route exact path="/">
               <View
@@ -139,6 +148,22 @@ export default function App() {
                 jobs={jobs}
                 clock={clock}
               />
+            </Route>
+            <Route exact path="/Dashboard">
+              <SegmentNav />
+
+              <View
+                inputDate={inputDate}
+                settings={settings}
+                changeMonth={changeMonth}
+                changeDate={changeDate}
+                records={records}
+                setInputDate={setInputDate}
+                jobs={jobs}
+                clock={clock}
+              >
+                <Dashboard jobs={jobs} settings={settings} records={records} />
+              </View>
             </Route>
             <Route exact path="/reporting">
               <Reporting

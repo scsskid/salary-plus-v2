@@ -8,7 +8,7 @@ function useClock() {
       // check if is new Hour
 
       setClock(buildClockObj());
-    }, 1000 * 60);
+    }, 1000 * 10);
 
     return () => {
       clearInterval(clockInterval);

@@ -1,23 +1,15 @@
 import React from 'react';
 import ListView from './ListView';
 import DateDetails from './DateDetails';
+import { useHistory } from 'react-router-dom';
 import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import AppHeader from './AppHeader';
 import WidgetReporting from './WidgetReporting';
 import WidgetInputDate from './WidgetInputDate';
-import Week from './Week';
 import Calendar from './Calendar';
-import { getWeekStartDate } from '../utils/helpers.js';
-import Weekdays from './Weekdays';
-import {
-  getRecentRecords,
-  getRecordsByRange,
-  getPastRecords,
-  getRecordsByMonth
-} from '../utils/dataHelpers.js';
+import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import Clock from './Clock';
-import { useClock } from '../utils/hooks';
-import { isSameDay } from '../utils/helpers.js';
+import Dashboard from './Dashboard';
 
 export default function View({
   inputDate,
@@ -28,32 +20,15 @@ export default function View({
   setInputDate,
   jobs = [],
   clock,
-  initialState = { activeSegement: 'Calendar' }
+  initialState = { activeSegement: 'Calendar' },
+  children
 }) {
-  const segements = ['Dashboard', 'Calendar', 'List'];
+  const segements = ['Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
 
   const monthRecords = getRecordsByMonth({
     records,
     date: clock.today
-  });
-
-  const reocordsBeforeToday = getRecordsByRange(records, {
-    start: new Date('1900'),
-    end: clock.today
-  })
-    .sort(function sortByDateDesc(a, b) {
-      return new Date(b.end) - new Date(a.end);
-    })
-    .splice(0, 1);
-
-  const todayRecords = records.filter((record) =>
-    isSameDay(new Date(record.begin), clock.today)
-  );
-
-  const next7DaysRecords = getRecordsByRange(records, {
-    start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
-    end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
 
   function handleDateClick(e) {
@@ -65,69 +40,6 @@ export default function View({
   }, [clock]);
 
   const Views = {
-    Dashboard: (
-      <div className="view-dashboard | view-component">
-        <div className="view-dashboard-reporting">
-          <h2>
-            Earned{' '}
-            {clock.today.toLocaleDateString('de-DE', {
-              month: 'long',
-              year: 'numeric'
-            })}
-          </h2>
-          <WidgetReporting
-            records={monthRecords}
-            figures={['dates', 'hours', 'earned']}
-          />
-        </div>
-        <div className="view-dashboard-ongoing">
-          <h2>Today</h2>
-          <ListView
-            jobs={jobs}
-            settings={settings}
-            records={todayRecords}
-            hideDates={true}
-          />
-        </div>
-
-        <div className="view-dashboard-recent">
-          <h2>before Today</h2>
-          <ListView
-            jobs={jobs}
-            settings={settings}
-            records={reocordsBeforeToday}
-          />
-        </div>
-
-        <div className="view-dashboard-upcoming">
-          <h2>Upcoming</h2>
-          <div className="view-dashboard-upcoming-week">
-            <Weekdays dayStart={clock.today.getDay() + 1} settings={settings} />
-            <Week
-              records={records}
-              inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
-            />
-          </div>
-          <div className="view-dashboard-upcoming-list">
-            <ListView
-              jobs={jobs}
-              settings={settings}
-              records={next7DaysRecords}
-            />
-          </div>
-        </div>
-      </div>
-    ),
-    Week: (
-      <div>
-        <Week
-          inputDate={inputDate}
-          dateWalker={getWeekStartDate(inputDate)}
-          records={records}
-          bleedMonth="true"
-        />
-      </div>
-    ),
     Calendar: (
       <div className="view-calendar | view-component">
         <div className="view-calendar-controls">
@@ -177,32 +89,8 @@ export default function View({
 
   return (
     <div className="view">
-      <AppHeader>
-        <h1>View</h1>
-        <Clock />
-        {['Off', ''].includes(state.activeSegement) && (
-          <WidgetReporting
-            records={monthRecords}
-            figures={['hours', 'earned']}
-          />
-        )}
-      </AppHeader>
-
-      <SegmentNav>
-        {segements.map((segment, i) => (
-          <SegmentNavEl
-            id={segment}
-            key={i}
-            isActive={state.activeSegement === segment ? true : false}
-            onClick={(event) =>
-              setState({ activeSegement: event.currentTarget.id })
-            }
-          >
-            <b>{segment}</b>
-          </SegmentNavEl>
-        ))}
-      </SegmentNav>
       <div className="app-body">{Views[state.activeSegement]}</div>
+      {children}
     </div>
   );
 }
