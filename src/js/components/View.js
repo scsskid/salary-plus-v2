@@ -16,6 +16,7 @@ import {
   getRecordsByMonth
 } from '../utils/dataHelpers.js';
 import Clock from './Clock';
+import { useClock } from '../utils/hooks';
 
 export default function View({
   inputDate,
@@ -49,8 +50,16 @@ export default function View({
     })
     .splice(0, 1);
 
+  const onGoingRecords = records.filter((record) => {
+    return (
+      clock.now >= new Date(record.begin) && clock.now <= new Date(record.end)
+    );
+  });
+
+  console.log(onGoingRecords);
+
   const next7DaysRecords = getRecordsByRange(records, {
-    start: new Date(clock.today),
+    start: new Date(clock.now),
     end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
   });
 
@@ -79,6 +88,11 @@ export default function View({
           />
         </div>
         <div className="view-dashboard-recent">
+          <h2>Now</h2>
+          <ListView jobs={jobs} settings={settings} records={onGoingRecords} />
+        </div>
+
+        <div className="view-dashboard-recent">
           <h2>Most Recent</h2>
           <ListView jobs={jobs} settings={settings} records={latestRecord} />
         </div>
@@ -90,6 +104,13 @@ export default function View({
             <Week records={records} />
           </div>
           <div className="view-dashboard-upcoming-list">
+            <div style={{ border: '1px dotted pink' }}>
+              <ListView
+                jobs={jobs}
+                settings={settings}
+                records={onGoingRecords}
+              />
+            </div>
             <ListView
               jobs={jobs}
               settings={settings}
