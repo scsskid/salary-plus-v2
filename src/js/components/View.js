@@ -17,6 +17,7 @@ import {
 } from '../utils/dataHelpers.js';
 import Clock from './Clock';
 import { useClock } from '../utils/hooks';
+import { isSameDay } from '../utils/helpers.js';
 
 export default function View({
   inputDate,
@@ -50,16 +51,14 @@ export default function View({
     })
     .splice(0, 1);
 
-  const onGoingRecords = records.filter((record) => {
-    return (
-      clock.now >= new Date(record.begin) && clock.now <= new Date(record.end)
-    );
-  });
+  const todayRecords = records.filter((record) =>
+    isSameDay(new Date(record.begin), clock.today)
+  );
 
-  console.log(onGoingRecords);
+  console.log(todayRecords);
 
   const next7DaysRecords = getRecordsByRange(records, {
-    start: new Date(clock.now),
+    start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
     end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
   });
 
@@ -87,9 +86,9 @@ export default function View({
             figures={['dates', 'hours', 'earned']}
           />
         </div>
-        <div className="view-dashboard-recent">
-          <h2>Now</h2>
-          <ListView jobs={jobs} settings={settings} records={onGoingRecords} />
+        <div className="view-dashboard-ongoing">
+          <h2>Today</h2>
+          <ListView jobs={jobs} settings={settings} records={todayRecords} />
         </div>
 
         <div className="view-dashboard-recent">
@@ -100,17 +99,13 @@ export default function View({
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
           <div className="view-dashboard-upcoming-week">
-            <Weekdays dayStart={clock.today.getDay()} settings={settings} />
-            <Week records={records} />
+            <Weekdays dayStart={clock.today.getDay() + 1} settings={settings} />
+            <Week
+              records={records}
+              inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
+            />
           </div>
           <div className="view-dashboard-upcoming-list">
-            <div style={{ border: '1px dotted pink' }}>
-              <ListView
-                jobs={jobs}
-                settings={settings}
-                records={onGoingRecords}
-              />
-            </div>
             <ListView
               jobs={jobs}
               settings={settings}
