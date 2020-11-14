@@ -9,7 +9,8 @@ export default function ListView({
   records = [],
   jobs = [],
   settings = {},
-  reverse = false
+  reverse = false,
+  hideDates = false
 }) {
   const [start, end] = getMinMaxDateBeginOfRecords(records) || [0, 0];
   const dateRange = { start, end };
@@ -27,14 +28,15 @@ export default function ListView({
       return (
         hasRecords && (
           <div className="view-list-date" key={i}>
-            <h1 className="view-list-date-title">
-              {date.toLocaleDateString(undefined, {
-                weekday: 'long',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </h1>
-
+            {!hideDates && (
+              <h1 className="view-list-date-title">
+                {date.toLocaleDateString(undefined, {
+                  weekday: 'long',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </h1>
+            )}
             <DateDetails
               date={date}
               jobs={jobs}

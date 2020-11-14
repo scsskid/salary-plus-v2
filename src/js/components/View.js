@@ -88,7 +88,12 @@ export default function View({
         </div>
         <div className="view-dashboard-ongoing">
           <h2>Today</h2>
-          <ListView jobs={jobs} settings={settings} records={todayRecords} />
+          <ListView
+            jobs={jobs}
+            settings={settings}
+            records={todayRecords}
+            hideDates={true}
+          />
         </div>
 
         <div className="view-dashboard-recent">
