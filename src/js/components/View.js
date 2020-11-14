@@ -43,7 +43,7 @@ export default function View({
     end: clock.today
   })
     .sort(function sortByDateDesc(a, b) {
-      return new Date(b.begin) - new Date(a.begin);
+      return new Date(b.end) - new Date(a.end);
     })
     .splice(0, 1);
 
