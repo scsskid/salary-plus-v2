@@ -55,8 +55,6 @@ export default function View({
     isSameDay(new Date(record.begin), clock.today)
   );
 
-  console.log(todayRecords);
-
   const next7DaysRecords = getRecordsByRange(records, {
     start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
     end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
