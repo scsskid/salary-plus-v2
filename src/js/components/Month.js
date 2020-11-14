@@ -16,7 +16,6 @@ export default function Month({ inputDate, handleDateClick, records }) {
       currentDate.getFullYear() > inputDate.getFullYear();
 
     if (isNextMonth) {
-      console.log('break');
       break;
     }
     weeks.push(
