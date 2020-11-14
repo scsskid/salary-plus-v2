@@ -13,8 +13,6 @@ export default function DateCell({
     now.setHours(0, 0, 0, 0);
     return now;
   })();
-  const matchesTodayDate = helpers.isSameDay(date, todayDate);
-  const matchesInputDate = helpers.isSameDay(date, inputDate);
   const dateRecords = getRecordsByDate({
     records,
     date
@@ -28,8 +26,8 @@ export default function DateCell({
     <div
       className="calendar-date"
       data-date-string={date.toISOString()}
-      data-selected={matchesInputDate ? 'selected' : ''}
-      data-today={matchesTodayDate ? 'today' : 'foo'}
+      data-selected={helpers.isSameDay(date, inputDate) ? 'selected' : ''}
+      data-today={helpers.isSameDay(date, todayDate) ? 'today' : 'foo'}
     >
       <button
         type="button"
