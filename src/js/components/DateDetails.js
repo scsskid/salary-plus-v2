@@ -4,7 +4,10 @@ import { getRecordsByDate } from '../utils/dataHelpers.js';
 
 export default function DateDetails({ records, jobs, settings, date }) {
   const defaultClassName = 'date-details';
-  const dateRecords = getRecordsByDate({ records, date });
+  const dateRecords = [...getRecordsByDate({ records, date })].sort((a, b) => {
+    return new Date(a.begin) - new Date(b.begin);
+  });
+
   const content = dateRecords.map((record) => {
     return (
       <DateDetailsEntry
