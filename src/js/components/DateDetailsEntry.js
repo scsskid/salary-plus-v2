@@ -12,6 +12,7 @@ export default function DateDetailsEntry({
   showDebugInfo = false
 }) {
   const clock = useClock();
+  let status;
   // const clock = { now: new Date('2020/11/14 13:00') };
   // const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
@@ -23,7 +24,23 @@ export default function DateDetailsEntry({
     begin: getLocaleTimeString(datesObj.begin),
     end: getLocaleTimeString(datesObj.end)
   };
-  const ongoing = clock.now >= datesObj.begin && clock.now <= datesObj.end;
+  const statusObj = {
+    ongoing: clock.now >= datesObj.begin && clock.now <= datesObj.end,
+    past: clock.now > datesObj.end,
+    future: clock.now < datesObj.begin
+  };
+
+  const classList = ['date-details-entry'];
+
+  for (const prop in statusObj) {
+    const value = statusObj[prop];
+    if (value) {
+      classList.push(` date-details-entry--${prop}`);
+      status = prop;
+    }
+  }
+
+  const className = classList.join(' ');
 
   function handleClick() {
     history.push(`/records/${record.id}`);
@@ -56,7 +73,7 @@ export default function DateDetailsEntry({
     <>
       <button
         type="button"
-        className="date-details-entry"
+        className={className}
         data-record-id={record.id}
         onClick={handleClick}
       >
@@ -74,8 +91,8 @@ export default function DateDetailsEntry({
 
         <div className="date-details-entry-content">
           <h2>
-            {record.jobName}{' '}
-            {ongoing && <span className="is-ongoing">now</span>}
+            {record.jobName} [{status}]
+            {statusObj.ongoing && <span className="is-ongoing">now</span>}
           </h2>
 
           <div className="date-details-entry-meta">

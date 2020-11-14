@@ -47,6 +47,10 @@
   margin-right: 0;
 }
 
+.date-details-entry--ongoing {
+  box-shadow: inset 0 0 0 1px var(--color-highlight);
+}
+
 .is-ongoing {
   margin-left: 0.2rem;
   padding: 2px 0.5rem 2px;
