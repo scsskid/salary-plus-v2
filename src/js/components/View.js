@@ -38,14 +38,10 @@ export default function View({
     date: clock.today
   });
 
-  const latestRecord = getRecordsByRange(
-    records,
-    {
-      start: new Date('1900'),
-      end: clock.now
-    },
-    true
-  )
+  const reocordsBeforeToday = getRecordsByRange(records, {
+    start: new Date('1900'),
+    end: clock.today
+  })
     .sort(function sortByDateDesc(a, b) {
       return new Date(b.begin) - new Date(a.begin);
     })
@@ -95,8 +91,12 @@ export default function View({
         </div>
 
         <div className="view-dashboard-recent">
-          <h2>Most Recent</h2>
-          <ListView jobs={jobs} settings={settings} records={latestRecord} />
+          <h2>before Today</h2>
+          <ListView
+            jobs={jobs}
+            settings={settings}
+            records={reocordsBeforeToday}
+          />
         </div>
 
         <div className="view-dashboard-upcoming">
