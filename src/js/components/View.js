@@ -59,7 +59,7 @@ export default function View({
 
   const next7DaysRecords = getRecordsByRange(records, {
     start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
-    end: new Date(clock.today.getTime() + 7 * 24 * 60 * 60 * 1000)
+    end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
 
   function handleDateClick(e) {
