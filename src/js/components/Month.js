@@ -9,13 +9,14 @@ export default function Month({ inputDate, handleDateClick, records }) {
   for (let i = 1; i < 42; i = i + 7) {
     const currentDate = new Date(dateWalker.setDate(i));
     const weekStartOffset = getWeekStartDateOffset(currentDate);
-    const isNextMonth =
-      currentDate.getMonth() > inputDate.getMonth() &&
-      currentDate.getFullYear() === inputDate.getFullYear();
-
     currentDate.setDate(weekStartOffset);
+    const isNextMonth =
+      (currentDate.getMonth() > inputDate.getMonth() &&
+        currentDate.getFullYear() === inputDate.getFullYear()) ||
+      currentDate.getFullYear() > inputDate.getFullYear();
 
     if (isNextMonth) {
+      console.log('break');
       break;
     }
     weeks.push(
