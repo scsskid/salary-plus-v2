@@ -12,7 +12,8 @@ import Weekdays from './Weekdays';
 import {
   getRecentRecords,
   getRecordsByRange,
-  getPastRecords
+  getPastRecords,
+  getRecordsByMonth
 } from '../utils/dataHelpers.js';
 import Clock from './Clock';
 
@@ -21,15 +22,20 @@ export default function View({
   settings,
   changeMonth,
   changeDate,
-  records,
-  monthRecords,
+  records = [],
   setInputDate,
-  jobs,
+  jobs = [],
   clock,
-  initialState = { activeSegement: 'Dashboard' }
+  initialState = { activeSegement: 'Calendar' }
 }) {
   const segements = ['Dashboard', 'Calendar', 'List'];
   const [state, setState] = React.useState(initialState);
+
+  const monthRecords = getRecordsByMonth({
+    records,
+    date: clock.today
+  });
+
   const latestRecord = getRecordsByRange(
     records,
     {

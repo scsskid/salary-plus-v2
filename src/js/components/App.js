@@ -61,11 +61,6 @@ export default function App() {
 
   // InputDate Derived Values
 
-  const monthRecords = getRecordsByMonth({
-    records,
-    date: clock.today
-  });
-
   // Fns to Drill
 
   function changeMonth(summand = 0) {
@@ -140,7 +135,6 @@ export default function App() {
                 changeMonth={changeMonth}
                 changeDate={changeDate}
                 records={records}
-                monthRecords={monthRecords}
                 setInputDate={setInputDate}
                 jobs={jobs}
                 clock={clock}
@@ -151,9 +145,9 @@ export default function App() {
                 inputDate={inputDate}
                 settings={settings}
                 changeMonth={changeMonth}
-                records={monthRecords}
                 setInputDate={setInputDate}
                 changeDate={changeDate}
+                records={records}
               />
             </Route>
             <Route path="/records/add">
