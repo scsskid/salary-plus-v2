@@ -12,7 +12,7 @@ export default function Calendar({
   setInputDate,
   changeMonth,
   changeDate,
-  jobs = { jobs }
+  jobs = []
 }) {
   return (
     <>
