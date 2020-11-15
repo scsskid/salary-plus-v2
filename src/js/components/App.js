@@ -23,32 +23,7 @@ import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
 import Clock from './Clock';
 import Calendar from './Calendar';
-
-const pages = [
-  {
-    name: 'View',
-    id: 'view',
-    segments: [
-      {
-        name: 'Dashboard',
-        id: 'dashboard',
-        url: '/'
-      },
-      {
-        name: 'Calendar',
-        id: 'calendar',
-        url: '/calendar'
-      },
-      {
-        name: 'List',
-        id: 'list',
-        url: '/records/list'
-      }
-    ]
-  },
-  { name: 'Add', id: 'add' },
-  { name: 'Settings', id: 'settings' }
-];
+import pages from '../../data/pages.js';
 
 export default function App() {
   const clock = useClock();
