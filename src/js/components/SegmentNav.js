@@ -1,12 +1,11 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useSegments } from '../utils/hooks.js';
 
-export default function SegmentNav({ pages = [1, 2, 3] }) {
+export default function SegmentNav({ segments = [] }) {
   const history = useHistory();
   const { pathname } = useLocation();
-  const { segments } = pages.find((page) => {
-    return page.segments.find((segment) => segment.url === pathname);
-  });
+  // const segments = useSegments();
 
   return (
     <div className="segment-nav">
@@ -14,12 +13,12 @@ export default function SegmentNav({ pages = [1, 2, 3] }) {
         <SegmentNavEl
           id={segment}
           key={i}
-          isActive={segment.url === pathname ? true : false}
+          isActive={segment.path === pathname ? true : false}
           onClick={() => {
-            history.push(segment.url);
+            history.push(segment.path);
           }}
         >
-          <b>{segment.name}</b>
+          <b>{segment.title}</b>
         </SegmentNavEl>
       ))}
     </div>

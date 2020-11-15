@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import AppHeader from './AppHeader';
 import FormElement from './FormElement';
 import FormElementSet from './FormElementSet';
 
@@ -13,9 +12,6 @@ export default function Settings({ jobs, children }) {
 
   return (
     <>
-      <AppHeader>
-        <h1>Settings</h1>
-      </AppHeader>
       <fieldset>
         <FormElementSet>
           <FormElement label="Language">
@@ -45,7 +41,6 @@ export default function Settings({ jobs, children }) {
           </FormElement>
         </FormElementSet>
       </fieldset>
-
       {children}
     </>
   );

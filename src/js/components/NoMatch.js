@@ -12,9 +12,6 @@ function NoMatch() {
 
   return (
     <>
-      <AppHeader>
-        <h1>Sorry</h1>
-      </AppHeader>
       <p>
         Not found: <code>{location.pathname}</code>
       </p>

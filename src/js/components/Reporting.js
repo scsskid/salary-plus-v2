@@ -1,41 +1,19 @@
 import React from 'react';
-import SegmentNav, { SegmentNavEl } from './SegmentNav';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
 import FigureBonus from './FigureBonus';
 import FigureTotals from './FigureTotals';
-import AppHeader from './AppHeader';
-import WidgetInputDate from './WidgetInputDate';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 
-export default function Reporting({
-  inputDate,
-  settings,
-  changeMonth,
-  records,
-  initialState = { activeSegement: 'Week' }
-}) {
-  const segements = ['Week', 'Month', 'Custom'];
-  const [state, setState] = React.useState(initialState);
-
+export default function Reporting({ inputDate, records }) {
   const monthRecords = getRecordsByMonth({
     records,
     date: inputDate
   });
 
   const Views = {
-    Week: <div>W E E K</div>,
     Month: (
       <div className="reporting-month | reporting-component">
-        <div className="reporting-calendar-controls | main-calendar-controls">
-          <WidgetInputDate
-            inputDate={inputDate}
-            settings={settings}
-            changeMonth={changeMonth}
-            changeDate={changeMonth}
-            type={state.activeSegement.toLowerCase()}
-          />
-        </div>
         <div>Records: {records.length}</div>
 
         <div className="table-reporting-container">
@@ -120,31 +98,12 @@ export default function Reporting({
           </p>
         </div>
       </div>
-    ),
-    Custom: <p>C U S T O M</p>
+    )
   };
 
   return (
     <div className="reporting main-component">
-      <AppHeader>
-        <h1>Reporting</h1>
-      </AppHeader>
-      <SegmentNav>
-        {segements.map((segment, i) => (
-          <SegmentNavEl
-            id={segment}
-            key={i}
-            isActive={state.activeSegement === segment ? true : false}
-            onClick={(event) =>
-              setState({ activeSegement: event.currentTarget.id })
-            }
-          >
-            <b>{segment}</b>
-          </SegmentNavEl>
-        ))}
-      </SegmentNav>
-
-      <div className="app-body">{Views[state.activeSegement]}</div>
+      <div className="app-body">{Views['Month']}</div>
     </div>
   );
 }

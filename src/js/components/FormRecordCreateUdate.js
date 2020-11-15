@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import FormRecord from './FormRecord';
 import { getTimeOfDate } from '../utils/helpers';
-import AppHeader from './AppHeader';
 
 export function FormRecordCreate({
   inputDate,
@@ -38,23 +37,17 @@ export function FormRecordCreate({
   };
 
   return (
-    <>
-      <AppHeader>
-        <h1>New Entry</h1>
-      </AppHeader>
-
-      <FormRecord
-        jobs={jobs}
-        saveRecord={saveRecord}
-        inputDate={inputDate}
-        settings={settings}
-        dispatch={dispatch}
-        changeMonth={changeMonth}
-        selectedDates={selectedDates}
-        setSelectedDates={setSelectedDates}
-        initialFormData={initialFormData}
-      />
-    </>
+    <FormRecord
+      jobs={jobs}
+      saveRecord={saveRecord}
+      inputDate={inputDate}
+      settings={settings}
+      dispatch={dispatch}
+      changeMonth={changeMonth}
+      selectedDates={selectedDates}
+      setSelectedDates={setSelectedDates}
+      initialFormData={initialFormData}
+    />
   );
 }
 
@@ -97,21 +90,16 @@ export function FormRecordUpdate({
   };
 
   return (
-    <>
-      <AppHeader>
-        <h1>Update Entry</h1>
-      </AppHeader>
-      <FormRecord
-        jobs={jobs}
-        saveRecord={saveRecord}
-        deleteItem={deleteItem}
-        isUpdateForm={true}
-        dispatch={dispatch}
-        settings={settings}
-        changeMonth={changeMonth}
-        inputDate={inputDate}
-        initialFormData={initialFormData}
-      />
-    </>
+    <FormRecord
+      jobs={jobs}
+      saveRecord={saveRecord}
+      deleteItem={deleteItem}
+      isUpdateForm={true}
+      dispatch={dispatch}
+      settings={settings}
+      changeMonth={changeMonth}
+      inputDate={inputDate}
+      initialFormData={initialFormData}
+    />
   );
 }

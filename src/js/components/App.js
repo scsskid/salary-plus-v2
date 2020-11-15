@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
 import Navigation from './Navigation';
@@ -29,12 +34,13 @@ import RecordsList from './RecordsList';
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
-  const [state, setState] = React.useState();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = [], jobs = [] } = appData;
 
   // Effects
+
+  // console.log(page);
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
@@ -113,12 +119,13 @@ export default function App() {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  if (!isLoggedIn) {
-    return (
+  return (
+    <React.StrictMode>
       <Router>
+        {isLoggedIn && <Navigation />}
         <main className="main">
-          <Switch>
-            <Route exact path="/">
+          {!isLoggedIn ? (
+            <>
               <Welcome
                 seedFunctions={{
                   insertSampleData: () =>
@@ -127,114 +134,129 @@ export default function App() {
                 }}
               />
               <Debug />
-            </Route>
-            <Route path="*" component={NoMatch} />
-          </Switch>
-        </main>
-      </Router>
-    );
-  }
-
-  return (
-    <React.StrictMode>
-      <Router>
-        {isLoggedIn && <Navigation pages={pages} />}
-        <main className="main">
-          <AppHeader>
-            <h1>View</h1>
-            <Clock />
-          </AppHeader>
-          <Switch>
-            <Route exact path="/">
-              <SegmentNav pages={pages} />
-              <Dashboard jobs={jobs} settings={settings} records={records} />
-            </Route>
-            <Route exact path="/calendar">
-              <SegmentNav pages={pages} />
-              <Calendar
-                inputDate={inputDate}
-                settings={settings}
-                handleDateClick={handleDateClick}
-                setInputDate={setInputDate}
-                records={records}
-                changeDate={changeDate}
-                changeMonth={changeMonth}
-                jobs={jobs}
-              />
-            </Route>
-            <Route exact path="/list">
-              <SegmentNav pages={pages} />
-              <WidgetInputDate
-                inputDate={inputDate}
-                settings={settings}
-                changeMonth={changeMonth}
-                setInputDate={setInputDate}
-                changeDate={changeDate}
-              />
-              <RecordsList
-                jobs={jobs}
-                settings={settings}
-                inputDate={inputDate}
-                records={monthRecords}
-              />
-            </Route>
-            <Route exact path="/reporting">
-              <Reporting
-                inputDate={inputDate}
-                settings={settings}
-                changeMonth={changeMonth}
-                setInputDate={setInputDate}
-                changeDate={changeDate}
-                records={records}
-              />
-            </Route>
-            <Route path="/records/add">
-              <FormRecordCreate
-                inputDate={inputDate}
-                jobs={jobs}
-                settings={settings}
-                saveRecord={saveRecord}
-                dispatch={dispatch}
-                changeMonth={changeMonth}
-              />
-            </Route>
-            <Route path="/records/:id">
-              <FormRecordUpdate
-                jobs={jobs}
-                records={records}
-                saveRecord={saveRecord}
-                deleteItem={deleteItem}
-                dispatch={dispatch}
-                settings={settings}
-                changeMonth={changeMonth}
-                inputDate={inputDate}
-              />
-            </Route>
-            <Route path="/jobs/add">
-              <FormJobCreate saveJob={saveJob} />
-            </Route>
-            <Route path="/jobs/:jobId">
-              <FormJobUpdate
-                jobs={jobs}
-                saveJob={saveJob}
-                deleteItem={deleteItem}
-                changeMonth={changeMonth}
-              />
-            </Route>
-            <Route path="/jobs/">
-              <JobsList jobs={jobs} />
-            </Route>
-            <Route path="/settings">
-              <Settings settings={settings} jobs={jobs}>
-                <Debug
-                  settings={settings}
-                  dispatch={dispatch}
-                  isLoggedIn={isLoggedIn}
+            </>
+          ) : (
+            <>
+              <Route exact path="/">
+                <Redirect to="/dashboard" />
+              </Route>
+              <Route path={['/dashboard', '/list', '/calendar']}>
+                <AppHeader title="View">
+                  <Clock />
+                </AppHeader>
+                <SegmentNav
+                  segments={[
+                    { title: 'Dashboard', path: '/dashboard' },
+                    { title: 'Calendar', path: '/calendar' },
+                    { title: 'List', path: '/list' }
+                  ]}
                 />
-              </Settings>
-            </Route>
-            <Route path="*" component={NoMatch} />
-          </Switch>
+              </Route>
+
+              <Switch>
+                <Route exact path="/dashboard">
+                  <Dashboard
+                    jobs={jobs}
+                    settings={settings}
+                    records={records}
+                  />
+                </Route>
+                <Route exact path="/calendar">
+                  <Calendar
+                    inputDate={inputDate}
+                    settings={settings}
+                    handleDateClick={handleDateClick}
+                    setInputDate={setInputDate}
+                    records={records}
+                    changeDate={changeDate}
+                    changeMonth={changeMonth}
+                    jobs={jobs}
+                  />
+                </Route>
+                <Route exact path="/list">
+                  <WidgetInputDate
+                    inputDate={inputDate}
+                    settings={settings}
+                    changeMonth={changeMonth}
+                    setInputDate={setInputDate}
+                    changeDate={changeDate}
+                  />
+                  <RecordsList
+                    jobs={jobs}
+                    settings={settings}
+                    inputDate={inputDate}
+                    records={monthRecords}
+                  />
+                </Route>
+                <Route exact path="/reporting">
+                  <AppHeader title="Reporting"></AppHeader>
+                  <Reporting
+                    inputDate={inputDate}
+                    settings={settings}
+                    changeMonth={changeMonth}
+                    setInputDate={setInputDate}
+                    changeDate={changeDate}
+                    records={records}
+                  />
+                </Route>
+                <Route path="/records/add">
+                  <AppHeader title="New" />
+                  <FormRecordCreate
+                    inputDate={inputDate}
+                    jobs={jobs}
+                    settings={settings}
+                    saveRecord={saveRecord}
+                    dispatch={dispatch}
+                    changeMonth={changeMonth}
+                  />
+                </Route>
+                <Route path="/records/:id">
+                  <AppHeader title="Update" />
+                  <FormRecordUpdate
+                    jobs={jobs}
+                    records={records}
+                    saveRecord={saveRecord}
+                    deleteItem={deleteItem}
+                    dispatch={dispatch}
+                    settings={settings}
+                    changeMonth={changeMonth}
+                    inputDate={inputDate}
+                  />
+                </Route>
+                <Route path="/jobs/add">
+                  <AppHeader title="Add Job" />
+                  <FormJobCreate saveJob={saveJob} />
+                </Route>
+                <Route path="/jobs/:jobId">
+                  <AppHeader title="Update Job" />
+                  <FormJobUpdate
+                    jobs={jobs}
+                    saveJob={saveJob}
+                    deleteItem={deleteItem}
+                    changeMonth={changeMonth}
+                  />
+                </Route>
+                <Route path="/jobs/">
+                  <AppHeader title="Jobs" />
+                  <JobsList jobs={jobs} />
+                </Route>
+                <Route path="/settings">
+                  <AppHeader title="Settings" />
+                  <Settings settings={settings} jobs={jobs}>
+                    <Debug
+                      settings={settings}
+                      dispatch={dispatch}
+                      isLoggedIn={isLoggedIn}
+                    />
+                  </Settings>
+                </Route>
+                <Route path="*">
+                  <AppHeader title="Not Found" />
+                  <NoMatch />
+                </Route>
+              </Switch>
+            </>
+          )}
         </main>
       </Router>
     </React.StrictMode>

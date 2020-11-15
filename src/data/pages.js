@@ -1,25 +1,32 @@
 export default [
+  {},
   {
     name: 'View',
-    id: 'view',
-    segments: [
+    key: 'view',
+    path: '/',
+    routes: [
       {
         name: 'Dashboard',
-        id: 'dashboard',
-        url: '/'
+        key: 'dashboard',
+        path: '/dashboard'
       },
       {
         name: 'Calendar',
-        id: 'calendar',
-        url: '/calendar'
+        key: 'calendar',
+        path: '/calendar'
       },
       {
         name: 'List',
-        id: 'list',
-        url: '/list'
+        key: 'list',
+        path: '/list'
       }
     ]
   },
+  {
+    name: 'Reporting',
+    id: 'reporting'
+  },
   { name: 'Add', id: 'add' },
-  { name: 'Settings', id: 'settings' }
+  { name: 'Settings', id: 'settings' },
+  { name: 'Jobs', id: 'jobs' }
 ];
