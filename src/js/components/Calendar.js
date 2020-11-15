@@ -9,9 +9,7 @@ export default function Calendar({
   handleDateClick,
   settings,
   records = [],
-  setInputDate,
   changeMonth,
-  changeDate,
   jobs = []
 }) {
   return (
@@ -21,9 +19,6 @@ export default function Calendar({
           inputDate={inputDate}
           settings={settings}
           changeMonth={changeMonth}
-          setInputDate={setInputDate}
-          // type={state.activeSegement.toLowerCase()}
-          changeDate={changeDate}
         />
       </div>
       <div className="calendar-body">

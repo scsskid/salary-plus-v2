@@ -1,8 +1,8 @@
 import React from 'react';
-import Calendar from './Calendar';
 import Button from './Button';
-import InputDateControl from './InputDateControl';
-import InputDateDisplay from './InputDateDisplay';
+import Weekdays from './Weekdays';
+import Month from './Month';
+import WidgetInputDate from './WidgetInputDate';
 
 export default function DatesPickerCalendar({
   inputDate,
@@ -11,7 +11,8 @@ export default function DatesPickerCalendar({
   settings,
   isUpdateForm,
   changeMonth,
-  datePickerOpen
+  datePickerOpen,
+  setInputDate
 }) {
   const datesPickerCalendarRef = React.useRef();
   const datesCount = dates.length;
@@ -85,13 +86,20 @@ export default function DatesPickerCalendar({
           Clear All Selected
         </Button>
       )}
-      <InputDateControl changeMonth={changeMonth} />
-      <InputDateDisplay inputDate={inputDate} settings={settings} />
-      <Calendar
+      <div className="view-calendar-controls">
+        <WidgetInputDate
+          inputDate={inputDate}
+          settings={settings}
+          changeMonth={changeMonth}
+        />
+      </div>
+      <Weekdays settings={settings} />
+      <Month
         inputDate={inputDate}
-        settings={settings}
         handleDateClick={handleDateClick}
+        // records={records}
       />
+
       {!isUpdateForm && (
         <p>
           <small>
