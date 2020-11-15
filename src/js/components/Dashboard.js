@@ -7,7 +7,7 @@ import { useClock } from '../utils/hooks';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { isSameDay } from '../utils/helpers.js';
 
-export default function Dashboard({ jobs, settings, records, children }) {
+export default function Dashboard({ jobs, settings, records }) {
   const clock = useClock();
 
   const monthRecords = getRecordsByMonth({
@@ -35,7 +35,6 @@ export default function Dashboard({ jobs, settings, records, children }) {
 
   return (
     <>
-      {children}
       <div className="view-dashboard | view-component">
         <div className="view-dashboard-reporting">
           <h2>

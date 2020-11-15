@@ -12,12 +12,10 @@ export default function Calendar({
   setInputDate,
   changeMonth,
   changeDate,
-  jobs = { jobs },
-  children
+  jobs = { jobs }
 }) {
   return (
     <>
-      {children}
       <div className="view-calendar-controls">
         <WidgetInputDate
           inputDate={inputDate}

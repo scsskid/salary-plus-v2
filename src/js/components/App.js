@@ -31,15 +31,18 @@ const pages = [
     segments: [
       {
         name: 'Dashboard',
-        id: 'dashboard'
+        id: 'dashboard',
+        url: '/'
       },
       {
         name: 'Calendar',
-        id: 'calendar'
+        id: 'calendar',
+        url: '/calendar'
       },
       {
         name: 'List',
-        id: 'list'
+        id: 'list',
+        url: '/records/list'
       }
     ]
   },
@@ -176,13 +179,12 @@ export default function App() {
               />
             </Route> */}
             <Route exact path="/">
-              <Dashboard jobs={jobs} settings={settings} records={records}>
-                <SegmentNav />
-              </Dashboard>
+              <SegmentNav pages={pages} />
+              <Dashboard jobs={jobs} settings={settings} records={records} />
             </Route>
 
             <Route exact path="/calendar">
-              <SegmentNav />
+              <SegmentNav pages={pages} />
               <Calendar
                 inputDate={inputDate}
                 settings={settings}
@@ -192,9 +194,7 @@ export default function App() {
                 changeDate={changeDate}
                 changeMonth={changeMonth}
                 jobs={jobs}
-              >
-                <p>Lonely Child</p>
-              </Calendar>
+              />
             </Route>
 
             <Route exact path="/reporting">
