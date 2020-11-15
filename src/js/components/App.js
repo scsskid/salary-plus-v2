@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import View from './View';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
 import Navigation from './Navigation';
@@ -24,6 +23,8 @@ import AppHeader from './AppHeader';
 import Clock from './Clock';
 import Calendar from './Calendar';
 import pages from '../../data/pages.js';
+import WidgetInputDate from './WidgetInputDate';
+import RecordsList from './RecordsList';
 
 export default function App() {
   const clock = useClock();
@@ -41,7 +42,10 @@ export default function App() {
     setAppInnerHeight();
   }, []);
 
-  // Store CRUD
+  const monthRecords = getRecordsByMonth({
+    records,
+    date: inputDate
+  });
 
   // make higher order fn
   function saveRecord(formData) {
@@ -141,23 +145,10 @@ export default function App() {
             <Clock />
           </AppHeader>
           <Switch>
-            {/* <Route exact path="/">
-              <View
-                inputDate={inputDate}
-                settings={settings}
-                changeMonth={changeMonth}
-                changeDate={changeDate}
-                records={records}
-                setInputDate={setInputDate}
-                jobs={jobs}
-                clock={clock}
-              />
-            </Route> */}
             <Route exact path="/">
               <SegmentNav pages={pages} />
               <Dashboard jobs={jobs} settings={settings} records={records} />
             </Route>
-
             <Route exact path="/calendar">
               <SegmentNav pages={pages} />
               <Calendar
@@ -171,7 +162,22 @@ export default function App() {
                 jobs={jobs}
               />
             </Route>
-
+            <Route exact path="/list">
+              <SegmentNav pages={pages} />
+              <WidgetInputDate
+                inputDate={inputDate}
+                settings={settings}
+                changeMonth={changeMonth}
+                setInputDate={setInputDate}
+                changeDate={changeDate}
+              />
+              <RecordsList
+                jobs={jobs}
+                settings={settings}
+                inputDate={inputDate}
+                records={monthRecords}
+              />
+            </Route>
             <Route exact path="/reporting">
               <Reporting
                 inputDate={inputDate}

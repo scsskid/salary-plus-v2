@@ -5,7 +5,7 @@ import {
   getMinMaxDateBeginOfRecords
 } from '../utils/dataHelpers';
 
-export default function ListView({
+export default function RecordsList({
   records = [],
   jobs = [],
   settings = {},

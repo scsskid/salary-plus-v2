@@ -1,15 +1,13 @@
 import React from 'react';
-import { useRouteMatch, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 export default function SegmentNav({ pages = [1, 2, 3] }) {
-  const { url, path } = useRouteMatch;
   const history = useHistory();
   const { pathname } = useLocation();
   const { segments } = pages.find((page) => {
     return page.segments.find((segment) => segment.url === pathname);
   });
 
-  console.log(url, path, pathname, segments);
   return (
     <div className="segment-nav">
       {segments.map((segment, i) => (

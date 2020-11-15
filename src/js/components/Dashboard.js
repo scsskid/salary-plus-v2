@@ -1,5 +1,5 @@
 import React from 'react';
-import ListView from './ListView';
+import RecordsList from './RecordsList';
 import Week from './Week';
 import Weekdays from './Weekdays';
 import WidgetReporting from './WidgetReporting';
@@ -51,7 +51,7 @@ export default function Dashboard({ jobs, settings, records }) {
         </div>
         <div className="view-dashboard-ongoing">
           <h2>Today</h2>
-          <ListView
+          <RecordsList
             jobs={jobs}
             settings={settings}
             records={todayRecords}
@@ -61,7 +61,7 @@ export default function Dashboard({ jobs, settings, records }) {
 
         <div className="view-dashboard-recent">
           <h2>before Today</h2>
-          <ListView
+          <RecordsList
             jobs={jobs}
             settings={settings}
             records={reocordsBeforeToday}
@@ -78,7 +78,7 @@ export default function Dashboard({ jobs, settings, records }) {
             />
           </div>
           <div className="view-dashboard-upcoming-list">
-            <ListView
+            <RecordsList
               jobs={jobs}
               settings={settings}
               records={next7DaysRecords}

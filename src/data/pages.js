@@ -16,7 +16,7 @@ export default [
       {
         name: 'List',
         id: 'list',
-        url: '/records/list'
+        url: '/list'
       }
     ]
   },
