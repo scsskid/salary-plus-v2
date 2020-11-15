@@ -1,10 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import IconView from './../../icons/icon-view.svg';
 import IconAdd from './../../icons/icon-add.svg';
 import IconSettings from './../../icons/icon-settings.svg';
 
-const Navigaton = () => {
+const Navigaton = ({ pages }) => {
+  const { url, path } = useRouteMatch;
+
+  console.log(url, path);
+
   return (
     <nav className="main-navigation">
       <ul>
@@ -21,6 +25,11 @@ const Navigaton = () => {
           Settings
         </NavEl>
       </ul>
+      {pages.map(({ name, id }) => (
+        <Link key={id} to={id}>
+          {name}
+        </Link>
+      ))}
     </nav>
   );
 };

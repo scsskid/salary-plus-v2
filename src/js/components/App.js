@@ -19,14 +19,38 @@ import Reporting from './Reporting';
 import JobsList from './JobsList';
 import { useClock } from '../utils/hooks.js';
 import Dashboard from './Dashboard';
-import SegmentNav, { SegmentNavEl } from './SegmentNav';
+import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
 import Clock from './Clock';
-import WidgetReporting from './WidgetReporting';
+import Calendar from './Calendar';
+
+const pages = [
+  {
+    name: 'View',
+    id: 'view',
+    segments: [
+      {
+        name: 'Dashboard',
+        id: 'dashboard'
+      },
+      {
+        name: 'Calendar',
+        id: 'calendar'
+      },
+      {
+        name: 'List',
+        id: 'list'
+      }
+    ]
+  },
+  { name: 'Add', id: 'add' },
+  { name: 'Settings', id: 'settings' }
+];
 
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
+  const [state, setState] = React.useState();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = [], jobs = [] } = appData;
@@ -103,6 +127,10 @@ export default function App() {
     setInputDate(inputDateCopy);
   }
 
+  function handleDateClick(e) {
+    setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
+  }
+
   if (!isLoggedIn) {
     return (
       <Router>
@@ -125,19 +153,17 @@ export default function App() {
     );
   }
 
-  // console.log(clock);
-
   return (
     <React.StrictMode>
       <Router>
-        {isLoggedIn && <Navigation />}
+        {isLoggedIn && <Navigation pages={pages} />}
         <main className="main">
           <AppHeader>
             <h1>View</h1>
             <Clock />
           </AppHeader>
           <Switch>
-            <Route exact path="/">
+            {/* <Route exact path="/">
               <View
                 inputDate={inputDate}
                 settings={settings}
@@ -148,23 +174,29 @@ export default function App() {
                 jobs={jobs}
                 clock={clock}
               />
+            </Route> */}
+            <Route exact path="/">
+              <Dashboard jobs={jobs} settings={settings} records={records}>
+                <SegmentNav />
+              </Dashboard>
             </Route>
-            <Route exact path="/Dashboard">
-              <SegmentNav />
 
-              <View
+            <Route exact path="/calendar">
+              <SegmentNav />
+              <Calendar
                 inputDate={inputDate}
                 settings={settings}
-                changeMonth={changeMonth}
-                changeDate={changeDate}
-                records={records}
+                handleDateClick={handleDateClick}
                 setInputDate={setInputDate}
+                records={records}
+                changeDate={changeDate}
+                changeMonth={changeMonth}
                 jobs={jobs}
-                clock={clock}
               >
-                <Dashboard jobs={jobs} settings={settings} records={records} />
-              </View>
+                <p>Lonely Child</p>
+              </Calendar>
             </Route>
+
             <Route exact path="/reporting">
               <Reporting
                 inputDate={inputDate}

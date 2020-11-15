@@ -7,9 +7,8 @@ import { useClock } from '../utils/hooks';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { isSameDay } from '../utils/helpers.js';
 
-export default function Dashboard({ jobs, settings, records }) {
+export default function Dashboard({ jobs, settings, records, children }) {
   const clock = useClock();
-  console.log(records);
 
   const monthRecords = getRecordsByMonth({
     records,
@@ -35,56 +34,59 @@ export default function Dashboard({ jobs, settings, records }) {
   });
 
   return (
-    <div className="view-dashboard | view-component">
-      <div className="view-dashboard-reporting">
-        <h2>
-          Earned{' '}
-          {clock.today.toLocaleDateString('de-DE', {
-            month: 'long',
-            year: 'numeric'
-          })}
-        </h2>
-        <WidgetReporting
-          records={monthRecords}
-          figures={['dates', 'hours', 'earned']}
-        />
-      </div>
-      <div className="view-dashboard-ongoing">
-        <h2>Today</h2>
-        <ListView
-          jobs={jobs}
-          settings={settings}
-          records={todayRecords}
-          hideDates={true}
-        />
-      </div>
-
-      <div className="view-dashboard-recent">
-        <h2>before Today</h2>
-        <ListView
-          jobs={jobs}
-          settings={settings}
-          records={reocordsBeforeToday}
-        />
-      </div>
-
-      <div className="view-dashboard-upcoming">
-        <h2>Upcoming</h2>
-        <div className="view-dashboard-upcoming-week">
-          <Weekdays dayStart={clock.today.getDay() + 1} settings={settings} />
-          <Week
-            records={records}
-            inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
+    <>
+      {children}
+      <div className="view-dashboard | view-component">
+        <div className="view-dashboard-reporting">
+          <h2>
+            Earned{' '}
+            {clock.today.toLocaleDateString('de-DE', {
+              month: 'long',
+              year: 'numeric'
+            })}
+          </h2>
+          <WidgetReporting
+            records={monthRecords}
+            figures={['dates', 'hours', 'earned']}
           />
         </div>
-        <div className="view-dashboard-upcoming-list">
+        <div className="view-dashboard-ongoing">
+          <h2>Today</h2>
           <ListView
             jobs={jobs}
             settings={settings}
-            records={next7DaysRecords}
+            records={todayRecords}
+            hideDates={true}
           />
         </div>
+
+        <div className="view-dashboard-recent">
+          <h2>before Today</h2>
+          <ListView
+            jobs={jobs}
+            settings={settings}
+            records={reocordsBeforeToday}
+          />
+        </div>
+
+        <div className="view-dashboard-upcoming">
+          <h2>Upcoming</h2>
+          <div className="view-dashboard-upcoming-week">
+            <Weekdays dayStart={clock.today.getDay() + 1} settings={settings} />
+            <Week
+              records={records}
+              inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
+            />
+          </div>
+          <div className="view-dashboard-upcoming-list">
+            <ListView
+              jobs={jobs}
+              settings={settings}
+              records={next7DaysRecords}
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

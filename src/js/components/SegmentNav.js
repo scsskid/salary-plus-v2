@@ -1,6 +1,10 @@
 import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
 
 export default function SegmentNav({ segments = [1, 2, 3] }) {
+  const { url, path } = useRouteMatch;
+
+  console.log(url, path);
   return (
     <div className="segment-nav">
       {segments.map((segment, i) => (
