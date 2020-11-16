@@ -1,6 +1,6 @@
 const settings = {
   // timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  language: 'en_US'
+  language: 'en-US'
 };
 
 export const bootstrapData = {
