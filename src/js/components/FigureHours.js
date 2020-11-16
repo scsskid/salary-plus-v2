@@ -9,7 +9,8 @@ export default function FigureHours({
   records,
   type = 'actual',
   fractionDigits = { maximumFractionDigits: 2, minimumFractionDigits: 0 },
-  colorize = false
+  colorize = false,
+  settings
 }) {
   let hoursNumber;
   let className = 'figure-hours';

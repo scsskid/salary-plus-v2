@@ -47,6 +47,7 @@ export default function Dashboard({ jobs, settings, records }) {
           <WidgetReporting
             records={monthRecords}
             figures={['dates', 'hours', 'earned']}
+            settings={settings}
           />
         </div>
         <div className="view-dashboard-ongoing">

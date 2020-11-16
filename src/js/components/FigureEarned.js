@@ -6,14 +6,16 @@ import {
 } from '../utils/reporting-fns';
 
 export default function FigureEarned({
-  records,
+  records = [],
   type = 'actual',
   fractionDigits = {
     maximumFractionDigits: 0,
     minimumFractionDigits: 0
-  }
+  },
+  settings = {}
 }) {
   let earnedCalculationFn;
+  const { language } = settings;
 
   switch (type) {
     case 'actual':
@@ -31,11 +33,12 @@ export default function FigureEarned({
       };
   }
 
-  const earned = new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR',
-    ...fractionDigits
-  }).format(earnedCalculationFn(records));
+  const earned =
+    new Intl.NumberFormat(language, {
+      style: 'currency',
+      currency: 'EUR',
+      ...fractionDigits
+    }).format(earnedCalculationFn(records)) || 0;
 
   return <span>{earned}</span>;
 }

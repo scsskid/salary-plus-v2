@@ -72,6 +72,11 @@ function reducer(state, { type, payload }) {
           }
         }
       };
+    case 'updateSetting':
+      return {
+        ...state,
+        settings: { ...state.settings, ...payload }
+      };
     case 'reset':
       return init({ ...bootstrapData });
     case 'deleteAppData':

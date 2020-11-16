@@ -9,7 +9,8 @@ import FigureHours from './FigureHours';
 export default function DateDetailsEntry({
   record = {},
   // jobs = [],
-  showDebugInfo = false
+  showDebugInfo = false,
+  settings
 }) {
   const clock = useClock();
   let status;
@@ -96,8 +97,12 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            <FigureEarned records={[record]} />
-            <FigureHours colorize={true} records={[record]} />
+            <FigureEarned records={[record]} settings={settings} />
+            <FigureHours
+              colorize={true}
+              records={[record]}
+              settings={settings}
+            />
             {reporting.includedOvertime !== 0 && (
               <p>
                 Overtime:{' '}
@@ -105,6 +110,7 @@ export default function DateDetailsEntry({
                   type="overtime"
                   colorize={true}
                   records={[record]}
+                  settings={settings}
                 />
               </p>
             )}

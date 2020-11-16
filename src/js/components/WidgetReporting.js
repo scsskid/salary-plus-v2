@@ -3,7 +3,7 @@ import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
 import { useHistory } from 'react-router-dom';
 
-export default function WidgetReporting({ records, figures = [] }) {
+export default function WidgetReporting({ records, figures = [], settings }) {
   const history = useHistory();
 
   return (
@@ -23,7 +23,7 @@ export default function WidgetReporting({ records, figures = [] }) {
         {figures.includes('hours') && (
           <figure className="widget-reporting-figures-el">
             <b>
-              <FigureHours records={records} />
+              <FigureHours records={records} settings={settings} />
             </b>
             <figcaption>Hours</figcaption>
           </figure>
@@ -31,7 +31,7 @@ export default function WidgetReporting({ records, figures = [] }) {
         {figures.includes('earned') && (
           <figure className="widget-reporting-figures-el">
             <b>
-              <FigureEarned records={records} />
+              <FigureEarned records={records} settings={settings} />
             </b>
             <figcaption>Earned</figcaption>
           </figure>

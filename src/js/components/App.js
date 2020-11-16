@@ -233,7 +233,7 @@ export default function App() {
                 </Route>
                 <Route path="/settings">
                   <AppHeader title="Settings" />
-                  <Settings settings={settings} jobs={jobs}>
+                  <Settings settings={settings} jobs={jobs} dispatch={dispatch}>
                     <Debug
                       settings={settings}
                       dispatch={dispatch}

@@ -1,7 +1,6 @@
 const settings = {
-  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  locale: 'en',
-  currency: 'EUR'
+  // timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  language: 'en_US'
 };
 
 export const bootstrapData = {
@@ -2437,7 +2436,8 @@ export const sampleData = {
       rate: 20,
       hoursUnpaid: 0.5,
       dayHours: 8,
-      status: 'active'
+      status: 'active',
+      currency: 'EUR'
     },
     {
       id: 2,
@@ -2445,15 +2445,17 @@ export const sampleData = {
       rate: 17.5,
       dayHours: 7,
       hoursUnpaid: 0.75,
-      status: 'active'
+      status: 'active',
+      currency: 'EUR'
     },
     {
       id: 3,
       name: 'Benedikts Teufelsküche',
       dayHours: '',
       hoursUnpaid: 1,
-      rate: 80,
-      status: 'active'
+      rate: 800,
+      status: 'active',
+      currency: 'DKK'
     }
   ]
 };
