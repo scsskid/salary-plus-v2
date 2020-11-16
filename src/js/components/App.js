@@ -15,7 +15,7 @@ import {
   setAppInnerHeight,
   getWeekStartDateOffset
 } from '../utils/helpers.js';
-import { getRecordsByMonth, getRecordsByRange } from '../utils/dataHelpers.js';
+import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
@@ -27,7 +27,6 @@ import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
 import Clock from './Clock';
 import Calendar from './Calendar';
-import pages from '../../data/pages.js';
 import WidgetInputDate from './WidgetInputDate';
 import RecordsList from './RecordsList';
 
@@ -37,10 +36,6 @@ export default function App() {
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, records = [], jobs = [] } = appData;
-
-  // Effects
-
-  // console.log(page);
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
@@ -75,10 +70,6 @@ export default function App() {
       payload: { id }
     });
   }
-
-  // InputDate Derived Values
-
-  // Fns to Drill
 
   function changeMonth(summand = 0) {
     const inputDateCopy = (function () {
@@ -152,7 +143,6 @@ export default function App() {
                   ]}
                 />
               </Route>
-
               <Switch>
                 <Route exact path="/dashboard">
                   <Dashboard
