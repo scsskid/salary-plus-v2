@@ -3,15 +3,15 @@ import { isSameMonth } from '../utils/helpers.js';
 import DateCell from './DateCell.js';
 
 export default function Week({
-  inputDate = new Date(),
-  dateWalker = inputDate,
+  inputDate,
+  dateWalker,
   bleedMonth = false,
   records = [],
-  handleDateClick = () => {}
+  handleDateClick = () => {
+    console.warn('no handler for dateClick');
+  }
 }) {
   const cells = [];
-  // bleedMonth = true;
-
   for (let i = 0; i < 7; i++) {
     if (!bleedMonth && !isSameMonth(dateWalker, inputDate)) {
       cells.push(
