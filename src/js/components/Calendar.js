@@ -15,9 +15,11 @@ export default function Calendar({
   clock
 }) {
   React.useEffect(() => {
-    const allDateCells = document.getElementsByClassName('calendar-date');
+    const allDateCells = Array.from(
+      document.getElementsByClassName('calendar-date')
+    );
 
-    Array.from(allDateCells).forEach((cell) => {
+    allDateCells.forEach((cell) => {
       const dateString = cell.dataset.dateString;
 
       if (helpers.isSameDay(new Date(dateString), inputDate)) {
@@ -30,7 +32,7 @@ export default function Calendar({
     });
 
     return () => {
-      Array.from(allDateCells).forEach((cell) => {
+      allDateCells.forEach((cell) => {
         cell.dataset.selected = '';
         cell.dataset.today = '';
       });
