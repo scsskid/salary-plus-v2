@@ -11,11 +11,18 @@ export default function DatesPickerCalendar({
   settings,
   isUpdateForm,
   changeMonth,
-  datePickerOpen,
-  setInputDate
+  datePickerOpen
 }) {
+  const [allowMultipleDates, setAllowMultipleDates] = React.useState(false);
   const datesPickerCalendarRef = React.useRef();
   const datesCount = dates.length;
+
+  function handleChange(e) {
+    const { checked } = e.target;
+    console.log(checked);
+
+    setAllowMultipleDates(checked);
+  }
 
   function handleDateClick(e) {
     const selectedDateObj = new Date(
@@ -26,7 +33,7 @@ export default function DatesPickerCalendar({
       return date.setHours(0, 0, 0, 0) === selectedDateObj.setHours(0, 0, 0, 0);
     });
 
-    if (matchedExisting && !isUpdateForm) {
+    if (matchedExisting && allowMultipleDates) {
       // Create Form:
       // remove existing
 
@@ -41,13 +48,17 @@ export default function DatesPickerCalendar({
       // Update Form:
       // push new
       updateDates(
-        isUpdateForm ? [selectedDateObj] : [...dates, selectedDateObj]
+        isUpdateForm || !allowMultipleDates
+          ? [selectedDateObj]
+          : [...dates, selectedDateObj]
       );
     }
   }
 
   React.useEffect(() => {
-    const allDateCells = document.querySelectorAll('[data-date-string]');
+    const allDateCells = Array.from(
+      document.getElementsByClassName('calendar-date')
+    );
 
     allDateCells.forEach((cell) => {
       const cellDateObj = new Date(cell.dataset.dateString);
@@ -77,7 +88,7 @@ export default function DatesPickerCalendar({
       }
       ref={datesPickerCalendarRef}
     >
-      {datesCount > 0 && !isUpdateForm && (
+      {datesCount > 0 && allowMultipleDates && (
         <Button
           onClick={() => {
             updateDates([]);
@@ -85,6 +96,18 @@ export default function DatesPickerCalendar({
         >
           Clear All Selected
         </Button>
+      )}
+      {!isUpdateForm && (
+        <label>
+          Select multiple{' '}
+          <input
+            type="checkbox"
+            id="allowMultiple"
+            name="allowMultiple"
+            onChange={handleChange}
+            checked={allowMultipleDates}
+          />
+        </label>
       )}
       <div className="view-calendar-controls">
         <WidgetInputDate
