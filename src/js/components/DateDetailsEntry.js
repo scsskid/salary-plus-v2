@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getLocaleTimeString } from '../utils/helpers';
 import * as reportingFns from './../utils/reporting-fns';
 import { useClock } from '../utils/hooks';
 import FigureEarned from './FigureEarned';
@@ -10,9 +9,14 @@ export default function DateDetailsEntry({
   record = {},
   // jobs = [],
   showDebugInfo = false,
-  settings
+  settings = {}
 }) {
   const clock = useClock();
+  const { language } = settings;
+  const localeTimeStringOptions = {
+    hour: '2-digit',
+    minute: '2-digit'
+  };
   let status;
   // const clock = { now: new Date('2020/11/14 13:00') };
   // const job = jobs.find((job) => job.id == record.jobId);
@@ -22,8 +26,11 @@ export default function DateDetailsEntry({
     end: new Date(record.end)
   };
   const time = {
-    begin: getLocaleTimeString(datesObj.begin),
-    end: getLocaleTimeString(datesObj.end)
+    // begin: getLocaleTimeString(datesObj.begin),
+
+    begin: datesObj.begin.toLocaleTimeString(language, localeTimeStringOptions),
+    end: datesObj.end.toLocaleTimeString(language, localeTimeStringOptions)
+    // end: getLocaleTimeString(datesObj.end)
   };
   const statusObj = {
     ongoing: clock.now >= datesObj.begin && clock.now <= datesObj.end,
@@ -98,11 +105,7 @@ export default function DateDetailsEntry({
 
           <div className="date-details-entry-meta">
             <FigureEarned records={[record]} settings={settings} />
-            <FigureHours
-              colorize={true}
-              records={[record]}
-              settings={settings}
-            />
+            <FigureHours records={[record]} settings={settings} />
             {reporting.includedOvertime !== 0 && (
               <p>
                 Overtime:{' '}

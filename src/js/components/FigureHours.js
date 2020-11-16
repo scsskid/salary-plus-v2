@@ -10,10 +10,12 @@ export default function FigureHours({
   type = 'actual',
   fractionDigits = { maximumFractionDigits: 2, minimumFractionDigits: 0 },
   colorize = false,
-  settings
+  settings = {}
 }) {
+  // console.log('Figure Earned', settings);
   let hoursNumber;
   let className = 'figure-hours';
+  const { language } = settings;
 
   switch (type) {
     case 'actual':
@@ -34,7 +36,7 @@ export default function FigureHours({
 
   className += colorize ? ' value-colorize' : '';
 
-  const hoursFormatted = new Intl.NumberFormat('de-DE', {
+  const hoursFormatted = new Intl.NumberFormat(language, {
     style: 'decimal',
     ...fractionDigits
   }).format(hoursNumber);

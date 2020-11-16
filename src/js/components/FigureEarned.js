@@ -14,8 +14,9 @@ export default function FigureEarned({
   },
   settings = {}
 }) {
+  // console.log('Figure Earned', settings);
   let earnedCalculationFn;
-  const { language } = settings;
+  const { language } = settings || {};
 
   switch (type) {
     case 'actual':

@@ -7,11 +7,13 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   const history = useHistory();
 
   const {
+    language = 'en-US',
     allowCustomJobProps = false,
     sickleaveOnNewRecordForm = false
   } = settings;
 
   const [formData, setFormData] = React.useState({
+    language,
     allowCustomJobProps,
     sickleaveOnNewRecordForm
   });
