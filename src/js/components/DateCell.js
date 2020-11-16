@@ -1,18 +1,7 @@
 import * as React from 'react';
-import * as helpers from '../utils/helpers.js';
 import { getRecordsByDate } from '../utils/dataHelpers.js';
 
-export default function DateCell({
-  date,
-  inputDate,
-  records,
-  handleDateClick: handleClick
-}) {
-  const todayDate = (function () {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    return now;
-  })();
+export default function DateCell({ date, records, handleDateClick }) {
   const dateRecords = getRecordsByDate({
     records,
     date
@@ -23,16 +12,11 @@ export default function DateCell({
   }
 
   return (
-    <div
-      className="calendar-date"
-      data-date-string={date.toISOString()}
-      data-selected={helpers.isSameDay(date, inputDate) ? 'selected' : ''}
-      data-today={helpers.isSameDay(date, todayDate) ? 'today' : 'foo'}
-    >
+    <div className="calendar-date" data-date-string={date.toISOString()}>
       <button
         type="button"
         className="calendar-date-button"
-        onClick={handleClick}
+        onClick={handleDateClick}
         onKeyUp={handleKeyUp}
       >
         <div className="calendar-date-button-figure">

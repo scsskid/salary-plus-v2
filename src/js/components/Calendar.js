@@ -3,6 +3,7 @@ import DateDetails from './DateDetails.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
 import WidgetInputDate from './WidgetInputDate.js';
+import * as helpers from '../utils/helpers.js';
 
 export default function Calendar({
   inputDate = new Date(),
@@ -10,8 +11,32 @@ export default function Calendar({
   settings,
   records = [],
   changeMonth,
-  jobs = []
+  jobs = [],
+  clock
 }) {
+  React.useEffect(() => {
+    const allDateCells = document.getElementsByClassName('calendar-date');
+
+    Array.from(allDateCells).forEach((cell) => {
+      const dateString = cell.dataset.dateString;
+
+      if (helpers.isSameDay(new Date(dateString), inputDate)) {
+        cell.dataset.selected = 'selected';
+      }
+
+      if (helpers.isSameDay(new Date(dateString), clock.today)) {
+        cell.dataset.today = 'today';
+      }
+    });
+
+    return () => {
+      Array.from(allDateCells).forEach((cell) => {
+        cell.dataset.selected = '';
+        cell.dataset.today = '';
+      });
+    };
+  }, [inputDate]);
+
   return (
     <>
       <div className="view-calendar-controls">

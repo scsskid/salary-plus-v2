@@ -171,6 +171,7 @@ export default function App() {
                     changeDate={changeDate}
                     changeMonth={changeMonth}
                     jobs={jobs}
+                    clock={clock}
                   />
                 </Route>
                 <Route exact path="/list">
