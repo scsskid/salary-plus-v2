@@ -28,38 +28,11 @@ export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
 
 // dates
 
-export function getLocaleTimeString(date) {
-  return date.toLocaleTimeString(undefined, {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-export function getIntlDateTimeFormat(
-  date = new Date(),
-  options = {
-    // timeZone: Intl.DateTimeFormat().resolvedOptions(),
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit'
-  }
-) {
-  return new Intl.DateTimeFormat(undefined, options).format(date);
-}
-
 export function getShortIsoString(date) {
   const offset = date.getTimezoneOffset();
   date = new Date(date.getTime() - offset * 60 * 1000);
   return date.toISOString().split('T')[0];
 }
-
-// export function getDayNames() {
-//   return ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-// }
 
 // Get First (Week-)Day, Adjusted for On Monday Starting Week
 export function getFirstDay(date) {
@@ -92,16 +65,6 @@ export function isSameMonth(d1, d2) {
     d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth()
   );
 }
-
-const formatDate = {
-  rfc3339: (date) => {
-    // target: YYYY-MM-DD
-    var year = date.getFullYear().toString();
-    var month = (date.getMonth() + 101).toString().substring(1); // 101 because first month is 0 not 1
-    var day = (date.getDate() + 100).toString().substring(1);
-    return year + '-' + month + '-' + day;
-  }
-};
 
 function getRecordBeginEnd({ dateBegin, timeBegin, timeEnd }) {
   let dateEnd = new Date(dateBegin.getTime());
@@ -158,10 +121,6 @@ export function mutateArrayWithObject(obj, array) {
 
   return array;
 }
-
-export function insertEntry() {}
-
-export { formatDate };
 
 // Development
 
