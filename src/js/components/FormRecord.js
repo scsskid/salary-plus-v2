@@ -25,7 +25,7 @@ export default function FormRecord({
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
-  const form = React.useRef();
+  // const form = React.useRef();
   const [dates, setDates] = React.useState(initialFormData.dates);
   const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
     ''
@@ -290,7 +290,7 @@ export default function FormRecord({
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre> */}
       <form
         className="form-record"
-        ref={form}
+        // ref={form}
         onSubmit={handleSubmit}
         data-record-id={formData.recordId}
         autoComplete="off"
