@@ -273,12 +273,12 @@ export default function FormRecord({
       };
       saveRecord(singleDateFormData);
     });
-    history.push('/');
+    history.push('/calendar');
   }
 
   function handleDelete() {
     deleteItem({ type: 'record', id: formData.id });
-    history.push('/');
+    history.push('/calendar');
   }
 
   return (
