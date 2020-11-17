@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link, useLocation, useRouteMatch } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import IconView from './../../icons/icon-view.svg';
 import IconAdd from './../../icons/icon-add.svg';
 import IconSettings from './../../icons/icon-settings.svg';
-import pages from '../../data/pages';
 
 const Navigaton = () => {
   return (

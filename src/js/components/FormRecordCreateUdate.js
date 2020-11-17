@@ -68,7 +68,6 @@ export function FormRecordUpdate({
   const {
     id,
     jobId,
-    previousJobId,
     jobName,
     begin,
     end,
@@ -82,7 +81,6 @@ export function FormRecordUpdate({
   const initialFormData = {
     id,
     jobId,
-    previousJobId: job ?? jobId,
     jobName,
     dates: [new Date(record.begin)],
     timeBegin: getTimeOfDate(new Date(begin)),
