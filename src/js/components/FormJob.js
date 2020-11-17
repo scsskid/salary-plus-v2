@@ -4,7 +4,6 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Prompt } from 'react-router';
 import Button from './Button';
 import Dialog from './Dialog';
-import FormElementSet from './FormElementSet';
 import FormElement from './FormElement';
 
 export function FormJobCreate({ saveJob }) {
@@ -99,69 +98,67 @@ export default function FormJob({
       <form onSubmit={handleSubmit} autoComplete="off">
         <p>ID: {formData.id}</p>
         <fieldset>
-          <FormElementSet>
-            <FormElement htmlFor="name" label="Job Name">
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                placeholder="Enter a job name..."
-              />
-            </FormElement>
-          </FormElementSet>
+          <FormElement htmlFor="name" label="Job Name">
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              placeholder="Enter a job name..."
+            />
+          </FormElement>
         </fieldset>
         <fieldset>
-          <FormElementSet>
-            <FormElement htmlFor="rate" label="Job Rate">
-              <input
-                id="rate"
-                type="number"
-                step="0.01"
-                name="rate"
-                value={formData.rate}
-                onChange={handleNumberChange}
-                placeholder="Enter optional rate..."
-              />
-            </FormElement>
-          </FormElementSet>
-          <FormElementSet>
-            <FormElement htmlFor="dayHours" label="Regular Hours per Day">
-              <input
-                id="dayHours"
-                name="dayHours"
-                type="number"
-                step="0.1"
-                min="0"
-                value={formData.dayHours}
-                onChange={handleNumberChange}
-                placeholder="0"
-              />
-            </FormElement>
-          </FormElementSet>
-          <FormElementSet>
-            <FormElement
-              htmlFor="hoursUnpaid"
-              label="Default Unpaid Hours per Day"
-            >
-              <input
-                id="hoursUnpaid"
-                name="hoursUnpaid"
-                type="number"
-                step="0.1"
-                min="0"
-                value={formData.hoursUnpaid}
-                onChange={handleNumberChange}
-                placeholder="0"
-              />
-            </FormElement>
-          </FormElementSet>
-        </fieldset>
+          <FormElement htmlFor="rate" label="Job Rate">
+            <input
+              id="rate"
+              type="number"
+              step="0.01"
+              name="rate"
+              value={formData.rate}
+              onChange={handleNumberChange}
+              placeholder="Enter optional rate..."
+            />
+          </FormElement>
 
-        <div>
-          <label htmlFor="name">Rate</label>
-        </div>
+          <FormElement htmlFor="dayHours" label="Regular Hours per Day">
+            <input
+              id="dayHours"
+              name="dayHours"
+              type="number"
+              step="0.1"
+              min="0"
+              value={formData.dayHours}
+              onChange={handleNumberChange}
+              placeholder="0"
+            />
+          </FormElement>
+
+          <FormElement
+            htmlFor="hoursUnpaid"
+            label="Default Unpaid Hours per Day"
+          >
+            <input
+              id="hoursUnpaid"
+              name="hoursUnpaid"
+              type="number"
+              step="0.1"
+              min="0"
+              value={formData.hoursUnpaid}
+              onChange={handleNumberChange}
+              placeholder="0"
+            />
+          </FormElement>
+        </fieldset>
+        {isUpdateForm && (
+          <p>
+            <small>
+              Updates to Job Settings will only not affect existing records for
+              this Job.
+            </small>
+          </p>
+        )}
 
         <div>
           {/* <button className="btn">Cancel</button> */}
