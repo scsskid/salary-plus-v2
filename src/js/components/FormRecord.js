@@ -36,6 +36,7 @@ export default function FormRecord({
   const showJobsDropdown = (hasJobs && linkedJob) || (hasJobs && !isUpdateForm);
   const showJobsNameInput = jobs.length == 0 || jobWasDeleted;
   const showJobPropsFields = settings.allowCustomJobProps || jobWasDeleted;
+  const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
@@ -489,7 +490,7 @@ export default function FormRecord({
             />
           </FormElement>
         </fieldset>
-        {settings.sickleaveOnNewRecordForm && (
+        {showSickLeave && (
           <fieldset>
             <FormElementSet>
               <FormElement label="Sick Leave?" htmlFor="sickLeave">
