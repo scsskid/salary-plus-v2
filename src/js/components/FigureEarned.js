@@ -2,7 +2,9 @@ import * as React from 'react';
 import {
   getOvertimeEarned,
   getPaidHoursEarned,
-  getPaidHoursWithoutOvertimeEarned
+  getPaidHoursWithoutOvertimeEarned,
+  getTotalsEarned,
+  getBonusEarned
 } from '../utils/reporting-fns';
 
 export default function FigureEarned({
@@ -27,6 +29,12 @@ export default function FigureEarned({
       break;
     case 'contract':
       earnedCalculationFn = getPaidHoursWithoutOvertimeEarned;
+      break;
+    case 'bonus':
+      earnedCalculationFn = getBonusEarned;
+      break;
+    case 'totals':
+      earnedCalculationFn = getTotalsEarned;
       break;
     default:
       earnedCalculationFn = () => {

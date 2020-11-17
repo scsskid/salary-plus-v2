@@ -1,8 +1,6 @@
 import React from 'react';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
-import FigureBonus from './FigureBonus';
-import FigureTotals from './FigureTotals';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 
 export default function Reporting({ inputDate, records }) {
@@ -84,7 +82,7 @@ export default function Reporting({ inputDate, records }) {
                 <td></td>
                 <td>
                   <b>
-                    <FigureBonus records={monthRecords} />
+                    <FigureEarned records={monthRecords} type="bonus" />
                   </b>
                 </td>
               </tr>
@@ -93,7 +91,7 @@ export default function Reporting({ inputDate, records }) {
           <p className="totals">
             Total{' '}
             <b>
-              <FigureTotals records={monthRecords} />
+              <FigureEarned records={monthRecords} type="totals" />
             </b>
           </p>
         </div>
