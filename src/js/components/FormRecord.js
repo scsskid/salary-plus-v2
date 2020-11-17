@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 export default function FormRecord({
   saveRecord,
   deleteItem,
+  job,
   jobs,
   isUpdateForm,
   settings,
@@ -28,7 +29,10 @@ export default function FormRecord({
     ''
   );
   const [submit, setSubmit] = React.useState();
-
+  const jobWasDeleted = isUpdateForm && !job;
+  const showJobsDropdown =
+    (jobs.length && !job && !isUpdateForm) || !jobWasDeleted;
+  const showJobsNameInput = jobs.length == 0 || (isUpdateForm && !job);
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
@@ -291,7 +295,7 @@ export default function FormRecord({
 
         <fieldset>
           <FormElementSet>
-            {jobs.length ? (
+            {showJobsDropdown && (
               <FormElement
                 label="Select Job (id)"
                 error={errors.jobId}
@@ -305,7 +309,7 @@ export default function FormRecord({
                   onChange={handleSelectJobChange}
                 >
                   <option key={`job-0`} disabled={true} value={0}>
-                    Select Job...
+                    None
                   </option>
                   {jobs.map((job) => (
                     <option key={`job-${job.id}`} value={job.id}>
@@ -314,7 +318,8 @@ export default function FormRecord({
                   ))}
                 </select>
               </FormElement>
-            ) : (
+            )}
+            {showJobsNameInput && (
               <FormElement
                 htmlFor="jobName"
                 error={errors.jobName}
@@ -332,6 +337,14 @@ export default function FormRecord({
             )}
           </FormElementSet>
         </fieldset>
+        {jobWasDeleted && (
+          <p>
+            <small>
+              This record was attached to a job which was since deleted. You can
+              still edit contents and provide a diffrent Jobname.
+            </small>
+          </p>
+        )}
 
         <fieldset>
           <FormElement label="Select Dates...">
