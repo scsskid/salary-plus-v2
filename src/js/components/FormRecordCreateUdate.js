@@ -64,7 +64,7 @@ export function FormRecordUpdate({
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
-  const job = jobs.find((job) => job.id == record.jobId);
+  const linkedJob = jobs.find((job) => job.id == record.jobId);
   const {
     id,
     jobId,
@@ -77,7 +77,7 @@ export function FormRecordUpdate({
     bonus = '',
     sickLeave = ''
   } = record;
-  console.log(job, jobId);
+
   const initialFormData = {
     id,
     jobId,
@@ -94,7 +94,7 @@ export function FormRecordUpdate({
 
   return (
     <FormRecord
-      job={job}
+      linkedJob={linkedJob}
       jobs={jobs}
       saveRecord={saveRecord}
       deleteItem={deleteItem}

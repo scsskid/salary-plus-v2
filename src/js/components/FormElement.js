@@ -14,18 +14,16 @@ export default function FormElement({
     : defaultClassName;
 
   return (
-    <>
-      <div className={className}>
-        <label htmlFor={htmlFor}>
-          <p>
-            {label}
+    <div className={className}>
+      <label htmlFor={htmlFor}>
+        <p>
+          {label}
 
-            {/* {variant ? `(${variant})` : ''} */}
-          </p>
-          {children}
-        </label>
-        {touched && error && <div className="form-el-error">{error}</div>}
-      </div>
-    </>
+          {/* {variant ? `(${variant})` : ''} */}
+        </p>
+        {children}
+      </label>
+      {touched && error && <div className="form-el-error">{error}</div>}
+    </div>
   );
 }

@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 export default function FormRecord({
   saveRecord,
   deleteItem,
-  job,
+  linkedJob,
   jobs,
   isUpdateForm,
   settings,
@@ -29,10 +29,11 @@ export default function FormRecord({
     ''
   );
   const [submit, setSubmit] = React.useState();
-  const jobWasDeleted = isUpdateForm && !job;
-  const showJobsDropdown =
-    (jobs.length && !job && !isUpdateForm) || !jobWasDeleted;
-  const showJobsNameInput = jobs.length == 0 || (isUpdateForm && !job);
+  const jobWasDeleted = isUpdateForm && !linkedJob;
+  const hasJobs = jobs.length > 0;
+  const showJobsDropdown = (hasJobs && linkedJob) || (hasJobs && !isUpdateForm);
+  const showJobsNameInput = jobs.length == 0 || jobWasDeleted;
+  const showJobPropsFields = settings.allowCustomJobProps || jobWasDeleted;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
@@ -403,8 +404,8 @@ export default function FormRecord({
           </FormElementSet>
         </fieldset>
 
-        <fieldset>
-          <FormElementSet>
+        {showJobPropsFields && (
+          <fieldset>
             <FormElement
               label="dayHours"
               error={errors.dayHours}
@@ -441,9 +442,7 @@ export default function FormRecord({
                 placeholder="0"
               />
             </FormElement>
-          </FormElementSet>
 
-          <FormElementSet>
             <FormElement
               label="Rate"
               error={errors.rate}
@@ -464,44 +463,47 @@ export default function FormRecord({
                 placeholder="0"
               />
             </FormElement>
-
-            <FormElement
-              label="Bonus"
-              error={errors.bonus}
-              touched={touched.bonus}
-              htmlFor="bonus"
-            >
-              <input
-                inputMode="decimal"
-                variant="currency"
-                name="bonus"
-                id="bonus"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.bonus}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
-          </FormElementSet>
-        </fieldset>
+          </fieldset>
+        )}
         <fieldset>
-          <FormElementSet>
-            <FormElement label="Sick Leave?" htmlFor="sickLeave">
-              <input
-                type="checkbox"
-                checked={formData.sickLeave}
-                name="sickLeave"
-                id="sickLeave"
-                value={formData.sickLeave}
-                onChange={handleChange}
-                // handleBlur={handleBlur}
-              />
-            </FormElement>
-          </FormElementSet>
+          <FormElement
+            label="Bonus"
+            error={errors.bonus}
+            touched={touched.bonus}
+            htmlFor="bonus"
+          >
+            <input
+              inputMode="decimal"
+              variant="currency"
+              name="bonus"
+              id="bonus"
+              type="number"
+              step="0.01"
+              min="0"
+              value={formData.bonus}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="0"
+            />
+          </FormElement>
         </fieldset>
+        {settings.sickleaveOnNewRecordForm && (
+          <fieldset>
+            <FormElementSet>
+              <FormElement label="Sick Leave?" htmlFor="sickLeave">
+                <input
+                  type="checkbox"
+                  checked={formData.sickLeave}
+                  name="sickLeave"
+                  id="sickLeave"
+                  value={formData.sickLeave}
+                  onChange={handleChange}
+                  // handleBlur={handleBlur}
+                />
+              </FormElement>
+            </FormElementSet>
+          </fieldset>
+        )}
         {/* <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre> */}
         <Button type="submit" data-button-submit="">
           Save
@@ -518,6 +520,7 @@ export default function FormRecord({
         )}
       </form>
       <pre>{JSON.stringify(formData, null, 2)}</pre>
+      <pre>{JSON.stringify(settings, null, 2)}</pre>
     </>
   );
 }

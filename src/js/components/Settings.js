@@ -48,7 +48,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   }
 
   React.useEffect(() => {
-    console.log(settings);
     window.scrollTo(0, 0);
   }, [history]);
 
@@ -74,7 +73,7 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             </FormElement>
           </FormElementSet>
           <FormElementSet>
-            <FormElement label="Allow manual jobs properties in Records Entry">
+            <FormElement label="Always allow manual jobs properties in Records Entry">
               <input
                 type="checkbox"
                 checked={formData.allowCustomJobProps}
