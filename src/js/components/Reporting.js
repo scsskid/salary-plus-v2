@@ -2,6 +2,7 @@ import React from 'react';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
+import { Link } from 'react-router-dom';
 
 export default function Reporting({ inputDate, records }) {
   const monthRecords = getRecordsByMonth({
@@ -12,6 +13,9 @@ export default function Reporting({ inputDate, records }) {
   const Views = {
     Month: (
       <div className="reporting-month | reporting-component">
+        <p>
+          <Link to="/calendar">View Calendar</Link>
+        </p>
         <div>Records: {records.length}</div>
 
         <div className="table-reporting-container">
