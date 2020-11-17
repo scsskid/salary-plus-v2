@@ -201,7 +201,13 @@ export default function App() {
                   />
                 </Route>
                 <Route exact path="/reporting">
-                  <AppHeader title="Reporting"></AppHeader>
+                  <AppHeader title="Reporting">
+                    <WidgetInputJob
+                      settings={settings}
+                      jobs={jobs}
+                      handleInputJobChange={handleInputJobChange}
+                    />
+                  </AppHeader>
                   <WidgetInputDate
                     inputDate={inputDate}
                     settings={settings}
