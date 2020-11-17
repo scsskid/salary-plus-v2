@@ -284,10 +284,10 @@ export default function FormRecord({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      {/* <pre>touched</pre>
+      <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre> */}
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
       <form
         className="form-record"
         // ref={form}
@@ -341,6 +341,22 @@ export default function FormRecord({
             )}
           </FormElementSet>
         </fieldset>
+
+        <FormElement
+          htmlFor="jobName"
+          error={errors.jobName}
+          touched={touched.jobName}
+          label="Job Name"
+        >
+          <input
+            name="jobName"
+            id="jobName"
+            value={formData.jobName}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </FormElement>
+
         {jobWasDeleted && (
           <p>
             <small>

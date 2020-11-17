@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export function WidgetInputJob({ handleInputJobChange, jobs, settings }) {
+export function WidgetInputJobId({ handleInputJobIdChange, jobs, settings }) {
   return jobs.length > 1 ? (
     <select
-      name="inputJob"
-      id="inputJob"
-      value={settings.inputJob}
-      onBlur={handleInputJobChange}
-      onChange={handleInputJobChange}
+      name="inputJobId"
+      id="inputJobId"
+      value={settings.inputJobId}
+      onBlur={handleInputJobIdChange}
+      onChange={handleInputJobIdChange}
     >
       <option key={`job-0`} value={0}>
         All Jobs

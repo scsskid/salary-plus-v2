@@ -1,7 +1,7 @@
 const settings = {
   // timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   language: 'en-US',
-  inputJob: 0
+  inputJobId: 0
 };
 
 export const bootstrapData = {

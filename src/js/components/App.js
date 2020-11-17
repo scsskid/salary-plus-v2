@@ -29,7 +29,7 @@ import Clock from './Clock';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
 import RecordsList from './RecordsList';
-import { WidgetInputJob } from './WidgetInputJob';
+import { WidgetInputJobId } from './WidgetInputJobId';
 
 export default function App() {
   const clock = useClock();
@@ -38,10 +38,10 @@ export default function App() {
   const isLoggedIn = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [] } = appData;
   const records =
-    settings.inputJob == 0
+    settings.inputJobId == 0
       ? appData.records
       : appData.records?.filter((record) => {
-          return record.jobId == settings.inputJob;
+          return record.jobId == settings.inputJobId;
         });
 
   React.useEffect(() => {
@@ -117,12 +117,12 @@ export default function App() {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
-  function handleInputJobChange(e) {
+  function handleInputJobIdChange(e) {
     const { value } = e.target;
     console.log('job change');
     dispatch({
       type: `updateSetting`,
-      payload: { inputJob: value }
+      payload: { inputJobId: value }
     });
   }
 
@@ -149,10 +149,10 @@ export default function App() {
               </Route>
               <Route path={['/dashboard', '/list', '/calendar']}>
                 <AppHeader title="View">
-                  <WidgetInputJob
+                  <WidgetInputJobId
                     settings={settings}
                     jobs={jobs}
-                    handleInputJobChange={handleInputJobChange}
+                    handleInputJobIdChange={handleInputJobIdChange}
                   />
                 </AppHeader>
                 <SegmentNav
@@ -202,10 +202,10 @@ export default function App() {
                 </Route>
                 <Route exact path="/reporting">
                   <AppHeader title="Reporting">
-                    <WidgetInputJob
+                    <WidgetInputJobId
                       settings={settings}
                       jobs={jobs}
-                      handleInputJobChange={handleInputJobChange}
+                      handleInputJobChange={handleInputJobIdChange}
                     />
                   </AppHeader>
                   <WidgetInputDate

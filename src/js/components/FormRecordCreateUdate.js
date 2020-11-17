@@ -13,7 +13,6 @@ export function FormRecordCreate({
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
   const {
-    jobName = '',
     timeBegin = '08:00',
     timeEnd = '17:00',
     hoursUnpaid = '',
@@ -22,11 +21,26 @@ export function FormRecordCreate({
     bonus = ''
   } = { ...settings.previousFormData };
 
-  const jobId = settings.inputJob || 0;
+  const inputJobIdAppData = jobs.find((job) => job.id == settings.inputJobId);
+  const previousJobIdAppData = jobs.find(
+    (job) => job.id == settings.previousFormData?.jobId
+  );
+
+  let jobId;
+  let jobName;
+
+  // Try Setting from previousJob
+  if (inputJobIdAppData) {
+    ({ id: jobId, name: jobName } = inputJobIdAppData);
+  } else if (previousJobIdAppData) {
+    ({ id: jobId, name: jobName } = previousJobIdAppData);
+  }
+
+  // But Prioritise Setting from previousJob
 
   const initialFormData = {
-    jobId,
-    jobName,
+    jobId: jobId ?? 0,
+    jobName: jobName ?? '',
     dates: [inputDate],
     timeBegin,
     timeEnd,

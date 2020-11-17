@@ -57,6 +57,10 @@ function reducer(state, { type, payload }) {
     case 'deleteJob':
       return {
         ...state,
+        settings: {
+          ...state.settings,
+          inputJobId: 0
+        },
         jobs: state.jobs.filter((job) => {
           return job.id != payload.id;
         })
@@ -66,6 +70,7 @@ function reducer(state, { type, payload }) {
         ...state,
         settings: {
           ...state.settings,
+          inputJobId: payload.jobId,
           previousFormData: {
             ...state.settings.previousFormData,
             ...payload
