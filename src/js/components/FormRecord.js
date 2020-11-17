@@ -341,22 +341,6 @@ export default function FormRecord({
             )}
           </FormElementSet>
         </fieldset>
-
-        <FormElement
-          htmlFor="jobName"
-          error={errors.jobName}
-          touched={touched.jobName}
-          label="Job Name"
-        >
-          <input
-            name="jobName"
-            id="jobName"
-            value={formData.jobName}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-        </FormElement>
-
         {jobWasDeleted && (
           <p>
             <small>
