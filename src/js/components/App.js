@@ -242,11 +242,11 @@ export default function App() {
                     inputDate={inputDate}
                   />
                 </Route>
-                <Route path="/jobs/add">
+                <Route exact path="/jobs/add">
                   <AppHeader title="Add Job" />
                   <FormJobCreate saveJob={saveJob} />
                 </Route>
-                <Route path="/jobs/:jobId">
+                <Route exact path="/jobs/:jobId">
                   <AppHeader title="Update Job" />
                   <FormJobUpdate
                     jobs={jobs}
@@ -255,7 +255,7 @@ export default function App() {
                     changeMonth={changeMonth}
                   />
                 </Route>
-                <Route path="/jobs/">
+                <Route exact path="/jobs/">
                   <AppHeader title="Jobs" />
                   <JobsList jobs={jobs} />
                 </Route>

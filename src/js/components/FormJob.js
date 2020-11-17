@@ -6,7 +6,6 @@ import Button from './Button';
 import Dialog from './Dialog';
 import FormElementSet from './FormElementSet';
 import FormElement from './FormElement';
-import AppHeader from './AppHeader';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -19,20 +18,15 @@ export function FormJobCreate({ saveJob }) {
   };
 
   return (
-    <>
-      <div className="component-header">
-        <h1>New Job</h1>
-      </div>
-      <FormJob
-        initialFormData={initialFormData}
-        saveJob={saveJob}
-        history={history}
-      />
-    </>
+    <FormJob
+      initialFormData={initialFormData}
+      saveJob={saveJob}
+      history={history}
+    />
   );
 }
 
-export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
+export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
   const { jobId } = useParams();
   const history = useHistory();
   const job = jobs.find((job) => job.id === parseInt(jobId));
@@ -47,10 +41,6 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, children }) {
 
   return (
     <>
-      <AppHeader>
-        <h1>Update Job</h1>
-      </AppHeader>
-      {children}
       <FormJob
         job={job}
         deleteItem={deleteItem}

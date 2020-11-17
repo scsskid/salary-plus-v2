@@ -8,14 +8,10 @@ export default function JobsList({ jobs }) {
 
   return (
     <div className="jobs-list">
-      <div className="component-header">
-        <h1>Jobs List</h1>
-        <div>
-          <button className="btn" onClick={() => history.push(`/jobs/add`)}>
-            New Job
-          </button>
-        </div>
-      </div>
+      <button className="btn" onClick={() => history.push(`/jobs/add`)}>
+        New Job
+      </button>
+
       <div className="component-body">
         <fieldset>
           {jobs.map((job) => (
