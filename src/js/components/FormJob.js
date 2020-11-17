@@ -61,6 +61,20 @@ export default function FormJob({
 }) {
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [errors, setErrors] = React.useState({});
+  const [touched, setTouched] = React.useState({});
+  const [submit, setSubmit] = React.useState();
+
+  function handleDispatch(formData) {
+    saveJob(formData);
+    history.push('/jobs');
+  }
+
+  React.useEffect(() => {
+    if (submit) {
+      handleDispatch(formData);
+    }
+  }, [submit]);
 
   function handleDelete() {
     deleteItem({ type: 'job', id: formData.id });
@@ -69,20 +83,65 @@ export default function FormJob({
 
   function handleSubmit(e) {
     e.preventDefault();
-    saveJob(formData);
-    history.push('/jobs');
+
+    const formDataKeys = Object.keys(formData);
+    const formValidation = formDataKeys.reduce(
+      (acc, key) => {
+        const hasValidationFunction = typeof validate[key] === 'function';
+        const newError = hasValidationFunction // validation whole form
+          ? validate[key](null, formData[key])
+          : null;
+        const newTouched = { [key]: true };
+
+        return {
+          errors: {
+            ...acc.errors,
+            ...(newError && { [key]: newError })
+          },
+          touched: {
+            ...acc.touched,
+            ...newTouched
+          }
+        };
+      },
+      {
+        errors: { ...errors },
+        touched: { ...touched }
+      }
+    );
+
+    setErrors(formValidation.errors);
+    setTouched(formValidation.touched);
+
+    if (
+      !Object.values(formValidation.errors).length && // errors object is empty
+      Object.values(formValidation.touched).length ===
+        Object.values(formData).length && // all fields were touched
+      Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
+    ) {
+      alert(JSON.stringify(formData, null, 2));
+      setSubmit(true);
+    }
   }
 
   function handleChange(e) {
     const { name, value } = e.target;
 
+    console.log(value);
+
     setFormData({
       ...formData,
       [name]: value
     });
+
+    setTouched({
+      ...touched,
+      [name]: true
+    });
   }
 
   function handleNumberChange(e) {
+    const { name } = e.target;
     const value = Number(
       parseFloat(e.target.value) === 0 ? '' : e.target.value
     ).toString();
@@ -91,10 +150,67 @@ export default function FormJob({
       ...formData,
       [e.target.name]: value
     });
+
+    setTouched({
+      ...touched,
+      [name]: true
+    });
+  }
+
+  function handleBlur(e) {
+    handleValidation(e.target);
+  }
+
+  // validation fns
+
+  const validate = {
+    name: validateJobName,
+    rate: validateNumber,
+    dayHours: validateNumber,
+    hoursUnpaid: validateNumber
+  };
+
+  function validateJobName(name, value) {
+    if (value.trim() === '') {
+      return 'jobName is required (is empty)';
+    }
+    return null;
+  }
+
+  function validateNumber(name, value) {
+    if (!value) {
+      return null;
+    }
+    const valueToString = '' + value;
+    // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
+    const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
+
+    if (!valueToString.match(numberRegex)) {
+      return 'Not a Valid Positive Number';
+    }
+
+    return null;
+  }
+
+  function handleValidation({ name, value }) {
+    // spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
+    // eslint-disable-next-line no-unused-vars
+    const { [name]: removedErrorWhatever, ...restErrors } = errors;
+
+    const error = validate[name](name, value);
+
+    setErrors({
+      ...restErrors,
+      ...(error && { [name]: touched[name] && error })
+    });
   }
 
   return (
     <>
+      <pre>touched</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
+      <pre>errors</pre>
+      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
       <form onSubmit={handleSubmit} autoComplete="off">
         <p>ID: {formData.id}</p>
         <fieldset>
@@ -104,7 +220,7 @@ export default function FormJob({
               name="name"
               value={formData.name}
               onChange={handleChange}
-              required
+              onBlur={handleBlur}
               placeholder="Enter a job name..."
             />
           </FormElement>
@@ -118,6 +234,7 @@ export default function FormJob({
               name="rate"
               value={formData.rate}
               onChange={handleNumberChange}
+              onBlur={handleBlur}
               placeholder="Enter optional rate..."
             />
           </FormElement>
@@ -131,6 +248,7 @@ export default function FormJob({
               min="0"
               value={formData.dayHours}
               onChange={handleNumberChange}
+              onBlur={handleBlur}
               placeholder="0"
             />
           </FormElement>
