@@ -29,13 +29,20 @@ import Clock from './Clock';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
 import RecordsList from './RecordsList';
+import { WidgetInputJob } from './WidgetInputJob';
 
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const isLoggedIn = Object.entries(appData).length > 0;
-  const { settings = {}, records = [], jobs = [] } = appData;
+  const { settings = {}, jobs = [] } = appData;
+  const records =
+    settings.inputJob == 0
+      ? appData.records
+      : appData.records?.filter((record) => {
+          return record.jobId == settings.inputJob;
+        });
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
@@ -110,6 +117,15 @@ export default function App() {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
 
+  function handleInputJobChange(e) {
+    const { value } = e.target;
+    console.log('job change');
+    dispatch({
+      type: `updateSetting`,
+      payload: { inputJob: value }
+    });
+  }
+
   return (
     <React.StrictMode>
       <Router>
@@ -133,7 +149,11 @@ export default function App() {
               </Route>
               <Route path={['/dashboard', '/list', '/calendar']}>
                 <AppHeader title="View">
-                  <Clock />
+                  <WidgetInputJob
+                    settings={settings}
+                    jobs={jobs}
+                    handleInputJobChange={handleInputJobChange}
+                  />
                 </AppHeader>
                 <SegmentNav
                   segments={[
@@ -145,6 +165,7 @@ export default function App() {
               </Route>
               <Switch>
                 <Route exact path="/dashboard">
+                  <Clock />
                   <Dashboard
                     jobs={jobs}
                     settings={settings}
