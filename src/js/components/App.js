@@ -205,7 +205,7 @@ export default function App() {
                     <WidgetInputJobId
                       settings={settings}
                       jobs={jobs}
-                      handleInputJobChange={handleInputJobIdChange}
+                      handleInputJobIdChange={handleInputJobIdChange}
                     />
                   </AppHeader>
                   <WidgetInputDate
