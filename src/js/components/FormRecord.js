@@ -5,6 +5,7 @@ import FormElementSet from './FormElementSet';
 import DatesPickerCalendar from './DatesPickerCalendar';
 import { Prompt } from 'react-router';
 import { useHistory } from 'react-router-dom';
+import Dialog from './Dialog';
 
 export default function FormRecord({
   saveRecord,
@@ -20,6 +21,7 @@ export default function FormRecord({
 }) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
@@ -511,8 +513,11 @@ export default function FormRecord({
         {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
         {isUpdateForm && (
           <Button
-            onClick={handleDelete}
-            className="btn-delete"
+            type="button"
+            onClick={() => {
+              setDialogOpen(true);
+            }}
+            className="btn--delete"
             data-button-delete=""
           >
             Delete Record
@@ -521,6 +526,16 @@ export default function FormRecord({
       </form>
       <pre>{JSON.stringify(formData, null, 2)}</pre>
       <pre>{JSON.stringify(settings, null, 2)}</pre>
+
+      <Dialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        buttonConfirmLabel="Delete Job 🗑"
+        handleConfirm={handleDelete}
+      >
+        <h1>Confirm deletion</h1>
+        <p>Are you sure to permanently delete this record?</p>
+      </Dialog>
     </>
   );
 }
