@@ -8,7 +8,6 @@ import FormElement from './FormElement';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
-
   const initialFormData = {
     name: '',
     rate: '',
@@ -29,7 +28,6 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
   const { jobId } = useParams();
   const history = useHistory();
   const job = jobs.find((job) => job.id === parseInt(jobId));
-
   const initialFormData = {
     id: job.id,
     name: job.name,
@@ -65,16 +63,16 @@ export default function FormJob({
   const [touched, setTouched] = React.useState({});
   const [submit, setSubmit] = React.useState();
 
-  function handleDispatch(formData) {
-    saveJob(formData);
-    history.push('/jobs');
-  }
-
   React.useEffect(() => {
     if (submit) {
       handleDispatch(formData);
     }
   }, [submit]);
+
+  function handleDispatch(formData) {
+    saveJob(formData);
+    history.push('/jobs');
+  }
 
   function handleDelete() {
     deleteItem({ type: 'job', id: formData.id });
@@ -83,7 +81,6 @@ export default function FormJob({
 
   function handleSubmit(e) {
     e.preventDefault();
-
     const formDataKeys = Object.keys(formData);
     const formValidation = formDataKeys.reduce(
       (acc, key) => {
@@ -127,8 +124,6 @@ export default function FormJob({
   function handleChange(e) {
     const { name, value } = e.target;
 
-    console.log(value);
-
     setFormData({
       ...formData,
       [name]: value
@@ -148,7 +143,7 @@ export default function FormJob({
 
     setFormData({
       ...formData,
-      [e.target.name]: value
+      [name]: value
     });
 
     setTouched({
@@ -214,7 +209,12 @@ export default function FormJob({
       <form onSubmit={handleSubmit} autoComplete="off">
         <p>ID: {formData.id}</p>
         <fieldset>
-          <FormElement htmlFor="name" label="Job Name">
+          <FormElement
+            htmlFor="name"
+            label="Job Name"
+            error={errors.name}
+            touched={touched.name}
+          >
             <input
               type="text"
               name="name"
@@ -226,7 +226,12 @@ export default function FormJob({
           </FormElement>
         </fieldset>
         <fieldset>
-          <FormElement htmlFor="rate" label="Job Rate">
+          <FormElement
+            htmlFor="rate"
+            label="Job Rate"
+            touched={touched.rate}
+            errors={errors.rate}
+          >
             <input
               id="rate"
               type="number"
@@ -239,12 +244,17 @@ export default function FormJob({
             />
           </FormElement>
 
-          <FormElement htmlFor="dayHours" label="Regular Hours per Day">
+          <FormElement
+            htmlFor="dayHours"
+            label="Regular Hours per Day"
+            touched={touched.dayHours}
+            errors={errors.dayHours}
+          >
             <input
               id="dayHours"
               name="dayHours"
               type="number"
-              step="0.1"
+              step="0.01"
               min="0"
               value={formData.dayHours}
               onChange={handleNumberChange}
@@ -256,12 +266,14 @@ export default function FormJob({
           <FormElement
             htmlFor="hoursUnpaid"
             label="Default Unpaid Hours per Day"
+            touched={touched.hoursUnpaid}
+            errors={errors.hoursUnpaid}
           >
             <input
               id="hoursUnpaid"
               name="hoursUnpaid"
               type="number"
-              step="0.1"
+              step="0.01"
               min="0"
               value={formData.hoursUnpaid}
               onChange={handleNumberChange}
