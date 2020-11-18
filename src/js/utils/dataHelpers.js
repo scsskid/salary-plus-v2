@@ -19,6 +19,16 @@ export function getRecordsByMonth({ records = [], date = new Date() }) {
   });
 }
 
+export function getUnattachedRecords(records, jobs) {
+  return records.filter((record) => {
+    const attachedJob = jobs.find((job) => {
+      return job.id == record.jobId;
+    });
+
+    return !attachedJob;
+  });
+}
+
 export function getRecordsByRange(
   records,
   dateRange = {
