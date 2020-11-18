@@ -123,7 +123,6 @@ export default function App() {
 
   function handleInputJobIdChange(e) {
     const { value } = e.target;
-    console.log('job change');
     dispatch({
       type: `updateSetting`,
       payload: { inputJobId: value }

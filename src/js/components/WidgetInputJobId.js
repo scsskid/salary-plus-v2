@@ -18,7 +18,7 @@ export function WidgetInputJobId({
       name="inputJobId"
       id="inputJobId"
       value={settings.inputJobId}
-      onBlur={handleInputJobIdChange}
+      onBlur={() => {}}
       onChange={handleInputJobIdChange}
     >
       <option key={`job-0`} value={0}>
