@@ -211,6 +211,7 @@ export default function App() {
                       settings={settings}
                       jobs={jobs}
                       handleInputJobIdChange={handleInputJobIdChange}
+                      unattachedRecordsCount={unattachedRecords.length}
                     />
                   </AppHeader>
                   <WidgetInputDate
