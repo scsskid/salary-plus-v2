@@ -12,31 +12,37 @@ export function FormRecordCreate({
   changeMonth
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
-  const {
+  const inputJobIdAppData = jobs.find((job) => job.id == settings.inputJobId);
+
+  let jobId = 0,
+    jobName,
+    timeBegin,
+    timeEnd,
+    hoursUnpaid,
+    dayHours,
+    rate,
+    bonus;
+
+  ({
+    jobName = '',
     timeBegin = '08:00',
     timeEnd = '17:00',
     hoursUnpaid = '',
     dayHours = '',
     rate = '',
     bonus = ''
-  } = { ...settings.previousFormData };
+  } = settings.previousFormData);
 
-  const inputJobIdAppData = jobs.find((job) => job.id == settings.inputJobId);
-  const previousJobIdAppData = jobs.find(
-    (job) => job.id == settings.previousFormData?.jobId
-  );
-
-  let jobId;
-  let jobName;
-
-  // Try Setting from previousJob
+  // Try Override if inputJobisSelected
   if (inputJobIdAppData) {
-    ({ id: jobId, name: jobName } = inputJobIdAppData);
-  } else if (previousJobIdAppData) {
-    ({ id: jobId, name: jobName } = previousJobIdAppData);
+    ({
+      id: jobId,
+      name: jobName,
+      dayHours,
+      rate,
+      hoursUnpaid
+    } = inputJobIdAppData);
   }
-
-  // But Prioritise Setting from previousJob
 
   const initialFormData = {
     jobId: jobId ?? 0,
