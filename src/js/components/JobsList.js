@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import FormElement from './FormElement';
-import FormElementSet from './FormElementSet';
 
 export default function JobsList({ jobs }) {
   const history = useHistory();
@@ -15,14 +14,12 @@ export default function JobsList({ jobs }) {
       <div className="component-body">
         <fieldset>
           {jobs.map((job) => (
-            <FormElementSet key={job.id}>
-              <FormElement label={job.name}>
-                <button
-                  className="jobs-list-el"
-                  onClick={() => history.push(`/jobs/${job.id}`)}
-                ></button>
-              </FormElement>
-            </FormElementSet>
+            <FormElement label={job.name} key={job.id}>
+              <button
+                className="jobs-list-el"
+                onClick={() => history.push(`/jobs/${job.id}`)}
+              ></button>
+            </FormElement>
           ))}
         </fieldset>
       </div>
