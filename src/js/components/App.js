@@ -39,11 +39,13 @@ export default function App() {
   const { settings = {}, jobs = [] } = appData;
 
   const records =
-    settings.inputJobId == 0
+    settings.inputJobId == 0 || !settings.inputJobId
       ? appData.records
       : appData.records?.filter((record) => {
           return record.jobId == settings.inputJobId;
         });
+
+  console.log(appData.records);
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
