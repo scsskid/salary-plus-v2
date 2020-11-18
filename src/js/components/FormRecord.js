@@ -34,7 +34,7 @@ export default function FormRecord({
   const jobWasDeleted = isUpdateForm && !linkedJob;
   const hasJobs = jobs.length > 0;
   const showJobsDropdown = (hasJobs && linkedJob) || (hasJobs && !isUpdateForm);
-  const showJobsNameInput = jobs.length == 0 || jobWasDeleted;
+  const showJobsNameInput = formData.jobId == 0;
   const showJobPropsFields = settings.allowCustomJobProps || jobWasDeleted;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const formIsHalfTouched =
@@ -109,14 +109,14 @@ export default function FormRecord({
     setFormData({
       ...formData,
       [name]: value, // jobId
-      ['rate']: job?.rate,
-      ['jobName']: job?.name,
-      ['dayHours']: job?.dayHours,
-      ['hoursUnpaid']: job?.hoursUnpaid
+      ['rate']: job?.rate || '',
+      ['jobName']: job?.name || '',
+      ['dayHours']: job?.dayHours || '',
+      ['hoursUnpaid']: job?.hoursUnpaid || ''
     });
 
     handleValidation({ name: 'jobId', value: value });
-    handleValidation({ name: 'jobName', value: job?.name });
+    handleValidation({ name: 'jobName', value: job?.name || '' });
     handleValidation({ name: 'rate', value: job?.rate });
     handleValidation({ name: 'hoursUnpaid', value: job?.hoursUnpaid });
     handleValidation({ name: 'dayHours', value: job?.dayHours });
@@ -151,7 +151,7 @@ export default function FormRecord({
   // Validation Functions
 
   const validate = {
-    jobId: validateJobId,
+    jobId: validateNumber,
     jobName: validateJobName,
     dates: validateDates,
     timeBegin: validateTime,
@@ -173,13 +173,6 @@ export default function FormRecord({
       ...restErrors,
       ...(error && { [name]: touched[name] && error })
     });
-  }
-
-  function validateJobId(value) {
-    if (parseInt(value) === 0 && formData.jobName === '') {
-      return 'Select a Job or Provide a Custom JobName';
-    }
-    return null;
   }
 
   function validateJobName(value) {
@@ -298,48 +291,46 @@ export default function FormRecord({
         <input type="hidden" name="id" value={formData.id} />
 
         <fieldset>
-          <FormElementSet>
-            {showJobsDropdown && (
-              <FormElement
-                label="Select Job (id)"
-                error={errors.jobId}
-                htmlFor="entry-job"
+          {showJobsDropdown && (
+            <FormElement
+              label="Select saved job"
+              error={errors.jobId}
+              htmlFor="entry-job"
+            >
+              <select
+                name="jobId"
+                id="entry-job"
+                value={formData.jobId}
+                onBlur={handleBlur}
+                onChange={handleSelectJobChange}
               >
-                <select
-                  name="jobId"
-                  id="entry-job"
-                  value={formData.jobId}
-                  onBlur={handleBlur}
-                  onChange={handleSelectJobChange}
-                >
-                  <option key={`job-0`} disabled={true} value={0}>
-                    None
+                <option key={`job-0`} value={0}>
+                  None
+                </option>
+                {jobs.map((job) => (
+                  <option key={`job-${job.id}`} value={job.id}>
+                    {job.name}
                   </option>
-                  {jobs.map((job) => (
-                    <option key={`job-${job.id}`} value={job.id}>
-                      {job.name}
-                    </option>
-                  ))}
-                </select>
-              </FormElement>
-            )}
-            {showJobsNameInput && (
-              <FormElement
-                htmlFor="jobName"
-                error={errors.jobName}
-                touched={touched.jobName}
-                label="Job Name"
-              >
-                <input
-                  name="jobName"
-                  id="jobName"
-                  value={formData.jobName}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </FormElement>
-            )}
-          </FormElementSet>
+                ))}
+              </select>
+            </FormElement>
+          )}
+          {showJobsNameInput && (
+            <FormElement
+              htmlFor="jobName"
+              error={errors.jobName}
+              touched={touched.jobName}
+              label="Job Name"
+            >
+              <input
+                name="jobName"
+                id="jobName"
+                value={formData.jobName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormElement>
+          )}
         </fieldset>
         {jobWasDeleted && (
           <p>
@@ -372,39 +363,37 @@ export default function FormRecord({
             updateDates={handleDatesChange}
           />
 
-          <FormElementSet>
-            <FormElement
-              error={errors.timeBegin}
-              touched={touched.timeBegin}
-              htmlFor="timeBegin"
-              label="Starts"
-            >
-              <input
-                name="timeBegin"
-                id="timeBegin"
-                type="time"
-                value={formData.timeBegin}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </FormElement>
+          <FormElement
+            error={errors.timeBegin}
+            touched={touched.timeBegin}
+            htmlFor="timeBegin"
+            label="Starts"
+          >
+            <input
+              name="timeBegin"
+              id="timeBegin"
+              type="time"
+              value={formData.timeBegin}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </FormElement>
 
-            <FormElement
-              error={errors.timeEnd}
-              touched={touched.timeEnd}
-              htmlFor="timeEnd"
-              label="Ends"
-            >
-              <input
-                name="timeEnd"
-                id="timeEnd"
-                type="time"
-                value={formData.timeEnd}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </FormElement>
-          </FormElementSet>
+          <FormElement
+            error={errors.timeEnd}
+            touched={touched.timeEnd}
+            htmlFor="timeEnd"
+            label="Ends"
+          >
+            <input
+              name="timeEnd"
+              id="timeEnd"
+              type="time"
+              value={formData.timeEnd}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </FormElement>
         </fieldset>
 
         {showJobPropsFields && (
@@ -492,19 +481,17 @@ export default function FormRecord({
         </fieldset>
         {showSickLeave && (
           <fieldset>
-            <FormElementSet>
-              <FormElement label="Sick Leave?" htmlFor="sickLeave">
-                <input
-                  type="checkbox"
-                  checked={formData.sickLeave}
-                  name="sickLeave"
-                  id="sickLeave"
-                  value={formData.sickLeave}
-                  onChange={handleChange}
-                  // handleBlur={handleBlur}
-                />
-              </FormElement>
-            </FormElementSet>
+            <FormElement label="Sick Leave?" htmlFor="sickLeave">
+              <input
+                type="checkbox"
+                checked={formData.sickLeave}
+                name="sickLeave"
+                id="sickLeave"
+                value={formData.sickLeave}
+                onChange={handleChange}
+                // handleBlur={handleBlur}
+              />
+            </FormElement>
           </fieldset>
         )}
         {/* <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre> */}
