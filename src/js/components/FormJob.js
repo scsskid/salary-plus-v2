@@ -62,6 +62,9 @@ export default function FormJob({
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [submit, setSubmit] = React.useState();
+  const formIsHalfTouched =
+    Object.values(touched).length > 0 &&
+    Object.values(touched).length != Object.values(formData).length;
 
   React.useEffect(() => {
     if (submit) {
@@ -86,7 +89,7 @@ export default function FormJob({
       (acc, key) => {
         const hasValidationFunction = typeof validate[key] === 'function';
         const newError = hasValidationFunction // validation whole form
-          ? validate[key](null, formData[key])
+          ? validate[key](formData[key])
           : null;
         const newTouched = { [key]: true };
 
@@ -148,14 +151,14 @@ export default function FormJob({
     hoursUnpaid: validateNumber
   };
 
-  function validateJobName(name, value) {
+  function validateJobName(value) {
     if (value.trim() === '') {
       return 'jobName is required (is empty)';
     }
     return null;
   }
 
-  function validateNumber(name, value) {
+  function validateNumber(value) {
     if (!value) {
       return null;
     }
@@ -175,7 +178,7 @@ export default function FormJob({
     // eslint-disable-next-line no-unused-vars
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
-    const error = validate[name](name, value);
+    const error = validate[name](value);
 
     setErrors({
       ...restErrors,
@@ -185,6 +188,7 @@ export default function FormJob({
 
   return (
     <>
+      <Prompt message="really navigate away?" when={formIsHalfTouched} />
       <pre>touched</pre>
       <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
       <pre>errors</pre>

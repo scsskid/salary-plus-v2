@@ -167,7 +167,7 @@ export default function FormRecord({
     // eslint-disable-next-line no-unused-vars
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
-    const error = validate[name](name, value);
+    const error = validate[name](value);
 
     setErrors({
       ...restErrors,
@@ -175,21 +175,21 @@ export default function FormRecord({
     });
   }
 
-  function validateJobId(name, value) {
+  function validateJobId(value) {
     if (parseInt(value) === 0 && formData.jobName === '') {
       return 'Select a Job or Provide a Custom JobName';
     }
     return null;
   }
 
-  function validateJobName(name, value) {
+  function validateJobName(value) {
     if (value.trim() === '') {
       return 'jobName is required (is empty)';
     }
     return null;
   }
 
-  function validateDates(name, value) {
+  function validateDates(value) {
     if (!value?.length) {
       return 'no dates selected';
     }
@@ -197,7 +197,7 @@ export default function FormRecord({
     return null;
   }
 
-  function validateTime(name, value) {
+  function validateTime(value) {
     const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
 
     if (!value.match(timeRegex)) {
@@ -207,7 +207,7 @@ export default function FormRecord({
     return null;
   }
 
-  function validateNumber(name, value) {
+  function validateNumber(value) {
     if (!value) {
       return null;
     }
@@ -231,7 +231,7 @@ export default function FormRecord({
       (acc, key) => {
         const hasValidationFunction = typeof validate[key] === 'function';
         const newError = hasValidationFunction // validation whole form
-          ? validate[key](null, formData[key])
+          ? validate[key](formData[key])
           : null;
         const newTouched = { [key]: true };
 
