@@ -4,7 +4,6 @@ import { useLocation, useHistory } from 'react-router-dom';
 export default function SegmentNav({ segments = [] }) {
   const history = useHistory();
   const { pathname } = useLocation();
-  // const segments = useSegments();
 
   return (
     <div className="segment-nav">
