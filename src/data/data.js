@@ -1,15 +1,15 @@
+const app = {
+  version: 'Alpha 1.0',
+  localStorageKey: 'salary-plus:app-data'
+};
+
 const settings = {
-  // timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
   language: 'en-US',
   inputJobId: 0
 };
 
 export const bootstrapData = {
-  app: {
-    version: 'Alpha-Bootstrap',
-    state: 'running',
-    localStorageKey: 'salary-plus:app-data'
-  },
+  app,
   records: [],
   jobs: [],
   settings: {
@@ -20,11 +20,7 @@ export const bootstrapData = {
 };
 
 export const sampleData = {
-  app: {
-    version: 'Alpha-Demo',
-    state: 'running',
-    localStorageKey: 'salary-plus:app-data'
-  },
+  app,
   settings: {
     ...settings,
     incrementIdRecords: 159,
