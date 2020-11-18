@@ -34,7 +34,8 @@ export default function FormRecord({
   const hasJobs = jobs.length > 0;
   const showJobsDropdown = (hasJobs && linkedJob) || (hasJobs && !isUpdateForm);
   const showJobsNameInput = formData.jobId == 0;
-  const showJobPropsFields = settings.allowCustomJobProps || jobWasDeleted;
+  const showJobPropsFields =
+    settings.allowCustomJobProps || jobWasDeleted || formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
