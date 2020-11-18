@@ -39,8 +39,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
       [name]: value
     });
 
-    // Save as Previous FromData
-
     dispatch({
       type: 'updateSetting',
       payload: { [name]: type === 'checkbox' ? checked : value }
