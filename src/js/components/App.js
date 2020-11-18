@@ -15,7 +15,10 @@ import {
   setAppInnerHeight,
   getWeekStartDateOffset
 } from '../utils/helpers.js';
-import { getRecordsByMonth } from '../utils/dataHelpers.js';
+import {
+  getRecordsByMonth,
+  getUnattachedRecords
+} from '../utils/dataHelpers.js';
 import { FormRecordCreate, FormRecordUpdate } from './FormRecordCreateUdate';
 import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
@@ -37,15 +40,13 @@ export default function App() {
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [] } = appData;
-
   const records =
     settings.inputJobId == 0 || !settings.inputJobId
       ? appData.records
       : appData.records?.filter((record) => {
           return record.jobId == settings.inputJobId;
         });
-
-  console.log(appData.records);
+  const unattachedRecords = getUnattachedRecords(appData.records, jobs);
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
@@ -156,6 +157,7 @@ export default function App() {
                     settings={settings}
                     jobs={jobs}
                     handleInputJobIdChange={handleInputJobIdChange}
+                    unattachedRecordsCount={unattachedRecords.length}
                   />
                 </AppHeader>
                 <SegmentNav
