@@ -31,9 +31,9 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
   const initialFormData = {
     id: job.id,
     name: job.name,
-    rate: job.rate || '',
-    dayHours: job.dayHours || '',
-    hoursUnpaid: job.hoursUnpaid || ''
+    rate: parseFloat(job.rate) || '',
+    dayHours: parseFloat(job.dayHours) || '',
+    hoursUnpaid: parseFloat(job.hoursUnpaid) || ''
   };
 
   return (
@@ -116,30 +116,13 @@ export default function FormJob({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      alert(JSON.stringify(formData, null, 2));
+      // alert(JSON.stringify(formData, null, 2));
       setSubmit(true);
     }
   }
 
   function handleChange(e) {
     const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-
-    setTouched({
-      ...touched,
-      [name]: true
-    });
-  }
-
-  function handleNumberChange(e) {
-    const { name } = e.target;
-    const value = Number(
-      parseFloat(e.target.value) === 0 ? '' : e.target.value
-    ).toString();
 
     setFormData({
       ...formData,
@@ -238,7 +221,7 @@ export default function FormJob({
               step="0.01"
               name="rate"
               value={formData.rate}
-              onChange={handleNumberChange}
+              onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Enter optional rate..."
             />
@@ -257,7 +240,7 @@ export default function FormJob({
               step="0.01"
               min="0"
               value={formData.dayHours}
-              onChange={handleNumberChange}
+              onChange={handleChange}
               onBlur={handleBlur}
               placeholder="0"
             />
@@ -276,7 +259,7 @@ export default function FormJob({
               step="0.01"
               min="0"
               value={formData.hoursUnpaid}
-              onChange={handleNumberChange}
+              onChange={handleChange}
               placeholder="0"
             />
           </FormElement>
