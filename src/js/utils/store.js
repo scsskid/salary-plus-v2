@@ -89,6 +89,8 @@ function reducer(state, { type, payload }) {
       return init({});
     case 'insertSampleData':
       return init({ ...sampleData });
+    case 'importData':
+      return init({ ...payload });
     default:
       break;
   }

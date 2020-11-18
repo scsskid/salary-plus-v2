@@ -35,8 +35,9 @@ export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
-  const isLoggedIn = Object.entries(appData).length > 0;
+  const appRunning = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [] } = appData;
+
   const records =
     settings.inputJobId == 0
       ? appData.records
@@ -129,9 +130,9 @@ export default function App() {
   return (
     <React.StrictMode>
       <Router>
-        {isLoggedIn && <Navigation />}
+        {appRunning && <Navigation />}
         <main className="main">
-          {!isLoggedIn ? (
+          {!appRunning ? (
             <>
               <Welcome
                 seedFunctions={{
@@ -271,7 +272,10 @@ export default function App() {
                     <Debug
                       settings={settings}
                       dispatch={dispatch}
-                      isLoggedIn={isLoggedIn}
+                      appRunning={appRunning}
+                      version={appData.app.version}
+                      appData={appData}
+                      clock={clock}
                     />
                   </Settings>
                 </Route>
