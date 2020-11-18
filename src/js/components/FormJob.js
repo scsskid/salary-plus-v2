@@ -5,6 +5,7 @@ import { Prompt } from 'react-router';
 import Button from './Button';
 import Dialog from './Dialog';
 import FormElement from './FormElement';
+// import useForm from '../hooks/useForm';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
