@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useClock } from '../utils/hooks';
+import useClock from '../hooks/useClock';
 
 export default function Clock() {
   const clock = useClock();

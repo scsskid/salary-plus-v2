@@ -3,7 +3,7 @@ import RecordsList from './RecordsList';
 import Week from './Week';
 import Weekdays from './Weekdays';
 import WidgetReporting from './WidgetReporting';
-import { useClock } from '../utils/hooks';
+import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { isSameDay } from '../utils/helpers.js';
 

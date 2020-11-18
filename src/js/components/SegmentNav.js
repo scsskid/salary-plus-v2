@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import { useSegments } from '../utils/hooks.js';
 
 export default function SegmentNav({ segments = [] }) {
   const history = useHistory();

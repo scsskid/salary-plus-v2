@@ -21,7 +21,7 @@ import { FormJobCreate, FormJobUpdate } from './FormJob';
 import Debug from './Debug';
 import Reporting from './Reporting';
 import JobsList from './JobsList';
-import { useClock } from '../utils/hooks.js';
+import useClock from '../hooks/useClock';
 import Dashboard from './Dashboard';
 import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';

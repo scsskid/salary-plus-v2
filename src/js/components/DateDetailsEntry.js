@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as reportingFns from './../utils/reporting-fns';
-import { useClock } from '../utils/hooks';
+import useClock from '../hooks/useClock';
 import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
 
