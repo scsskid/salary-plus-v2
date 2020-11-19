@@ -16,14 +16,14 @@
 
 .mount-handler {
   transition: 0.3s;
-}
-
-.mount-handler--unmounted {
   opacity: 0;
 }
 
+.mount-handler--unmounted {
+}
+
 .mount-handler--mounting {
-  opacity: 1;
+  opacity: 0;
 }
 
 .mount-handler--mounted {

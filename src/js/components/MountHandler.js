@@ -1,8 +1,7 @@
 import * as React from 'react';
-import useDelayedUnmounting from '../hooks/useDelayedUnmounting';
 
-export default function MountHandler({ hook, children }) {
-  const [state, show, hide] = hook;
+export default function MountHandler({ useDelayedUnmounting = [], children }) {
+  const [state, show, hide] = useDelayedUnmounting;
   const defaultClassName = 'mount-handler';
   const className = `${defaultClassName} ${defaultClassName}--${state}`;
 

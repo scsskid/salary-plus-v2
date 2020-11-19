@@ -42,12 +42,10 @@ import useDelayedUnmounting from '../hooks/useDelayedUnmounting';
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
-  const [
-    notificationState,
-    showNotification,
-    hideNotification
-  ] = useDelayedUnmounting(1000);
-  const [notification, setNotification] = useNotification({});
+
+  const [state, show, hide] = useDelayedUnmounting(1000);
+  const [notification, setNotification] = useNotification();
+
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [], app = {} } = appData;
@@ -167,17 +165,10 @@ export default function App() {
               </>
             ) : (
               <>
-                {notification?.message && (
-                  <MountHandler
-                    hook={[
-                      notificationState,
-                      showNotification,
-                      hideNotification
-                    ]}
-                  >
-                    <Notification>{notification.message}</Notification>
-                  </MountHandler>
-                )}
+                <MountHandler useDelayedUnmounting={[state, show, hide]}>
+                  <Notification>{notification.message}</Notification>
+                </MountHandler>
+
                 {/* <Notification>Wassup</Notification> */}
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
