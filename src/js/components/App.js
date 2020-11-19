@@ -36,14 +36,11 @@ import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
 import useNotification from '../hooks/useNotification';
-import MountHandler from './MountHandler';
-import useDelayedUnmounting from '../hooks/useDelayedUnmounting';
 
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
 
-  const [state, show, hide] = useDelayedUnmounting(1000);
   const [notification, setNotification] = useNotification();
 
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
@@ -65,6 +62,10 @@ export default function App() {
 
     setNotification({ message: 'Hey' });
   }, []);
+
+  // React.useEffect(() => {
+  //   console.log('notification effect');
+  // }, [notification]);
 
   const monthRecords = getRecordsByMonth({
     records,
@@ -165,11 +166,8 @@ export default function App() {
               </>
             ) : (
               <>
-                <MountHandler useDelayedUnmounting={[state, show, hide]}>
-                  <Notification>{notification.message}</Notification>
-                </MountHandler>
+                <Notification notification={notification} />
 
-                {/* <Notification>Wassup</Notification> */}
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
                 </Route>

@@ -6,12 +6,12 @@ export default function useNotification(initialState = {}) {
   // React.useEffect(() => {
   //   const clearNotification = setTimeout(() => {
   //     setNotification({});
-  //   }, 30000);
+  //   }, 0);
 
   //   return () => {
   //     clearTimeout(clearNotification);
   //   };
-  // }, [notification]);
+  // }, []);
 
   return [notification, setNotification];
 }

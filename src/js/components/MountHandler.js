@@ -9,7 +9,7 @@ export default function MountHandler({ useDelayedUnmounting = [], children }) {
 
   React.useEffect(() => {
     show();
-    setTimeout(hide, 5000);
+    // setTimeout(hide, 5000);
     return () => {};
   }, []);
 

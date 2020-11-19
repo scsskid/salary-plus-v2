@@ -24,9 +24,8 @@ export default function useDelayedUnmounting(time = 2000) {
         setState('unmounted');
       }, time);
     } else if (state === 'mounting') {
-      timeoutId = setTimeout(() => {
-        setState('mounted');
-      }, time);
+      // timeoutId = setTimeout(() => {}, time);
+      setState('mounted');
     }
 
     return () => {
