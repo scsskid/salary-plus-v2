@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import useDelayedUnmounting from '../hooks/useDelayedUnmounting';
 
 export default function useNotification(initialState) {

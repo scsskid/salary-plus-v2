@@ -56,8 +56,6 @@ export default function App() {
     // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
-
-    setNotification('Hey');
   }, []);
 
   const monthRecords = getRecordsByMonth({
