@@ -11,6 +11,7 @@ export default function Debug({
 }) {
   let importData;
   const [importError, setImportError] = React.useState();
+  const { app } = appData || {};
 
   function triggerDownload() {
     const j = document.createElement('a');
@@ -55,11 +56,7 @@ export default function Debug({
   return (
     <div>
       <LogToScreen title="settings" object={settings} settings={settings} />
-      <LogToScreen
-        title="appData.app"
-        object={appData.app}
-        settings={settings}
-      />
+      <LogToScreen title="appData.app" object={app} settings={settings} />
       {appRunning && (
         <>
           <p>
@@ -103,7 +100,11 @@ export default function Debug({
           </p>
         </>
       )}
-      <div style={{ fontSize: '.8rem', opacity: 0.5 }}>Version: {version}</div>
+      {appRunning && (
+        <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
+          Version: {version}
+        </div>
+      )}
     </div>
   );
 }

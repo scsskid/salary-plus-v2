@@ -6,7 +6,7 @@ export default function Welcome({ seedFunctions }) {
 
   return (
     <>
-      <header className="component-header">
+      <header className="app-header">
         <h1>Welcome</h1>
       </header>
       <p>

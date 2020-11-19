@@ -40,14 +40,15 @@ export default function App() {
   const [appData, dispatch] = useLocalStorageReducer();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
-  const { settings = {}, jobs = [] } = appData;
+  const { settings = {}, jobs = [], app = {} } = appData;
   const records =
     settings.inputJobId == 0 || !settings.inputJobId
       ? appData.records
       : appData.records?.filter((record) => {
           return record.jobId == settings.inputJobId;
         });
-  const unattachedRecords = getUnattachedRecords(appData.records, jobs);
+
+  const unattachedRecords = getUnattachedRecords(appData?.records, jobs);
 
   React.useEffect(() => {
     // to hook, remove listener cleanup:
@@ -284,7 +285,7 @@ export default function App() {
                         settings={settings}
                         dispatch={dispatch}
                         appRunning={appRunning}
-                        version={appData.app.version}
+                        version={app?.version}
                         appData={appData}
                         clock={clock}
                       />
