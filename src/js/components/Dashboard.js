@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import RecordsList from './RecordsList';
 import Week from './Week';
 import Weekdays from './Weekdays';

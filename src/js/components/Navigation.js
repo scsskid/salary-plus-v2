@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import IconView from './../../icons/icon-view.svg';
 import IconAdd from './../../icons/icon-add.svg';

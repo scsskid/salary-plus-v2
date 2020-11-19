@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import FormElement from './FormElement';
 
@@ -97,6 +97,19 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             <button onClick={() => history.push('/jobs')}>
               {jobs.length} →
             </button>
+          </FormElement>
+        </fieldset>
+        <fieldset>
+          <FormElement label="Show { debug } infos across the app">
+            <input
+              type="checkbox"
+              checked={formData.showDebugInfo}
+              name="showDebugInfo"
+              id="showDebugInfo"
+              value={formData.showDebugInfo}
+              onChange={handleChange}
+              onBlur={handleChange}
+            />{' '}
           </FormElement>
         </fieldset>
       </form>

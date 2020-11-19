@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';

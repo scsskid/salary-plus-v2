@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { mapFormDataToStorageObject, mutateArrayWithObject } from './helpers';
 import { sampleData, bootstrapData } from '../../data/data';
 

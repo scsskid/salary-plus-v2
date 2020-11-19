@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as reportingFns from './../utils/reporting-fns';
 import useClock from '../hooks/useClock';

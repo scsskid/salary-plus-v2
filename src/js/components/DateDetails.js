@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import DateDetailsEntry from './DateDetailsEntry';
 import { getRecordsByDate } from '../utils/dataHelpers.js';
 
