@@ -8,13 +8,15 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   const {
     language = 'en-US',
     allowCustomJobProps = false,
-    sickleaveOnNewRecordForm = false
+    sickleaveOnNewRecordForm = false,
+    showDebugInfo = false
   } = settings;
 
   const [formData, setFormData] = React.useState({
     language,
     allowCustomJobProps,
-    sickleaveOnNewRecordForm
+    sickleaveOnNewRecordForm,
+    showDebugInfo
   });
 
   function handleChange(e) {

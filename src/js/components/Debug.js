@@ -1,4 +1,5 @@
 import * as React from 'react';
+import LogToScreen from './LogToScreen';
 
 export default function Debug({
   appRunning,
@@ -52,11 +53,15 @@ export default function Debug({
   }
 
   return (
-    <footer style={{ paddingTop: 40 }}>
+    <div>
+      <LogToScreen title="settings" object={settings} settings={settings} />
+      <LogToScreen
+        title="appData.app"
+        object={appData.app}
+        settings={settings}
+      />
       {appRunning && (
         <>
-          <pre>{JSON.stringify(settings, null, 2)}</pre>
-          <hr />
           <p>
             <button className="btn" onClick={triggerDownload}>
               Export Data
@@ -96,12 +101,9 @@ export default function Debug({
               Insert Sample App Data
             </button>
           </p>
-          <pre style={{ fontSize: '.6rem' }}>
-            {JSON.stringify(appData.app, null, 2)}
-          </pre>
         </>
       )}
       <div style={{ fontSize: '.8rem', opacity: 0.5 }}>Version: {version}</div>
-    </footer>
+    </div>
   );
 }
