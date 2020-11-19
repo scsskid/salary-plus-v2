@@ -40,9 +40,7 @@ import useNotification from '../hooks/useNotification';
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
-
-  const [notification, setNotification] = useNotification();
-
+  const [notification, setNotification, mountingState] = useNotification();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [], app = {} } = appData;
@@ -52,7 +50,6 @@ export default function App() {
       : appData.records?.filter((record) => {
           return record.jobId == settings.inputJobId;
         });
-
   const unattachedRecords = getUnattachedRecords(appData?.records, jobs);
 
   React.useEffect(() => {
@@ -60,12 +57,8 @@ export default function App() {
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
 
-    setNotification({ message: 'Hey' });
+    setNotification('Hey');
   }, []);
-
-  // React.useEffect(() => {
-  //   console.log('notification effect');
-  // }, [notification]);
 
   const monthRecords = getRecordsByMonth({
     records,
@@ -79,7 +72,7 @@ export default function App() {
       payload: formData
     });
     setInputDate(new Date(formData.dateBegin));
-    setNotification({ message: 'Record saved.' });
+    setNotification('Record saved.');
   }
 
   function saveJob(formData) {
@@ -87,7 +80,7 @@ export default function App() {
       type: 'id' in formData ? 'updateJob' : 'createJob',
       payload: formData
     });
-    setNotification({ message: 'Job saved.' });
+    setNotification('Job saved.');
   }
 
   function deleteItem({ type, id }) {
@@ -97,7 +90,7 @@ export default function App() {
       type: `delete${typeString}`,
       payload: { id }
     });
-    setNotification({ message: `${typeString} deleted.` });
+    setNotification(`${typeString} deleted.`);
   }
 
   function changeMonth(summand = 0) {
@@ -166,7 +159,10 @@ export default function App() {
               </>
             ) : (
               <>
-                <Notification notification={notification} />
+                <Notification
+                  notification={notification}
+                  mountingState={mountingState}
+                />
 
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />

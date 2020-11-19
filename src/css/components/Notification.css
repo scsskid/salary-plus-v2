@@ -14,18 +14,23 @@
   font-weight: bold;
 }
 
-.mount-handler {
-  transition: 0.3s;
+.notification {
+  transition: 0.5s;
   opacity: 0;
 }
 
-.mount-handler--unmounted {
-}
-
-.mount-handler--mounting {
+.notification--mounting {
   opacity: 0;
 }
 
-.mount-handler--mounted {
+.notification--mounted {
   opacity: 1;
+}
+
+.notification--unmounting {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.notification--unmounted {
 }

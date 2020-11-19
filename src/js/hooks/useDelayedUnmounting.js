@@ -1,37 +1,38 @@
 import * as React from 'react';
 
 export default function useDelayedUnmounting(time = 2000) {
-  const [state, setState] = React.useState('unmounted');
+  const [mountingState, setMountingState] = React.useState('unmounted');
 
   function show() {
-    if (state === 'unmounting') {
+    if (mountingState === 'unmounting') {
       return;
     }
-    setState('mounting');
+    setMountingState('mounting');
   }
 
   function hide() {
-    if (state === 'mounting') {
+    if (mountingState === 'mounting') {
       return;
     }
-    setState('unmounting');
+    setMountingState('unmounting');
   }
 
   React.useEffect(() => {
     let timeoutId;
-    if (state === 'unmounting') {
+    if (mountingState === 'unmounting') {
       timeoutId = setTimeout(() => {
-        setState('unmounted');
+        setMountingState('unmounted');
       }, time);
-    } else if (state === 'mounting') {
-      // timeoutId = setTimeout(() => {}, time);
-      setState('mounted');
+    } else if (mountingState === 'mounting') {
+      timeoutId = setTimeout(() => {
+        setMountingState('mounted');
+      }, 0);
     }
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [state, time]);
+  }, [mountingState, time]);
 
-  return [state, show, hide];
+  return [mountingState, show, hide];
 }
