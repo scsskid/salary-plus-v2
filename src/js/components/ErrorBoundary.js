@@ -37,7 +37,9 @@ export default class ErrorBoundary extends React.Component {
           <header className="app-header">
             <h2>Something went wrong.</h2>
           </header>
-
+          <p>
+            <a href="/">Go to Start</a>
+          </p>
           <p style={{ whiteSpace: 'pre-wrap' }}>
             {this.state.error && this.state.error.toString()}
             {this.state.errorInfo && this.state.errorInfo.componentStack}
