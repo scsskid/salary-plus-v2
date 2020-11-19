@@ -31,13 +31,16 @@ import AppHeader from './AppHeader';
 import Clock from './Clock';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
+import Notification from './Notification';
 import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
+import useNotification from '../hooks/useNotification';
 
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
+  const [notification, setNotification] = useNotification({});
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
   const { settings = {}, jobs = [], app = {} } = appData;
@@ -68,6 +71,7 @@ export default function App() {
       payload: formData
     });
     setInputDate(new Date(formData.dateBegin));
+    setNotification({ message: 'Record saved.' });
   }
 
   function saveJob(formData) {
@@ -75,13 +79,17 @@ export default function App() {
       type: 'id' in formData ? 'updateJob' : 'createJob',
       payload: formData
     });
+    setNotification({ message: 'Job saved.' });
   }
 
   function deleteItem({ type, id }) {
+    const typeString = type.charAt(0).toUpperCase() + type.slice(1);
+
     dispatch({
-      type: `delete${type.charAt(0).toUpperCase() + type.slice(1)}`,
+      type: `delete${typeString}`,
       payload: { id }
     });
+    setNotification({ message: `${typeString} deleted.` });
   }
 
   function changeMonth(summand = 0) {
@@ -150,6 +158,9 @@ export default function App() {
               </>
             ) : (
               <>
+                {notification?.message && (
+                  <Notification>{notification.message}</Notification>
+                )}
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
                 </Route>
