@@ -150,10 +150,15 @@ export default function App() {
               </>
             ) : (
               <>
-                <Route exact path="/">
-                  <Redirect to="/dashboard" />
+                <Route exact path="/view">
+                  <Redirect to="/view/dashboard" />
                 </Route>
-                <Route path={['/dashboard', '/list', '/calendar']}>
+                <Route exact path="/">
+                  <Redirect to="/view/dashboard" />
+                </Route>
+                <Route
+                  path={['/view/dashboard', '/view/list', '/view/calendar']}
+                >
                   <AppHeader title="View">
                     <WidgetInputJobId
                       settings={settings}
@@ -164,14 +169,14 @@ export default function App() {
                   </AppHeader>
                   <SegmentNav
                     segments={[
-                      { title: 'Dashboard', path: '/dashboard' },
-                      { title: 'Calendar', path: '/calendar' },
-                      { title: 'List', path: '/list' }
+                      { title: 'Dashboard', path: '/view/dashboard' },
+                      { title: 'Calendar', path: '/view/calendar' },
+                      { title: 'List', path: '/view/list' }
                     ]}
                   />
                 </Route>
                 <Switch>
-                  <Route exact path="/dashboard">
+                  <Route exact path="/view/dashboard">
                     <Clock />
                     <Dashboard
                       jobs={jobs}
@@ -179,7 +184,7 @@ export default function App() {
                       records={records}
                     />
                   </Route>
-                  <Route exact path="/calendar">
+                  <Route exact path="/view/calendar">
                     <Calendar
                       inputDate={inputDate}
                       settings={settings}
@@ -192,7 +197,7 @@ export default function App() {
                       clock={clock}
                     />
                   </Route>
-                  <Route exact path="/list">
+                  <Route exact path="/view/list">
                     <WidgetInputDate
                       inputDate={inputDate}
                       settings={settings}

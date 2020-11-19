@@ -11,7 +11,9 @@ export default function SegmentNav({ segments = [] }) {
         <SegmentNavEl
           id={segment}
           key={i}
-          isActive={segment.path === pathname ? true : false}
+          isActive={
+            segment.path.split('/')[2] === pathname.split('/')[2] ? true : false
+          }
           onClick={() => {
             history.push(segment.path);
           }}

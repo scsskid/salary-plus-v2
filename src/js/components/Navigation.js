@@ -8,7 +8,7 @@ const Navigaton = () => {
   return (
     <nav className="main-navigation">
       <ul>
-        <NavEl route="/">
+        <NavEl route="/view">
           <IconView />
           View
         </NavEl>
@@ -34,7 +34,7 @@ export default Navigaton;
 
 function NavEl({ route, children }) {
   const location = useLocation();
-  const isCurrentPath = location.pathname === route;
+  const isCurrentPath = location.pathname.split('/')[1] === route.split('/')[1];
   const defaultClassName = 'main-navigation-el';
 
   return (

@@ -1,5 +1,4 @@
 export default [
-  {},
   {
     name: 'View',
     key: 'view',
