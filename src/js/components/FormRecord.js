@@ -5,6 +5,7 @@ import DatesPickerCalendar from './DatesPickerCalendar';
 import { Prompt } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Dialog from './Dialog';
+import LogToScreen from './LogToScreen';
 
 export default function FormRecord({
   saveRecord,
@@ -277,10 +278,8 @@ export default function FormRecord({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      <pre>touched</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
-      <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
+      <LogToScreen title="touched" object={touched} settings={settings} />
+      <LogToScreen title="errors" object={errors} settings={settings} />
       <form
         className="form-record"
         // ref={form}
@@ -512,8 +511,8 @@ export default function FormRecord({
           </Button>
         )}
       </form>
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
-      <pre>{JSON.stringify(settings, null, 2)}</pre>
+      <LogToScreen title="formData" object={formData} settings={settings} />
+      <LogToScreen title="settings" object={settings} settings={settings} />
 
       <Dialog
         dialogOpen={dialogOpen}

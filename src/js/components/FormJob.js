@@ -5,9 +5,10 @@ import { Prompt } from 'react-router';
 import Button from './Button';
 import Dialog from './Dialog';
 import FormElement from './FormElement';
+import LogToScreen from './LogToScreen';
 // import useForm from '../hooks/useForm';
 
-export function FormJobCreate({ saveJob }) {
+export function FormJobCreate({ saveJob, settings }) {
   const history = useHistory();
   const initialFormData = {
     name: '',
@@ -25,7 +26,7 @@ export function FormJobCreate({ saveJob }) {
   );
 }
 
-export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
+export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
   const { jobId } = useParams();
   const history = useHistory();
   const job = jobs.find((job) => job.id === parseInt(jobId));
@@ -46,6 +47,7 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem }) {
         isUpdateForm={true}
         initialFormData={initialFormData}
         saveJob={saveJob}
+        settings={settings}
       />
     </>
   );
@@ -56,7 +58,8 @@ export default function FormJob({
   history,
   isUpdateForm,
   initialFormData,
-  saveJob
+  saveJob,
+  settings
 }) {
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -190,10 +193,8 @@ export default function FormJob({
   return (
     <>
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
-      <pre>touched</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(touched, null, 2)}</pre>
-      <pre>errors</pre>
-      <pre style={{ fontSize: '12px' }}>{JSON.stringify(errors, null, 2)}</pre>
+      <LogToScreen title="touched" object={touched} settings={settings} />
+      <LogToScreen title="errors" object={errors} settings={settings} />
       <form onSubmit={handleSubmit} autoComplete="off">
         <p>ID: {formData.id}</p>
         <fieldset>
@@ -297,7 +298,7 @@ export default function FormJob({
           )}
         </div>
       </form>
-      <pre>{JSON.stringify(formData, null, 2)}</pre>
+      <LogToScreen title="formData" object={formData} settings={settings} />
 
       <Dialog
         dialogOpen={dialogOpen}
