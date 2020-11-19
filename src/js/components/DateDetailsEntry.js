@@ -4,13 +4,9 @@ import * as reportingFns from './../utils/reporting-fns';
 import useClock from '../hooks/useClock';
 import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
+import LogToScreen from './LogToScreen';
 
-export default function DateDetailsEntry({
-  record = {},
-  // jobs = [],
-  showDebugInfo = false,
-  settings = {}
-}) {
+export default function DateDetailsEntry({ record = {}, settings = {} }) {
   const clock = useClock();
   const { language } = settings;
   const localeTimeStringOptions = {
@@ -18,19 +14,14 @@ export default function DateDetailsEntry({
     minute: '2-digit'
   };
   let status;
-  // const clock = { now: new Date('2020/11/14 13:00') };
-  // const job = jobs.find((job) => job.id == record.jobId);
   const history = useHistory();
   const datesObj = {
     begin: new Date(record.begin),
     end: new Date(record.end)
   };
   const time = {
-    // begin: getLocaleTimeString(datesObj.begin),
-
     begin: datesObj.begin.toLocaleTimeString(language, localeTimeStringOptions),
     end: datesObj.end.toLocaleTimeString(language, localeTimeStringOptions)
-    // end: getLocaleTimeString(datesObj.end)
   };
   const statusObj = {
     ongoing: clock.now >= datesObj.begin && clock.now <= datesObj.end,
@@ -121,16 +112,8 @@ export default function DateDetailsEntry({
           </div>
         </div>
       </button>
-      {showDebugInfo && (
-        <>
-          <pre style={{ fontSize: '12px' }}>
-            {JSON.stringify(debug, null, 2)}
-          </pre>
-          <pre style={{ fontSize: '12px' }}>
-            {JSON.stringify(record, null, 2)}
-          </pre>
-        </>
-      )}
+      <LogToScreen title="local debug obj" object={debug} settings={settings} />
+      <LogToScreen title="record" object={record} settings={settings} />
     </>
   );
 }
