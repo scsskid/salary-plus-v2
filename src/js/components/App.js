@@ -36,10 +36,17 @@ import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
 import useNotification from '../hooks/useNotification';
+import MountHandler from './MountHandler';
+import useDelayedUnmounting from '../hooks/useDelayedUnmounting';
 
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
+  const [
+    notificationState,
+    showNotification,
+    hideNotification
+  ] = useDelayedUnmounting(1000);
   const [notification, setNotification] = useNotification({});
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
@@ -57,6 +64,8 @@ export default function App() {
     // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
     setAppInnerHeight();
+
+    setNotification({ message: 'Hey' });
   }, []);
 
   const monthRecords = getRecordsByMonth({
@@ -159,8 +168,17 @@ export default function App() {
             ) : (
               <>
                 {notification?.message && (
-                  <Notification>{notification.message}</Notification>
+                  <MountHandler
+                    hook={[
+                      notificationState,
+                      showNotification,
+                      hideNotification
+                    ]}
+                  >
+                    <Notification>{notification.message}</Notification>
+                  </MountHandler>
                 )}
+                {/* <Notification>Wassup</Notification> */}
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
                 </Route>
@@ -170,7 +188,7 @@ export default function App() {
                 <Route
                   path={['/view/dashboard', '/view/list', '/view/calendar']}
                 >
-                  <AppHeader title="View">
+                  <AppHeader key="view" title="View">
                     <WidgetInputJobId
                       settings={settings}
                       jobs={jobs}
@@ -224,7 +242,7 @@ export default function App() {
                     />
                   </Route>
                   <Route exact path="/reporting">
-                    <AppHeader title="Reporting">
+                    <AppHeader key="reporting" title="Reporting">
                       <WidgetInputJobId
                         settings={settings}
                         jobs={jobs}
