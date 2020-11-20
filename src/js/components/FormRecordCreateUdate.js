@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import FormRecord from './FormRecord';
 import { getTimeOfDate } from '../utils/helpers';
+import NoMatch from './NoMatch';
 
 export function FormRecordCreate({
   inputDate,
@@ -79,25 +80,25 @@ export function FormRecordUpdate({
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
-  const linkedJob = jobs.find((job) => job.id == record.jobId);
+  const linkedJob = jobs.find((job) => job.id == record?.jobId);
   const {
     id,
     jobId,
     jobName,
     begin,
     end,
-    hoursUnpaid = '',
-    dayHours = '',
-    rate = '',
-    bonus = '',
-    sickLeave = ''
-  } = record;
+    hoursUnpaid,
+    dayHours,
+    rate,
+    bonus,
+    sickLeave
+  } = record || {};
 
   const initialFormData = {
     id,
     jobId,
     jobName,
-    dates: [new Date(record.begin)],
+    dates: [new Date(record?.begin)],
     timeBegin: getTimeOfDate(new Date(begin)),
     timeEnd: getTimeOfDate(new Date(end)),
     hoursUnpaid,
@@ -107,7 +108,7 @@ export function FormRecordUpdate({
     sickLeave
   };
 
-  return (
+  return record ? (
     <FormRecord
       linkedJob={linkedJob}
       jobs={jobs}
@@ -120,5 +121,7 @@ export function FormRecordUpdate({
       inputDate={inputDate}
       initialFormData={initialFormData}
     />
+  ) : (
+    <NoMatch />
   );
 }
