@@ -259,6 +259,7 @@ export default function App() {
                       dispatch={dispatch}
                       changeMonth={changeMonth}
                       clock={clock}
+                      records={records}
                     />
                   </Route>
                   <Route path="/records/:id">

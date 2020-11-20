@@ -18,7 +18,8 @@ export default function FormRecord({
   clock,
   changeMonth,
   initialFormData,
-  dispatch
+  dispatch,
+  records
 }) {
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
@@ -375,6 +376,7 @@ export default function FormRecord({
             dates={dates}
             updateDates={handleDatesChange}
             clock={clock}
+            records={records}
           />
 
           <FormElement

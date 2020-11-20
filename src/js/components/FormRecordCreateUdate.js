@@ -11,7 +11,8 @@ export function FormRecordCreate({
   settings,
   dispatch,
   changeMonth,
-  clock
+  clock,
+  records
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
   const inputJobIdAppData = jobs.find((job) => job.id == settings.inputJobId);
@@ -66,6 +67,7 @@ export function FormRecordCreate({
       setSelectedDates={setSelectedDates}
       initialFormData={initialFormData}
       clock={clock}
+      records={records}
     />
   );
 }
@@ -124,6 +126,7 @@ export function FormRecordUpdate({
       inputDate={inputDate}
       initialFormData={initialFormData}
       clock={clock}
+      records={records}
     />
   ) : (
     <NoMatch />

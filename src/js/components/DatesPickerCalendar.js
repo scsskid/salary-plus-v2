@@ -14,7 +14,8 @@ export default function DatesPickerCalendar({
   settings,
   isUpdateForm,
   changeMonth,
-  datePickerOpen
+  datePickerOpen,
+  records
 }) {
   const [allowMultipleDates, setAllowMultipleDates] = React.useState(false);
   const datesCount = dates.length;
@@ -30,8 +31,6 @@ export default function DatesPickerCalendar({
 
   function handleChange(e) {
     const { checked } = e.target;
-    console.log(checked);
-
     setAllowMultipleDates(checked);
   }
 
@@ -98,48 +97,44 @@ export default function DatesPickerCalendar({
           : 'dates-picker-calendar'
       }
     >
-      {datesCount > 0 && allowMultipleDates && (
-        <Button
+      <div className="dates-picker-calendar-inner">
+        {datesCount > 0 &&
+          allowMultipleDates &&
+          {
+            /* <Button
           onClick={() => {
             updateDates([]);
           }}
         >
           Clear All Selected
-        </Button>
-      )}
-      {!isUpdateForm && (
-        <label>
-          Select multiple{' '}
-          <input
-            type="checkbox"
-            id="allowMultiple"
-            name="allowMultiple"
-            onChange={handleChange}
-            checked={allowMultipleDates}
+        </Button> */
+          }}
+        {!isUpdateForm && (
+          <label>
+            Select multiple{' '}
+            <input
+              type="checkbox"
+              id="allowMultiple"
+              name="allowMultiple"
+              onChange={handleChange}
+              checked={allowMultipleDates}
+            />
+          </label>
+        )}
+        <div className="view-calendar-controls">
+          <WidgetInputDate
+            inputDate={inputDate}
+            settings={settings}
+            changeMonth={changeMonth}
           />
-        </label>
-      )}
-      <div className="view-calendar-controls">
-        <WidgetInputDate
+        </div>
+        <Weekdays settings={settings} />
+        <Month
           inputDate={inputDate}
-          settings={settings}
-          changeMonth={changeMonth}
+          handleDateClick={handleDateClick}
+          records={records}
         />
       </div>
-      <Weekdays settings={settings} />
-      <Month
-        inputDate={inputDate}
-        handleDateClick={handleDateClick}
-        // records={records}
-      />
-
-      {!isUpdateForm && (
-        <p>
-          <small>
-            Select <b>one or more</b> dates
-          </small>
-        </p>
-      )}
     </div>
   );
 }
