@@ -120,12 +120,6 @@ export default function FormRecord({
       ['hoursUnpaid']: job?.hoursUnpaid || ''
     });
 
-    handleValidation({ name: 'jobId', value: value });
-    handleValidation({ name: 'jobName', value: job?.name || '' });
-    handleValidation({ name: 'rate', value: job?.rate });
-    handleValidation({ name: 'hoursUnpaid', value: job?.hoursUnpaid });
-    handleValidation({ name: 'dayHours', value: job?.dayHours });
-
     setTouched({
       ...touched,
       jobId: true,
@@ -134,6 +128,12 @@ export default function FormRecord({
       dayHours: true,
       hoursUnpaid: true
     });
+
+    handleValidation({ name: 'jobId', value: value });
+    handleValidation({ name: 'jobName', value: job?.name || '' });
+    handleValidation({ name: 'rate', value: job?.rate });
+    handleValidation({ name: 'hoursUnpaid', value: job?.hoursUnpaid });
+    handleValidation({ name: 'dayHours', value: job?.dayHours });
 
     if (!isUpdateForm) {
       dispatch({
@@ -245,8 +245,10 @@ export default function FormRecord({
         };
       },
       {
-        errors: { ...errors },
-        touched: { ...touched }
+        // errors: { ...errors },
+        // touched: { ...touched }
+        errors: {},
+        touched: {}
       }
     );
     setErrors(formValidation.errors);
