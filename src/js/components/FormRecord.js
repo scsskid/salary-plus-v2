@@ -31,10 +31,10 @@ export default function FormRecord({
     ''
   );
   const [submit, setSubmit] = React.useState();
-  const jobWasDeleted = isUpdateForm && !linkedJob;
-  const hasJobs = jobs.length > 0;
-  const showJobsDropdown = (hasJobs && linkedJob) || (hasJobs && !isUpdateForm);
-  const showJobsNameInput = formData.jobId == 0;
+  const jobWasDeleted = isUpdateForm && !linkedJob && formData.jobId != 0;
+  const jobsPresent = jobs.length > 0;
+  const showJobsDropdown = jobsPresent;
+  const showJobsNameInput = formData.jobId == 0 || jobWasDeleted;
   const showJobPropsFields =
     settings.allowCustomJobProps || jobWasDeleted || formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
@@ -282,6 +282,17 @@ export default function FormRecord({
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
       <LogToScreen title="touched" object={touched} settings={settings} />
       <LogToScreen title="errors" object={errors} settings={settings} />
+      <LogToScreen
+        title="showJobsDropdown"
+        object={{
+          showJobsDropdown,
+          jobWasDeleted,
+          jobsPresent,
+          linkedJob: '' + linkedJob,
+          isUpdateForm
+        }}
+        settings={settings}
+      />
       <form
         className="form-record"
         // ref={form}
