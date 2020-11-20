@@ -193,3 +193,15 @@ export function getWeekStartDate(inputDate, weekStartsOn = 'monday') {
 
   return currentDate;
 }
+
+// DOM
+
+export function getAutoOffsetHeight(el) {
+  let offSetHeight;
+  const clone = el.cloneNode(true);
+  clone.style.height = 'auto';
+  document.body.appendChild(clone);
+  offSetHeight = clone.offsetHeight;
+  clone.remove();
+  return offSetHeight;
+}

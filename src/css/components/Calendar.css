@@ -113,15 +113,13 @@
 /* DatesPickerCalendar */
 
 .dates-picker-calendar {
-  display: none;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.2s;
 }
 
 .dates-picker-calendar {
   background: var(--color-bg-light);
   @mixin padHor;
   @mixin bleedHor;
-}
-
-.dates-picker-calendar--is-open {
-  display: block;
 }

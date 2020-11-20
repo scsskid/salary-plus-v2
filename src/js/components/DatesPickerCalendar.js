@@ -4,6 +4,7 @@ import Weekdays from './Weekdays';
 import Month from './Month';
 import WidgetInputDate from './WidgetInputDate';
 import useDatecellMarkers from '../hooks/useDatecellMarkers';
+import { getAutoOffsetHeight } from '../utils/helpers';
 
 export default function DatesPickerCalendar({
   inputDate,
@@ -16,10 +17,16 @@ export default function DatesPickerCalendar({
   datePickerOpen
 }) {
   const [allowMultipleDates, setAllowMultipleDates] = React.useState(false);
-  const datesPickerCalendarRef = React.useRef();
   const datesCount = dates.length;
 
   useDatecellMarkers('today', clock, inputDate);
+
+  React.useEffect(() => {
+    const datePickerDom = document.querySelector('.dates-picker-calendar');
+    datePickerDom.style.height = datePickerOpen
+      ? getAutoOffsetHeight(datePickerDom) + 'px'
+      : 0 + 'px';
+  }, [datePickerOpen, inputDate]);
 
   function handleChange(e) {
     const { checked } = e.target;
@@ -90,7 +97,6 @@ export default function DatesPickerCalendar({
           ? 'dates-picker-calendar dates-picker-calendar--is-open'
           : 'dates-picker-calendar'
       }
-      ref={datesPickerCalendarRef}
     >
       {datesCount > 0 && allowMultipleDates && (
         <Button
