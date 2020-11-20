@@ -4,6 +4,7 @@ import Month from './Month.js';
 import Weekdays from './Weekdays.js';
 import WidgetInputDate from './WidgetInputDate.js';
 import useDatecellMarkers from '../hooks/useDatecellMarkers';
+import { getAutoOffsetHeight } from '../utils/helpers';
 
 export default function Calendar({
   inputDate = new Date(),
@@ -16,6 +17,11 @@ export default function Calendar({
 }) {
   useDatecellMarkers('selected', clock, inputDate);
   useDatecellMarkers('today', clock, inputDate);
+
+  React.useEffect(() => {
+    const datePickerDom = document.querySelector('.calendar-body');
+    datePickerDom.style.height = getAutoOffsetHeight(datePickerDom) + 'px';
+  }, [inputDate]);
 
   return (
     <>
