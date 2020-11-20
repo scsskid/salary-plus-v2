@@ -6,8 +6,6 @@ export default function useDateCellsHighlighting(
   clock = { now: new Date(), today: new Date() },
   inputDate = new Date()
 ) {
-  console.log('type', type, clock, inputDate);
-
   React.useEffect(() => {
     const allDateCells = Array.from(
       document.getElementsByClassName('calendar-date')
