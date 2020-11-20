@@ -52,7 +52,9 @@ export default function FormRecord({
     if (dates.length === 0) {
       setDatePickerDisplayValue('please select a date');
     } else if (dates.length === 1) {
-      setDatePickerDisplayValue(dates[0]?.toLocaleDateString());
+      setDatePickerDisplayValue(
+        dates[0]?.toLocaleDateString(settings.language)
+      );
     } else if (dates.length > 0) {
       setDatePickerDisplayValue(`${dates.length} Dates`);
     }
