@@ -258,6 +258,7 @@ export default function App() {
                       saveRecord={saveRecord}
                       dispatch={dispatch}
                       changeMonth={changeMonth}
+                      clock={clock}
                     />
                   </Route>
                   <Route path="/records/:id">
@@ -271,6 +272,7 @@ export default function App() {
                       settings={settings}
                       changeMonth={changeMonth}
                       inputDate={inputDate}
+                      clock={clock}
                     />
                   </Route>
                   <Route exact path="/jobs/add">

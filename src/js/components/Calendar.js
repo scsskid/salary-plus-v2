@@ -3,7 +3,7 @@ import DateDetails from './DateDetails.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
 import WidgetInputDate from './WidgetInputDate.js';
-import * as helpers from '../utils/helpers.js';
+import useDatecellMarkers from '../hooks/useDatecellMarkers';
 
 export default function Calendar({
   inputDate = new Date(),
@@ -14,30 +14,8 @@ export default function Calendar({
   jobs = [],
   clock
 }) {
-  React.useEffect(() => {
-    const allDateCells = Array.from(
-      document.getElementsByClassName('calendar-date')
-    );
-
-    allDateCells.forEach((cell) => {
-      const dateString = cell.dataset.dateString;
-
-      if (helpers.isSameDay(new Date(dateString), inputDate)) {
-        cell.dataset.selected = 'selected';
-      }
-
-      if (helpers.isSameDay(new Date(dateString), clock.today)) {
-        cell.dataset.today = 'today';
-      }
-    });
-
-    return () => {
-      allDateCells.forEach((cell) => {
-        cell.dataset.selected = '';
-        cell.dataset.today = '';
-      });
-    };
-  }, [inputDate]);
+  useDatecellMarkers('selected', clock, inputDate);
+  useDatecellMarkers('today', clock, inputDate);
 
   return (
     <>

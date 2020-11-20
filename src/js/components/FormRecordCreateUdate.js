@@ -10,7 +10,8 @@ export function FormRecordCreate({
   jobs,
   settings,
   dispatch,
-  changeMonth
+  changeMonth,
+  clock
 }) {
   const [selectedDates, setSelectedDates] = React.useState([]);
   const inputJobIdAppData = jobs.find((job) => job.id == settings.inputJobId);
@@ -64,6 +65,7 @@ export function FormRecordCreate({
       selectedDates={selectedDates}
       setSelectedDates={setSelectedDates}
       initialFormData={initialFormData}
+      clock={clock}
     />
   );
 }
@@ -76,7 +78,8 @@ export function FormRecordUpdate({
   deleteItem,
   dispatch,
   settings,
-  changeMonth
+  changeMonth,
+  clock
 }) {
   const params = useParams();
   const record = records?.find((record) => record.id === parseInt(params?.id));
@@ -120,6 +123,7 @@ export function FormRecordUpdate({
       changeMonth={changeMonth}
       inputDate={inputDate}
       initialFormData={initialFormData}
+      clock={clock}
     />
   ) : (
     <NoMatch />

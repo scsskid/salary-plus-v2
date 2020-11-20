@@ -3,9 +3,11 @@ import Button from './Button';
 import Weekdays from './Weekdays';
 import Month from './Month';
 import WidgetInputDate from './WidgetInputDate';
+import useDatecellMarkers from '../hooks/useDatecellMarkers';
 
 export default function DatesPickerCalendar({
   inputDate,
+  clock,
   dates = [],
   updateDates,
   settings,
@@ -16,6 +18,8 @@ export default function DatesPickerCalendar({
   const [allowMultipleDates, setAllowMultipleDates] = React.useState(false);
   const datesPickerCalendarRef = React.useRef();
   const datesCount = dates.length;
+
+  useDatecellMarkers('today', clock, inputDate);
 
   function handleChange(e) {
     const { checked } = e.target;

@@ -15,6 +15,7 @@ export default function FormRecord({
   isUpdateForm,
   settings,
   inputDate,
+  clock,
   changeMonth,
   initialFormData,
   dispatch
@@ -373,6 +374,7 @@ export default function FormRecord({
             datePickerOpen={datePickerOpen}
             dates={dates}
             updateDates={handleDatesChange}
+            clock={clock}
           />
 
           <FormElement
