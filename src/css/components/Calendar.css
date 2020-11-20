@@ -130,5 +130,5 @@
 }
 
 .dates-picker-calendar-inner {
-  padding: calc(4 * var(--b)) 0;
+  padding: calc(2 * var(--b)) 0;
 }

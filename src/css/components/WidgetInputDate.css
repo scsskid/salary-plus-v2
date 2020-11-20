@@ -1,10 +1,10 @@
 .input-date-display-control {
-  /* padding-top: calc(2 * var(--b)); */
+  padding-top: calc(2 * var(--b));
+  padding-bottom: calc(2 * var(--b));
 
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: var(--bx); */
 }
 
 .input-date-display {
