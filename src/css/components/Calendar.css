@@ -111,6 +111,10 @@
   }
 }
 
+[data-day^='s'] {
+  color: #999;
+}
+
 /* DatesPickerCalendar */
 
 .dates-picker-calendar {

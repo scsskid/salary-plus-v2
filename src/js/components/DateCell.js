@@ -6,13 +6,20 @@ export default function DateCell({ date, records, handleDateClick }) {
     records,
     date
   });
+  const day = date
+    .toLocaleDateString('en-US', { weekday: 'short' })
+    .toLowerCase();
 
   function handleKeyUp() {
     return;
   }
 
   return (
-    <div className="calendar-date" data-date-string={date.toISOString()}>
+    <div
+      className="calendar-date"
+      data-date-string={date.toISOString()}
+      data-day={day}
+    >
       <button
         type="button"
         className="calendar-date-button"
