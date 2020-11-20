@@ -98,17 +98,16 @@ export default function DatesPickerCalendar({
       }
     >
       <div className="dates-picker-calendar-inner">
-        {datesCount > 0 &&
-          allowMultipleDates &&
-          {
-            /* <Button
-          onClick={() => {
-            updateDates([]);
-          }}
-        >
-          Clear All Selected
-        </Button> */
-          }}
+        {datesCount > 0 && allowMultipleDates && (
+          <Button
+            style={{ display: 'none' }}
+            onClick={() => {
+              updateDates([]);
+            }}
+          >
+            Clear All Selected
+          </Button>
+        )}
         {!isUpdateForm && (
           <label>
             Select multiple{' '}
