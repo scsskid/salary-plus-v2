@@ -54,7 +54,10 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     <>
       <form>
         <fieldset>
-          <FormElement label="Select Language" htmlFor="language">
+          <FormElement
+            label="Select Language (Number format)"
+            htmlFor="language"
+          >
             <select
               name="language"
               id="language"
