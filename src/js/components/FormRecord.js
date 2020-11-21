@@ -304,6 +304,12 @@ export default function FormRecord({
         data-record-id={formData.recordId}
         autoComplete="off"
       >
+        <FormButtonRow>
+          <Button actionType="cancel">Cancel</Button>
+          <Button type="submit" data-button-submit="">
+            Save
+          </Button>
+        </FormButtonRow>
         <input type="hidden" name="id" value={formData.id} />
 
         <fieldset>
@@ -513,10 +519,7 @@ export default function FormRecord({
             </FormElement>
           </fieldset>
         )}
-        {/* <pre>🤚 formIsHalfTouched {String(formIsHalfTouched)}</pre> */}
-        <Button type="submit" data-button-submit="">
-          Save
-        </Button>
+
         {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
         {isUpdateForm && (
           <Button
@@ -545,4 +548,8 @@ export default function FormRecord({
       </Dialog>
     </>
   );
+}
+
+function FormButtonRow({ children }) {
+  return <div className="form-button-row">{children}</div>;
 }

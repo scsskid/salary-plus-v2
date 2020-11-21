@@ -8,6 +8,12 @@
   padding-right: 2.5rem;
 }
 
+.form-button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(2 * var(--b));
+}
+
 input,
 select,
 .display-value {

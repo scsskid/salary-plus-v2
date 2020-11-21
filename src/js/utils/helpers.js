@@ -23,6 +23,15 @@ export function pad(n) {
   return n < 10 ? '0' + n : n;
 }
 
+export function referrerIsSameDomain() {
+  const refProtocol = document.referrer.split(':')[0] + ':';
+  const refHost = document.referrer.split('/')[2];
+
+  return (
+    refProtocol == window.location.protocol && refHost == window.location.host
+  );
+}
+
 export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
   .timeZone;
 
