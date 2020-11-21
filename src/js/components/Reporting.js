@@ -14,7 +14,7 @@ export default function Reporting({ inputDate, records }) {
     Month: (
       <div className="reporting-month | reporting-component">
         <p>
-          <Link to="/calendar">View Calendar</Link>
+          <Link to="/view/calendar">View Calendar</Link>
         </p>
         <div>Records: {records.length}</div>
 

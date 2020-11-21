@@ -2,14 +2,23 @@ import * as React from 'react';
 import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
 import { useHistory } from 'react-router-dom';
+import useClock from '../hooks/useClock';
 
-export default function WidgetReporting({ records, figures = [], settings }) {
+export default function WidgetReporting({
+  records,
+  figures = [],
+  settings,
+  inputDate,
+  setInputDate
+}) {
   const history = useHistory();
+  // const clock = useClock();
 
   return (
     <button
       className="widget-reporting"
       onClick={() => {
+        setInputDate(inputDate);
         history.push('/reporting');
       }}
     >

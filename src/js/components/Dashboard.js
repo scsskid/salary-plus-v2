@@ -7,7 +7,7 @@ import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { isSameDay } from '../utils/helpers.js';
 
-export default function Dashboard({ jobs, settings, records }) {
+export default function Dashboard({ jobs, settings, records, setInputDate }) {
   const clock = useClock();
 
   const monthRecords = getRecordsByMonth({
@@ -48,6 +48,8 @@ export default function Dashboard({ jobs, settings, records }) {
             records={monthRecords}
             figures={['dates', 'hours', 'earned']}
             settings={settings}
+            inputDate={clock.today}
+            setInputDate={setInputDate}
           />
         </div>
         <div className="view-dashboard-ongoing">

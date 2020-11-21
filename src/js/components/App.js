@@ -194,6 +194,7 @@ export default function App() {
                       jobs={jobs}
                       settings={settings}
                       records={records}
+                      setInputDate={setInputDate}
                     />
                   </Route>
                   <Route exact path="/view/calendar">
