@@ -68,6 +68,7 @@
 
 /* [data-selected='selected']:not([data-today='today'])
   .calendar-date-button-figure { */
+
 [data-selected='selected'] .calendar-date-button-figure {
   --color: hsl(var(--hue-accent) 50% 40%);
 

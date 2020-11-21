@@ -2,7 +2,6 @@ import * as React from 'react';
 import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
 import { useHistory } from 'react-router-dom';
-import useClock from '../hooks/useClock';
 
 export default function WidgetReporting({
   records,
