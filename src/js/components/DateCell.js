@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { getRecordsByDate } from '../utils/dataHelpers.js';
 
-export default function DateCell({ date, records, handleDateClick }) {
+export default function DateCell({ date, records, handleDateClick, jobs }) {
   const dateRecords = getRecordsByDate({
     records,
     date
   });
+
   const day = date
     .toLocaleDateString('en-US', { weekday: 'short' })
     .toLowerCase();
@@ -32,7 +33,7 @@ export default function DateCell({ date, records, handleDateClick }) {
         {dateRecords.length > 0 && (
           <div data-records>
             {dateRecords.map((record, i) => (
-              <DateCellEventIndicator key={i} record={record} />
+              <DateCellEventIndicator key={i} record={record} jobs={jobs} />
             ))}
           </div>
         )}
@@ -41,9 +42,14 @@ export default function DateCell({ date, records, handleDateClick }) {
   );
 }
 
-function DateCellEventIndicator({ record }) {
+function DateCellEventIndicator({ record, jobs = [] }) {
+  const job = jobs.find((job) => job.id == record.jobId);
+
   return (
-    <div className="calendar-date-event">
+    <div
+      className="calendar-date-event"
+      style={{ backgroundColor: job?.color }}
+    >
       <small>{record.id}</small>
     </div>
   );

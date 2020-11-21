@@ -3,6 +3,7 @@
   width: 100%;
   justify-content: space-between;
   background: #fff;
+  position: relative;
 }
 
 .date-details-entry > * {
@@ -25,7 +26,21 @@
 }
 
 .date-details-entry-content {
+  padding-left: 20px;
   flex: 1 0 calc(100% - 10rem);
+}
+
+.date-details-entry-color {
+  --padding: 5px;
+
+  position: absolute;
+  left: var(--padding);
+  top: var(--padding);
+  bottom: var(--padding);
+  width: 5px;
+  height: calc(100% - calc(2 * var(--padding)));
+  background: purple;
+  border-radius: 2px;
 }
 
 .date-details-entry-time {

@@ -78,6 +78,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
             <Week
               records={records}
               inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
+              jobs={jobs}
             />
           </div>
           <div className="view-dashboard-upcoming-list">

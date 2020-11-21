@@ -38,6 +38,7 @@ export default function Calendar({
           inputDate={inputDate}
           handleDateClick={handleDateClick}
           records={records}
+          jobs={jobs}
         />
       </div>
       <DateDetails

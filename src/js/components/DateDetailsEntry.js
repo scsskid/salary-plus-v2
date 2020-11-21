@@ -6,7 +6,11 @@ import FigureEarned from './FigureEarned';
 import FigureHours from './FigureHours';
 import LogToScreen from './LogToScreen';
 
-export default function DateDetailsEntry({ record = {}, settings = {} }) {
+export default function DateDetailsEntry({
+  record = {},
+  settings = {},
+  job = {}
+}) {
   const clock = useClock();
   const { language } = settings;
   const localeTimeStringOptions = {
@@ -77,6 +81,10 @@ export default function DateDetailsEntry({ record = {}, settings = {} }) {
         onClick={handleClick}
       >
         <div className="date-details-entry-time">
+          <div
+            className="date-details-entry-color"
+            style={{ backgroundColor: job?.color }}
+          ></div>
           <time
             className="date-details-entry-time-begin"
             dateTime="{time.begin}"

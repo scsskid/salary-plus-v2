@@ -14,7 +14,8 @@ export function FormJobCreate({ saveJob }) {
     name: '',
     rate: '',
     dayHours: '',
-    hoursUnpaid: ''
+    hoursUnpaid: '',
+    color: '#FF0000'
   };
 
   return (
@@ -35,7 +36,8 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
     name: job.name,
     rate: parseFloat(job.rate) || '',
     dayHours: parseFloat(job.dayHours) || '',
-    hoursUnpaid: parseFloat(job.hoursUnpaid) || ''
+    hoursUnpaid: parseFloat(job.hoursUnpaid) || '',
+    color: job.color
   };
 
   return (
@@ -149,15 +151,16 @@ export default function FormJob({
   // validation fns
 
   const validate = {
-    name: validateJobName,
+    name: validateNotEmpty,
     rate: validateNumber,
     dayHours: validateNumber,
-    hoursUnpaid: validateNumber
+    hoursUnpaid: validateNumber,
+    color: validateNotEmpty
   };
 
-  function validateJobName(value) {
+  function validateNotEmpty(value) {
     if (value.trim() === '') {
-      return 'jobName is required (is empty)';
+      return 'Field is required (is empty)';
     }
     return null;
   }
@@ -270,11 +273,28 @@ export default function FormJob({
             />
           </FormElement>
         </fieldset>
+        <fieldset>
+          <FormElement
+            htmlFor="color"
+            label="Color 🎨"
+            touched={touched.color}
+            errors={errors.color}
+          >
+            <input
+              style={{ padding: 0 }}
+              id="color"
+              name="color"
+              type="color"
+              value={formData.color}
+              onChange={handleChange}
+            />
+          </FormElement>
+        </fieldset>
         {isUpdateForm && (
           <p>
             <small>
               Updates to Job Settings will only not affect existing records for
-              this Job.
+              this Job (except color).
             </small>
           </p>
         )}

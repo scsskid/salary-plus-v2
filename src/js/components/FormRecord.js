@@ -379,6 +379,7 @@ export default function FormRecord({
             updateDates={handleDatesChange}
             clock={clock}
             records={records}
+            jobs={jobs}
           />
 
           <FormElement

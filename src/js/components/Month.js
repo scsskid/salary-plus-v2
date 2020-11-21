@@ -2,7 +2,7 @@ import * as React from 'react';
 import Week from './Week';
 import { getWeekStartDateOffset } from '../utils/helpers.js';
 
-export default function Month({ inputDate, handleDateClick, records }) {
+export default function Month({ inputDate, handleDateClick, records, jobs }) {
   const weeks = [];
   const dateWalker = new Date(inputDate.getTime());
 
@@ -25,6 +25,7 @@ export default function Month({ inputDate, handleDateClick, records }) {
         inputDate={inputDate}
         handleDateClick={handleDateClick}
         records={records}
+        jobs={jobs}
         // bleedMonth="true"
       />
     );

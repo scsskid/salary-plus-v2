@@ -9,11 +9,13 @@ export default function DateDetails({ records, jobs, settings, date }) {
   });
 
   const content = dateRecords.map((record) => {
+    const job = jobs.find((job) => job.id == record.jobId);
+
     return (
       <DateDetailsEntry
         key={`record-details-${record.id}`}
         record={record}
-        jobs={jobs}
+        job={job}
         settings={settings}
       />
     );

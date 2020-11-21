@@ -2434,7 +2434,8 @@ export const sampleData = {
       hoursUnpaid: 0.5,
       dayHours: 8,
       status: 'active',
-      currency: 'EUR'
+      currency: 'EUR',
+      color: '#FF0000'
     },
     {
       id: 2,
@@ -2443,7 +2444,8 @@ export const sampleData = {
       dayHours: 7,
       hoursUnpaid: 0.75,
       status: 'active',
-      currency: 'EUR'
+      currency: 'EUR',
+      color: '#B06000'
     },
     {
       id: 3,
@@ -2452,7 +2454,8 @@ export const sampleData = {
       hoursUnpaid: 1,
       rate: 800,
       status: 'active',
-      currency: 'DKK'
+      currency: 'DKK',
+      color: '#FF007F'
     }
   ]
 };

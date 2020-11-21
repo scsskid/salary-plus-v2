@@ -15,7 +15,8 @@ export default function DatesPickerCalendar({
   isUpdateForm,
   changeMonth,
   datePickerOpen,
-  records
+  records,
+  jobs
 }) {
   const [allowMultipleDates, setAllowMultipleDates] = React.useState(false);
   const datesCount = dates.length;
@@ -132,6 +133,7 @@ export default function DatesPickerCalendar({
           inputDate={inputDate}
           handleDateClick={handleDateClick}
           records={records}
+          jobs={jobs}
         />
       </div>
     </div>

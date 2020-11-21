@@ -7,6 +7,7 @@ export default function Week({
   dateWalker = inputDate,
   bleedMonth = false,
   records = [],
+  jobs,
   handleDateClick = () => {
     console.warn('no handler for dateClick');
   }
@@ -28,6 +29,7 @@ export default function Week({
           handleDateClick={handleDateClick}
           inputDate={inputDate}
           records={records}
+          jobs={jobs}
         />
       );
     }
