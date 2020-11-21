@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from './Button';
+import FormButtonRow from './FormButtonRow';
 import FormElement from './FormElement';
 
 export default function JobsList({ jobs }) {
@@ -7,9 +9,10 @@ export default function JobsList({ jobs }) {
 
   return (
     <div className="jobs-list">
-      <button className="btn" onClick={() => history.push(`/jobs/add`)}>
-        New Job
-      </button>
+      <FormButtonRow>
+        <Button actionType="cancel">Back</Button>
+        <Button onClick={() => history.push(`/jobs/add`)}>New</Button>
+      </FormButtonRow>
 
       <div className="component-body">
         <fieldset>
