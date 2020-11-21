@@ -6,7 +6,7 @@ import Button from './Button';
 import Dialog from './Dialog';
 import FormElement from './FormElement';
 import LogToScreen from './LogToScreen';
-// import useForm from '../hooks/useForm';
+import FormButtonRow from './FormButtonRow';
 
 export function FormJobCreate({ saveJob }) {
   const history = useHistory();
@@ -125,7 +125,6 @@ export default function FormJob({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      // alert(JSON.stringify(formData, null, 2));
       setSubmit(true);
     }
   }
@@ -198,8 +197,13 @@ export default function FormJob({
       <Prompt message="really navigate away?" when={formIsHalfTouched} />
       <LogToScreen title="touched" object={touched} settings={settings} />
       <LogToScreen title="errors" object={errors} settings={settings} />
-      <form onSubmit={handleSubmit} autoComplete="off">
-        <p>ID: {formData.id}</p>
+      <form className="form-job" onSubmit={handleSubmit} autoComplete="off">
+        <FormButtonRow>
+          <Button actionType="cancel">Cancel</Button>
+          <Button type="submit" data-button-submit="">
+            Save
+          </Button>
+        </FormButtonRow>
         <fieldset>
           <FormElement
             htmlFor="name"
@@ -300,10 +304,6 @@ export default function FormJob({
         )}
 
         <div>
-          {/* <button className="btn">Cancel</button> */}
-          <Button type="submit" data-button-submit="">
-            Save
-          </Button>
           {isUpdateForm && (
             <Button
               type="button"

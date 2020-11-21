@@ -6,6 +6,7 @@ import { Prompt } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Dialog from './Dialog';
 import LogToScreen from './LogToScreen';
+import FormButtonRow from './FormButtonRow';
 
 export default function FormRecord({
   saveRecord,
@@ -27,7 +28,6 @@ export default function FormRecord({
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
-  // const form = React.useRef();
   const [dates, setDates] = React.useState(initialFormData.dates);
   const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
     ''
@@ -260,7 +260,6 @@ export default function FormRecord({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      // alert(JSON.stringify(formData, null, 2));
       setSubmit(true);
     }
   }
@@ -548,8 +547,4 @@ export default function FormRecord({
       </Dialog>
     </>
   );
-}
-
-function FormButtonRow({ children }) {
-  return <div className="form-button-row">{children}</div>;
 }
