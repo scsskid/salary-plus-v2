@@ -14,7 +14,11 @@ export default function JobsList({ jobs }) {
       <div className="component-body">
         <fieldset>
           {jobs.map((job) => (
-            <FormElement label={job.name} key={job.id}>
+            <FormElement label={job.name + ' →'} key={job.id}>
+              <div
+                className="jobs-list-el-color"
+                style={{ backgroundColor: job.color }}
+              ></div>
               <button
                 className="jobs-list-el"
                 onClick={() => history.push(`/jobs/${job.id}`)}

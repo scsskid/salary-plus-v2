@@ -1,1 +1,6 @@
-/* todo */
+.jobs-list-el-color {
+  position: absolute;
+  right: 20px;
+  width: 10px;
+  height: 10px;
+}
