@@ -27,7 +27,6 @@ export function FormRecordCreate({
     bonus;
 
   ({
-    jobName = '',
     timeBegin = '09:00',
     timeEnd = '17:00',
     hoursUnpaid = '',
@@ -35,6 +34,8 @@ export function FormRecordCreate({
     rate = '',
     bonus = ''
   } = settings.previousFormData || {});
+
+  jobName = jobs.length ? '' : settings.previousFormData?.jobName;
 
   // Try Override if inputJobisSelected
   if (inputJobIdAppData) {
