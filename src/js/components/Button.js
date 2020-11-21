@@ -10,7 +10,7 @@ export default function Button({ actionType, className, ...props }) {
           referrerIsSameDomain() ? history.goBack() : history.push('/');
         }
       : () => {
-          console.warn('No Button Click Handler present.');
+          return;
         };
 
   const defaultProps = {
