@@ -447,11 +447,6 @@ export default function FormJob({
             />
           </FormElement>
         </fieldset>
-        <p>
-          <small>
-            Enter either regularHours per day or regularHours per week
-          </small>
-        </p>
 
         <fieldset>
           <FormElement
