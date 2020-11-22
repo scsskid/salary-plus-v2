@@ -14,7 +14,12 @@ export function FormJobCreate({ saveJob }) {
     name: '',
     rate: '',
     dayHours: '',
+    weekHours: '',
     hoursUnpaid: '',
+    monthlyIncome: '',
+    trackOvertime: false,
+    trackEarnings: false,
+    overtimeIsPaid: true,
     color: '#FF0000'
   };
 
@@ -36,8 +41,13 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
     name: job.name,
     rate: parseFloat(job.rate) || '',
     dayHours: parseFloat(job.dayHours) || '',
+    weekHours: parseFloat(job.weekHours) || '',
     hoursUnpaid: parseFloat(job.hoursUnpaid) || '',
-    color: job.color
+    trackOvertime: job.trackOvertime || false,
+    trackEarnings: job.trackEarnings || false,
+    overtimeIsPaid: job.overtimeIsPaid || true,
+    monthlyIncome: job.monthlyIncome || '',
+    color: job.color || '#000'
   };
 
   return (
@@ -130,7 +140,20 @@ export default function FormJob({
   }
 
   function handleChange(e) {
-    const { name, value } = e.target;
+    const { name, value: tempValue, checked, type } = e.target;
+    let value;
+
+    switch (type) {
+      case 'checkbox':
+        value = checked;
+        break;
+      case 'number':
+        value = +tempValue;
+        break;
+      default:
+        value = tempValue;
+        break;
+    }
 
     setFormData({
       ...formData,
@@ -153,6 +176,7 @@ export default function FormJob({
     name: validateNotEmpty,
     rate: validateNumber,
     dayHours: validateNumber,
+    weekHours: validateNumber,
     hoursUnpaid: validateNumber,
     color: validateNotEmpty
   };
@@ -222,21 +246,16 @@ export default function FormJob({
           </FormElement>
         </fieldset>
         <fieldset>
-          <FormElement
-            htmlFor="rate"
-            label="Job Rate"
-            touched={touched.rate}
-            errors={errors.rate}
-          >
+          <legend>Overtime</legend>
+          <FormElement label="Track overtime" htmlFor="trackOvertime">
             <input
-              id="rate"
-              type="number"
-              step="0.01"
-              name="rate"
-              value={formData.rate}
+              type="checkbox"
+              checked={formData.trackOvertime}
+              name="trackOvertime"
+              id="trackOvertime"
+              value={formData.trackOvertime}
               onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Enter optional rate..."
+              // handleBlur={handleBlur}
             />
           </FormElement>
 
@@ -260,6 +279,25 @@ export default function FormJob({
           </FormElement>
 
           <FormElement
+            htmlFor="weekHours"
+            label="Regular Hours per Week"
+            touched={touched.weekyHours}
+            errors={errors.weekHours}
+          >
+            <input
+              id="weekHours"
+              name="weekHours"
+              type="number"
+              step="0.01"
+              min="0"
+              value={formData.weekHours}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="0"
+            />
+          </FormElement>
+
+          <FormElement
             htmlFor="hoursUnpaid"
             label="Default Unpaid Hours per Day"
             touched={touched.hoursUnpaid}
@@ -274,6 +312,65 @@ export default function FormJob({
               value={formData.hoursUnpaid}
               onChange={handleChange}
               placeholder="0"
+            />
+          </FormElement>
+        </fieldset>
+        <fieldset>
+          <legend>Earnings Calculation</legend>
+          <FormElement label="Track Earnings" htmlFor="trackEarnings">
+            <input
+              type="checkbox"
+              checked={formData.trackEarnings}
+              name="trackEarnings"
+              id="trackEarnings"
+              value={formData.trackEarnings}
+              onChange={handleChange}
+              // handleBlur={handleBlur}
+            />
+          </FormElement>
+          <FormElement
+            htmlFor="rate"
+            label="Job Rate"
+            touched={touched.rate}
+            errors={errors.rate}
+          >
+            <input
+              id="rate"
+              type="number"
+              step="0.01"
+              name="rate"
+              value={formData.rate}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="0"
+            />
+          </FormElement>
+          <FormElement
+            htmlFor="monthlyIncome"
+            label="Income per month"
+            touched={touched.monthlyIncome}
+            errors={errors.monthlyIncome}
+          >
+            <input
+              id="monthlyIncome"
+              type="number"
+              step="0.01"
+              name="monthlyIncome"
+              value={formData.monthlyIncome}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              placeholder="0"
+            />
+          </FormElement>
+          <FormElement label="Overtime is paid" htmlFor="overtimeIsPaid">
+            <input
+              type="checkbox"
+              checked={formData.overtimeIsPaid}
+              name="overtimeIsPaid"
+              id="overtimeIsPaid"
+              value={formData.overtimeIsPaid}
+              onChange={handleChange}
+              // handleBlur={handleBlur}
             />
           </FormElement>
         </fieldset>
