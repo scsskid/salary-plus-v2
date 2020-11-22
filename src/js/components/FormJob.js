@@ -349,7 +349,7 @@ export default function FormJob({
               </FormElement>
             </fieldset>
             <fieldset>
-              <FormElement label="Always allow manual jobs properties in Records Entry">
+              <FormElement label="Allow override jobs properties in records form">
                 <input
                   type="checkbox"
                   checked={formData.allowCustomJobPropsInRecordForm}
@@ -431,7 +431,7 @@ export default function FormJob({
         <fieldset>
           <FormElement
             htmlFor="hoursUnpaid"
-            label="Default Unpaid Hours per Day"
+            label="Unpaid Hours per Day (Break)"
             touched={touched.hoursUnpaid}
             errors={errors.hoursUnpaid}
           >
