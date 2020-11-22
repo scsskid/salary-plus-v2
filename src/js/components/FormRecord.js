@@ -43,6 +43,7 @@ export default function FormRecord({
     jobWasDeleted ||
     formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
+  const { showBonusField } = settings;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
@@ -491,28 +492,30 @@ export default function FormRecord({
             </fieldset>
           </>
         )}
-        <fieldset>
-          <FormElement
-            label="Bonus"
-            error={errors.bonus}
-            touched={touched.bonus}
-            htmlFor="bonus"
-          >
-            <input
-              inputMode="decimal"
-              variant="currency"
-              name="bonus"
-              id="bonus"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.bonus}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0"
-            />
-          </FormElement>
-        </fieldset>
+        {showBonusField && (
+          <fieldset>
+            <FormElement
+              label="Bonus"
+              error={errors.bonus}
+              touched={touched.bonus}
+              htmlFor="bonus"
+            >
+              <input
+                inputMode="decimal"
+                variant="currency"
+                name="bonus"
+                id="bonus"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.bonus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
+            </FormElement>
+          </fieldset>
+        )}
         {showSickLeave && (
           <fieldset>
             <FormElement label="Sick Leave?" htmlFor="sickLeave">
