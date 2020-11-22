@@ -11,7 +11,7 @@ import FormButtonRow from './FormButtonRow';
 export default function FormRecord({
   saveRecord,
   deleteItem,
-  linkedJob,
+  linkedJob: linkedJobParent,
   jobs,
   isUpdateForm,
   settings,
@@ -28,6 +28,7 @@ export default function FormRecord({
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
+  const [linkedJob, setLinkedJob] = React.useState(linkedJobParent);
   const [dates, setDates] = React.useState(initialFormData.dates);
   const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
     ''
@@ -38,7 +39,9 @@ export default function FormRecord({
   const showJobsDropdown = jobsPresent;
   const showJobsNameInput = formData.jobId == 0 || jobWasDeleted;
   const showJobPropsFields =
-    linkedJob?.allowCustomJobProps || jobWasDeleted || formData.jobId == 0;
+    linkedJob?.allowCustomJobPropsInRecordForm ||
+    jobWasDeleted ||
+    formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
@@ -110,6 +113,7 @@ export default function FormRecord({
     const { name, value } = e.target;
     const selectedJobId = parseInt(value);
     const job = jobs.find((job) => job.id === selectedJobId);
+    setLinkedJob(job);
 
     setFormData({
       ...formData,

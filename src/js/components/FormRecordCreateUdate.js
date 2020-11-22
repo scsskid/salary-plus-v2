@@ -72,6 +72,7 @@ export function FormRecordCreate({
       initialFormData={initialFormData}
       clock={clock}
       records={records}
+      linkedJob={previousJobAppData}
     />
   );
 }
@@ -88,7 +89,9 @@ export function FormRecordUpdate({
   clock
 }) {
   const params = useParams();
-  const record = records?.find((record) => record.id === parseInt(params?.id));
+  const record = records?.find(
+    (record) => parseInt(record.id) === parseInt(params?.id)
+  );
   const linkedJob = jobs.find((job) => job.id == record?.jobId);
   const {
     id,
