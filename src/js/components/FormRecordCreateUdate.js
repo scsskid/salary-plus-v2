@@ -96,11 +96,11 @@ export function FormRecordUpdate({
     jobName,
     begin,
     end,
-    hoursUnpaid,
-    dayHours,
-    rate,
-    bonus,
-    sickLeave
+    hoursUnpaid = '',
+    dayHours = '',
+    rate = '',
+    bonus = '',
+    sickLeave = false
   } = record || {};
 
   const initialFormData = {

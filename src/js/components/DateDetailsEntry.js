@@ -32,6 +32,12 @@ export default function DateDetailsEntry({
     past: clock.now > datesObj.end,
     future: clock.now < datesObj.begin
   };
+  const { trackOvertime, weekHours, daysPerWeek, dayHours: jobDataDayHours } =
+    job || {};
+  const dayHours =
+    !isNaN(parseInt(jobDataDayHours)) || parseInt(jobDataDayHours) > 0
+      ? jobDataDayHours
+      : weekHours / daysPerWeek;
 
   const classList = ['date-details-entry'];
 
@@ -103,7 +109,10 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            <FigureEarned records={[record]} settings={settings} />
+            DayHours: {dayHours} <br />
+            {record.rate && (
+              <FigureEarned records={[record]} settings={settings} />
+            )}
             <FigureHours records={[record]} settings={settings} />
             {reporting.includedOvertime !== 0 && (
               <p>

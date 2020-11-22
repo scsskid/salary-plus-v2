@@ -51,6 +51,13 @@ fieldset {
   & * {
     min-width: 0;
   }
+
+  & legend {
+    background: #000;
+    padding: 2px 5px;
+    color: #fff;
+    @mixin fontSize 12;
+  }
 }
 
 .form-el-set {

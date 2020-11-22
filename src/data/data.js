@@ -2439,20 +2439,19 @@ export const sampleData = {
     },
     {
       id: 2,
-      name: 'OBI',
-      rate: 17.5,
-      dayHours: 7,
+      name: 'Ostertag',
+      weekHours: 37.5,
       hoursUnpaid: 0.75,
       status: 'active',
       currency: 'EUR',
-      color: '#B06000'
+      color: '#1249CA'
     },
     {
       id: 3,
       name: 'Benedikts Teufelsküche',
-      dayHours: '',
+      dayHours: 6,
       hoursUnpaid: 1,
-      rate: 800,
+      rate: 75,
       status: 'active',
       currency: 'DKK',
       color: '#FF007F'

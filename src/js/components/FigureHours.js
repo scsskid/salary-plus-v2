@@ -10,7 +10,8 @@ export default function FigureHours({
   type = 'actual',
   fractionDigits = { maximumFractionDigits: 2, minimumFractionDigits: 0 },
   colorize = false,
-  settings = {}
+  settings = {},
+  dayHours = 0
 }) {
   // console.log('Figure Earned', settings);
   let hoursNumber;
@@ -22,7 +23,7 @@ export default function FigureHours({
       hoursNumber = getPaidHours(records);
       break;
     case 'overtime':
-      hoursNumber = getOvertimeHours(records);
+      hoursNumber = getOvertimeHours(records, dayHours);
       className += hoursNumber < 1 ? ' value-negative' : '  value-not-negative';
       break;
     case 'contract':

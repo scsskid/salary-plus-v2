@@ -30,25 +30,23 @@ function getPaidHours(records, precision = false) {
   return withPrecision(paidHoursElapsed, precision);
 }
 
-function getOvertimeHours(records, precision = false) {
+function getOvertimeHours(records, dayHours = 0, precision = false) {
   const overtimeHours = records.reduce((acc, record) => {
-    const dayHours = parseInt(record.dayHours);
+    // const dayHours = parseInt(record.dayHours);
     if (isNaN(dayHours) || dayHours === 0) {
       return acc;
     }
     const hoursElapsed = getHoursElapsed([record]);
 
-    return (
-      acc + hoursElapsed - (record.hoursUnpaid ?? 0) - (record.dayHours ?? 0)
-    );
+    return acc + hoursElapsed - (record.hoursUnpaid ?? 0) - (dayHours ?? 0);
   }, 0);
 
   return withPrecision(overtimeHours, precision);
 }
 
-function getPaidHoursWithoutOvertime(records, precision) {
+function getPaidHoursWithoutOvertime(records, dayHours = 0, precision) {
   const paidHoursWithoutOvertime =
-    getPaidHours(records) - getOvertimeHours(records);
+    getPaidHours(records) - getOvertimeHours(records, dayHours);
   return withPrecision(paidHoursWithoutOvertime, precision);
 }
 

@@ -4,11 +4,29 @@ import FigureEarned from './FigureEarned';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { Link } from 'react-router-dom';
 
-export default function Reporting({ inputDate, records }) {
+export default function Reporting({ inputDate, records, jobs, settings }) {
   const monthRecords = getRecordsByMonth({
     records,
     date: inputDate
   });
+
+  const { inputJobId } = settings;
+  const inputJobData = jobs.find((job) => job.id == inputJobId);
+  const { trackOvertime, weekHours, daysPerWeek, dayHours: jobDataDayHours } =
+    inputJobData || {};
+
+  const dayHours =
+    !isNaN(parseInt(jobDataDayHours)) || parseInt(jobDataDayHours) > 0
+      ? jobDataDayHours
+      : weekHours / daysPerWeek;
+
+  React.useEffect(() => {
+    console.log(jobs, inputJobData, weekHours, daysPerWeek, dayHours);
+
+    if (trackOvertime) {
+      console.log('Track overTime!');
+    }
+  }, [inputJobId]);
 
   const Views = {
     Month: (
@@ -57,7 +75,11 @@ export default function Reporting({ inputDate, records }) {
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHours records={monthRecords} type="overtime" />
+                  <FigureHours
+                    records={monthRecords}
+                    dayHours={dayHours}
+                    type="overtime"
+                  />
                 </td>
                 <td>
                   <b>

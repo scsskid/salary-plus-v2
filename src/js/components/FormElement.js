@@ -5,6 +5,7 @@ export default function FormElement({
   touched,
   error,
   children,
+  disabled,
   label = 'Unnamed Form Element'
 }) {
   const inputError = touched && error;
@@ -16,9 +17,8 @@ export default function FormElement({
   return (
     <div className={className}>
       <label htmlFor={htmlFor}>
-        <p>
+        <p style={{ opacity: disabled ? 0.5 : 1 }}>
           {label}
-
           {/* {variant ? `(${variant})` : ''} */}
         </p>
         {children}
