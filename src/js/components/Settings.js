@@ -9,14 +9,16 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     language = 'en-US',
     allowCustomJobProps = false,
     sickleaveOnNewRecordForm = false,
-    showDebugInfo = false
+    showDebugInfo = false,
+    showBonusField = true
   } = settings;
 
   const [formData, setFormData] = React.useState({
     language,
     allowCustomJobProps,
     sickleaveOnNewRecordForm,
-    showDebugInfo
+    showDebugInfo,
+    showBonusField
   });
 
   function handleChange(e) {
@@ -54,10 +56,7 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     <>
       <form>
         <fieldset>
-          <FormElement
-            label="Select Language (Number format)"
-            htmlFor="language"
-          >
+          <FormElement label="Language (Number format)" htmlFor="language">
             <select
               name="language"
               id="language"
@@ -73,18 +72,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             </select>
           </FormElement>
 
-          <FormElement label="Always allow manual jobs properties in Records Entry">
-            <input
-              type="checkbox"
-              checked={formData.allowCustomJobProps}
-              name="allowCustomJobProps"
-              id="allowCustomJobProps"
-              value={formData.allowCustomJobPropse}
-              onChange={handleChange}
-              onBlur={handleChange}
-            />{' '}
-          </FormElement>
-
           <FormElement label="Display Sick Leave when adding new record">
             <input
               type="checkbox"
@@ -92,6 +79,18 @@ export default function Settings({ jobs, children, settings, dispatch }) {
               name="sickleaveOnNewRecordForm"
               id="sickleaveOnNewRecordForm"
               value={formData.sickleaveOnNewRecordForme}
+              onChange={handleChange}
+              onBlur={handleChange}
+            />{' '}
+          </FormElement>
+
+          <FormElement label="Show Bonus/Tips Field in Entry Form">
+            <input
+              type="checkbox"
+              checked={formData.showBonusField}
+              name="showBonusField"
+              id="showBonusField"
+              value={formData.showBonusField}
               onChange={handleChange}
               onBlur={handleChange}
             />{' '}

@@ -18,11 +18,12 @@ export function FormJobCreate({ saveJob }) {
     weekHours: '',
     hoursUnpaid: '',
     monthlyIncome: '',
-    daysPerWeek: '',
+    daysPerWeek: 5,
     trackOvertime: false,
     trackEarnings: false,
     color: '#FF0000',
-    paymentType: 'hourlyBased'
+    paymentType: 'hourly',
+    allowCustomJobPropsInRecordForm: false
   };
 
   return (
@@ -49,8 +50,10 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
     trackOvertime: job.trackOvertime || false,
     trackEarnings: job.trackEarnings || false,
     monthlyIncome: job.monthlyIncome || '',
-    paymentType: job.paymentType || 'hoursBased',
-    color: job.color || '#000'
+    paymentType: job.paymentType || 'hourly',
+    color: job.color || '#000',
+    allowCustomJobPropsInRecordForm:
+      job.allowCustomJobPropsInRecordForm || false
   };
 
   return (
@@ -277,10 +280,10 @@ export default function FormJob({
           >
             <input
               type="radio"
-              checked={formData.paymentType === 'hoursBased'}
+              checked={formData.paymentType === 'hourly'}
               name="paymentType"
               id="paymentTypeHourly"
-              value="hoursBased"
+              value="hourly"
               onChange={handleChange}
               // handleBlur={handleBlur}
             />
@@ -291,92 +294,141 @@ export default function FormJob({
           >
             <input
               type="radio"
-              checked={formData.paymentType === 'monthBased'}
+              checked={formData.paymentType === 'monthly'}
               name="paymentType"
               id="paymentTypeMonthly"
-              value="monthBased"
+              value="monthly"
               onChange={handleChange}
               // handleBlur={handleBlur}
             />
           </FormElement>
         </fieldset>
+
+        {formData.paymentType === 'hourly' && (
+          <>
+            <fieldset>
+              <FormElement
+                htmlFor="dayHours"
+                label="Hours per day"
+                touched={touched.dayHours}
+                errors={errors.dayHours}
+                disabled={formData.paymentType === 'monthly'}
+              >
+                <input
+                  id="dayHours"
+                  name="dayHours"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.dayHours}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                  disabled={formData.paymentType === 'monthly'}
+                />
+              </FormElement>
+
+              <FormElement
+                htmlFor="rate"
+                label="Hourly Rate"
+                touched={touched.rate}
+                errors={errors.rate}
+                disabled={formData.paymentType === 'monthly'}
+              >
+                <input
+                  id="rate"
+                  type="number"
+                  step="0.01"
+                  name="rate"
+                  value={formData.rate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                  disabled={formData.paymentType === 'monthly'}
+                />
+              </FormElement>
+            </fieldset>
+            <fieldset>
+              <FormElement label="Always allow manual jobs properties in Records Entry">
+                <input
+                  type="checkbox"
+                  checked={formData.allowCustomJobPropsInRecordForm}
+                  name="allowCustomJobPropsInRecordForm"
+                  id="allowCustomJobPropsInRecordForm"
+                  value={formData.allowCustomJobPropsInRecordForme}
+                  onChange={handleChange}
+                  onBlur={handleChange}
+                />{' '}
+              </FormElement>
+            </fieldset>
+          </>
+        )}
+        {formData.paymentType === 'monthly' && (
+          <fieldset>
+            <FormElement
+              htmlFor="weekHours"
+              label="Hours per week"
+              touched={touched.weekHours}
+              errors={errors.weekHours}
+              disabled={formData.paymentType === 'hourly'}
+            >
+              <input
+                id="weekHours"
+                name="weekHours"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.weekHours}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+                disabled={formData.paymentType === 'hourly'}
+              />
+            </FormElement>
+
+            <FormElement
+              htmlFor="daysPerWeek"
+              label="Days per week"
+              touched={touched.daysPerWeek}
+              errors={errors.daysPerWeek}
+              disabled={formData.paymentType === 'hourly'}
+            >
+              <input
+                id="daysPerWeek"
+                name="daysPerWeek"
+                type="number"
+                step="1"
+                min="0"
+                max="7"
+                value={formData.daysPerWeek}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+                disabled={formData.paymentType === 'hourly'}
+              />
+            </FormElement>
+
+            <FormElement
+              htmlFor="monthlyIncome"
+              label="Fixed monthly income"
+              touched={touched.monthlyIncome}
+              errors={errors.monthlyIncome}
+            >
+              <input
+                id="monthlyIncome"
+                type="number"
+                step="0.01"
+                name="monthlyIncome"
+                value={formData.monthlyIncome}
+                onChange={handleMonthlyIncomeChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
+            </FormElement>
+          </fieldset>
+        )}
+
         <fieldset>
-          <FormElement label="Track overtime" htmlFor="trackOvertime">
-            <input
-              type="checkbox"
-              checked={formData.trackOvertime}
-              name="trackOvertime"
-              id="trackOvertime"
-              value={formData.trackOvertime}
-              onChange={handleChange}
-              // handleBlur={handleBlur}
-            />
-          </FormElement>
-
-          <FormElement
-            htmlFor="dayHours"
-            label="Hours per day"
-            touched={touched.dayHours}
-            errors={errors.dayHours}
-            disabled={formData.weekHours}
-          >
-            <input
-              id="dayHours"
-              name="dayHours"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.dayHours}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0"
-              disabled={formData.weekHours}
-            />
-          </FormElement>
-
-          <FormElement
-            htmlFor="weekHours"
-            label="Hours per week"
-            touched={touched.weekHours}
-            errors={errors.weekHours}
-            disabled={formData.dayHours}
-          >
-            <input
-              id="weekHours"
-              name="weekHours"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.weekHours}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0"
-              disabled={formData.dayHours}
-            />
-          </FormElement>
-
-          <FormElement
-            htmlFor="daysPerWeek"
-            label="Days per week"
-            touched={touched.daysPerWeek}
-            errors={errors.daysPerWeek}
-            disabled={formData.dayHours}
-          >
-            <input
-              id="daysPerWeek"
-              name="daysPerWeek"
-              type="number"
-              step="1"
-              min="0"
-              max="7"
-              value={formData.daysPerWeek}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0"
-              disabled={formData.dayHours}
-            />
-          </FormElement>
-
           <FormElement
             htmlFor="hoursUnpaid"
             label="Default Unpaid Hours per Day"
@@ -400,54 +452,7 @@ export default function FormJob({
             Enter either regularHours per day or regularHours per week
           </small>
         </p>
-        <fieldset>
-          <legend>Earnings Calculation</legend>
-          <FormElement label="Track Earnings" htmlFor="trackEarnings">
-            <input
-              type="checkbox"
-              checked={formData.trackEarnings}
-              name="trackEarnings"
-              id="trackEarnings"
-              value={formData.trackEarnings}
-              onChange={handleChange}
-              // handleBlur={handleBlur}
-            />
-          </FormElement>
-          <FormElement
-            htmlFor="rate"
-            label="Hourly Rate"
-            touched={touched.rate}
-            errors={errors.rate}
-          >
-            <input
-              id="rate"
-              type="number"
-              step="0.01"
-              name="rate"
-              value={formData.rate}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="0"
-            />
-          </FormElement>
-          <FormElement
-            htmlFor="monthlyIncome"
-            label="Fixed monthly income"
-            touched={touched.monthlyIncome}
-            errors={errors.monthlyIncome}
-          >
-            <input
-              id="monthlyIncome"
-              type="number"
-              step="0.01"
-              name="monthlyIncome"
-              value={formData.monthlyIncome}
-              onChange={handleMonthlyIncomeChange}
-              onBlur={handleBlur}
-              placeholder="0"
-            />
-          </FormElement>
-        </fieldset>
+
         <fieldset>
           <FormElement
             htmlFor="color"

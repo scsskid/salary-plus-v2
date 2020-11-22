@@ -38,7 +38,7 @@ export default function FormRecord({
   const showJobsDropdown = jobsPresent;
   const showJobsNameInput = formData.jobId == 0 || jobWasDeleted;
   const showJobPropsFields =
-    settings.allowCustomJobProps || jobWasDeleted || formData.jobId == 0;
+    linkedJob?.allowCustomJobProps || jobWasDeleted || formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
@@ -421,65 +421,71 @@ export default function FormRecord({
         </fieldset>
 
         {showJobPropsFields && (
-          <fieldset>
-            <FormElement
-              label="dayHours"
-              error={errors.dayHours}
-              touched={touched.dayHours}
-              htmlFor="dayHours"
-            >
-              <input
-                name="dayHours"
-                id="dayHours"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.dayHours}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
-            <FormElement
-              label="Hours unpaid"
-              error={errors.hoursUnpaid}
-              touched={touched.hoursUnpaid}
-              htmlFor="hoursUnpaid"
-            >
-              <input
-                name="hoursUnpaid"
-                id="hoursUnpaid"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.hoursUnpaid}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
+          <>
+            <fieldset>
+              <legend>Salary Calculation</legend>
+              <FormElement
+                label="Hours unpaid"
+                error={errors.hoursUnpaid}
+                touched={touched.hoursUnpaid}
+                htmlFor="hoursUnpaid"
+              >
+                <input
+                  name="hoursUnpaid"
+                  id="hoursUnpaid"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.hoursUnpaid}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                />
+              </FormElement>
 
-            <FormElement
-              label="Rate"
-              error={errors.rate}
-              touched={touched.rate}
-              htmlFor="rate"
-            >
-              <input
-                inputMode="decimal"
-                variant="currency"
-                name="rate"
-                id="rate"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.rate}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
-          </fieldset>
+              <FormElement
+                label="Rate"
+                error={errors.rate}
+                touched={touched.rate}
+                htmlFor="rate"
+              >
+                <input
+                  inputMode="decimal"
+                  variant="currency"
+                  name="rate"
+                  id="rate"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.rate}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                />
+              </FormElement>
+            </fieldset>
+            <fieldset>
+              <legend>Overtime Calculation</legend>
+              <FormElement
+                label="dayHours"
+                error={errors.dayHours}
+                touched={touched.dayHours}
+                htmlFor="dayHours"
+              >
+                <input
+                  name="dayHours"
+                  id="dayHours"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.dayHours}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                />
+              </FormElement>
+            </fieldset>
+          </>
         )}
         <fieldset>
           <FormElement

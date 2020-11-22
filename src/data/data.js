@@ -4,7 +4,7 @@ const app = {
 };
 
 const settings = {
-  language: 'en-US',
+  language: 'de-DE',
   inputJobId: 0
 };
 
