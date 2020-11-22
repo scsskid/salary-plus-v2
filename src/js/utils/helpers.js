@@ -114,6 +114,8 @@ export function mapFormDataToStorageObject({
     ...rest
   };
 
+  delete payload.dates;
+
   return payload;
 }
 
