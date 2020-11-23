@@ -27,7 +27,11 @@ export function FormRecordCreate({
     hoursUnpaid,
     dayHours,
     rate,
-    bonus;
+    bonus,
+    weekHours,
+    daysPerWeek,
+    paymentType,
+    monthlyIncome;
 
   ({
     timeBegin = '09:00',
@@ -35,15 +39,28 @@ export function FormRecordCreate({
     hoursUnpaid = '',
     dayHours = '',
     rate = '',
-    bonus = ''
+    bonus = '',
+    weekHours,
+    daysPerWeek,
+    paymentType,
+    monthlyIncome
   } = settings.previousFormData || {});
 
   jobName = jobs.length ? '' : settings.previousFormData?.jobName;
 
   // Override if previousJobAppData
   if (previousJobAppData) {
-    ({ id: jobId, name: jobName, dayHours, rate, hoursUnpaid } =
-      previousJobAppData || {});
+    ({
+      id: jobId,
+      name: jobName,
+      dayHours,
+      rate,
+      hoursUnpaid,
+      weekHours,
+      daysPerWeek,
+      paymentType,
+      monthlyIncome
+    } = previousJobAppData || {});
   }
 
   const initialFormData = {
@@ -56,7 +73,11 @@ export function FormRecordCreate({
     dayHours: dayHours == 0 ? '' : dayHours,
     rate: rate == 0 ? '' : rate,
     bonus: bonus == 0 ? '' : bonus,
-    sickLeave: false
+    sickLeave: false,
+    weekHours,
+    daysPerWeek,
+    paymentType,
+    monthlyIncome
   };
 
   return (
@@ -103,7 +124,11 @@ export function FormRecordUpdate({
     dayHours = '',
     rate = '',
     bonus = '',
-    sickLeave = false
+    sickLeave = false,
+    weekHours,
+    daysPerWeek,
+    paymentType,
+    monthlyIncome
   } = record || {};
 
   const initialFormData = {
@@ -117,7 +142,11 @@ export function FormRecordUpdate({
     dayHours,
     rate,
     bonus,
-    sickLeave
+    sickLeave,
+    weekHours,
+    daysPerWeek,
+    paymentType,
+    monthlyIncome
   };
 
   return record ? (

@@ -122,16 +122,17 @@ export default function FormRecord({
       ['rate']: job?.rate || '',
       ['jobName']: job?.name || '',
       ['dayHours']: job?.dayHours || '',
+      ['weekHours']: job?.weekHours || '',
+      ['daysPerWeek']: job?.daysPerWeek || '',
+      ['paymentType']: job?.paymentType || '',
+      ['monthlyIncome']: job?.monthlyIncome || '',
       ['hoursUnpaid']: job?.hoursUnpaid || ''
     });
 
     setTouched({
       ...touched,
       jobId: true,
-      jobName: true,
-      rate: true,
-      dayHours: true,
-      hoursUnpaid: true
+      jobName: true
     });
 
     handleValidation({ name: 'jobId', value: value });
@@ -169,7 +170,10 @@ export default function FormRecord({
     hoursUnpaid: validateNumber,
     dayHours: validateNumber,
     rate: validateNumber,
-    bonus: validateNumber
+    bonus: validateNumber,
+    monthlyIncome: validateNumber,
+    weekHours: validateNumber,
+    daysPerWeek: validateNumber
   };
 
   function handleValidation({ name, value }) {
