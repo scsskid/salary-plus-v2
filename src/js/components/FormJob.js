@@ -180,13 +180,12 @@ export default function FormJob({
     setFormData({
       ...formData,
       [name]: value,
-      rate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
+      derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
     });
 
     setTouched({
       ...touched,
-      [name]: true,
-      rate: true
+      [name]: true
     });
   }
 
