@@ -1,3 +1,4 @@
+// eslint-disable no-unused-vars
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import FormRecord from './FormRecord';
@@ -5,12 +6,14 @@ import { getTimeOfDateISOString } from '../utils/helpers';
 import NoMatch from './NoMatch';
 
 export function FormRecordCreate(props) {
-  const { settings, jobs, inputDate } = props;
+  const { settings = {}, jobs = [], inputDate = new Date() } = props;
 
   const {
-    name: _,
-    trackEarnings: __,
-    trackOvertime: ___,
+    /* eslint-disable no-unused-vars */
+    name,
+    trackEarnings,
+    trackOvertime,
+    /* eslint-enable no-unused-vars */
     id: jobId = 0,
     ...previousJobAppData
   } = jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
@@ -39,13 +42,6 @@ export function FormRecordCreate(props) {
     ...{ ...previousJobAppData, jobId },
     dateBegin: new Date(inputDate.getTime())
   };
-
-  React.useEffect(() => {
-    console.log(defaults);
-    console.log(settings.previousFormData);
-    console.log(previousJobAppData);
-    console.log(initialFormData);
-  });
 
   return (
     <FormRecord

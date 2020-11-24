@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import Dialog from './Dialog';
 import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
-import { getTimeOfDateISOString } from '../utils/helpers';
 
 export default function FormRecord({
   saveRecord,
@@ -122,8 +121,10 @@ export default function FormRecord({
     const {
       id: jobId = 0,
       name: jobName = '',
+      /* eslint-disable no-unused-vars */
       trackOverTime,
       trackEarnings,
+      /* eslint-enable no-unused-vars */
       ...rest
     } = job || {};
     setLinkedJob(job);
@@ -205,7 +206,6 @@ export default function FormRecord({
   }
 
   function validateTime(value) {
-    const timeString = getTimeOfDateISOString(value);
     const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
 
     if (!value.match(timeRegex)) {
