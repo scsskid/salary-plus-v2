@@ -10,7 +10,6 @@ import FormButtonRow from './FormButtonRow';
 import { round } from '../utils/helpers';
 
 export function FormJobCreate({ saveJob, settings }) {
-  const history = useHistory();
   const initialFormData = {
     name: '',
     rate: '',
@@ -31,7 +30,6 @@ export function FormJobCreate({ saveJob, settings }) {
     <FormJob
       initialFormData={initialFormData}
       saveJob={saveJob}
-      history={history}
       settings={settings}
     />
   );
@@ -39,32 +37,13 @@ export function FormJobCreate({ saveJob, settings }) {
 
 export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
   const { jobId } = useParams();
-  const history = useHistory();
-  const job = jobs.find((job) => job.id === parseInt(jobId));
-  const initialFormData = {
-    id: job.id,
-    name: job.name,
-    rate: job.rate || '',
-    dayHours: job.dayHours || '',
-    weekHours: job.weekHours || '',
-    hoursUnpaid: job.hoursUnpaid || '',
-    derivedHourlyRate: job.derivedHourlyRate || '',
-    daysPerWeek: job.daysPerWeek || '',
-    trackOvertime: job.trackOvertime || false,
-    trackEarnings: job.trackEarnings || false,
-    monthlyIncome: job.monthlyIncome || '',
-    paymentType: job.paymentType || 'hourly',
-    color: job.color || '#000',
-    allowCustomJobPropsInRecordForm:
-      job.allowCustomJobPropsInRecordForm || false
-  };
+  const initialFormData = jobs.find((job) => job.id === +jobId);
 
   return (
     <>
       <FormJob
-        job={job}
+        job={initialFormData}
         deleteItem={deleteItem}
-        history={history}
         isUpdateForm={true}
         initialFormData={initialFormData}
         saveJob={saveJob}
@@ -76,12 +55,12 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
 
 export default function FormJob({
   deleteItem,
-  history,
   isUpdateForm,
   initialFormData,
   saveJob,
   settings
 }) {
+  const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [errors, setErrors] = React.useState({});

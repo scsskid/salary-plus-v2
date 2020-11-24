@@ -54,8 +54,9 @@ export function getDaysInMonth(date) {
   return 32 - new Date(date.getFullYear(), date.getMonth(), 32).getDate();
 }
 
-export function getTimeOfDate(string) {
-  return new Date(string).toLocaleTimeString('DE-de', {
+export function getTimeOfDateISOString(ISOString) {
+  return new Date(ISOString).toLocaleTimeString([], {
+    hour12: false,
     hour: '2-digit',
     minute: '2-digit'
   });
@@ -75,19 +76,19 @@ export function isSameMonth(d1, d2) {
   );
 }
 
-function getRecordBeginEnd({ dateBegin, timeBegin, timeEnd }) {
+function getRecordBeginEnd({ dateBegin, begin, end }) {
   let dateEnd = new Date(dateBegin.getTime());
 
   // check if endtime is less that begin time (enddate is next day), if so add one day
-  if (timeBegin > timeEnd) {
+  if (begin > end) {
     var recordedDateEnd = new Date(dateEnd);
     var recordedDateEndDay = recordedDateEnd.getDate();
     recordedDateEnd.setDate(recordedDateEndDay + 1);
     dateEnd = recordedDateEnd;
   }
   const timeSplits = {
-    begin: timeBegin.split(':'),
-    end: timeEnd.split(':')
+    begin: begin.split(':'),
+    end: end.split(':')
   };
 
   dateBegin.setHours(timeSplits.begin[0], timeSplits.begin[1], 0, 0);
@@ -100,17 +101,21 @@ export function mapFormDataToStorageObject({
   id,
   jobId,
   dateBegin,
-  timeBegin,
-  timeEnd,
+  begin,
+  end,
   ...rest
 }) {
-  const [begin, end] = getRecordBeginEnd({ dateBegin, timeBegin, timeEnd });
+  const [beginDateTime, endDateTime] = getRecordBeginEnd({
+    dateBegin,
+    begin,
+    end
+  });
 
   const payload = {
-    id: parseInt(id),
-    jobId: parseInt(jobId),
-    begin,
-    end,
+    id,
+    jobId,
+    begin: beginDateTime,
+    end: endDateTime,
     ...rest
   };
 
