@@ -60,12 +60,44 @@ function getReducedFixedMonthlyIncomeUnique(records) {
     }, Object.create(null))
     .map(({ jobId, monthlyIncome }) => {
       console.log({ jobId, monthlyIncome });
+
       return { jobId, monthlyIncome };
     })
-    .reduce((acc, monthlyIncome, _, { length }) => {
-      // console.log(acc, monthlyIncome, length);
-      return (acc + monthlyIncome) / length;
-    });
+    .reduce((acc, record) => {
+      console.log(acc);
+
+      const newArr = acc[record.jobId]
+        ? [...acc[record.jobId], record.monthlyIncome]
+        : [record.monthlyIncome];
+      return {
+        ...acc,
+        [record.jobId]: newArr
+      };
+    }, {});
+  // .reduce((acc, record, i, arr) => {
+  //   const countValuesByJobId = arr.filter((el) => {
+  //     return el.jobId == record.jobId;
+  //   }).length;
+
+  //   console.log(countValuesByJobId);
+
+  //   return {
+  //     ...acc,
+  //     [record.jobId]:
+  //       ((!isNaN(acc[record.jobId]) ? acc[record.jobId] : 0) +
+  //         record.monthlyIncome) /
+  //       countValuesByJobId
+  //   };
+  // }, {});
+  // .reduce((acc, record, _, { length }) => {
+  //   // console.log(acc, monthlyIncome, length);
+  //   console.log(record);
+  //   // return (acc + record.monthlyIncome) / length;
+  //   return [
+  //     ...acc,
+  //     { jobId: record.jobId, average: record.monthlyIncome / length }
+  //   ];
+  // }, []);
 }
 
 function getEarned(records, hourCalculationFn) {
