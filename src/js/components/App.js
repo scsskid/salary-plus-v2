@@ -278,7 +278,7 @@ export default function App() {
                   </Route>
                   <Route exact path="/jobs/add">
                     <AppHeader title="Add Job" />
-                    <FormJobCreate saveJob={saveJob} />
+                    <FormJobCreate saveJob={saveJob} settings={settings} />
                   </Route>
                   <Route exact path="/jobs/:jobId">
                     <AppHeader title="Update Job" />
@@ -286,7 +286,6 @@ export default function App() {
                       jobs={jobs}
                       saveJob={saveJob}
                       deleteItem={deleteItem}
-                      changeMonth={changeMonth}
                       settings={settings}
                     />
                   </Route>
