@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
-  getPaidHours,
-  getPaidHoursWithoutOvertime,
+  getWorkedHours,
+  getWorkedHoursWithoutOvertime,
   getOvertimeHours
 } from '../utils/reporting-fns';
 
@@ -20,14 +20,14 @@ export default function FigureHours({
 
   switch (type) {
     case 'actual':
-      hoursNumber = getPaidHours(records);
+      hoursNumber = getWorkedHours(records);
       break;
     case 'overtime':
       hoursNumber = getOvertimeHours(records, dayHours);
       className += hoursNumber < 1 ? ' value-negative' : '  value-not-negative';
       break;
     case 'contract':
-      hoursNumber = getPaidHoursWithoutOvertime(records);
+      hoursNumber = getWorkedHoursWithoutOvertime(records);
       break;
     default:
       hoursNumber = () => {

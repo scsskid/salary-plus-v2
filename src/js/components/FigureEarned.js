@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {
   getOvertimeEarned,
-  getPaidHoursEarned,
-  getPaidHoursWithoutOvertimeEarned,
+  getWorkedHoursEarned,
+  getWorkedHoursWithoutOvertimeEarned,
   getTotalsEarned,
   getBonusEarned
 } from '../utils/reporting-fns';
@@ -21,13 +21,13 @@ export default function FigureEarned({
 
   switch (type) {
     case 'actual':
-      earnedCalculationFn = getPaidHoursEarned;
+      earnedCalculationFn = getWorkedHoursEarned;
       break;
     case 'overtime':
       earnedCalculationFn = getOvertimeEarned;
       break;
     case 'contract':
-      earnedCalculationFn = getPaidHoursWithoutOvertimeEarned;
+      earnedCalculationFn = getWorkedHoursWithoutOvertimeEarned;
       break;
     case 'bonus':
       earnedCalculationFn = getBonusEarned;

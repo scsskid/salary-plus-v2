@@ -1,8 +1,10 @@
 import * as React from 'react';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
+import RecordsList from './RecordsList';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { Link } from 'react-router-dom';
+import * as r from '../utils/reporting-fns';
 
 export default function Reporting({ inputDate, records, jobs, settings }) {
   const monthRecords = getRecordsByMonth({
@@ -11,21 +13,17 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   });
 
   const { inputJobId } = settings;
-  const inputJobData = jobs.find((job) => job.id == inputJobId);
-  const { trackOvertime, weekHours, daysPerWeek, dayHours: jobDataDayHours } =
-    inputJobData || {};
+  const inputJobData = getJobById(inputJobId);
 
-  const dayHours =
-    !isNaN(parseInt(jobDataDayHours)) || parseInt(jobDataDayHours) > 0
-      ? jobDataDayHours
-      : weekHours / daysPerWeek;
+  function getJobById(id) {
+    return jobs.find((job) => job.id == id);
+  }
 
   React.useEffect(() => {
-    console.log(jobs, inputJobData, weekHours, daysPerWeek, dayHours);
+    // console.log(jobs, inputJobData, trackOvertime);
 
-    if (trackOvertime) {
-      console.log('Track overTime!');
-    }
+    console.log(r.getWorkedHours(records));
+    console.log(r.getOvertimeHours(records));
   }, [inputJobId]);
 
   const Views = {
@@ -75,11 +73,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHours
-                    records={monthRecords}
-                    dayHours={dayHours}
-                    type="overtime"
-                  />
+                  <FigureHours records={monthRecords} type="overtime" />
                 </td>
                 <td>
                   <b>
@@ -128,6 +122,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   return (
     <div className="reporting main-component">
       <div className="app-body">{Views['Month']}</div>
+      <RecordsList records={records} settings={settings} />
     </div>
   );
 }

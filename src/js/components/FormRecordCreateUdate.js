@@ -31,7 +31,8 @@ export function FormRecordCreate({
     weekHours,
     daysPerWeek,
     paymentType,
-    monthlyIncome;
+    monthlyIncome,
+    derivedhourlyRate;
 
   ({
     timeBegin = '09:00',
@@ -43,7 +44,8 @@ export function FormRecordCreate({
     weekHours,
     daysPerWeek,
     paymentType,
-    monthlyIncome
+    monthlyIncome,
+    derivedhourlyRate
   } = settings.previousFormData || {});
 
   jobName = jobs.length ? '' : settings.previousFormData?.jobName;
@@ -59,7 +61,8 @@ export function FormRecordCreate({
       weekHours,
       daysPerWeek,
       paymentType,
-      monthlyIncome
+      monthlyIncome,
+      derivedhourlyRate
     } = previousJobAppData || {});
   }
 
@@ -77,7 +80,8 @@ export function FormRecordCreate({
     weekHours,
     daysPerWeek,
     paymentType,
-    monthlyIncome
+    monthlyIncome,
+    derivedhourlyRate
   };
 
   return (
@@ -128,7 +132,8 @@ export function FormRecordUpdate({
     weekHours,
     daysPerWeek,
     paymentType,
-    monthlyIncome
+    monthlyIncome,
+    derivedhourlyRate
   } = record || {};
 
   const initialFormData = {
@@ -146,7 +151,8 @@ export function FormRecordUpdate({
     weekHours,
     daysPerWeek,
     paymentType,
-    monthlyIncome
+    monthlyIncome,
+    derivedhourlyRate
   };
 
   return record ? (

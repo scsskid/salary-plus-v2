@@ -14,6 +14,7 @@ export function FormJobCreate({ saveJob }) {
   const initialFormData = {
     name: '',
     rate: '',
+    derivedHourlyRate: '',
     dayHours: '',
     weekHours: '',
     hoursUnpaid: '',
@@ -46,6 +47,7 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
     dayHours: parseFloat(job.dayHours) || '',
     weekHours: parseFloat(job.weekHours) || '',
     hoursUnpaid: parseFloat(job.hoursUnpaid) || '',
+    derivedHourlyRate: parseFloat(job.derivedHourlyRate) || '',
     daysPerWeek: parseFloat(job.daysPerWeek) || '',
     trackOvertime: job.trackOvertime || false,
     trackEarnings: job.trackEarnings || false,
@@ -164,6 +166,26 @@ export default function FormJob({
     setFormData({
       ...formData,
       [name]: value
+    });
+
+    setTouched({
+      ...touched,
+      [name]: true
+    });
+  }
+
+  function handleWeekHoursChange(e) {
+    const { name, value } = e.target;
+    // const derivedHourlyRate = (value * 3) / 13 / formData.weekHours;
+    const derivedHourlyRate = round(
+      formData.monthlyIncome / (value * 4.325),
+      2
+    );
+
+    setFormData({
+      ...formData,
+      [name]: value,
+      derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
     });
 
     setTouched({
@@ -378,7 +400,7 @@ export default function FormJob({
                 step="0.01"
                 min="0"
                 value={formData.weekHours}
-                onChange={handleChange}
+                onChange={handleWeekHoursChange}
                 onBlur={handleBlur}
                 placeholder="0"
                 disabled={formData.paymentType === 'hourly'}

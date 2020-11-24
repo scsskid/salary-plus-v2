@@ -56,23 +56,23 @@ export default function DateDetailsEntry({
   }
 
   const reporting = {
-    contractEarned: reportingFns.getPaidHoursWithoutOvertimeEarned([record]),
-    actualEarned: reportingFns.getPaidHoursEarned([record]),
-    paidHours: reportingFns.getPaidHours([record], 2),
+    contractEarned: reportingFns.getWorkedHoursWithoutOvertimeEarned([record]),
+    actualEarned: reportingFns.getWorkedHoursEarned([record]),
+    WorkedHours: reportingFns.getWorkedHours([record], 2),
     includedOvertime: reportingFns.getOvertimeHours([record], 2)
   };
 
   const debug = {
     // job,
     rate: record.rate,
-    getPaidHours: reportingFns.getPaidHours([record]),
+    getWorkedHours: reportingFns.getWorkedHours([record]),
     getOvertimeHours: reportingFns.getOvertimeHours([record]),
-    getPaidHoursWithoutOvertime: reportingFns.getPaidHoursWithoutOvertime([
+    getWorkedHoursWithoutOvertime: reportingFns.getWorkedHoursWithoutOvertime([
       record
     ]),
     earned: {
       getOvertimeEarned: reportingFns.getOvertimeEarned([record]),
-      getPaidHoursWithoutOvertimeEarned: reportingFns.getPaidHoursWithoutOvertimeEarned(
+      getWorkedHoursWithoutOvertimeEarned: reportingFns.getWorkedHoursWithoutOvertimeEarned(
         [record]
       )
     }
