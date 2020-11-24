@@ -9,7 +9,7 @@ import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
 import { round } from '../utils/helpers';
 
-export function FormJobCreate({ saveJob }) {
+export function FormJobCreate({ saveJob, settings }) {
   const history = useHistory();
   const initialFormData = {
     name: '',
@@ -32,6 +32,7 @@ export function FormJobCreate({ saveJob }) {
       initialFormData={initialFormData}
       saveJob={saveJob}
       history={history}
+      settings={settings}
     />
   );
 }
@@ -43,12 +44,12 @@ export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
   const initialFormData = {
     id: job.id,
     name: job.name,
-    rate: parseFloat(job.rate) || '',
-    dayHours: parseFloat(job.dayHours) || '',
-    weekHours: parseFloat(job.weekHours) || '',
-    hoursUnpaid: parseFloat(job.hoursUnpaid) || '',
-    derivedHourlyRate: parseFloat(job.derivedHourlyRate) || '',
-    daysPerWeek: parseFloat(job.daysPerWeek) || '',
+    rate: job.rate || '',
+    dayHours: job.dayHours || '',
+    weekHours: job.weekHours || '',
+    hoursUnpaid: job.hoursUnpaid || '',
+    derivedHourlyRate: job.derivedHourlyRate || '',
+    daysPerWeek: job.daysPerWeek || '',
     trackOvertime: job.trackOvertime || false,
     trackEarnings: job.trackEarnings || false,
     monthlyIncome: job.monthlyIncome || '',
@@ -178,13 +179,13 @@ export default function FormJob({
     const { name, value } = e.target;
     // const derivedHourlyRate = (value * 3) / 13 / formData.weekHours;
     const derivedHourlyRate = round(
-      formData.monthlyIncome / (value * 4.325),
+      formData.monthlyIncome / (+value * 4.325),
       2
     );
 
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: +value,
       derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
     });
 
@@ -196,12 +197,11 @@ export default function FormJob({
 
   function handleMonthlyIncomeChange(e) {
     const { name, value } = e.target;
-    // const derivedHourlyRate = (value * 3) / 13 / formData.weekHours;
-    const derivedHourlyRate = round(value / (formData.weekHours * 4.325), 2);
+    const derivedHourlyRate = round(+value / (formData.weekHours * 4.325), 2);
 
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: +value,
       derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
     });
 
@@ -243,8 +243,7 @@ export default function FormJob({
       return null;
     }
     const valueToString = '' + value;
-    // const numberRegex = /^[+]?([0-9]*[.])?[0-9]{0,2}$/; //matches floats with up to 2 decimals
-    const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/; //matches floats with any amount of decimals
+    const numberRegex = /^[+]?([0-9]*[.])?[0-9]+$/;
 
     if (!valueToString.match(numberRegex)) {
       return 'Not a Valid Positive Number';
@@ -254,7 +253,6 @@ export default function FormJob({
   }
 
   function handleValidation({ name, value }) {
-    // spread existing errors: possibly existing error of current field, and ...rest (remove existing error)
     // eslint-disable-next-line no-unused-vars
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
@@ -306,7 +304,6 @@ export default function FormJob({
               id="paymentTypeHourly"
               value="hourly"
               onChange={handleChange}
-              // handleBlur={handleBlur}
             />
           </FormElement>
           <FormElement
@@ -320,7 +317,6 @@ export default function FormJob({
               id="paymentTypeMonthly"
               value="monthly"
               onChange={handleChange}
-              // handleBlur={handleBlur}
             />
           </FormElement>
         </fieldset>
