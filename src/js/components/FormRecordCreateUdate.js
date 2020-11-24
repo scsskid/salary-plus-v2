@@ -18,7 +18,7 @@ export function FormRecordCreate(props) {
     ...previousJobAppData
   } = jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
 
-  const { previousFormData } = settings?.previousFormData;
+  const { previousFormData } = settings?.previousFormData || {};
 
   const defaults = {
     jobId: 0,
