@@ -4,19 +4,18 @@ import FormRecord from './FormRecord';
 import { getTimeOfDateISOString } from '../utils/helpers';
 import NoMatch from './NoMatch';
 
-export function FormRecordCreate({
-  inputDate,
-  saveRecord,
-  jobs,
-  settings,
-  dispatch,
-  changeMonth,
-  clock,
-  records
-}) {
-  const { name, trackEarnings, trackOvertime, ...previousJobAppData } =
-    jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
-  const { jobId, ...previousFormData } = settings?.previousFormData;
+export function FormRecordCreate(props) {
+  const { settings, jobs, inputDate } = props;
+
+  const {
+    name: _,
+    trackEarnings: __,
+    trackOvertime: ___,
+    id: jobId = 0,
+    ...previousJobAppData
+  } = jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
+
+  const { previousFormData } = settings?.previousFormData;
 
   const defaults = {
     jobId: 0,
@@ -34,48 +33,33 @@ export function FormRecordCreate({
     derivedhourlyRate: ''
   };
 
+  const initialFormData = {
+    ...defaults,
+    ...previousFormData,
+    ...{ ...previousJobAppData, jobId },
+    dateBegin: new Date(inputDate.getTime())
+  };
+
   React.useEffect(() => {
     console.log(defaults);
     console.log(settings.previousFormData);
     console.log(previousJobAppData);
+    console.log(initialFormData);
   });
-
-  const initialFormData = {
-    ...defaults,
-    ...previousFormData,
-    ...previousJobAppData,
-    dateBegin: new Date(inputDate.getTime())
-  };
 
   return (
     <FormRecord
-      jobs={jobs}
-      saveRecord={saveRecord}
-      inputDate={inputDate}
-      settings={settings}
-      dispatch={dispatch}
-      changeMonth={changeMonth}
       initialFormData={initialFormData}
-      clock={clock}
-      records={records}
       linkedJob={previousJobAppData}
+      {...props}
     />
   );
 }
 
-export function FormRecordUpdate({
-  inputDate,
-  saveRecord,
-  jobs,
-  records,
-  deleteItem,
-  dispatch,
-  settings,
-  changeMonth,
-  clock
-}) {
+export function FormRecordUpdate(props) {
+  const { jobs, records } = props;
   const { id } = useParams();
-  const record = records?.find((record) => parseInt(record.id) === +id);
+  const record = records?.find((record) => +record.id === +id);
   const linkedJob = jobs.find((job) => job.id == record?.jobId);
 
   const initialFormData = {
@@ -88,17 +72,9 @@ export function FormRecordUpdate({
   return record ? (
     <FormRecord
       linkedJob={linkedJob}
-      jobs={jobs}
-      saveRecord={saveRecord}
-      deleteItem={deleteItem}
-      isUpdateForm={true}
-      dispatch={dispatch}
-      settings={settings}
-      changeMonth={changeMonth}
-      inputDate={inputDate}
       initialFormData={initialFormData}
-      clock={clock}
-      records={records}
+      isUpdateForm={true}
+      {...props}
     />
   ) : (
     <NoMatch />
