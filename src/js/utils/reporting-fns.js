@@ -15,7 +15,6 @@ function getHoursElapsed(records) {
     const hours = timeToHours(new Date(record.end) - new Date(record.begin));
     return acc + hours;
   }, 0);
-
   return hoursElapsed;
 }
 
@@ -24,7 +23,6 @@ function getHoursElapsed(records) {
 function getWorkedHours(records) {
   const paidHoursElapsed = records.reduce((acc, record) => {
     const hoursElapsed = getHoursElapsed([record]);
-
     return acc + hoursElapsed - (record.hoursUnpaid ?? 0);
   }, 0);
 
@@ -33,12 +31,13 @@ function getWorkedHours(records) {
 
 function getOvertimeHours(records) {
   const overtimeHours = records.reduce((acc, record) => {
+    // const dayHours = !isNaN(parseInt(record.dayHours)) ? parseInt(record.dayHours) ;
     const dayHours = parseInt(record.dayHours);
+
     if (isNaN(dayHours) || dayHours === 0) {
       return acc;
     }
     const hoursElapsed = getHoursElapsed([record]);
-
     return (
       acc + hoursElapsed - (record.hoursUnpaid ?? 0) - (record.dayHours ?? 0)
     );
@@ -48,11 +47,7 @@ function getOvertimeHours(records) {
 }
 
 function getWorkedHoursWithoutOvertime(records) {
-  const paidHoursWithoutOvertime =
-    getWorkedHours(records) - getOvertimeHours(records);
-
-  // return paidHoursWithoutOvertime);
-  return paidHoursWithoutOvertime;
+  return getWorkedHours(records) - getOvertimeHours(records);
 }
 
 // return earned
