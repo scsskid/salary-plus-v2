@@ -46,7 +46,7 @@ function reducer(state, { type, payload }) {
         jobs: [...state.jobs, payload],
         settings: {
           ...state.settings,
-          inputJobId: nextJobId,
+          // inputJobId: nextJobId,
           incrementIdJobs: nextJobId
         }
       };
