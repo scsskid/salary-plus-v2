@@ -49,7 +49,7 @@ function getWorkedHoursWithoutOvertime(records) {
 // return earned
 
 function getReducedFixedMonthlyIncomeUnique(records) {
-  return records
+  const jobSalaries = records
     .filter(function (record) {
       const combinedKey = record.jobId + '|' + record.monthlyIncome;
 
@@ -59,21 +59,34 @@ function getReducedFixedMonthlyIncomeUnique(records) {
       }
     }, Object.create(null))
     .map(({ jobId, monthlyIncome }) => {
-      console.log({ jobId, monthlyIncome });
+      // console.log({ jobId, monthlyIncome });
 
       return { jobId, monthlyIncome };
     })
-    .reduce((acc, record) => {
-      console.log(acc);
+    .reduce((acc, job) => {
+      // console.log(acc);
 
-      const newArr = acc[record.jobId]
-        ? [...acc[record.jobId], record.monthlyIncome]
-        : [record.monthlyIncome];
+      const newArr = acc[job.jobId]
+        ? [...acc[job.jobId], job.monthlyIncome]
+        : [job.monthlyIncome];
       return {
         ...acc,
-        [record.jobId]: newArr
+        [job.jobId]: newArr
       };
     }, {});
+
+  console.log(jobSalaries);
+
+  const result = [];
+
+  for (let el in jobSalaries) {
+    const sum = jobSalaries[el].reduce((acc, sum, i, arr) => acc + sum, 0);
+    result.push(sum / jobSalaries[el].length);
+  }
+
+  console.log(result);
+  return result.reduce((acc, num) => acc + num, 0);
+
   // .reduce((acc, record, i, arr) => {
   //   const countValuesByJobId = arr.filter((el) => {
   //     return el.jobId == record.jobId;
