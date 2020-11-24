@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Dialog from './Dialog';
 import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
+import { getTimeOfDateISOString } from '../utils/helpers';
 
 export default function FormRecord({
   saveRecord,
@@ -29,7 +30,9 @@ export default function FormRecord({
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
   const [linkedJob, setLinkedJob] = React.useState(linkedJobParent);
-  const [dates, setDates] = React.useState(initialFormData.dates);
+  const [dates, setDates] = React.useState([
+    new Date(initialFormData.dateBegin)
+  ]);
   const [datePickerDisplayValue, setDatePickerDisplayValue] = React.useState(
     ''
   );
@@ -49,17 +52,19 @@ export default function FormRecord({
     Object.values(touched).length != Object.values(formData).length;
 
   // Include dates directly in formData?
+
+  // React.useEffect(() => {
+  //   setDates([new Date('2082-11-24T08:08:08.000Z')]);
+  // }, []);
+
   React.useEffect(() => {
-    setFormData({
-      ...formData,
-      dates
-    });
+    // console.log(initialFormData.begin, new Date(initialFormData.begin), dates);
 
     if (dates.length === 0) {
       setDatePickerDisplayValue('please select a date');
     } else if (dates.length === 1) {
       setDatePickerDisplayValue(
-        dates[0]?.toLocaleDateString(settings.language)
+        new Date(dates[0])?.toLocaleDateString(settings.language)
       );
     } else if (dates.length > 0) {
       setDatePickerDisplayValue(`${dates.length} Dates`);
@@ -105,28 +110,29 @@ export default function FormRecord({
       // validate before?
       dispatch({
         type: 'setPreviousFormDataProp',
-        payload: { [e.target.name]: e.target.value }
+        payload: { [name]: value }
       });
     }
   }
 
   function handleSelectJobChange(e) {
-    const { name, value } = e.target;
-    const selectedJobId = parseInt(value);
+    const { value } = e.target;
+    const selectedJobId = +value;
     const job = jobs.find((job) => job.id === selectedJobId);
+    const {
+      id: jobId = 0,
+      name: jobName = '',
+      trackOverTime,
+      trackEarnings,
+      ...rest
+    } = job || {};
     setLinkedJob(job);
 
     setFormData({
       ...formData,
-      [name]: value, // jobId
-      ['rate']: job?.rate || '',
-      ['jobName']: job?.name || '',
-      ['dayHours']: job?.dayHours || '',
-      ['weekHours']: job?.weekHours || '',
-      ['daysPerWeek']: job?.daysPerWeek || '',
-      ['paymentType']: job?.paymentType || '',
-      ['monthlyIncome']: job?.monthlyIncome || '',
-      ['hoursUnpaid']: job?.hoursUnpaid || ''
+      ...rest,
+      jobId,
+      jobName
     });
 
     setTouched({
@@ -134,12 +140,6 @@ export default function FormRecord({
       jobId: true,
       jobName: true
     });
-
-    handleValidation({ name: 'jobId', value: value });
-    handleValidation({ name: 'jobName', value: job?.name || '' });
-    handleValidation({ name: 'rate', value: job?.rate });
-    handleValidation({ name: 'hoursUnpaid', value: job?.hoursUnpaid });
-    handleValidation({ name: 'dayHours', value: job?.dayHours });
 
     if (!isUpdateForm) {
       dispatch({
@@ -165,8 +165,8 @@ export default function FormRecord({
     jobId: validateNumber,
     jobName: validateJobName,
     dates: validateDates,
-    timeBegin: validateTime,
-    timeEnd: validateTime,
+    begin: validateTime,
+    end: validateTime,
     hoursUnpaid: validateNumber,
     dayHours: validateNumber,
     rate: validateNumber,
@@ -205,6 +205,7 @@ export default function FormRecord({
   }
 
   function validateTime(value) {
+    const timeString = getTimeOfDateISOString(value);
     const timeRegex = /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/;
 
     if (!value.match(timeRegex)) {
@@ -274,7 +275,7 @@ export default function FormRecord({
   }
 
   function handleDispatch(formData) {
-    formData.dates.forEach((date) => {
+    dates.forEach((date) => {
       const singleDateFormData = {
         ...formData,
         dateBegin: date
@@ -374,8 +375,8 @@ export default function FormRecord({
         <fieldset>
           <FormElement label="Select Dates...">
             <input
-              name="dates"
-              id="dates"
+              name="datesDisplay"
+              id="datesDisplay"
               value={datePickerDisplayValue}
               variant="dates field value"
               readOnly={true}
@@ -389,40 +390,41 @@ export default function FormRecord({
             isUpdateForm={isUpdateForm}
             changeMonth={changeMonth}
             datePickerOpen={datePickerOpen}
-            dates={dates}
+            dates={[...dates]}
             updateDates={handleDatesChange}
             clock={clock}
             records={records}
             jobs={jobs}
+            setDatePickerDisplayValue={setDatePickerDisplayValue}
           />
 
           <FormElement
-            error={errors.timeBegin}
-            touched={touched.timeBegin}
-            htmlFor="timeBegin"
+            error={errors.begin}
+            touched={touched.begin}
+            htmlFor="begin"
             label="Starts"
           >
             <input
-              name="timeBegin"
-              id="timeBegin"
+              name="begin"
+              id="begin"
               type="time"
-              value={formData.timeBegin}
+              value={formData.begin}
               onChange={handleChange}
               onBlur={handleBlur}
             />
           </FormElement>
 
           <FormElement
-            error={errors.timeEnd}
-            touched={touched.timeEnd}
-            htmlFor="timeEnd"
+            error={errors.end}
+            touched={touched.end}
+            htmlFor="end"
             label="Ends"
           >
             <input
-              name="timeEnd"
-              id="timeEnd"
+              name="end"
+              id="end"
               type="time"
-              value={formData.timeEnd}
+              value={formData.end}
               onChange={handleChange}
               onBlur={handleBlur}
             />
@@ -552,6 +554,7 @@ export default function FormRecord({
       </form>
       <LogToScreen title="formData" object={formData} settings={settings} />
       <LogToScreen title="settings" object={settings} settings={settings} />
+      <LogToScreen title="dates" object={dates} settings={settings} />
 
       <Dialog
         dialogOpen={dialogOpen}
