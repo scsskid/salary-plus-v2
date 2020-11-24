@@ -40,7 +40,7 @@ export function FormRecordCreate({
     console.log(previousJobAppData);
   });
 
-  let initialFormData = {
+  const initialFormData = {
     ...defaults,
     ...previousFormData,
     ...previousJobAppData,
