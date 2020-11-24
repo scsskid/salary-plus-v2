@@ -10,10 +10,10 @@ export function FormRecordCreate(props) {
 
   const {
     /* eslint-disable no-unused-vars */
-    name,
     trackEarnings,
     trackOvertime,
     /* eslint-enable no-unused-vars */
+    name: jobName = '',
     id: jobId = 0,
     ...previousJobAppData
   } = jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
@@ -39,9 +39,16 @@ export function FormRecordCreate(props) {
   const initialFormData = {
     ...defaults,
     ...previousFormData,
-    ...{ ...previousJobAppData, jobId },
+    ...{ ...previousJobAppData, jobId, jobName },
     dateBegin: new Date(inputDate.getTime())
   };
+
+  // React.useEffect(() => {
+  //   console.log(defaults);
+  //   console.log(previousFormData);
+  //   console.log(previousJobAppData);
+  //   console.log(initialFormData);
+  // }, []);
 
   return (
     <FormRecord
