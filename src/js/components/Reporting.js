@@ -24,6 +24,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
 
     console.log(r.getWorkedHours(records));
     console.log(r.getOvertimeHours(records));
+    console.log(r.getReducedFixedMonthlyIncomeUnique(records));
   }, [inputJobId]);
 
   const Views = {

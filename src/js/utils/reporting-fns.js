@@ -48,9 +48,43 @@ function getWorkedHoursWithoutOvertime(records) {
 
 // return earned
 
+function getReducedFixedMonthlyIncomeUnique(records) {
+  return records
+    .filter(function (record) {
+      const combinedKey = record.jobId + '|' + record.monthlyIncome;
+
+      if (!this[combinedKey] && record.paymentType === 'monthly') {
+        this[combinedKey] = true;
+        return true;
+      }
+    }, Object.create(null))
+    .map(({ jobId, monthlyIncome }) => {
+      console.log({ jobId, monthlyIncome });
+      return { jobId, monthlyIncome };
+    })
+    .reduce((acc, monthlyIncome, _, { length }) => {
+      // console.log(acc, monthlyIncome, length);
+      return (acc + monthlyIncome) / length;
+    });
+}
+
 function getEarned(records, hourCalculationFn) {
+  // const unqiueRecordsFixed
+
   return records.reduce((acc, record) => {
-    return acc + record.rate * hourCalculationFn([record]);
+    const { paymentType, /* monthlyIncome, */ derivedHourlyRate } = record;
+    const calculatedRate = derivedHourlyRate;
+    const rate = paymentType === 'monthly' ? calculatedRate : record.rate;
+    // get fixed oneTime if hourCalcFn = getWorkedHoursWithoutOvertime
+    const { name: hourCalcFnName } = hourCalculationFn;
+    if (
+      'getWorkedHoursWithoutOvertime' === hourCalcFnName &&
+      'monthly' === paymentType
+    ) {
+      // console.log('here');
+    }
+
+    return acc + rate * hourCalculationFn([record]);
   }, 0);
 }
 
@@ -88,5 +122,6 @@ export {
   getBonusEarned,
   getWorkedHoursWithoutOvertimeEarned,
   getWorkedHoursEarned,
-  getTotalsEarned
+  getTotalsEarned,
+  getReducedFixedMonthlyIncomeUnique
 };
