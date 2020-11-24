@@ -5,7 +5,8 @@ const app = {
 
 const settings = {
   language: 'de-DE',
-  inputJobId: 0
+  inputJobId: 0,
+  showDebugInfo: true
 };
 
 export const bootstrapData = {
@@ -15,7 +16,7 @@ export const bootstrapData = {
   settings: {
     ...settings,
     incrementIdRecords: 0,
-    incrementIdJobs: 1
+    incrementIdJobs: 0
   }
 };
 
