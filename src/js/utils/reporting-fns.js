@@ -52,20 +52,15 @@ function getReducedFixedMonthlyIncomeUnique(records) {
   const jobSalaries = records
     .filter(function (record) {
       const combinedKey = record.jobId + '|' + record.monthlyIncome;
-
       if (!this[combinedKey] && record.paymentType === 'monthly') {
         this[combinedKey] = true;
         return true;
       }
     }, Object.create(null))
     .map(({ jobId, monthlyIncome }) => {
-      // console.log({ jobId, monthlyIncome });
-
       return { jobId, monthlyIncome };
     })
     .reduce((acc, job) => {
-      // console.log(acc);
-
       const newArr = acc[job.jobId]
         ? [...acc[job.jobId], job.monthlyIncome]
         : [job.monthlyIncome];
@@ -75,8 +70,6 @@ function getReducedFixedMonthlyIncomeUnique(records) {
       };
     }, {});
 
-  console.log(jobSalaries);
-
   const result = [];
 
   for (let el in jobSalaries) {
@@ -84,7 +77,6 @@ function getReducedFixedMonthlyIncomeUnique(records) {
     result.push(sum / jobSalaries[el].length);
   }
 
-  console.log(result);
   return result.reduce((acc, num) => acc + num, 0);
 }
 
@@ -118,7 +110,6 @@ function getOvertimeEarned(records) {
 }
 
 function getWorkedHoursEarned(records) {
-  // return getEarned(records, getWorkedHours);
   return (
     getEarned(records, getWorkedHoursWithoutOvertime) +
     getEarned(records, getOvertimeHours)

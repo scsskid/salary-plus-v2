@@ -13,18 +13,12 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   });
 
   const { inputJobId } = settings;
-  const inputJobData = getJobById(inputJobId);
-
-  function getJobById(id) {
-    return jobs.find((job) => job.id == id);
-  }
 
   React.useEffect(() => {
     // console.log(jobs, inputJobData, trackOvertime);
-
-    console.log(r.getWorkedHours(records));
-    console.log(r.getOvertimeHours(records));
-    console.log(r.getReducedFixedMonthlyIncomeUnique(records));
+    // console.log(r.getWorkedHours(records));
+    // console.log(r.getOvertimeHours(records));
+    // console.log(r.getReducedFixedMonthlyIncomeUnique(records));
   }, [inputJobId]);
 
   const Views = {
