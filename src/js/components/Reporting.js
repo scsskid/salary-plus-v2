@@ -4,7 +4,7 @@ import FigureEarned from './FigureEarned';
 import RecordsList from './RecordsList';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { Link } from 'react-router-dom';
-import * as r from '../utils/reporting-fns';
+// import * as r from '../utils/reporting-fns';
 
 export default function Reporting({ inputDate, records, jobs, settings }) {
   const monthRecords = getRecordsByMonth({
@@ -117,7 +117,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   return (
     <div className="reporting main-component">
       <div className="app-body">{Views['Month']}</div>
-      <RecordsList records={monthRecords} settings={settings} />
+      <RecordsList records={monthRecords} settings={settings} jobs={jobs} />
     </div>
   );
 }
