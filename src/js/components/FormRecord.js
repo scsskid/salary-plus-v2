@@ -589,7 +589,6 @@ export default function FormRecord({
                 </>
               )}
             </fieldset>
-            <fieldset></fieldset>
           </>
         )}
 
