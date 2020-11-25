@@ -9,26 +9,26 @@ import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
 import { round } from '../utils/helpers';
 
-export function FormJobCreate({ saveJob, settings }) {
-  const initialFormData = {
-    name: '',
-    rate: '',
-    derivedHourlyRate: '',
-    dayHours: '',
-    weekHours: '',
-    hoursUnpaid: '',
-    monthlyIncome: '',
-    daysPerWeek: 5,
-    trackOvertime: false,
-    trackEarnings: false,
-    color: '#FF0000',
-    paymentType: 'hourly',
-    allowCustomJobPropsInRecordForm: false
-  };
+const defaultFormData = {
+  name: '',
+  rate: '',
+  derivedHourlyRate: '',
+  dayHours: '',
+  weekHours: '',
+  hoursUnpaid: '',
+  monthlyIncome: '',
+  daysPerWeek: 5,
+  trackOvertime: false,
+  trackEarnings: false,
+  color: '#FF0000',
+  paymentType: 'hourly',
+  allowCustomJobPropsInRecordForm: false
+};
 
+export function FormJobCreate({ saveJob, settings }) {
   return (
     <FormJob
-      initialFormData={initialFormData}
+      initialFormData={defaultFormData}
       saveJob={saveJob}
       settings={settings}
     />
@@ -37,7 +37,10 @@ export function FormJobCreate({ saveJob, settings }) {
 
 export function FormJobUpdate({ jobs, saveJob, deleteItem, settings }) {
   const { jobId } = useParams();
-  const initialFormData = jobs.find((job) => job.id === +jobId);
+  const initialFormData = {
+    ...defaultFormData,
+    ...jobs.find((job) => job.id === +jobId)
+  };
 
   return (
     <>
