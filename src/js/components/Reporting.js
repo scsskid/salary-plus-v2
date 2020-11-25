@@ -117,7 +117,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   return (
     <div className="reporting main-component">
       <div className="app-body">{Views['Month']}</div>
-      <RecordsList records={records} settings={settings} />
+      <RecordsList records={monthRecords} settings={settings} />
     </div>
   );
 }
