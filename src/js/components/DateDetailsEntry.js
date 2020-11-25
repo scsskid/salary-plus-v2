@@ -9,16 +9,16 @@ import LogToScreen from './LogToScreen';
 export default function DateDetailsEntry({
   record = {},
   settings = {},
-  job = {}
+  jobs = {}
 }) {
-  const clock = useClock();
+  const history = useHistory();
   const { language } = settings;
+  const clock = useClock();
   const localeTimeStringOptions = {
     hour: '2-digit',
     minute: '2-digit'
   };
   let status;
-  const history = useHistory();
   const datesObj = {
     begin: new Date(record.begin),
     end: new Date(record.end)
@@ -32,12 +32,23 @@ export default function DateDetailsEntry({
     past: clock.now > datesObj.end,
     future: clock.now < datesObj.begin
   };
-  const { trackOvertime, weekHours, daysPerWeek, dayHours: jobDataDayHours } =
-    job || {};
+
+  const {
+    dayHours: recordDayHours = 0,
+    paymentType,
+    weekHours = 0,
+    daysPerWeek = 0
+  } = record || {};
+
+  const linkedJob = jobs.find((job) => job.id === record.jobId);
+  const { foo } = linkedJob || {};
+  const canCalculateFixedIncomeDayHours = weekHours && daysPerWeek;
+  const derivedDayHours = canCalculateFixedIncomeDayHours
+    ? weekHours / daysPerWeek
+    : 'cant calculcate';
+
   const dayHours =
-    !isNaN(parseInt(jobDataDayHours)) || parseInt(jobDataDayHours) > 0
-      ? jobDataDayHours
-      : weekHours / daysPerWeek;
+    record.paymentType === 'monthly' ? derivedDayHours : record.dayHours;
 
   const classList = ['date-details-entry'];
 
@@ -78,6 +89,15 @@ export default function DateDetailsEntry({
     }
   };
 
+  React.useEffect(() => {
+    console.log(
+      paymentType,
+      /* recordDayHours, */ weekHours,
+      daysPerWeek,
+      weekHours && daysPerWeek
+    );
+  }, []);
+
   return (
     <>
       <button
@@ -89,7 +109,7 @@ export default function DateDetailsEntry({
         <div className="date-details-entry-time">
           <div
             className="date-details-entry-color"
-            style={{ backgroundColor: job?.color }}
+            style={{ backgroundColor: linkedJob?.color }}
           ></div>
           <time
             className="date-details-entry-time-begin"
@@ -109,11 +129,11 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            DayHours: {dayHours} <br />
+            DayHours: {dayHours} <hr />
             {record.rate && (
               <FigureEarned records={[record]} settings={settings} />
             )}
-            <FigureHours records={[record]} settings={settings} />
+            Hours Worked: <FigureHours records={[record]} settings={settings} />
             {reporting.includedOvertime !== 0 && (
               <p>
                 Overtime:{' '}
@@ -129,8 +149,10 @@ export default function DateDetailsEntry({
           </div>
         </div>
       </button>
-      <LogToScreen title="local debug obj" object={debug} settings={settings} />
+      <LogToScreen title="dayHours" object={dayHours} settings={settings} />
       <LogToScreen title="record" object={record} settings={settings} />
+      <LogToScreen title="linkedJob" object={linkedJob} settings={settings} />
+      <LogToScreen title="local debug obj" object={debug} settings={settings} />
     </>
   );
 }
