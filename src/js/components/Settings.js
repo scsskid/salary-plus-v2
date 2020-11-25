@@ -10,15 +10,17 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     allowCustomJobProps = false,
     sickleaveOnNewRecordForm = false,
     showDebugInfo = false,
-    showBonusField = true
-  } = settings;
+    showBonusField = true,
+    allowCustomJobPropsInRecordForm = false
+  } = settings || {};
 
   const [formData, setFormData] = React.useState({
     language,
     allowCustomJobProps,
     sickleaveOnNewRecordForm,
     showDebugInfo,
-    showBonusField
+    showBonusField,
+    allowCustomJobPropsInRecordForm
   });
 
   function handleChange(e) {
@@ -91,6 +93,19 @@ export default function Settings({ jobs, children, settings, dispatch }) {
               name="showBonusField"
               id="showBonusField"
               value={formData.showBonusField}
+              onChange={handleChange}
+              onBlur={handleChange}
+            />{' '}
+          </FormElement>
+        </fieldset>
+        <fieldset>
+          <FormElement label="Allow override jobs properties in records form">
+            <input
+              type="checkbox"
+              checked={formData.allowCustomJobPropsInRecordForm}
+              name="allowCustomJobPropsInRecordForm"
+              id="allowCustomJobPropsInRecordForm"
+              value={formData.allowCustomJobPropsInRecordForme}
               onChange={handleChange}
               onBlur={handleChange}
             />{' '}

@@ -41,7 +41,7 @@ export default function FormRecord({
   const showJobsDropdown = jobsPresent;
   const showJobsNameInput = formData.jobId == 0 || jobWasDeleted;
   const showJobPropsFields =
-    linkedJob?.allowCustomJobPropsInRecordForm ||
+    settings?.allowCustomJobPropsInRecordForm ||
     jobWasDeleted ||
     formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
@@ -434,70 +434,165 @@ export default function FormRecord({
         {showJobPropsFields && (
           <>
             <fieldset>
-              <legend>Salary Calculation</legend>
-              <FormElement
-                label="Hours unpaid"
-                error={errors.hoursUnpaid}
-                touched={touched.hoursUnpaid}
-                htmlFor="hoursUnpaid"
-              >
-                <input
-                  name="hoursUnpaid"
-                  id="hoursUnpaid"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={formData.hoursUnpaid}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="0"
-                />
-              </FormElement>
+              <legend>Reporting Settings</legend>
+              {linkedJob?.paymentType !== 'OFFhourly' && (
+                <>
+                  <FormElement
+                    label="Hours unpaid"
+                    error={errors.hoursUnpaid}
+                    touched={touched.hoursUnpaid}
+                    htmlFor="hoursUnpaid"
+                  >
+                    <input
+                      name="hoursUnpaid"
+                      id="hoursUnpaid"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.hoursUnpaid}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                    />
+                  </FormElement>
 
-              <FormElement
-                label="Rate"
-                error={errors.rate}
-                touched={touched.rate}
-                htmlFor="rate"
-              >
-                <input
-                  inputMode="decimal"
-                  variant="currency"
-                  name="rate"
-                  id="rate"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={formData.rate}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="0"
-                />
-              </FormElement>
+                  <FormElement
+                    label="Rate"
+                    error={errors.rate}
+                    touched={touched.rate}
+                    htmlFor="rate"
+                  >
+                    <input
+                      inputMode="decimal"
+                      variant="currency"
+                      name="rate"
+                      id="rate"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.rate}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                    />
+                  </FormElement>
+
+                  <FormElement
+                    label="dayHours"
+                    error={errors.dayHours}
+                    touched={touched.dayHours}
+                    htmlFor="dayHours"
+                  >
+                    <input
+                      name="dayHours"
+                      id="dayHours"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.dayHours}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                    />
+                  </FormElement>
+                </>
+              )}
+              {linkedJob?.paymentType !== 'OFFmonthly' && (
+                <>
+                  <FormElement
+                    label="Payment is hours based"
+                    htmlFor="paymentTypeHourly"
+                  >
+                    <input
+                      type="radio"
+                      checked={formData.paymentType === 'hourly'}
+                      name="paymentType"
+                      id="paymentTypeHourly"
+                      value="hourly"
+                      onChange={handleChange}
+                    />
+                  </FormElement>
+                  <FormElement
+                    label="Payment is month based"
+                    htmlFor="paymentTypeMonthly"
+                  >
+                    <input
+                      type="radio"
+                      checked={formData.paymentType === 'monthly'}
+                      name="paymentType"
+                      id="paymentTypeMonthly"
+                      value="monthly"
+                      onChange={handleChange}
+                    />
+                  </FormElement>
+
+                  <FormElement
+                    htmlFor="weekHours"
+                    label="Hours per week"
+                    touched={touched.weekHours}
+                    errors={errors.weekHours}
+                    disabled={formData.paymentType === 'hourly'}
+                  >
+                    <input
+                      id="weekHours"
+                      name="weekHours"
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={formData.weekHours}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                      disabled={formData.paymentType === 'hourly'}
+                    />
+                  </FormElement>
+
+                  <FormElement
+                    htmlFor="daysPerWeek"
+                    label="Days per week"
+                    touched={touched.daysPerWeek}
+                    errors={errors.daysPerWeek}
+                    disabled={formData.paymentType === 'hourly'}
+                  >
+                    <input
+                      id="daysPerWeek"
+                      name="daysPerWeek"
+                      type="number"
+                      step="1"
+                      min="0"
+                      max="7"
+                      value={formData.daysPerWeek}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                      disabled={formData.paymentType === 'hourly'}
+                    />
+                  </FormElement>
+
+                  <FormElement
+                    htmlFor="monthlyIncome"
+                    label="Fixed monthly income"
+                    touched={touched.monthlyIncome}
+                    errors={errors.monthlyIncome}
+                  >
+                    <input
+                      id="monthlyIncome"
+                      type="number"
+                      step="0.01"
+                      name="monthlyIncome"
+                      value={formData.monthlyIncome}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      placeholder="0"
+                    />
+                  </FormElement>
+                </>
+              )}
             </fieldset>
-            <fieldset>
-              <legend>Overtime Calculation</legend>
-              <FormElement
-                label="dayHours"
-                error={errors.dayHours}
-                touched={touched.dayHours}
-                htmlFor="dayHours"
-              >
-                <input
-                  name="dayHours"
-                  id="dayHours"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={formData.dayHours}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="0"
-                />
-              </FormElement>
-            </fieldset>
+            <fieldset></fieldset>
           </>
         )}
+
         {showBonusField && (
           <fieldset>
             <FormElement
@@ -555,6 +650,7 @@ export default function FormRecord({
       <LogToScreen title="formData" object={formData} settings={settings} />
       <LogToScreen title="settings" object={settings} settings={settings} />
       <LogToScreen title="dates" object={dates} settings={settings} />
+      <LogToScreen title="linkedJob" object={linkedJob} settings={settings} />
 
       <Dialog
         dialogOpen={dialogOpen}

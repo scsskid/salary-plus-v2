@@ -344,19 +344,6 @@ export default function FormJob({
                 />
               </FormElement>
             </fieldset>
-            <fieldset>
-              <FormElement label="Allow override jobs properties in records form">
-                <input
-                  type="checkbox"
-                  checked={formData.allowCustomJobPropsInRecordForm}
-                  name="allowCustomJobPropsInRecordForm"
-                  id="allowCustomJobPropsInRecordForm"
-                  value={formData.allowCustomJobPropsInRecordForme}
-                  onChange={handleChange}
-                  onBlur={handleChange}
-                />{' '}
-              </FormElement>
-            </fieldset>
           </>
         )}
         {formData.paymentType === 'monthly' && (
