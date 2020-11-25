@@ -80,69 +80,49 @@ function getReducedFixedMonthlyIncomeUnique(records) {
   const result = [];
 
   for (let el in jobSalaries) {
-    const sum = jobSalaries[el].reduce((acc, sum, i, arr) => acc + sum, 0);
+    const sum = jobSalaries[el].reduce((acc, sum) => acc + sum, 0);
     result.push(sum / jobSalaries[el].length);
   }
 
   console.log(result);
   return result.reduce((acc, num) => acc + num, 0);
-
-  // .reduce((acc, record, i, arr) => {
-  //   const countValuesByJobId = arr.filter((el) => {
-  //     return el.jobId == record.jobId;
-  //   }).length;
-
-  //   console.log(countValuesByJobId);
-
-  //   return {
-  //     ...acc,
-  //     [record.jobId]:
-  //       ((!isNaN(acc[record.jobId]) ? acc[record.jobId] : 0) +
-  //         record.monthlyIncome) /
-  //       countValuesByJobId
-  //   };
-  // }, {});
-  // .reduce((acc, record, _, { length }) => {
-  //   // console.log(acc, monthlyIncome, length);
-  //   console.log(record);
-  //   // return (acc + record.monthlyIncome) / length;
-  //   return [
-  //     ...acc,
-  //     { jobId: record.jobId, average: record.monthlyIncome / length }
-  //   ];
-  // }, []);
 }
 
 function getEarned(records, hourCalculationFn) {
-  // const unqiueRecordsFixed
-
-  return records.reduce((acc, record) => {
+  const { name: hourCalcFnName } = hourCalculationFn;
+  const earnedHoursBased = records.reduce((acc, record) => {
     const { paymentType, /* monthlyIncome, */ derivedHourlyRate } = record;
+
     const calculatedRate = derivedHourlyRate;
-    const rate = paymentType === 'monthly' ? calculatedRate : record.rate;
-    // get fixed oneTime if hourCalcFn = getWorkedHoursWithoutOvertime
-    const { name: hourCalcFnName } = hourCalculationFn;
-    if (
-      'getWorkedHoursWithoutOvertime' === hourCalcFnName &&
-      'monthly' === paymentType
-    ) {
-      // console.log('here');
-    }
+    const rate =
+      paymentType === 'monthly' && 'getOvertimeHours' == hourCalcFnName
+        ? calculatedRate
+        : record.rate;
 
     return acc + rate * hourCalculationFn([record]);
   }, 0);
+
+  const fixedIncome =
+    'getWorkedHoursWithoutOvertime' == hourCalcFnName
+      ? getReducedFixedMonthlyIncomeUnique(records)
+      : 0;
+  return earnedHoursBased + fixedIncome;
 }
 
-function getWorkedHoursEarned(records) {
-  return getEarned(records, getWorkedHours);
+function getWorkedHoursWithoutOvertimeEarned(records) {
+  return getEarned(records, getWorkedHoursWithoutOvertime);
 }
 
 function getOvertimeEarned(records) {
   return getEarned(records, getOvertimeHours);
 }
 
-function getWorkedHoursWithoutOvertimeEarned(records) {
-  return getEarned(records, getWorkedHoursWithoutOvertime);
+function getWorkedHoursEarned(records) {
+  // return getEarned(records, getWorkedHours);
+  return (
+    getEarned(records, getWorkedHoursWithoutOvertime) +
+    getEarned(records, getOvertimeHours)
+  );
 }
 
 function getTotalsEarned(records) {
