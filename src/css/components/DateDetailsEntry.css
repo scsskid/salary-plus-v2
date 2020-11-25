@@ -27,7 +27,6 @@
 
 .date-details-entry-content {
   padding-left: 20px;
-  flex: 1 0 calc(100% - 10rem);
 }
 
 .date-details-entry-color {
@@ -44,7 +43,7 @@
 }
 
 .date-details-entry-time {
-  flex: 1 0 10rem;
+  flex: 1;
   order: 1;
   text-align: right;
 }
