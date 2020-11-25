@@ -6,7 +6,8 @@ const app = {
 const settings = {
   language: 'de-DE',
   inputJobId: 0,
-  showDebugInfo: true
+  showDebugInfo: true,
+  reportingSource: 'record'
 };
 
 export const bootstrapData = {

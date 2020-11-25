@@ -11,7 +11,8 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     sickleaveOnNewRecordForm = false,
     showDebugInfo = false,
     showBonusField = true,
-    allowCustomJobPropsInRecordForm = false
+    allowCustomJobPropsInRecordForm = false,
+    reportingSource = 'record'
   } = settings || {};
 
   const [formData, setFormData] = React.useState({
@@ -20,7 +21,8 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     sickleaveOnNewRecordForm,
     showDebugInfo,
     showBonusField,
-    allowCustomJobPropsInRecordForm
+    allowCustomJobPropsInRecordForm,
+    reportingSource
   });
 
   function handleChange(e) {
@@ -116,6 +118,35 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             <button onClick={() => history.push('/jobs')}>
               {jobs.length} →
             </button>
+          </FormElement>
+        </fieldset>
+        <h3>Debug</h3>
+        <fieldset>
+          <FormElement
+            label="Reporting source record"
+            htmlFor="reportingSourceRecord"
+          >
+            <input
+              type="radio"
+              checked={formData.reportingSource === 'record'}
+              name="reportingSource"
+              id="reportingSourceRecord"
+              value="record"
+              onChange={handleChange}
+            />
+          </FormElement>
+          <FormElement
+            label="Reporting source job"
+            htmlFor="reportingSourceJob"
+          >
+            <input
+              type="radio"
+              checked={formData.reportingSource === 'job'}
+              name="reportingSource"
+              id="reportingSourceJob"
+              value="job"
+              onChange={handleChange}
+            />
           </FormElement>
         </fieldset>
         <fieldset>

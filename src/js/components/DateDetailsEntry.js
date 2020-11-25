@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
-import * as reportingFns from './../utils/reporting-fns';
+import * as r from './../utils/reporting-fns';
 import useClock from '../hooks/useClock';
-import FigureEarned from './FigureEarned';
-import FigureHours from './FigureHours';
+import FigureHoursDumb from './FigureHoursDumb';
+import FigureEarnedDumb from './FigureEarnedDumb';
 import LogToScreen from './LogToScreen';
 
 export default function DateDetailsEntry({
@@ -11,6 +11,13 @@ export default function DateDetailsEntry({
   settings = {},
   jobs = {}
 }) {
+  const source = 'record';
+  const classList = ['date-details-entry'];
+  const className = classList.join(' ');
+  const { paymentType, rate, begin, end, jobId } =
+    source === 'record' ? record : r.getLinkedJob(record.id, jobs);
+  const linkedJob = jobs.find((job) => job.id === jobId);
+  // -----------------------------------------------
   const history = useHistory();
   const { language } = settings;
   const clock = useClock();
@@ -18,39 +25,24 @@ export default function DateDetailsEntry({
     hour: '2-digit',
     minute: '2-digit'
   };
+
   let status;
+
   const datesObj = {
-    begin: new Date(record.begin),
-    end: new Date(record.end)
+    begin: new Date(begin),
+    end: new Date(end)
   };
-  const time = {
+
+  const timeDisplay = {
     begin: datesObj.begin.toLocaleTimeString(language, localeTimeStringOptions),
     end: datesObj.end.toLocaleTimeString(language, localeTimeStringOptions)
   };
+
   const statusObj = {
     ongoing: clock.now >= datesObj.begin && clock.now <= datesObj.end,
     past: clock.now > datesObj.end,
     future: clock.now < datesObj.begin
   };
-
-  const {
-    dayHours: recordDayHours = 0,
-    paymentType,
-    weekHours = 0,
-    daysPerWeek = 0
-  } = record || {};
-
-  const linkedJob = jobs.find((job) => job.id === record.jobId);
-  const { foo } = linkedJob || {};
-  const canCalculateFixedIncomeDayHours = weekHours && daysPerWeek;
-  const derivedDayHours = canCalculateFixedIncomeDayHours
-    ? weekHours / daysPerWeek
-    : 'cant calculcate';
-
-  const dayHours =
-    record.paymentType === 'monthly' ? derivedDayHours : record.dayHours;
-
-  const classList = ['date-details-entry'];
 
   for (const prop in statusObj) {
     const value = statusObj[prop];
@@ -60,43 +52,38 @@ export default function DateDetailsEntry({
     }
   }
 
-  const className = classList.join(' ');
-
   function handleClick() {
     history.push(`/records/${record.id}`);
   }
 
-  const reporting = {
-    contractEarned: reportingFns.getWorkedHoursWithoutOvertimeEarned([record]),
-    actualEarned: reportingFns.getWorkedHoursEarned([record]),
-    WorkedHours: reportingFns.getWorkedHours([record], 2),
-    includedOvertime: reportingFns.getOvertimeHours([record], 2)
-  };
+  /* Record Reporting Values */
+
+  const workedHours = r.getWorkedHours(
+    [record],
+    source === 'jobs' ? jobs : undefined
+  );
+
+  const overtimeHours = r.getOvertimeHours(
+    [record],
+    source === 'jobs' ? jobs : undefined
+  );
+
+  const workedHoursEarned =
+    paymentType === 'hourly' ? r.getWorkedHoursEarned([record]) : undefined;
+  const contractEarned =
+    paymentType === 'hourly'
+      ? r.getWorkedHoursWithoutOvertime(
+          [record],
+          source === 'jobs' ? jobs : undefined
+        ) * rate
+      : undefined;
 
   const debug = {
-    // job,
-    rate: record.rate,
-    getWorkedHours: reportingFns.getWorkedHours([record]),
-    getOvertimeHours: reportingFns.getOvertimeHours([record]),
-    getWorkedHoursWithoutOvertime: reportingFns.getWorkedHoursWithoutOvertime([
-      record
-    ]),
-    earned: {
-      getOvertimeEarned: reportingFns.getOvertimeEarned([record]),
-      getWorkedHoursWithoutOvertimeEarned: reportingFns.getWorkedHoursWithoutOvertimeEarned(
-        [record]
-      )
-    }
+    workedHours,
+    overtimeHours,
+    workedHoursEarned,
+    contractEarned
   };
-
-  React.useEffect(() => {
-    console.log(
-      paymentType,
-      /* recordDayHours, */ weekHours,
-      daysPerWeek,
-      weekHours && daysPerWeek
-    );
-  }, []);
 
   return (
     <>
@@ -113,12 +100,15 @@ export default function DateDetailsEntry({
           ></div>
           <time
             className="date-details-entry-time-begin"
-            dateTime="{time.begin}"
+            dateTime={timeDisplay.begin}
           >
-            {time.begin}
+            {timeDisplay.begin}
           </time>
-          <time className="date-details-entry-time-end" dateTime="{time.end}">
-            {time.end}
+          <time
+            className="date-details-entry-time-end"
+            dateTime={timeDisplay.end}
+          >
+            {timeDisplay.end}
           </time>
         </div>
 
@@ -129,30 +119,47 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            DayHours: {dayHours} <hr />
-            {record.rate && (
-              <FigureEarned records={[record]} settings={settings} />
+            <p>
+              Data Source: <b>{source}</b>
+            </p>
+            workedHoursEarned:
+            {workedHoursEarned ? (
+              <FigureEarnedDumb value={workedHoursEarned} settings={settings} />
+            ) : (
+              <code> {String(workedHoursEarned)}</code>
             )}
-            Hours Worked: <FigureHours records={[record]} settings={settings} />
-            {reporting.includedOvertime !== 0 && (
+            <br />
+            contractEarned:
+            {contractEarned ? (
+              <p>{String(contractEarned)}</p>
+            ) : (
+              <code> {String(contractEarned)}</code>
+            )}
+            <hr />
+            workedHours:{' '}
+            {workedHours ? (
+              <FigureHoursDumb value={workedHours} settings={settings} />
+            ) : (
               <p>
-                Overtime:{' '}
-                <FigureHours
-                  type="overtime"
-                  colorize={true}
-                  records={[record]}
-                  settings={settings}
-                />
+                <code>workedHours</code>: <code>{String(workedHours)}</code>
+              </p>
+            )}
+            <br />
+            FigureOvertimeDumb:{' '}
+            {overtimeHours ? (
+              <FigureHoursDumb value={overtimeHours} settings={settings} />
+            ) : (
+              <p>
+                <code>overtimeHours</code>: <code>{String(overtimeHours)}</code>
               </p>
             )}
             {record.sickLeave && <span> [sick]</span>}
           </div>
         </div>
       </button>
-      <LogToScreen title="dayHours" object={dayHours} settings={settings} />
       <LogToScreen title="record" object={record} settings={settings} />
       <LogToScreen title="linkedJob" object={linkedJob} settings={settings} />
-      <LogToScreen title="local debug obj" object={debug} settings={settings} />
+      <LogToScreen title="debug" object={debug} settings={settings} />
     </>
   );
 }
