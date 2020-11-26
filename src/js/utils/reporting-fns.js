@@ -46,7 +46,7 @@ function getOvertimeHours(records, jobs = []) {
         : record.dayHours;
 
     if (!dayHours) {
-      return;
+      return 0;
     }
 
     return acc + hoursElapsed - +hoursUnpaid - +dayHours;
@@ -98,10 +98,18 @@ function getEarned(records, hourCalculationFn, jobs = []) {
   const earnedHoursBased = records.reduce((acc, record) => {
     const { paymentType, /* monthlyIncome, */ derivedHourlyRate } =
       getLinkedJob(record.jobId, jobs) ?? record;
-    const rate =
-      paymentType === 'monthly' && 'getOvertimeHours' == hourCalcFnName
-        ? derivedHourlyRate
-        : record.rate;
+    let rate;
+
+    if (paymentType === 'monthly' && 'getOvertimeHours' == hourCalcFnName) {
+      rate = derivedHourlyRate;
+    } else if (
+      paymentType === 'monthly' &&
+      'getWorkedHoursWithoutOvertime' == hourCalcFnName
+    ) {
+      rate = 0;
+    } else {
+      rate = record.rate;
+    }
 
     return acc + rate * hourCalculationFn([record]);
   }, 0);
