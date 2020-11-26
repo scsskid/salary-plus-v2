@@ -44,7 +44,6 @@ export default function WidgetInputDate({
 
   return (
     <div className="input-date-display-control">
-      {/* {inputDate.toLocaleDateString()} */}
       <div className="input-date-display">{display['dashboard']}</div>
 
       <div className="input-date-control">
