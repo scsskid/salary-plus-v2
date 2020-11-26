@@ -27,7 +27,7 @@ function getLinkedJob(jobId, jobs = []) {
 function getWorkedHours(records, jobs = []) {
   const paidHoursElapsed = records.reduce((acc, record) => {
     const hoursElapsed = getHoursElapsed([record]);
-    const { hoursUnpaid } = getLinkedJob(record.jobId, jobs) ?? record;
+    const { hoursUnpaid = 0 } = getLinkedJob(record.jobId, jobs) ?? record;
     return acc + hoursElapsed - +hoursUnpaid;
   }, 0);
 
@@ -37,7 +37,7 @@ function getWorkedHours(records, jobs = []) {
 function getOvertimeHours(records, jobs = []) {
   const overtimeHours = records.reduce((acc, record) => {
     const hoursElapsed = getHoursElapsed([record]);
-    const { hoursUnpaid, paymentType, weekHours, daysPerWeek } =
+    const { hoursUnpaid = 0, paymentType = 'hourly', weekHours, daysPerWeek } =
       getLinkedJob(record.jobId, jobs) ?? record;
     const canCalculateFixedIncomeDayHours = weekHours && daysPerWeek;
     const dayHours =
