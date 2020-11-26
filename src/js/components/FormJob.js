@@ -10,7 +10,7 @@ import FormButtonRow from './FormButtonRow';
 import { round } from '../utils/helpers';
 
 const defaultFormData = {
-  name: '',
+  jobName: '',
   rate: '',
   derivedHourlyRate: '',
   dayHours: '',
@@ -200,7 +200,7 @@ export default function FormJob({
   // validation fns
 
   const validate = {
-    name: validateNotEmpty,
+    jobName: validateNotEmpty,
     rate: validateNumber,
     dayHours: validateNumber,
     weekHours: validateNumber,
@@ -262,13 +262,13 @@ export default function FormJob({
           <FormElement
             htmlFor="name"
             label="Job Name"
-            error={errors.name}
-            touched={touched.name}
+            error={errors.jobName}
+            touched={touched.jobName}
           >
             <input
               type="text"
-              name="name"
-              value={formData.name}
+              name="jobName"
+              value={formData.jobName}
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Enter a job name..."
@@ -485,7 +485,7 @@ export default function FormJob({
       >
         <h1>Confirm deletion</h1>
         <p>
-          Are you sure to permanently delete <b>{formData.name}</b>?
+          Are you sure to permanently delete <b>{formData.jobName}</b>?
         </p>
         <p>
           <small>

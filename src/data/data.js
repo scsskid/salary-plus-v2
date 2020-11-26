@@ -2431,7 +2431,7 @@ export const sampleData = {
   jobs: [
     {
       id: 1,
-      name: "Hell's Kitchen™️",
+      jobName: "Hell's Kitchen™️",
       rate: 20,
       hoursUnpaid: 0.5,
       dayHours: 8,
@@ -2441,7 +2441,7 @@ export const sampleData = {
     },
     {
       id: 2,
-      name: 'Ostertag',
+      jobName: 'Ostertag',
       weekHours: 37.5,
       hoursUnpaid: 0.75,
       status: 'active',
@@ -2450,7 +2450,7 @@ export const sampleData = {
     },
     {
       id: 3,
-      name: 'Benedikts Teufelsküche',
+      jobName: 'Benedikts Teufelsküche',
       dayHours: 6,
       hoursUnpaid: 1,
       rate: 75,

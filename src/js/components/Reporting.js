@@ -30,9 +30,9 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
 
   React.useEffect(() => {
     // console.log(jobs, inputJobData, trackOvertime);
-    console.log(workedHours);
-    console.log(overtimeHours);
-    console.log(workedHoursEarned);
+    // console.log(workedHours);
+    // console.log(overtimeHours);
+    // console.log(workedHoursEarned);
   }, [inputJobId]);
 
   const Views = {

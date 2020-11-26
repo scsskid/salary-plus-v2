@@ -8,7 +8,7 @@ export function WidgetInputJobId({
 }) {
   const jobOptions = jobs.map((job) => (
     <option key={`job-${job.id}`} value={job.id}>
-      {job.name}
+      {job.jobName}
     </option>
   ));
 
@@ -27,7 +27,7 @@ export function WidgetInputJobId({
       {jobOptions}
     </select>
   ) : jobs.length === 1 ? (
-    jobs.map((job) => job.name)
+    jobs.map((job) => job.jobName)
   ) : (
     'no saved job'
   );

@@ -125,7 +125,7 @@ export default function FormRecord({
     const job = jobs.find((job) => job.id === selectedJobId);
     const {
       id: jobId = 0,
-      name: jobName = '',
+      jobName: jobName = '',
       /* eslint-disable no-unused-vars */
       trackOverTime,
       trackEarnings,
@@ -345,7 +345,7 @@ export default function FormRecord({
                 </option>
                 {jobs.map((job) => (
                   <option key={`job-${job.id}`} value={job.id}>
-                    {job.name}
+                    {job.jobName}
                   </option>
                 ))}
               </select>

@@ -13,7 +13,7 @@ export function FormRecordCreate(props) {
     trackEarnings,
     trackOvertime,
     /* eslint-enable no-unused-vars */
-    name: jobName = '',
+    jobName: jobName = '',
     id: jobId = 0,
     ...previousJobAppData
   } = jobs.find((job) => job.id == settings.previousFormData?.jobId) || {};
