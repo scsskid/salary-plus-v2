@@ -39,7 +39,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
         <div className="view-dashboard-reporting">
           <h2>
             Earned{' '}
-            {clock.today.toLocaleDateString('de-DE', {
+            {clock.today.toLocaleDateString(settings.language, {
               month: 'long',
               year: 'numeric'
             })}

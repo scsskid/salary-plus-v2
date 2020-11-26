@@ -1,7 +1,7 @@
 export function getWeekDayNames({
   dayStart = 1,
   format = 'short',
-  locale = 'en'
+  locale = 'en-US'
 }) {
   const names = [];
   const date = new Date('2020-10-04');
@@ -10,7 +10,10 @@ export function getWeekDayNames({
 
   while (days !== 0) {
     date.setDate(date.getDate() + 1);
-    names.push(date.toLocaleDateString(locale, { weekday: format }));
+    names.push({
+      localized: date.toLocaleDateString(locale, { weekday: format }),
+      english: date.toLocaleDateString('en-US', { weekday: format })
+    });
     days--;
   }
 

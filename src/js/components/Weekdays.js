@@ -4,15 +4,19 @@ import { getWeekDayNames } from '../utils/helpers.js';
 export default function Weekdays({ dayStart, settings }) {
   let cells = [];
   for (let i = 0; i < 7; i++) {
-    const name = getWeekDayNames({
+    const weekdayName = getWeekDayNames({
       dayStart,
       format: 'short',
-      locale: settings.locale
+      locale: settings.language
     })[i];
 
+    // todo: data name must bne english
     cells.push(
-      <div key={`weekday-headcell-${i}`} data-day={name.toLowerCase()}>
-        {name}
+      <div
+        key={`weekday-headcell-${i}`}
+        data-day={weekdayName.english.toLowerCase()}
+      >
+        {weekdayName.localized}
       </div>
     );
   }

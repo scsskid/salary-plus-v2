@@ -30,7 +30,7 @@ export default function RecordsList({
           <div className="view-list-date" key={i}>
             {!hideDates && (
               <h1 className="view-list-date-title">
-                {date.toLocaleDateString(undefined, {
+                {date.toLocaleDateString(settings.language, {
                   weekday: 'long',
                   month: 'short',
                   day: 'numeric'

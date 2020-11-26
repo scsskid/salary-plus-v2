@@ -12,23 +12,20 @@ export default function WidgetInputDate({
   const date = new Date(inputDate.getTime());
 
   const display = {
-    dashboard: date.toLocaleDateString(undefined, {
+    dashboard: date.toLocaleDateString(settings.language, {
       month: 'long',
-      year: 'numeric',
-      timeZone: settings.timeZone
+      year: 'numeric'
     }),
     week: (function () {
-      let string = date.toLocaleDateString(undefined, {
+      let string = date.toLocaleDateString(settings.language, {
         month: 'short',
-        day: 'numeric',
-        timeZone: settings.timeZone
+        day: 'numeric'
       });
       date.setDate(date.getDate() + 6);
       string += ' - ';
-      string += date.toLocaleDateString(undefined, {
+      string += date.toLocaleDateString(settings.language, {
         month: 'short',
-        day: 'numeric',
-        timeZone: settings.timeZone
+        day: 'numeric'
       });
       return string;
     })()

@@ -72,7 +72,7 @@ export default function Settings({ jobs, children, settings, dispatch }) {
               <option value="de-DE">Deutsch</option>
               <option value="es-ES">Español</option>
               <option value="fr-FR">Français</option>
-              <option value="dk-DK">Dansk</option>
+              <option value="da-DK">Dansk</option>
             </select>
           </FormElement>
 

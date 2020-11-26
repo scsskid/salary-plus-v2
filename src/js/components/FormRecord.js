@@ -63,7 +63,12 @@ export default function FormRecord({
       setDatePickerDisplayValue('please select a date');
     } else if (dates.length === 1) {
       setDatePickerDisplayValue(
-        new Date(dates[0])?.toLocaleDateString(settings.language)
+        new Date(dates[0])?.toLocaleDateString(settings.language, {
+          weekday: 'short',
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        })
       );
     } else if (dates.length > 0) {
       setDatePickerDisplayValue(`${dates.length} Dates`);
