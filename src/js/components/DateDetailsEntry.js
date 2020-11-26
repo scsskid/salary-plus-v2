@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as r from './../utils/reporting-fns';
 import useClock from '../hooks/useClock';
-import FigureHoursDumb from './FigureHoursDumb';
-import FigureEarnedDumb from './FigureEarnedDumb';
+import FigureHours from './FigureHours';
+import FigureEarned from './FigureEarned';
 import LogToScreen from './LogToScreen';
 
 export default function DateDetailsEntry({
@@ -124,7 +124,7 @@ export default function DateDetailsEntry({
             </p>
             workedHoursEarned:
             {workedHoursEarned ? (
-              <FigureEarnedDumb value={workedHoursEarned} settings={settings} />
+              <FigureEarned value={workedHoursEarned} settings={settings} />
             ) : (
               <code> {String(workedHoursEarned)}</code>
             )}
@@ -138,16 +138,16 @@ export default function DateDetailsEntry({
             <hr />
             workedHours:{' '}
             {workedHours ? (
-              <FigureHoursDumb value={workedHours} settings={settings} />
+              <FigureHours value={workedHours} settings={settings} />
             ) : (
               <p>
                 <code>workedHours</code>: <code>{String(workedHours)}</code>
               </p>
             )}
             <br />
-            FigureOvertimeDumb:{' '}
+            FigureOvertime:{' '}
             {overtimeHours ? (
-              <FigureHoursDumb value={overtimeHours} settings={settings} />
+              <FigureHours value={overtimeHours} settings={settings} />
             ) : (
               <p>
                 <code>overtimeHours</code>: <code>{String(overtimeHours)}</code>

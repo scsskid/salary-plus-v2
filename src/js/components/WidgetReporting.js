@@ -1,7 +1,8 @@
 import * as React from 'react';
-import FigureEarned from './FigureEarned';
-import FigureHours from './FigureHours';
 import { useHistory } from 'react-router-dom';
+import FigureHours from './FigureHours';
+import FigureEarned from './FigureEarned';
+import * as r from './../utils/reporting-fns';
 
 export default function WidgetReporting({
   records,
@@ -31,7 +32,10 @@ export default function WidgetReporting({
         {figures.includes('hours') && (
           <figure className="widget-reporting-figures-el">
             <b>
-              <FigureHours records={records} settings={settings} />
+              <FigureHours
+                value={r.getWorkedHours(records)}
+                settings={settings}
+              />
             </b>
             <figcaption>Hours</figcaption>
           </figure>
@@ -39,9 +43,25 @@ export default function WidgetReporting({
         {figures.includes('earned') && (
           <figure className="widget-reporting-figures-el">
             <b>
-              <FigureEarned records={records} settings={settings} />
+              {' '}
+              <FigureEarned
+                value={r.getWorkedHoursEarned(records)}
+                settings={settings}
+              />
             </b>
-            <figcaption>Earned</figcaption>
+            <figcaption>
+              Earned (
+              <FigureEarned
+                value={r.getWorkedHoursWithoutOvertimeEarned(records)}
+                settings={settings}
+              />
+              +{' '}
+              <FigureEarned
+                value={r.getOvertimeEarned(records)}
+                settings={settings}
+              />
+              )
+            </figcaption>
           </figure>
         )}
       </div>

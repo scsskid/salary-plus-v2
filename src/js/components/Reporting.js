@@ -1,12 +1,14 @@
 import * as React from 'react';
-import FigureHours from './FigureHours';
-import FigureEarned from './FigureEarned';
 import RecordsList from './RecordsList';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import { Link } from 'react-router-dom';
-// import * as r from '../utils/reporting-fns';
+import * as r from '../utils/reporting-fns';
+import FigureHours from './FigureHours';
+import FigureEarned from './FigureEarned';
 
 export default function Reporting({ inputDate, records, jobs, settings }) {
+  const source = 'record';
+  //
   const monthRecords = getRecordsByMonth({
     records,
     date: inputDate
@@ -14,11 +16,23 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
 
   const { inputJobId } = settings;
 
+  const workedHours = r.getWorkedHours(
+    records,
+    source === 'jobs' ? jobs : undefined
+  );
+
+  const overtimeHours = r.getOvertimeHours(
+    records,
+    source === 'jobs' ? jobs : undefined
+  );
+
+  const workedHoursEarned = r.getWorkedHoursEarned(records);
+
   React.useEffect(() => {
     // console.log(jobs, inputJobData, trackOvertime);
-    // console.log(r.getWorkedHours(records));
-    // console.log(r.getOvertimeHours(records));
-    // console.log(r.getReducedFixedMonthlyIncomeUnique(records));
+    console.log(workedHours);
+    console.log(overtimeHours);
+    console.log(workedHoursEarned);
   }, [inputJobId]);
 
   const Views = {
@@ -27,7 +41,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
         <p>
           <Link to="/view/calendar">View Calendar</Link>
         </p>
-        <div>Records: {records.length}</div>
+        <div>Records: {monthRecords.length}</div>
 
         <div className="table-reporting-container">
           {/* Table Header Helper */}
@@ -57,22 +71,36 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
               <tr className="table-reporting-row">
                 <th>Regular</th>
                 <td>
-                  <FigureHours records={monthRecords} type="contract" />
+                  <FigureHours
+                    value={r.getWorkedHoursWithoutOvertime(monthRecords)}
+                    settings={settings}
+                  />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} type="contract" />
+                    <FigureEarned
+                      value={r.getWorkedHoursWithoutOvertimeEarned(
+                        monthRecords
+                      )}
+                      settings={settings}
+                    />
                   </b>
                 </td>
               </tr>
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHours records={monthRecords} type="overtime" />
+                  <FigureHours
+                    value={r.getOvertimeHours(monthRecords)}
+                    settings={settings}
+                  />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} type="overtime" />
+                    <FigureEarned
+                      value={r.getOvertimeEarned(monthRecords)}
+                      settings={settings}
+                    />{' '}
                   </b>
                 </td>
               </tr>
@@ -80,9 +108,16 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
           </table>
           <p className="totals">
             Claimable Salary (
-            <FigureHours records={monthRecords} type="actual" /> hours)
+            <FigureHours
+              value={r.getWorkedHours(monthRecords)}
+              settings={settings}
+            />
+            )
             <b>
-              <FigureEarned records={monthRecords} type="actual" />
+              <FigureEarned
+                value={r.getWorkedHoursEarned(monthRecords)}
+                settings={settings}
+              />
             </b>{' '}
           </p>
           <table className="table-reporting">
@@ -97,7 +132,10 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
                 <td></td>
                 <td>
                   <b>
-                    <FigureEarned records={monthRecords} type="bonus" />
+                    <FigureEarned
+                      value={r.getBonusEarned(monthRecords)}
+                      settings={settings}
+                    />
                   </b>
                 </td>
               </tr>
@@ -106,7 +144,10 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
           <p className="totals">
             Total{' '}
             <b>
-              <FigureEarned records={monthRecords} type="totals" />
+              <FigureEarned
+                value={r.getTotalsEarned(monthRecords)}
+                settings={settings}
+              />
             </b>
           </p>
         </div>
