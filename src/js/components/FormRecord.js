@@ -268,7 +268,7 @@ export default function FormRecord({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      // setSubmit(true);
+      setSubmit(true);
     }
   }
 
