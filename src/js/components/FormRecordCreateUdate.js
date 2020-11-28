@@ -31,7 +31,7 @@ export function FormRecordCreate(props) {
     bonus: '',
     weekHours: '',
     daysPerWeek: '',
-    paymentType: '',
+    paymentType: 'hourly',
     monthlyIncome: '',
     derivedHourlyRate: ''
   };
@@ -69,6 +69,7 @@ export function FormRecordUpdate(props) {
   }, []);
 
   const initialFormData = {
+    paymentType: 'hourly',
     ...record,
     dateBegin: new Date(record.begin).setHours(0, 0, 0, 0),
     begin: getTimeOfDateISOString(record.begin),
