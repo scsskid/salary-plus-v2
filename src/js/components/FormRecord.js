@@ -50,15 +50,7 @@ export default function FormRecord({
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
 
-  // Include dates directly in formData?
-
-  // React.useEffect(() => {
-  //   setDates([new Date('2082-11-24T08:08:08.000Z')]);
-  // }, []);
-
   React.useEffect(() => {
-    // console.log(initialFormData.begin, new Date(initialFormData.begin), dates);
-
     if (dates.length === 0) {
       setDatePickerDisplayValue('please select a date');
     } else if (dates.length === 1) {
@@ -169,7 +161,7 @@ export default function FormRecord({
 
   const validate = {
     jobId: validateNumber,
-    jobName: validateJobName,
+    jobName: validateNotEmpty,
     dates: validateDates,
     begin: validateTime,
     end: validateTime,
@@ -179,7 +171,8 @@ export default function FormRecord({
     bonus: validateNumber,
     monthlyIncome: validateNumber,
     weekHours: validateNumber,
-    daysPerWeek: validateNumber
+    daysPerWeek: validateNumber,
+    paymentType: validateNotEmpty
   };
 
   function handleValidation({ name, value }) {
@@ -187,7 +180,7 @@ export default function FormRecord({
     // eslint-disable-next-line no-unused-vars
     const { [name]: removedErrorWhatever, ...restErrors } = errors;
 
-    const error = validate[name](value);
+    const error = validate[name](value, name);
 
     setErrors({
       ...restErrors,
@@ -195,9 +188,9 @@ export default function FormRecord({
     });
   }
 
-  function validateJobName(value) {
+  function validateNotEmpty(value, name = 'unnamed field') {
     if (value.trim() === '') {
-      return 'jobName is required (is empty)';
+      return name + ' is required (is empty)';
     }
     return null;
   }
@@ -244,7 +237,7 @@ export default function FormRecord({
       (acc, key) => {
         const hasValidationFunction = typeof validate[key] === 'function';
         const newError = hasValidationFunction // validation whole form
-          ? validate[key](formData[key])
+          ? validate[key](formData[key], key)
           : null;
         const newTouched = { [key]: true };
 
@@ -275,7 +268,7 @@ export default function FormRecord({
         Object.values(formData).length && // all fields were touched
       Object.values(formValidation.touched).every((t) => t === true) // every touched field is true
     ) {
-      setSubmit(true);
+      // setSubmit(true);
     }
   }
 
@@ -515,6 +508,7 @@ export default function FormRecord({
                       id="paymentTypeHourly"
                       value="hourly"
                       onChange={handleChange}
+                      required={true}
                     />
                   </FormElement>
                   <FormElement
