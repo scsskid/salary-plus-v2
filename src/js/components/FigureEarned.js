@@ -1,20 +1,12 @@
 import * as React from 'react';
+import { NumberFormatter } from '../utils/helpers';
 
-export default function FigureEarned({
-  fractionDigits = {
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0
-  },
-  settings = {},
-  value
-}) {
-  const { language } = settings || {};
-
-  const earned = new Intl.NumberFormat(language, {
+export default function FigureEarned({ settings = {}, value }) {
+  const { language: locale } = settings || {};
+  const formatter = new NumberFormatter(locale, {
     style: 'currency',
-    currency: 'EUR',
-    ...fractionDigits
-  }).format(value);
+    currency: 'EUR'
+  });
 
-  return <span>{earned}</span>;
+  return <span>{formatter(value)}</span>;
 }

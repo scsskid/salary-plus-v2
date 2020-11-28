@@ -1,3 +1,33 @@
+// general
+
+export function pad(n) {
+  return n < 10 ? '0' + n : n;
+}
+
+export function referrerIsSameDomain() {
+  const refProtocol = document.referrer.split(':')[0] + ':';
+  const refHost = document.referrer.split('/')[2];
+
+  return (
+    refProtocol == window.location.protocol && refHost == window.location.host
+  );
+}
+
+export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
+  .timeZone;
+
+export function NumberFormatter(locale, options = {}) {
+  const defaults = {
+    style: 'decimal',
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 0
+  };
+
+  return new Intl.NumberFormat(locale, { ...defaults, ...options }).format;
+}
+
+// dates
+
 export function getWeekDayNames({
   dayStart = 1,
   format = 'short',
@@ -19,26 +49,6 @@ export function getWeekDayNames({
 
   return names;
 }
-
-// general
-
-export function pad(n) {
-  return n < 10 ? '0' + n : n;
-}
-
-export function referrerIsSameDomain() {
-  const refProtocol = document.referrer.split(':')[0] + ':';
-  const refHost = document.referrer.split('/')[2];
-
-  return (
-    refProtocol == window.location.protocol && refHost == window.location.host
-  );
-}
-
-export const resolvedTimeZone = Intl.DateTimeFormat().resolvedOptions()
-  .timeZone;
-
-// dates
 
 export function getShortIsoString(date) {
   const offset = date.getTimezoneOffset();
