@@ -46,7 +46,7 @@ function getOvertimeHours(records, jobs = []) {
         : record.dayHours;
 
     if (!dayHours) {
-      return acc + 0;
+      return acc;
     }
 
     return acc + hoursElapsed - +hoursUnpaid - +dayHours;

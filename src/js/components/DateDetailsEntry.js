@@ -69,9 +69,9 @@ export default function DateDetailsEntry({
   );
 
   const workedHoursEarned =
-    paymentType === 'hourly' ? r.getWorkedHoursEarned([record]) : undefined;
+    paymentType !== 'monthly' ? r.getWorkedHoursEarned([record]) : undefined;
   const contractEarned =
-    paymentType === 'hourly'
+    paymentType !== 'monthly'
       ? r.getWorkedHoursWithoutOvertime(
           [record],
           source === 'jobs' ? jobs : undefined
@@ -131,7 +131,7 @@ export default function DateDetailsEntry({
             <br />
             contractEarned:
             {contractEarned ? (
-              <p>{String(contractEarned)}</p>
+              <FigureEarned value={contractEarned} settings={settings} />
             ) : (
               <code> {String(contractEarned)}</code>
             )}
@@ -141,16 +141,16 @@ export default function DateDetailsEntry({
               <FigureHours value={workedHours} settings={settings} />
             ) : (
               <p>
-                <code>workedHours</code>: <code>{String(workedHours)}</code>
+                <code>{String(workedHours)}</code>
               </p>
             )}
             <br />
-            FigureOvertime:{' '}
+            overtimeHours:{' '}
             {overtimeHours ? (
               <FigureHours value={overtimeHours} settings={settings} />
             ) : (
               <p>
-                <code>overtimeHours</code>: <code>{String(overtimeHours)}</code>
+                <code>{String(overtimeHours)}</code>
               </p>
             )}
             {record.sickLeave && <span> [sick]</span>}
