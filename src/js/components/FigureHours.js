@@ -11,7 +11,7 @@ export default function FigureHours({
   console.log(formatter(12));
 
   let className = 'figure-hours';
-  className += value < 1 ? ' value-negative' : '  value-not-negative';
+  className += value < 0 ? ' value-negative' : '  value-not-negative';
   className += colorize ? ' value-colorize' : '';
 
   return (

@@ -16,7 +16,8 @@ export default function DateDetailsEntry({
   const source = settings.reportingSource;
   const { begin, end, jobId } = record || {};
   const linkedJob = r.getLinkedJob(jobId, jobs) || {};
-  const { paymentType, rate } = source === 'record' ? record : linkedJob;
+  const { paymentType, rate, weekHours, monthlyIncome } =
+    source === 'record' ? record : linkedJob;
 
   const history = useHistory();
   const { language } = settings;
@@ -78,11 +79,17 @@ export default function DateDetailsEntry({
         ) * rate
       : undefined;
 
+  const overtimeEarned =
+    paymentType !== 'monthly'
+      ? r.getOvertimeEarned([record])
+      : (overtimeHours * monthlyIncome) / (weekHours * 4.325);
+
   const debug = {
     workedHours,
     overtimeHours,
     workedHoursEarned,
-    contractEarned
+    contractEarned,
+    overtimeEarned
   };
 
   return (
@@ -119,47 +126,45 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            <p>
-              Data Source: <b>{source}</b>
-            </p>
-            workedHoursEarned:
-            {workedHoursEarned ? (
+            {/* {workedHoursEarned && (
               <FigureEarned value={workedHoursEarned} settings={settings} />
-            ) : (
-              <code> {String(workedHoursEarned)}</code>
-            )}
-            <br />
-            contractEarned:
-            {contractEarned ? (
-              <FigureEarned value={contractEarned} settings={settings} />
-            ) : (
-              <code> {String(contractEarned)}</code>
-            )}
-            <hr />
-            workedHours:{' '}
-            {workedHours ? (
+            )} */}
+            {workedHours && (
               <FigureHours value={workedHours} settings={settings} />
-            ) : (
-              <p>
-                <code>{String(workedHours)}</code>
-              </p>
             )}
-            <br />
-            overtimeHours:{' '}
-            {overtimeHours ? (
-              <FigureHours value={overtimeHours} settings={settings} />
-            ) : (
+            {contractEarned && (
+              <FigureEarned value={contractEarned} settings={settings} />
+            )}
+
+            {overtimeHours && (
               <p>
-                <code>{String(overtimeHours)}</code>
+                overtime:
+                <FigureHours
+                  value={overtimeHours}
+                  settings={settings}
+                  colorize={true}
+                />
+                {overtimeEarned && (
+                  <>
+                    {' '}
+                    =
+                    <FigureEarned value={overtimeEarned} settings={settings} />
+                  </>
+                )}
               </p>
             )}
             {record.sickLeave && <span> [sick]</span>}
           </div>
         </div>
       </button>
+      <LogToScreen
+        title="Reporting Source"
+        object={source}
+        settings={settings}
+      />
+      <LogToScreen title="debug" object={debug} settings={settings} />
       <LogToScreen title="record" object={record} settings={settings} />
       <LogToScreen title="linkedJob" object={linkedJob} settings={settings} />
-      <LogToScreen title="debug" object={debug} settings={settings} />
     </>
   );
 }
