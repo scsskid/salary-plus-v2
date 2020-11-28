@@ -11,13 +11,13 @@ export default function DateDetailsEntry({
   settings = {},
   jobs = {}
 }) {
-  const source = 'record';
   const classList = ['date-details-entry'];
   const className = classList.join(' ');
-  const { paymentType, rate, begin, end, jobId } =
-    source === 'record' ? record : r.getLinkedJob(record.id, jobs);
-  const linkedJob = jobs.find((job) => job.id === jobId);
-  // -----------------------------------------------
+  const source = settings.reportingSource;
+  const { begin, end, jobId } = record || {};
+  const linkedJob = r.getLinkedJob(jobId, jobs) || {};
+  const { paymentType, rate } = source === 'record' ? record : linkedJob;
+
   const history = useHistory();
   const { language } = settings;
   const clock = useClock();
