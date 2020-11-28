@@ -274,6 +274,7 @@ export default function App() {
                       changeMonth={changeMonth}
                       inputDate={inputDate}
                       clock={clock}
+                      setInputDate={setInputDate}
                     />
                   </Route>
                   <Route exact path="/jobs/add">

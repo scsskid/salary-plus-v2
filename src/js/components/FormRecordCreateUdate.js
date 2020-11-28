@@ -52,18 +52,21 @@ export function FormRecordCreate(props) {
 
   return (
     <FormRecord
+      {...props}
       initialFormData={initialFormData}
       linkedJob={previousJobAppData}
-      {...props}
     />
   );
 }
 
 export function FormRecordUpdate(props) {
-  const { jobs, records } = props;
+  const { jobs, records, setInputDate } = props;
   const { id } = useParams();
   const record = records?.find((record) => +record.id === +id);
   const linkedJob = jobs.find((job) => job.id == record?.jobId);
+  React.useEffect(() => {
+    setInputDate(new Date(record.begin));
+  }, []);
 
   const initialFormData = {
     ...record,
@@ -74,10 +77,10 @@ export function FormRecordUpdate(props) {
 
   return record ? (
     <FormRecord
+      {...props}
       linkedJob={linkedJob}
       initialFormData={initialFormData}
       isUpdateForm={true}
-      {...props}
     />
   ) : (
     <NoMatch />
