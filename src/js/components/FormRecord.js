@@ -636,7 +636,14 @@ export default function FormRecord({
           <Button
             type="button"
             onClick={() => {
-              setDialogOpen(true);
+              if (
+                window.confirm(
+                  'Are you sure to permanently delete this record?'
+                )
+              ) {
+                handleDelete();
+              }
+              // setDialogOpen(true);
             }}
             className="btn--delete"
             data-button-delete=""

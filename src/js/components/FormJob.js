@@ -465,7 +465,14 @@ export default function FormJob({
             <Button
               type="button"
               onClick={() => {
-                setDialogOpen(true);
+                if (
+                  window.confirm(
+                    `Are you sure Are you sure to permanently delete ${formData.jobName}? You will loose the ability to filter views by job, entries wont be deleted.`
+                  )
+                ) {
+                  handleDelete();
+                }
+                // setDialogOpen(true);
               }}
               className="btn--delete"
               data-button-delete=""
@@ -489,7 +496,7 @@ export default function FormJob({
         </p>
         <p>
           <small>
-            You will loose the ability to filter reporting by Job, entries wont
+            You will loose the ability to filter reporting by job, entries wont
             be deleted.
           </small>
         </p>
