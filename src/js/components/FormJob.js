@@ -156,34 +156,6 @@ export default function FormJob({
     });
   }
 
-  function handleWeekHoursChange(e) {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: +value
-    });
-
-    setTouched({
-      ...touched,
-      [name]: true
-    });
-  }
-
-  function handleMonthlyIncomeChange(e) {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: +value
-    });
-
-    setTouched({
-      ...touched,
-      [name]: true
-    });
-  }
-
   function handleBlur(e) {
     handleValidation(e.target);
   }
@@ -354,7 +326,7 @@ export default function FormJob({
                 step="0.01"
                 min="0"
                 value={formData.weekHours}
-                onChange={handleWeekHoursChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="0"
                 disabled={formData.paymentType === 'hourly'}
@@ -395,7 +367,7 @@ export default function FormJob({
                 step="0.01"
                 name="monthlyIncome"
                 value={formData.monthlyIncome}
-                onChange={handleMonthlyIncomeChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="0"
               />
