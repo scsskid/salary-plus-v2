@@ -67,8 +67,15 @@ export function FormRecordUpdate(props) {
     setInputDate(new Date(record.begin));
   }, []);
 
-  const initialFormData = {
+  const initialFormDataMigration = {
     paymentType: 'hourly',
+    daysPerWeek: '',
+    weekHours: '',
+    monthlyIncome: ''
+  };
+
+  const initialFormData = {
+    ...initialFormDataMigration,
     ...record,
     dateBegin: new Date(record.begin).setHours(0, 0, 0, 0),
     begin: getTimeOfDateISOString(record.begin),
