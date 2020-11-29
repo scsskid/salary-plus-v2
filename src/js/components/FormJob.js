@@ -12,7 +12,6 @@ import { round } from '../utils/helpers';
 const defaultFormData = {
   jobName: '',
   rate: '',
-  derivedHourlyRate: '',
   dayHours: '',
   weekHours: '',
   hoursUnpaid: '',
@@ -159,16 +158,10 @@ export default function FormJob({
 
   function handleWeekHoursChange(e) {
     const { name, value } = e.target;
-    // const derivedHourlyRate = (value * 3) / 13 / formData.weekHours;
-    const derivedHourlyRate = round(
-      formData.monthlyIncome / (+value * 4.325),
-      2
-    );
 
     setFormData({
       ...formData,
-      [name]: +value,
-      derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
+      [name]: +value
     });
 
     setTouched({
@@ -179,12 +172,10 @@ export default function FormJob({
 
   function handleMonthlyIncomeChange(e) {
     const { name, value } = e.target;
-    const derivedHourlyRate = round(+value / (formData.weekHours * 4.325), 2);
 
     setFormData({
       ...formData,
-      [name]: +value,
-      derivedHourlyRate: !isNaN(derivedHourlyRate) ? derivedHourlyRate : 0
+      [name]: +value
     });
 
     setTouched({
@@ -208,9 +199,7 @@ export default function FormJob({
     hoursUnpaid: validateNumber,
     monthlyIncome: validateNumber,
     color: validateNotEmpty,
-    paymentType: () => {
-      return null;
-    }
+    paymentType: validateNotEmpty
   };
 
   function validateNotEmpty(value) {

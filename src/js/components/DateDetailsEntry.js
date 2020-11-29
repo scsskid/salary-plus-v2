@@ -16,8 +16,7 @@ export default function DateDetailsEntry({
   const source = settings.reportingSource;
   const { begin, end, jobId } = record || {};
   const linkedJob = r.getLinkedJob(jobId, jobs) || {};
-  const { paymentType, rate, weekHours, monthlyIncome } =
-    source === 'record' ? record : linkedJob;
+  const { paymentType, rate, weekHours, monthlyIncome } = record;
 
   const history = useHistory();
   const { language } = settings;
@@ -59,36 +58,27 @@ export default function DateDetailsEntry({
 
   /* Record Reporting Values */
 
-  const workedHours = r.getWorkedHours(
-    [record],
-    source === 'jobs' ? jobs : undefined
-  );
+  const workedHours = r.getWorkedHours([record]);
 
-  const overtimeHours = r.getOvertimeHours(
-    [record],
-    source === 'jobs' ? jobs : undefined
-  );
+  const overtimeHours = r.getOvertimeHours([record]);
 
   const workedHoursEarned =
     paymentType !== 'monthly' ? r.getWorkedHoursEarned([record]) : undefined;
-  const contractEarned =
+  const workedHoursWithoutOvertime =
     paymentType !== 'monthly'
-      ? r.getWorkedHoursWithoutOvertime(
-          [record],
-          source === 'jobs' ? jobs : undefined
-        ) * rate
+      ? r.getWorkedHoursWithoutOvertime([record]) * rate
       : undefined;
 
   const overtimeEarned =
     paymentType !== 'monthly'
       ? r.getOvertimeEarned([record])
-      : (overtimeHours * monthlyIncome) / (weekHours * 4.325);
+      : overtimeHours * r.getDerivedHourlyRate({ monthlyIncome, weekHours });
 
   const debug = {
     workedHours,
     overtimeHours,
     workedHoursEarned,
-    contractEarned,
+    workedHoursWithoutOvertime,
     overtimeEarned
   };
 
@@ -126,17 +116,20 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            {/* {workedHoursEarned && (
+            {workedHoursEarned && (
               <FigureEarned value={workedHoursEarned} settings={settings} />
-            )} */}
+            )}
             {workedHours && (
               <FigureHours value={workedHours} settings={settings} />
             )}
-            {contractEarned && (
-              <FigureEarned value={contractEarned} settings={settings} />
+            {workedHoursWithoutOvertime && (
+              <FigureEarned
+                value={workedHoursWithoutOvertime}
+                settings={settings}
+              />
             )}
 
-            {overtimeHours && (
+            {overtimeHours > 0 && (
               <p>
                 overtime:
                 <FigureHours

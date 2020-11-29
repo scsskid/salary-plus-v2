@@ -32,8 +32,7 @@ export function FormRecordCreate(props) {
     weekHours: '',
     daysPerWeek: '',
     paymentType: 'hourly',
-    monthlyIncome: '',
-    derivedHourlyRate: ''
+    monthlyIncome: ''
   };
 
   const initialFormData = {

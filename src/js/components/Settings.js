@@ -120,35 +120,8 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             </button>
           </FormElement>
         </fieldset>
+
         <h3>Debug</h3>
-        <fieldset>
-          <FormElement
-            label="Reporting source record"
-            htmlFor="reportingSourceRecord"
-          >
-            <input
-              type="radio"
-              checked={formData.reportingSource === 'record'}
-              name="reportingSource"
-              id="reportingSourceRecord"
-              value="record"
-              onChange={handleChange}
-            />
-          </FormElement>
-          <FormElement
-            label="Reporting source job"
-            htmlFor="reportingSourceJob"
-          >
-            <input
-              type="radio"
-              checked={formData.reportingSource === 'job'}
-              name="reportingSource"
-              id="reportingSourceJob"
-              value="job"
-              onChange={handleChange}
-            />
-          </FormElement>
-        </fieldset>
         <fieldset>
           <FormElement label="Show { debug } infos across the app">
             <input

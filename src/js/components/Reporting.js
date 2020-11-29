@@ -7,7 +7,6 @@ import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
 
 export default function Reporting({ inputDate, records, jobs, settings }) {
-  const source = 'record';
   //
   const monthRecords = getRecordsByMonth({
     records,
@@ -16,15 +15,9 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
 
   const { inputJobId } = settings;
 
-  const workedHours = r.getWorkedHours(
-    records,
-    source === 'jobs' ? jobs : undefined
-  );
+  const workedHours = r.getWorkedHours(records);
 
-  const overtimeHours = r.getOvertimeHours(
-    records,
-    source === 'jobs' ? jobs : undefined
-  );
+  const overtimeHours = r.getOvertimeHours(records);
 
   const workedHoursEarned = r.getWorkedHoursEarned(records);
 

@@ -96,12 +96,11 @@ function getReducedFixedMonthlyIncomeUnique(records) {
 function getEarned(records, hourCalculationFn, jobs = []) {
   const { name: hourCalcFnName } = hourCalculationFn;
   const earnedHoursBased = records.reduce((acc, record) => {
-    const { paymentType, /* monthlyIncome, */ derivedHourlyRate } =
-      getLinkedJob(record.jobId, jobs) ?? record;
+    const { paymentType, weekHours, monthlyIncome } = record;
     let rate;
 
     if (paymentType === 'monthly' && 'getOvertimeHours' == hourCalcFnName) {
-      rate = derivedHourlyRate;
+      rate = getDerivedHourlyRate({ monthlyIncome, weekHours });
     } else if (
       paymentType === 'monthly' &&
       'getWorkedHoursWithoutOvertime' == hourCalcFnName
@@ -119,6 +118,10 @@ function getEarned(records, hourCalculationFn, jobs = []) {
       ? getReducedFixedMonthlyIncomeUnique(records)
       : 0;
   return earnedHoursBased + fixedIncome;
+}
+
+function getDerivedHourlyRate({ monthlyIncome, weekHours }) {
+  return monthlyIncome / (weekHours * 4.325);
 }
 
 function getWorkedHoursWithoutOvertimeEarned(records) {
@@ -160,5 +163,6 @@ export {
   getWorkedHoursEarned,
   getTotalsEarned,
   getReducedFixedMonthlyIncomeUnique,
-  getLinkedJob
+  getLinkedJob,
+  getDerivedHourlyRate
 };
