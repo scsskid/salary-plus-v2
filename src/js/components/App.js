@@ -43,13 +43,14 @@ export default function App() {
   const [notification, setNotification, mountingState] = useNotification();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
-  const { settings = {}, jobs = [], app = {} } = appData;
-  const records =
+  const { records = [], settings = {}, jobs = [], app = {} } = appData;
+  const recordsByInputJob =
     settings.inputJobId == 0 || !settings.inputJobId
-      ? appData.records
-      : appData.records?.filter((record) => {
+      ? records
+      : records?.filter((record) => {
           return record.jobId == settings.inputJobId;
         });
+
   const unattachedRecords = getUnattachedRecords(appData?.records, jobs);
 
   React.useEffect(() => {
@@ -59,9 +60,11 @@ export default function App() {
   }, []);
 
   const monthRecords = getRecordsByMonth({
-    records,
+    records: recordsByInputJob,
     date: inputDate
   });
+
+  console.log(monthRecords);
 
   // make higher order fn
   function saveRecord(formData) {
@@ -193,7 +196,7 @@ export default function App() {
                     <Dashboard
                       jobs={jobs}
                       settings={settings}
-                      records={records}
+                      records={recordsByInputJob}
                       setInputDate={setInputDate}
                     />
                   </Route>
@@ -203,7 +206,7 @@ export default function App() {
                       settings={settings}
                       handleDateClick={handleDateClick}
                       setInputDate={setInputDate}
-                      records={records}
+                      records={recordsByInputJob}
                       changeDate={changeDate}
                       changeMonth={changeMonth}
                       jobs={jobs}
