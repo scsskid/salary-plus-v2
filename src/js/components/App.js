@@ -64,8 +64,6 @@ export default function App() {
     date: inputDate
   });
 
-  console.log(monthRecords);
-
   // make higher order fn
   function saveRecord(formData) {
     dispatch({
