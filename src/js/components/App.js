@@ -248,7 +248,7 @@ export default function App() {
                       inputDate={inputDate}
                       settings={settings}
                       changeMonth={changeMonth}
-                      records={records}
+                      records={recordsByInputJob}
                       jobs={jobs}
                     />
                   </Route>
