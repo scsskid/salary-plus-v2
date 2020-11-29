@@ -129,7 +129,7 @@ export default function DateDetailsEntry({
               />
             )}
 
-            {overtimeHours > 0 && (
+            {overtimeHours !== 0 && (
               <p>
                 overtime:
                 <FigureHours
