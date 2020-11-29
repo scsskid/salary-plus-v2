@@ -8,7 +8,6 @@ export default function FigureHours({
 }) {
   const { language: locale } = settings;
   const formatter = new NumberFormatter(locale);
-  console.log(formatter(12));
 
   let className = 'figure-hours';
   className += value < 0 ? ' value-negative' : '  value-not-negative';
