@@ -7,20 +7,23 @@ export default function Welcome({ seedFunctions }) {
   return (
     <>
       <header className="app-header">
-        <h1>Welcome</h1>
+        <h1>Salary Plus Alpha Version</h1>
       </header>
       <p>
-        Thank you for trying out Salary Calendar.{' '}
-        <span style={{ display: 'none' }} role="img" aria-label="bowing emoji">
-          🙇‍♂️
-        </span>
+        With Salary Plus you can keep track of your working hours, income and
+        overtime.
       </p>
       <p>
-        <Button className="btn" onClick={insertSampleData}>
+        While not mandatory {"it's"} recommended to add a job to enable more
+        flexible reporting and mass-organize your past records in future
+        updates. Go to <code>settings/jobs</code> to add a job
+      </p>
+      <p>
+        {/* <Button className="btn" onClick={insertSampleData}>
           Insert Sample Data
-        </Button>{' '}
+        </Button>{' '} */}
         <Button className="btn" onClick={insertBootstrapData}>
-          Start as new User
+          Start
         </Button>
       </p>
     </>
