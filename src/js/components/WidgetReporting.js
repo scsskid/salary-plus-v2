@@ -43,19 +43,17 @@ export default function WidgetReporting({
         {figures.includes('earned') && (
           <figure className="widget-reporting-figures-el">
             <b>
-              {' '}
-              <FigureEarned
+              {/* <FigureEarned
                 value={r.getWorkedHoursEarned(records)}
                 settings={settings}
-              />
-            </b>
-            <figcaption>
-              Earned (
+              /> */}
               <FigureEarned
                 value={r.getWorkedHoursWithoutOvertimeEarned(records)}
                 settings={settings}
               />
-              +{' '}
+            </b>
+            <figcaption>
+              Earned (overtime:{' '}
               <FigureEarned
                 value={r.getOvertimeEarned(records)}
                 settings={settings}

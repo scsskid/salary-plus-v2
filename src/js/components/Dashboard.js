@@ -66,11 +66,11 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
       <div className="view-dashboard | view-component">
         <div className="view-dashboard-reporting">
           <h2>
-            Earned{' '}
             {clock.today.toLocaleDateString(settings.language, {
               month: 'long',
               year: 'numeric'
-            })}
+            })}{' '}
+            Stats
           </h2>
           <WidgetReporting
             records={monthRecords}

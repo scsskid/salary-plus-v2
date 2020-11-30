@@ -232,21 +232,13 @@ export default function App() {
                     />
                   </Route>
                   <Route exact path="/view/reporting">
-                    {/* <AppHeader key="reporting" title="Reporting">
-                      <WidgetInputJobId
-                        settings={settings}
-                        jobs={jobs}
-                        handleInputJobIdChange={handleInputJobIdChange}
-                        unattachedRecordsCount={unattachedRecords.length}
-                      />
-                    </AppHeader>
                     <WidgetInputDate
                       inputDate={inputDate}
                       settings={settings}
                       changeMonth={changeMonth}
                       setInputDate={setInputDate}
                       changeDate={changeDate}
-                    /> */}
+                    />
                     <Reporting
                       inputDate={inputDate}
                       settings={settings}
