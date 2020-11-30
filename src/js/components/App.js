@@ -190,7 +190,7 @@ export default function App() {
                 </Route>
                 <Switch>
                   <Route exact path="/view/dashboard">
-                    <Clock />
+                    {/* <Clock /> */}
                     <Dashboard
                       jobs={jobs}
                       settings={settings}

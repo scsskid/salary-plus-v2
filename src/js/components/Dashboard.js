@@ -6,6 +6,7 @@ import WidgetReporting from './WidgetReporting';
 import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { isSameDay } from '../utils/helpers.js';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard({ jobs, settings, records, setInputDate }) {
   const clock = useClock();
@@ -15,7 +16,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     date: clock.today
   });
 
-  const reocordsBeforeToday = getRecordsByRange(records, {
+  const beforeTodayRecords = getRecordsByRange(records, {
     start: new Date('1900'),
     end: clock.today
   })
@@ -32,6 +33,35 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
     end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
+
+  console.log(beforeTodayRecords);
+
+  function addJobNudge() {
+    if (!jobs.length) {
+      return (
+        <>
+          <p>No Jobs found.</p>
+          <p>
+            {"It's"} recommended to add a job to enable more flexible reporting
+            and mass-organize your past records in future updates.{' '}
+            <Link to="/jobs/add">add a job</Link>
+          </p>
+        </>
+      );
+    }
+  }
+
+  if (!records.length) {
+    return (
+      <div className="view-dashboard | view-component">
+        <p>No data to display.</p>
+        <p>
+          <Link to="/records/add">Add a record</Link>
+        </p>
+        {addJobNudge()}
+      </div>
+    );
+  }
 
   return (
     <>
@@ -51,26 +81,33 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
             inputDate={clock.today}
             setInputDate={setInputDate}
           />
+          <p style={{ textAlign: 'right' }}>
+            <Link to="/reporting">Full Report →</Link>
+          </p>
         </div>
-        <div className="view-dashboard-ongoing">
-          <h2>Today</h2>
-          <RecordsList
-            jobs={jobs}
-            settings={settings}
-            records={todayRecords}
-            hideDates={true}
-          />
-        </div>
+        {todayRecords.length > 0 && (
+          <div className="view-dashboard-ongoing">
+            <h2>Today</h2>
+            <RecordsList
+              jobs={jobs}
+              settings={settings}
+              records={todayRecords}
+              hideDates={true}
+            />
+          </div>
+        )}
 
-        <div className="view-dashboard-recent">
-          <h2>before Today</h2>
-          <RecordsList
-            jobs={jobs}
-            settings={settings}
-            records={reocordsBeforeToday}
-          />
-        </div>
+        {beforeTodayRecords.length > 0 && (
+          <div className="view-dashboard-recent">
+            <h2>before Today</h2>
 
+            <RecordsList
+              jobs={jobs}
+              settings={settings}
+              records={beforeTodayRecords}
+            />
+          </div>
+        )}
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
           <div className="view-dashboard-upcoming-week">

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { Prompt } from 'react-router';
 import Button from './Button';
@@ -214,7 +214,8 @@ export default function FormJob({
       <LogToScreen title="errors" object={errors} settings={settings} />
       <form className="form-job" onSubmit={handleSubmit} autoComplete="off">
         <FormButtonRow>
-          <Button actionType="cancel">Cancel</Button>
+          {/* <Button actionType="cancel">Cancel</Button> */}
+          <Link to="/jobs">Cancel</Link>
           <Button type="submit" data-button-submit="">
             Save
           </Button>
