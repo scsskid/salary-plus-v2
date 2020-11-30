@@ -34,9 +34,6 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
   const Views = {
     Month: (
       <div className="reporting-month | reporting-component">
-        <p>
-          <Link to="/view/calendar">View Calendar</Link>
-        </p>
         <div>Records: {monthRecords.length}</div>
 
         <div className="table-reporting-container">
