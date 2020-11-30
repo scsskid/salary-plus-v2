@@ -101,7 +101,14 @@ export default function Settings({ jobs, children, settings, dispatch }) {
           </FormElement>
         </fieldset>
         <fieldset>
-          <FormElement label="Allow override jobs properties in records form">
+          <FormElement label="Jobs">
+            <button onClick={() => history.push('/jobs')}>
+              {jobs.length} →
+            </button>
+          </FormElement>
+        </fieldset>
+        <fieldset>
+          <FormElement label="Always show overrides in records form">
             <input
               type="checkbox"
               checked={formData.allowCustomJobPropsInRecordForm}
@@ -111,13 +118,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
               onChange={handleChange}
               onBlur={handleChange}
             />{' '}
-          </FormElement>
-        </fieldset>
-        <fieldset>
-          <FormElement label="Jobs">
-            <button onClick={() => history.push('/jobs')}>
-              {jobs.length} →
-            </button>
           </FormElement>
         </fieldset>
 

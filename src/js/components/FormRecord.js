@@ -25,6 +25,9 @@ export default function FormRecord({
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [showJobPropsFieldLocal, setShowJobPropsFieldLocal] = React.useState(
+    false
+  );
   const [errors, setErrors] = React.useState({});
   const [touched, setTouched] = React.useState({});
   const [datePickerOpen, setDatePickerOpen] = React.useState(false);
@@ -429,10 +432,97 @@ export default function FormRecord({
           </FormElement>
         </fieldset>
 
-        {showJobPropsFields && (
+        {showBonusField && (
+          <fieldset>
+            <FormElement
+              label="Bonus"
+              error={errors.bonus}
+              touched={touched.bonus}
+              htmlFor="bonus"
+            >
+              <input
+                inputMode="decimal"
+                variant="currency"
+                name="bonus"
+                id="bonus"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.bonus}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder="0"
+              />
+            </FormElement>
+          </fieldset>
+        )}
+        {showSickLeave && (
+          <fieldset>
+            <FormElement label="Sick Leave?" htmlFor="sickLeave">
+              <input
+                type="checkbox"
+                checked={formData.sickLeave}
+                name="sickLeave"
+                id="sickLeave"
+                value={formData.sickLeave}
+                onChange={handleChange}
+                // handleBlur={handleBlur}
+              />
+            </FormElement>
+          </fieldset>
+        )}
+
+        {!showJobPropsFields && (
+          <fieldset>
+            <FormElement
+              label="Override Reporting (Job-) properties"
+              htmlFor="showJobPropsFieldLocal"
+            >
+              <input
+                type="checkbox"
+                checked={showJobPropsFieldLocal}
+                name="showJobPropsFieldLocal"
+                id="showJobPropsFieldLocal"
+                value={showJobPropsFieldLocal}
+                onChange={() => {
+                  setShowJobPropsFieldLocal(!showJobPropsFieldLocal);
+                }}
+                // handleBlur={handleBlur}
+              />
+            </FormElement>
+          </fieldset>
+        )}
+        {(showJobPropsFields || showJobPropsFieldLocal) && (
           <>
             <fieldset>
               <legend>Reporting Settings</legend>
+              <FormElement
+                label="Payment is hours based"
+                htmlFor="paymentTypeHourly"
+              >
+                <input
+                  type="radio"
+                  checked={formData.paymentType === 'hourly'}
+                  name="paymentType"
+                  id="paymentTypeHourly"
+                  value="hourly"
+                  onChange={handleChange}
+                  required={true}
+                />
+              </FormElement>
+              <FormElement
+                label="Payment is month based"
+                htmlFor="paymentTypeMonthly"
+              >
+                <input
+                  type="radio"
+                  checked={formData.paymentType === 'monthly'}
+                  name="paymentType"
+                  id="paymentTypeMonthly"
+                  value="monthly"
+                  onChange={handleChange}
+                />
+              </FormElement>
               {linkedJob?.paymentType !== 'OFFhourly' && (
                 <>
                   <FormElement
@@ -459,6 +549,7 @@ export default function FormRecord({
                     error={errors.rate}
                     touched={touched.rate}
                     htmlFor="rate"
+                    disabled={formData.paymentType === 'monthly'}
                   >
                     <input
                       inputMode="decimal"
@@ -472,6 +563,7 @@ export default function FormRecord({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="0"
+                      disabled={formData.paymentType === 'monthly'}
                     />
                   </FormElement>
 
@@ -480,6 +572,7 @@ export default function FormRecord({
                     error={errors.dayHours}
                     touched={touched.dayHours}
                     htmlFor="dayHours"
+                    disabled={formData.paymentType === 'monthly'}
                   >
                     <input
                       name="dayHours"
@@ -491,40 +584,13 @@ export default function FormRecord({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="0"
+                      disabled={formData.paymentType === 'monthly'}
                     />
                   </FormElement>
                 </>
               )}
               {linkedJob?.paymentType !== 'OFFmonthly' && (
                 <>
-                  <FormElement
-                    label="Payment is hours based"
-                    htmlFor="paymentTypeHourly"
-                  >
-                    <input
-                      type="radio"
-                      checked={formData.paymentType === 'hourly'}
-                      name="paymentType"
-                      id="paymentTypeHourly"
-                      value="hourly"
-                      onChange={handleChange}
-                      required={true}
-                    />
-                  </FormElement>
-                  <FormElement
-                    label="Payment is month based"
-                    htmlFor="paymentTypeMonthly"
-                  >
-                    <input
-                      type="radio"
-                      checked={formData.paymentType === 'monthly'}
-                      name="paymentType"
-                      id="paymentTypeMonthly"
-                      value="monthly"
-                      onChange={handleChange}
-                    />
-                  </FormElement>
-
                   <FormElement
                     htmlFor="weekHours"
                     label="Hours per week"
@@ -573,6 +639,7 @@ export default function FormRecord({
                     label="Fixed monthly income"
                     touched={touched.monthlyIncome}
                     errors={errors.monthlyIncome}
+                    disabled={formData.paymentType === 'hourly'}
                   >
                     <input
                       id="monthlyIncome"
@@ -583,52 +650,13 @@ export default function FormRecord({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="0"
+                      disabled={formData.paymentType === 'hourly'}
                     />
                   </FormElement>
                 </>
               )}
             </fieldset>
           </>
-        )}
-
-        {showBonusField && (
-          <fieldset>
-            <FormElement
-              label="Bonus"
-              error={errors.bonus}
-              touched={touched.bonus}
-              htmlFor="bonus"
-            >
-              <input
-                inputMode="decimal"
-                variant="currency"
-                name="bonus"
-                id="bonus"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.bonus}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
-          </fieldset>
-        )}
-        {showSickLeave && (
-          <fieldset>
-            <FormElement label="Sick Leave?" htmlFor="sickLeave">
-              <input
-                type="checkbox"
-                checked={formData.sickLeave}
-                name="sickLeave"
-                id="sickLeave"
-                value={formData.sickLeave}
-                onChange={handleChange}
-                // handleBlur={handleBlur}
-              />
-            </FormElement>
-          </fieldset>
         )}
 
         {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
