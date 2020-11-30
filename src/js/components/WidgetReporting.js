@@ -19,7 +19,7 @@ export default function WidgetReporting({
       className="widget-reporting"
       onClick={() => {
         setInputDate(inputDate);
-        history.push('/reporting');
+        history.push('/view/reporting');
       }}
     >
       <div className="widget-reporting-figures">

@@ -170,7 +170,12 @@ export default function App() {
                   <Redirect to="/view/dashboard" />
                 </Route>
                 <Route
-                  path={['/view/dashboard', '/view/list', '/view/calendar']}
+                  path={[
+                    '/view/dashboard',
+                    '/view/list',
+                    '/view/calendar',
+                    '/view/reporting'
+                  ]}
                 >
                   <AppHeader key="view" title="View">
                     <WidgetInputJobId
@@ -184,7 +189,7 @@ export default function App() {
                     segments={[
                       { title: 'Dashboard', path: '/view/dashboard' },
                       { title: 'Calendar', path: '/view/calendar' },
-                      { title: 'List', path: '/view/list' }
+                      { title: 'Reporting', path: '/view/reporting' }
                     ]}
                   />
                 </Route>
@@ -226,8 +231,8 @@ export default function App() {
                       records={monthRecords}
                     />
                   </Route>
-                  <Route exact path="/reporting">
-                    <AppHeader key="reporting" title="Reporting">
+                  <Route exact path="/view/reporting">
+                    {/* <AppHeader key="reporting" title="Reporting">
                       <WidgetInputJobId
                         settings={settings}
                         jobs={jobs}
@@ -241,7 +246,7 @@ export default function App() {
                       changeMonth={changeMonth}
                       setInputDate={setInputDate}
                       changeDate={changeDate}
-                    />
+                    /> */}
                     <Reporting
                       inputDate={inputDate}
                       settings={settings}
