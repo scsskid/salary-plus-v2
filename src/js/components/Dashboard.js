@@ -97,7 +97,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
 
         {beforeTodayRecords.length > 0 && (
           <div className="view-dashboard-recent">
-            <h2>before Today</h2>
+            <h2>Most Recent</h2>
 
             <RecordsList
               jobs={jobs}
