@@ -93,7 +93,7 @@ function getReducedFixedMonthlyIncomeUnique(records) {
   return result.reduce((acc, num) => acc + num, 0);
 }
 
-function getEarned(records, hourCalculationFn, jobs = []) {
+function getEarned(records, hourCalculationFn) {
   const { name: hourCalcFnName } = hourCalculationFn;
   const earnedHoursBased = records.reduce((acc, record) => {
     const { paymentType, weekHours, monthlyIncome } = record;
@@ -121,6 +121,9 @@ function getEarned(records, hourCalculationFn, jobs = []) {
 }
 
 function getDerivedHourlyRate({ monthlyIncome, weekHours }) {
+  if (!monthlyIncome || !weekHours) {
+    return undefined;
+  }
   return monthlyIncome / (weekHours * 4.325);
 }
 

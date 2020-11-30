@@ -16,7 +16,16 @@ export default function DateDetailsEntry({
   const source = settings.reportingSource;
   const { begin, end, jobId } = record || {};
   const linkedJob = r.getLinkedJob(jobId, jobs) || {};
-  const { paymentType, rate, weekHours, monthlyIncome } = record;
+  const {
+    paymentType = 'hourly',
+    rate = 0,
+    weekHours = 0,
+    monthlyIncome = 0
+  } = record;
+  const derivedHourlyRate = r.getDerivedHourlyRate({
+    monthlyIncome,
+    weekHours
+  });
 
   const history = useHistory();
   const { language } = settings;
@@ -72,7 +81,9 @@ export default function DateDetailsEntry({
   const overtimeEarned =
     paymentType !== 'monthly'
       ? r.getOvertimeEarned([record])
-      : overtimeHours * r.getDerivedHourlyRate({ monthlyIncome, weekHours });
+      : derivedHourlyRate
+      ? overtimeHours * r.getDerivedHourlyRate({ monthlyIncome, weekHours })
+      : undefined;
 
   const debug = {
     workedHours,

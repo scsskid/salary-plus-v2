@@ -13,20 +13,23 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
     date: inputDate
   });
 
-  const { inputJobId } = settings;
+  // const { inputJobId } = settings;
 
-  const workedHours = r.getWorkedHours(records);
+  const workedHoursWithoutOvertime = r.getWorkedHoursWithoutOvertime(
+    monthRecords
+  );
+  const workedHoursWithoutOvertimeEarned = r.getWorkedHoursWithoutOvertimeEarned(
+    monthRecords
+  );
 
-  const overtimeHours = r.getOvertimeHours(records);
+  const overtimeHours = r.getOvertimeHours(monthRecords);
+  const overtimeEarned = r.getOvertimeEarned(monthRecords) || 0;
 
-  const workedHoursEarned = r.getWorkedHoursEarned(records);
+  const workedHours = r.getWorkedHours(monthRecords);
+  const workedHoursEarned = r.getWorkedHoursEarned(monthRecords) || 0;
 
-  React.useEffect(() => {
-    // console.log(jobs, inputJobData, trackOvertime);
-    // console.log(workedHours);
-    // console.log(overtimeHours);
-    // console.log(workedHoursEarned);
-  }, [inputJobId]);
+  const bonusEarned = r.getBonusEarned(monthRecords);
+  const totalsEarned = r.getTotalsEarned(monthRecords) || 0;
 
   const Views = {
     Month: (
@@ -65,16 +68,14 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
                 <th>Regular</th>
                 <td>
                   <FigureHours
-                    value={r.getWorkedHoursWithoutOvertime(monthRecords)}
+                    value={workedHoursWithoutOvertime}
                     settings={settings}
                   />
                 </td>
                 <td>
                   <b>
                     <FigureEarned
-                      value={r.getWorkedHoursWithoutOvertimeEarned(
-                        monthRecords
-                      )}
+                      value={workedHoursWithoutOvertimeEarned}
                       settings={settings}
                     />
                   </b>
@@ -83,34 +84,28 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
               <tr className="table-reporting-row">
                 <th>Overtime</th>
                 <td>
-                  <FigureHours
-                    value={r.getOvertimeHours(monthRecords)}
-                    settings={settings}
-                  />
+                  <FigureHours value={overtimeHours} settings={settings} />
                 </td>
                 <td>
                   <b>
-                    <FigureEarned
-                      value={r.getOvertimeEarned(monthRecords)}
-                      settings={settings}
-                    />{' '}
+                    <FigureEarned value={overtimeEarned} settings={settings} />{' '}
                   </b>
                 </td>
               </tr>
             </tbody>
           </table>
+          {isNaN(r.getOvertimeEarned(monthRecords)) && (
+            <p style={{ color: 'red' }}>
+              Error: Could not Calculate overtime Earned, due to to records
+              present set to pamentType monthly, but weekHours, daysPerWeek or
+              monthlyIncome not set.
+            </p>
+          )}
           <p className="totals">
             Claimable Salary (
-            <FigureHours
-              value={r.getWorkedHours(monthRecords)}
-              settings={settings}
-            />
-            )
+            <FigureHours value={workedHours} settings={settings} />)
             <b>
-              <FigureEarned
-                value={r.getWorkedHoursEarned(monthRecords)}
-                settings={settings}
-              />
+              <FigureEarned value={workedHoursEarned} settings={settings} />
             </b>{' '}
           </p>
           <table className="table-reporting">
@@ -125,10 +120,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
                 <td></td>
                 <td>
                   <b>
-                    <FigureEarned
-                      value={r.getBonusEarned(monthRecords)}
-                      settings={settings}
-                    />
+                    <FigureEarned value={bonusEarned} settings={settings} />
                   </b>
                 </td>
               </tr>
@@ -137,10 +129,7 @@ export default function Reporting({ inputDate, records, jobs, settings }) {
           <p className="totals">
             Total{' '}
             <b>
-              <FigureEarned
-                value={r.getTotalsEarned(monthRecords)}
-                settings={settings}
-              />
+              <FigureEarned value={totalsEarned} settings={settings} />
             </b>
           </p>
         </div>
