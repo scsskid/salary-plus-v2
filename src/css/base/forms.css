@@ -118,9 +118,16 @@ button[type='submit'] {
   box-shadow: inset 0 0 0 2px hsl(0deg 40% 10%);
 }
 
-/* Record Form  */
+/* Specifics  */
 
-.form-record input,
-.form-job input {
-  text-align: right;
+.form-record,
+.form-job {
+  & input {
+    text-align: right;
+  }
+  & input[type='text'],
+  & input[type='number'],
+  & input[type='time'] {
+    flex: 1;
+  }
 }
