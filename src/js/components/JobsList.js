@@ -6,6 +6,18 @@ import FormElement from './FormElement';
 
 export default function JobsList({ jobs }) {
   const history = useHistory();
+  const jobsList = jobs.map((job) => (
+    <FormElement label={job.jobName + ' →'} key={job.id}>
+      <div
+        className="jobs-list-el-color"
+        style={{ backgroundColor: job.color }}
+      ></div>
+      <button
+        className="jobs-list-el"
+        onClick={() => history.push(`/jobs/${job.id}`)}
+      ></button>
+    </FormElement>
+  ));
 
   return (
     <div className="jobs-list">
@@ -15,20 +27,7 @@ export default function JobsList({ jobs }) {
       </FormButtonRow>
 
       <div className="component-body">
-        <fieldset>
-          {jobs.map((job) => (
-            <FormElement label={job.jobName + ' →'} key={job.id}>
-              <div
-                className="jobs-list-el-color"
-                style={{ backgroundColor: job.color }}
-              ></div>
-              <button
-                className="jobs-list-el"
-                onClick={() => history.push(`/jobs/${job.id}`)}
-              ></button>
-            </FormElement>
-          ))}
-        </fieldset>
+        {jobsList.length ? <fieldset>{jobsList}</fieldset> : <div>No Jobs</div>}
       </div>
     </div>
   );
