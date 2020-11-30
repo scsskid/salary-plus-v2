@@ -127,18 +127,19 @@ export default function DateDetailsEntry({
           </h2>
 
           <div className="date-details-entry-meta">
-            {workedHoursEarned !== 0 && (
+            {/* {workedHoursEarned !== 0 && (
               <FigureEarned value={workedHoursEarned} settings={settings} />
-            )}
+            )} */}
             {workedHours && (
               <FigureHours value={workedHours} settings={settings} />
             )}
-            {workedHoursWithoutOvertime !== 0 && (
-              <FigureEarned
-                value={workedHoursWithoutOvertime}
-                settings={settings}
-              />
-            )}
+            {workedHoursWithoutOvertime !== 0 &&
+              !isNaN(workedHoursWithoutOvertime) && (
+                <FigureEarned
+                  value={workedHoursWithoutOvertime}
+                  settings={settings}
+                />
+              )}
 
             {overtimeHours !== 0 && (
               <p>
