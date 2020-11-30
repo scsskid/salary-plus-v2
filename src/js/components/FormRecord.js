@@ -25,7 +25,7 @@ export default function FormRecord({
   const history = useHistory();
   const [formData, setFormData] = React.useState(initialFormData);
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [showJobPropsFieldLocal, setShowJobPropsFieldLocal] = React.useState(
+  const [showJobPropsFieldsLocal, setShowJobPropsFieldsLocal] = React.useState(
     false
   );
   const [errors, setErrors] = React.useState({});
@@ -42,10 +42,12 @@ export default function FormRecord({
   const jobWasDeleted = isUpdateForm && !linkedJob && formData.jobId != 0;
   const jobsPresent = jobs.length > 0;
   const showJobsDropdown = jobsPresent;
+  const noJobSelected = formData.jobId == 0;
   const showJobsNameInput = formData.jobId == 0 || jobWasDeleted;
   const showJobPropsFields =
     settings?.allowCustomJobPropsInRecordForm ||
     jobWasDeleted ||
+    showJobPropsFieldsLocal ||
     formData.jobId == 0;
   const showSickLeave = settings.sickleaveOnNewRecordForm || isUpdateForm;
   const { showBonusField } = settings;
@@ -472,27 +474,27 @@ export default function FormRecord({
           </fieldset>
         )}
 
-        {!showJobPropsFields && (
+        {!settings?.allowCustomJobPropsInRecordForm && !noJobSelected && (
           <fieldset>
             <FormElement
               label="Override Reporting (Job-) properties"
-              htmlFor="showJobPropsFieldLocal"
+              htmlFor="showJobPropsFieldsLocal"
             >
               <input
                 type="checkbox"
-                checked={showJobPropsFieldLocal}
-                name="showJobPropsFieldLocal"
-                id="showJobPropsFieldLocal"
-                value={showJobPropsFieldLocal}
+                checked={showJobPropsFieldsLocal}
+                name="showJobPropsFieldsLocal"
+                id="showJobPropsFieldsLocal"
+                value={showJobPropsFieldsLocal}
                 onChange={() => {
-                  setShowJobPropsFieldLocal(!showJobPropsFieldLocal);
+                  setShowJobPropsFieldsLocal(!showJobPropsFieldsLocal);
                 }}
                 // handleBlur={handleBlur}
               />
             </FormElement>
           </fieldset>
         )}
-        {(showJobPropsFields || showJobPropsFieldLocal) && (
+        {showJobPropsFields && (
           <>
             <fieldset>
               <legend>Reporting Settings</legend>
