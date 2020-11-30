@@ -7,7 +7,6 @@ import Dialog from './Dialog';
 import FormElement from './FormElement';
 import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
-import { round } from '../utils/helpers';
 
 const defaultFormData = {
   jobName: '',

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import RecordsList from './RecordsList';
 import { getRecordsByMonth } from '../utils/dataHelpers.js';
-import { Link } from 'react-router-dom';
 import * as r from '../utils/reporting-fns';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
