@@ -30,7 +30,7 @@ select {
   background-color: #fff;
 }
 
-input[name='dates'] {
+input[name='datesDisplay'] {
   @mixin chevronDown;
 }
 

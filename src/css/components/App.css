@@ -27,12 +27,40 @@ html {
 }
 
 .main {
-  grid-row: 1 / 2;
+  /* grid-row: 1 / 2; */
+  margin-top: calc(22 * var(--b));
   @mixin padHor;
   overflow: scroll;
 }
 
 .main-navigation {
   position: fixed;
-  grid-row: 2 / 3;
+  z-index: 1;
+  bottom: 0;
+  width: 100%;
+  height: calc(10 * var(--b));
+  /* grid-row: 2 / 3; */
+}
+
+.app-header {
+  background: var(--color-bg-light);
+  @mixin padHor;
+  height: calc(12 * var(--b));
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.segment-nav {
+  margin-left: calc(2 * var(--b));
+  margin-right: calc(2 * var(--b));
+  position: fixed;
+  top: calc(12 * var(--b));
+  left: 0;
+  right: 0;
+  /* top: 10px; */
+  z-index: 1;
+  margin-bottom: calc(2 * var(--b));
 }
