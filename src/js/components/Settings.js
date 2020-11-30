@@ -107,6 +107,8 @@ export default function Settings({ jobs, children, settings, dispatch }) {
             </button>
           </FormElement>
         </fieldset>
+
+        <h3>Debug</h3>
         <fieldset>
           <FormElement label="Always show overrides in records form">
             <input
@@ -119,10 +121,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
               onBlur={handleChange}
             />{' '}
           </FormElement>
-        </fieldset>
-
-        <h3>Debug</h3>
-        <fieldset>
           <FormElement label="Show { debug } infos across the app">
             <input
               type="checkbox"

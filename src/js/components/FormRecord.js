@@ -295,7 +295,7 @@ export default function FormRecord({
 
   return (
     <>
-      <Prompt message="really navigate away?" when={formIsHalfTouched} />
+      <Prompt message="Discard unsaved changes?" when={formIsHalfTouched} />
       <LogToScreen title="touched" object={touched} settings={settings} />
       <LogToScreen title="errors" object={errors} settings={settings} />
       <LogToScreen
