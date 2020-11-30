@@ -34,8 +34,6 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
 
-  console.log(beforeTodayRecords);
-
   function addJobNudge() {
     if (!jobs.length) {
       return (
