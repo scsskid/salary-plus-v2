@@ -5,15 +5,27 @@ import Weekdays from './Weekdays';
 import WidgetReporting from './WidgetReporting';
 import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
+import { deltaDate, getFirstDateOfMonthDate } from '../utils/date-fns.js';
 import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 
 export default function Dashboard({ jobs, settings, records, setInputDate }) {
   const clock = useClock();
+  const firstDateOfCurrentMonth = getFirstDateOfMonthDate(clock.today); // set to deltaDate
 
   const monthRecords = getRecordsByMonth({
     records,
     date: clock.today
+  });
+
+  const lastThreeMonthsRecords = getRecordsByRange(records, {
+    start: deltaDate(firstDateOfCurrentMonth, -3, 'months'),
+    end: firstDateOfCurrentMonth
+  });
+
+  const currentYear = getRecordsByRange(records, {
+    start: new Date(`${clock.today.getFullYear()}-01-01`),
+    end: new Date(`${clock.today.getFullYear() + 1}-01-01`)
   });
 
   const beforeTodayRecords = getRecordsByRange(records, {
@@ -74,6 +86,22 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
           </h2>
           <WidgetReporting
             records={monthRecords}
+            figures={['dates', 'hours', 'earned']}
+            settings={settings}
+            inputDate={clock.today}
+            setInputDate={setInputDate}
+          />
+          <h2>Past 3 Months</h2>
+          <WidgetReporting
+            records={lastThreeMonthsRecords}
+            figures={['dates', 'hours', 'earned']}
+            settings={settings}
+            inputDate={clock.today}
+            setInputDate={setInputDate}
+          />
+          <h2>Current Year</h2>
+          <WidgetReporting
+            records={currentYear}
             figures={['dates', 'hours', 'earned']}
             settings={settings}
             inputDate={clock.today}

@@ -17,3 +17,22 @@ export function timeToDecimal(t) {
 
   return parseFloat(parseInt(arr[0], 10) + '.' + (dec < 10 ? '0' : '') + dec);
 }
+
+export function deltaDate(input, amount, dateType) {
+  const dt = new Date(input);
+  switch (dateType) {
+    case 'days':
+      return dt.setDate(dt.getDate() + amount) && dt;
+    case 'weeks':
+      return dt.setDate(dt.getDate() + 7 * amount) && dt;
+    case 'months':
+      return dt.setMonth(dt.getMonth() + amount) && dt;
+    case 'years':
+      return dt.setFullYear(dt.getFullYear() + amount) && dt;
+  }
+}
+
+export function getFirstDateOfMonthDate(input) {
+  const dt = new Date(input);
+  return new Date(dt.setDate(1));
+}
