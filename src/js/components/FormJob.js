@@ -233,6 +233,7 @@ export default function FormJob({
               onChange={handleChange}
               onBlur={handleBlur}
               placeholder="Enter a job name..."
+              required={true}
             />
           </FormElement>
 
