@@ -174,7 +174,7 @@ export default function FormJob({
   };
 
   function validateNotEmpty(value) {
-    if (value.trim() === '') {
+    if (('' + value).trim() === '') {
       return 'Field is required (is empty)';
     }
     return null;
@@ -391,6 +391,7 @@ export default function FormJob({
               value={formData.hoursUnpaid}
               onChange={handleChange}
               placeholder="0"
+              required={true}
             />
           </FormElement>
         </fieldset>

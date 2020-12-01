@@ -543,6 +543,7 @@ export default function FormRecord({
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="0"
+                      required={true}
                     />
                   </FormElement>
 
