@@ -28,7 +28,7 @@ html {
 
 .main {
   /* grid-row: 1 / 2; */
-  margin-top: calc(22 * var(--b));
+  margin-top: calc(12 * var(--b));
   @mixin padHor;
   overflow: scroll;
   padding-bottom: calc(16 * var(--b));
@@ -52,16 +52,4 @@ html {
   top: 0;
   left: 0;
   right: 0;
-}
-
-.segment-nav {
-  margin-left: calc(2 * var(--b));
-  margin-right: calc(2 * var(--b));
-  position: fixed;
-  top: calc(12 * var(--b));
-  left: 0;
-  right: 0;
-  /* top: 10px; */
-  z-index: 1;
-  margin-bottom: calc(2 * var(--b));
 }
