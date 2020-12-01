@@ -312,379 +312,383 @@ export default function FormRecord({
         }}
         settings={settings}
       />
-      <FormButtonRow>
-        <Button actionType="cancel">Cancel</Button>
-        <Button type="submit" data-button-submit="">
-          Save
-        </Button>
-      </FormButtonRow>
+
       <form
-        className="form-record has-fixed-button-row"
+        className="form-record"
         // ref={form}
         onSubmit={handleSubmit}
         data-record-id={formData.recordId}
         autoComplete="off"
       >
-        <input type="hidden" name="id" value={formData.id} />
+        <FormButtonRow>
+          <Button actionType="cancel">Cancel</Button>
+          <Button type="submit" data-button-submit="">
+            Save
+          </Button>
+        </FormButtonRow>
+        <div className="form-body has-fixed-button-row">
+          <input type="hidden" name="id" value={formData.id} />
 
-        <fieldset>
-          {showJobsDropdown && (
-            <FormElement
-              label="Select saved job"
-              error={errors.jobId}
-              htmlFor="entry-job"
-            >
-              <select
-                name="jobId"
-                id="entry-job"
-                value={formData.jobId}
-                onBlur={handleBlur}
-                onChange={handleSelectJobChange}
-              >
-                <option key={`job-0`} value={0}>
-                  None
-                </option>
-                {jobs.map((job) => (
-                  <option key={`job-${job.id}`} value={job.id}>
-                    {job.jobName}
-                  </option>
-                ))}
-              </select>
-            </FormElement>
-          )}
-          {showJobsNameInput && (
-            <FormElement
-              htmlFor="jobName"
-              error={errors.jobName}
-              touched={touched.jobName}
-              label="Job Name"
-            >
-              <input
-                name="jobName"
-                id="jobName"
-                value={formData.jobName}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </FormElement>
-          )}
-        </fieldset>
-        {jobWasDeleted && (
-          <p>
-            <small>
-              This record was attached to a job which was since deleted. You can
-              still edit contents and provide a diffrent Jobname.
-            </small>
-          </p>
-        )}
-
-        <fieldset>
-          <FormElement label="Select Dates...">
-            <input
-              name="datesDisplay"
-              id="datesDisplay"
-              value={datePickerDisplayValue}
-              variant="dates field value"
-              readOnly={true}
-              onClick={() => setDatePickerOpen(!datePickerOpen)}
-            />
-          </FormElement>
-
-          <DatesPickerCalendar
-            inputDate={inputDate}
-            settings={settings}
-            isUpdateForm={isUpdateForm}
-            changeMonth={changeMonth}
-            datePickerOpen={datePickerOpen}
-            dates={[...dates]}
-            updateDates={handleDatesChange}
-            clock={clock}
-            records={records}
-            jobs={jobs}
-            setDatePickerDisplayValue={setDatePickerDisplayValue}
-          />
-
-          <FormElement
-            error={errors.begin}
-            touched={touched.begin}
-            htmlFor="begin"
-            label="Starts"
-          >
-            <input
-              name="begin"
-              id="begin"
-              type="time"
-              value={formData.begin}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </FormElement>
-
-          <FormElement
-            error={errors.end}
-            touched={touched.end}
-            htmlFor="end"
-            label="Ends"
-          >
-            <input
-              name="end"
-              id="end"
-              type="time"
-              value={formData.end}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-          </FormElement>
-        </fieldset>
-
-        {showBonusField && (
           <fieldset>
-            <FormElement
-              label="Bonus"
-              error={errors.bonus}
-              touched={touched.bonus}
-              htmlFor="bonus"
-            >
-              <input
-                inputMode="decimal"
-                variant="currency"
-                name="bonus"
-                id="bonus"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.bonus}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-              />
-            </FormElement>
-          </fieldset>
-        )}
-        {showSickLeave && (
-          <fieldset>
-            <FormElement label="Sick Leave?" htmlFor="sickLeave">
-              <input
-                type="checkbox"
-                checked={formData.sickLeave}
-                name="sickLeave"
-                id="sickLeave"
-                value={formData.sickLeave}
-                onChange={handleChange}
-                // handleBlur={handleBlur}
-              />
-            </FormElement>
-          </fieldset>
-        )}
-
-        {!settings?.allowCustomJobPropsInRecordForm && !noJobSelected && (
-          <fieldset>
-            <FormElement
-              label="Override Reporting (Job-) properties"
-              htmlFor="showJobPropsFieldsLocal"
-            >
-              <input
-                type="checkbox"
-                checked={showJobPropsFieldsLocal}
-                name="showJobPropsFieldsLocal"
-                id="showJobPropsFieldsLocal"
-                value={showJobPropsFieldsLocal}
-                onChange={() => {
-                  setShowJobPropsFieldsLocal(!showJobPropsFieldsLocal);
-                }}
-                // handleBlur={handleBlur}
-              />
-            </FormElement>
-          </fieldset>
-        )}
-        {showJobPropsFields && (
-          <>
-            <fieldset>
-              <legend>Reporting Settings</legend>
+            {showJobsDropdown && (
               <FormElement
-                label="Payment is hours based"
-                htmlFor="paymentTypeHourly"
+                label="Select saved job"
+                error={errors.jobId}
+                htmlFor="entry-job"
+              >
+                <select
+                  name="jobId"
+                  id="entry-job"
+                  value={formData.jobId}
+                  onBlur={handleBlur}
+                  onChange={handleSelectJobChange}
+                >
+                  <option key={`job-0`} value={0}>
+                    None
+                  </option>
+                  {jobs.map((job) => (
+                    <option key={`job-${job.id}`} value={job.id}>
+                      {job.jobName}
+                    </option>
+                  ))}
+                </select>
+              </FormElement>
+            )}
+            {showJobsNameInput && (
+              <FormElement
+                htmlFor="jobName"
+                error={errors.jobName}
+                touched={touched.jobName}
+                label="Job Name"
               >
                 <input
-                  type="radio"
-                  checked={formData.paymentType === 'hourly'}
-                  name="paymentType"
-                  id="paymentTypeHourly"
-                  value="hourly"
+                  name="jobName"
+                  id="jobName"
+                  value={formData.jobName}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   required={true}
                 />
               </FormElement>
+            )}
+          </fieldset>
+          {jobWasDeleted && (
+            <p>
+              <small>
+                This record was attached to a job which was since deleted. You
+                can still edit contents and provide a diffrent Jobname.
+              </small>
+            </p>
+          )}
+
+          <fieldset>
+            <FormElement label="Select Dates...">
+              <input
+                name="datesDisplay"
+                id="datesDisplay"
+                value={datePickerDisplayValue}
+                variant="dates field value"
+                readOnly={true}
+                onClick={() => setDatePickerOpen(!datePickerOpen)}
+              />
+            </FormElement>
+
+            <DatesPickerCalendar
+              inputDate={inputDate}
+              settings={settings}
+              isUpdateForm={isUpdateForm}
+              changeMonth={changeMonth}
+              datePickerOpen={datePickerOpen}
+              dates={[...dates]}
+              updateDates={handleDatesChange}
+              clock={clock}
+              records={records}
+              jobs={jobs}
+              setDatePickerDisplayValue={setDatePickerDisplayValue}
+            />
+
+            <FormElement
+              error={errors.begin}
+              touched={touched.begin}
+              htmlFor="begin"
+              label="Starts"
+            >
+              <input
+                name="begin"
+                id="begin"
+                type="time"
+                value={formData.begin}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormElement>
+
+            <FormElement
+              error={errors.end}
+              touched={touched.end}
+              htmlFor="end"
+              label="Ends"
+            >
+              <input
+                name="end"
+                id="end"
+                type="time"
+                value={formData.end}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            </FormElement>
+          </fieldset>
+
+          {showBonusField && (
+            <fieldset>
               <FormElement
-                label="Payment is month based"
-                htmlFor="paymentTypeMonthly"
+                label="Bonus"
+                error={errors.bonus}
+                touched={touched.bonus}
+                htmlFor="bonus"
               >
                 <input
-                  type="radio"
-                  checked={formData.paymentType === 'monthly'}
-                  name="paymentType"
-                  id="paymentTypeMonthly"
-                  value="monthly"
+                  inputMode="decimal"
+                  variant="currency"
+                  name="bonus"
+                  id="bonus"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.bonus}
                   onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
                 />
               </FormElement>
-              {linkedJob?.paymentType !== 'OFFhourly' && (
-                <>
-                  <FormElement
-                    label="Hours unpaid"
-                    error={errors.hoursUnpaid}
-                    touched={touched.hoursUnpaid}
-                    htmlFor="hoursUnpaid"
-                  >
-                    <input
-                      name="hoursUnpaid"
-                      id="hoursUnpaid"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.hoursUnpaid}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      required={true}
-                    />
-                  </FormElement>
-
-                  <FormElement
-                    label="Rate"
-                    error={errors.rate}
-                    touched={touched.rate}
-                    htmlFor="rate"
-                    disabled={formData.paymentType === 'monthly'}
-                  >
-                    <input
-                      inputMode="decimal"
-                      variant="currency"
-                      name="rate"
-                      id="rate"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.rate}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      disabled={formData.paymentType === 'monthly'}
-                    />
-                  </FormElement>
-
-                  <FormElement
-                    label="dayHours"
-                    error={errors.dayHours}
-                    touched={touched.dayHours}
-                    htmlFor="dayHours"
-                    disabled={formData.paymentType === 'monthly'}
-                  >
-                    <input
-                      name="dayHours"
-                      id="dayHours"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.dayHours}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      disabled={formData.paymentType === 'monthly'}
-                    />
-                  </FormElement>
-                </>
-              )}
-              {linkedJob?.paymentType !== 'OFFmonthly' && (
-                <>
-                  <FormElement
-                    htmlFor="weekHours"
-                    label="Hours per week"
-                    touched={touched.weekHours}
-                    errors={errors.weekHours}
-                    disabled={formData.paymentType === 'hourly'}
-                  >
-                    <input
-                      id="weekHours"
-                      name="weekHours"
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.weekHours}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      disabled={formData.paymentType === 'hourly'}
-                    />
-                  </FormElement>
-
-                  <FormElement
-                    htmlFor="daysPerWeek"
-                    label="Days per week"
-                    touched={touched.daysPerWeek}
-                    errors={errors.daysPerWeek}
-                    disabled={formData.paymentType === 'hourly'}
-                  >
-                    <input
-                      id="daysPerWeek"
-                      name="daysPerWeek"
-                      type="number"
-                      step="1"
-                      min="0"
-                      max="7"
-                      value={formData.daysPerWeek}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      disabled={formData.paymentType === 'hourly'}
-                    />
-                  </FormElement>
-
-                  <FormElement
-                    htmlFor="monthlyIncome"
-                    label="Fixed monthly income"
-                    touched={touched.monthlyIncome}
-                    errors={errors.monthlyIncome}
-                    disabled={formData.paymentType === 'hourly'}
-                  >
-                    <input
-                      id="monthlyIncome"
-                      type="number"
-                      step="0.01"
-                      name="monthlyIncome"
-                      value={formData.monthlyIncome}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      placeholder="0"
-                      disabled={formData.paymentType === 'hourly'}
-                    />
-                  </FormElement>
-                </>
-              )}
             </fieldset>
-          </>
-        )}
+          )}
+          {showSickLeave && (
+            <fieldset>
+              <FormElement label="Sick Leave?" htmlFor="sickLeave">
+                <input
+                  type="checkbox"
+                  checked={formData.sickLeave}
+                  name="sickLeave"
+                  id="sickLeave"
+                  value={formData.sickLeave}
+                  onChange={handleChange}
+                  // handleBlur={handleBlur}
+                />
+              </FormElement>
+            </fieldset>
+          )}
 
-        {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
-        {isUpdateForm && (
-          <Button
-            type="button"
-            onClick={() => {
-              if (
-                window.confirm(
-                  'Are you sure to permanently delete this record?'
-                )
-              ) {
-                handleDelete();
-              }
-              // setDialogOpen(true);
-            }}
-            className="btn--delete"
-            data-button-delete=""
-          >
-            Delete Record
-          </Button>
-        )}
+          {!settings?.allowCustomJobPropsInRecordForm && !noJobSelected && (
+            <fieldset>
+              <FormElement
+                label="Override Reporting (Job-) properties"
+                htmlFor="showJobPropsFieldsLocal"
+              >
+                <input
+                  type="checkbox"
+                  checked={showJobPropsFieldsLocal}
+                  name="showJobPropsFieldsLocal"
+                  id="showJobPropsFieldsLocal"
+                  value={showJobPropsFieldsLocal}
+                  onChange={() => {
+                    setShowJobPropsFieldsLocal(!showJobPropsFieldsLocal);
+                  }}
+                  // handleBlur={handleBlur}
+                />
+              </FormElement>
+            </fieldset>
+          )}
+          {showJobPropsFields && (
+            <>
+              <fieldset>
+                <legend>Reporting Settings</legend>
+                <FormElement
+                  label="Payment is hours based"
+                  htmlFor="paymentTypeHourly"
+                >
+                  <input
+                    type="radio"
+                    checked={formData.paymentType === 'hourly'}
+                    name="paymentType"
+                    id="paymentTypeHourly"
+                    value="hourly"
+                    onChange={handleChange}
+                    required={true}
+                  />
+                </FormElement>
+                <FormElement
+                  label="Payment is month based"
+                  htmlFor="paymentTypeMonthly"
+                >
+                  <input
+                    type="radio"
+                    checked={formData.paymentType === 'monthly'}
+                    name="paymentType"
+                    id="paymentTypeMonthly"
+                    value="monthly"
+                    onChange={handleChange}
+                  />
+                </FormElement>
+                {linkedJob?.paymentType !== 'OFFhourly' && (
+                  <>
+                    <FormElement
+                      label="Hours unpaid"
+                      error={errors.hoursUnpaid}
+                      touched={touched.hoursUnpaid}
+                      htmlFor="hoursUnpaid"
+                    >
+                      <input
+                        name="hoursUnpaid"
+                        id="hoursUnpaid"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.hoursUnpaid}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        required={true}
+                      />
+                    </FormElement>
+
+                    <FormElement
+                      label="Rate"
+                      error={errors.rate}
+                      touched={touched.rate}
+                      htmlFor="rate"
+                      disabled={formData.paymentType === 'monthly'}
+                    >
+                      <input
+                        inputMode="decimal"
+                        variant="currency"
+                        name="rate"
+                        id="rate"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.rate}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        disabled={formData.paymentType === 'monthly'}
+                      />
+                    </FormElement>
+
+                    <FormElement
+                      label="dayHours"
+                      error={errors.dayHours}
+                      touched={touched.dayHours}
+                      htmlFor="dayHours"
+                      disabled={formData.paymentType === 'monthly'}
+                    >
+                      <input
+                        name="dayHours"
+                        id="dayHours"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.dayHours}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        disabled={formData.paymentType === 'monthly'}
+                      />
+                    </FormElement>
+                  </>
+                )}
+                {linkedJob?.paymentType !== 'OFFmonthly' && (
+                  <>
+                    <FormElement
+                      htmlFor="weekHours"
+                      label="Hours per week"
+                      touched={touched.weekHours}
+                      errors={errors.weekHours}
+                      disabled={formData.paymentType === 'hourly'}
+                    >
+                      <input
+                        id="weekHours"
+                        name="weekHours"
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.weekHours}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        disabled={formData.paymentType === 'hourly'}
+                      />
+                    </FormElement>
+
+                    <FormElement
+                      htmlFor="daysPerWeek"
+                      label="Days per week"
+                      touched={touched.daysPerWeek}
+                      errors={errors.daysPerWeek}
+                      disabled={formData.paymentType === 'hourly'}
+                    >
+                      <input
+                        id="daysPerWeek"
+                        name="daysPerWeek"
+                        type="number"
+                        step="1"
+                        min="0"
+                        max="7"
+                        value={formData.daysPerWeek}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        disabled={formData.paymentType === 'hourly'}
+                      />
+                    </FormElement>
+
+                    <FormElement
+                      htmlFor="monthlyIncome"
+                      label="Fixed monthly income"
+                      touched={touched.monthlyIncome}
+                      errors={errors.monthlyIncome}
+                      disabled={formData.paymentType === 'hourly'}
+                    >
+                      <input
+                        id="monthlyIncome"
+                        type="number"
+                        step="0.01"
+                        name="monthlyIncome"
+                        value={formData.monthlyIncome}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="0"
+                        disabled={formData.paymentType === 'hourly'}
+                      />
+                    </FormElement>
+                  </>
+                )}
+              </fieldset>
+            </>
+          )}
+
+          {Object.values(errors).length !== 0 && <p>There were ERRORS</p>}
+          {isUpdateForm && (
+            <Button
+              type="button"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    'Are you sure to permanently delete this record?'
+                  )
+                ) {
+                  handleDelete();
+                }
+                // setDialogOpen(true);
+              }}
+              className="btn--delete"
+              data-button-delete=""
+            >
+              Delete Record
+            </Button>
+          )}
+        </div>
       </form>
       <LogToScreen title="formData" object={formData} settings={settings} />
       <LogToScreen title="settings" object={settings} settings={settings} />

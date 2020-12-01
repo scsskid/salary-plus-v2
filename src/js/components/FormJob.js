@@ -214,223 +214,219 @@ export default function FormJob({
       <Prompt message="Discard unsaved changes?" when={formIsHalfTouched} />
       <LogToScreen title="touched" object={touched} settings={settings} />
       <LogToScreen title="errors" object={errors} settings={settings} />
-      <FormButtonRow>
-        {/* <Button actionType="cancel">Cancel</Button> */}
-        <Link to="/jobs">Cancel</Link>
-        <Button type="submit" data-button-submit="">
-          Save
-        </Button>
-      </FormButtonRow>
-      <form
-        className="form-job has-fixed-button-row"
-        onSubmit={handleSubmit}
-        autoComplete="off"
-      >
-        <fieldset>
-          <FormElement
-            htmlFor="name"
-            label="Job Name"
-            error={errors.jobName}
-            touched={touched.jobName}
-          >
-            <input
-              type="text"
-              name="jobName"
-              value={formData.jobName}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              placeholder="Enter a job name..."
-              required={true}
-            />
-          </FormElement>
-
-          <FormElement
-            label="Payment is hours based"
-            htmlFor="paymentTypeHourly"
-          >
-            <input
-              type="radio"
-              checked={formData.paymentType === 'hourly'}
-              name="paymentType"
-              id="paymentTypeHourly"
-              value="hourly"
-              onChange={handleChange}
-            />
-          </FormElement>
-          <FormElement
-            label="Payment is month based"
-            htmlFor="paymentTypeMonthly"
-          >
-            <input
-              type="radio"
-              checked={formData.paymentType === 'monthly'}
-              name="paymentType"
-              id="paymentTypeMonthly"
-              value="monthly"
-              onChange={handleChange}
-            />
-          </FormElement>
-        </fieldset>
-
-        {formData.paymentType === 'hourly' && (
-          <>
-            <fieldset>
-              <FormElement
-                htmlFor="dayHours"
-                label="Hours per day"
-                touched={touched.dayHours}
-                errors={errors.dayHours}
-                disabled={formData.paymentType === 'monthly'}
-              >
-                <input
-                  id="dayHours"
-                  name="dayHours"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={formData.dayHours}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="0"
-                  disabled={formData.paymentType === 'monthly'}
-                />
-              </FormElement>
-
-              <FormElement
-                htmlFor="rate"
-                label="Hourly Rate"
-                touched={touched.rate}
-                errors={errors.rate}
-                disabled={formData.paymentType === 'monthly'}
-              >
-                <input
-                  id="rate"
-                  type="number"
-                  step="0.01"
-                  name="rate"
-                  value={formData.rate}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="0"
-                  disabled={formData.paymentType === 'monthly'}
-                />
-              </FormElement>
-            </fieldset>
-          </>
-        )}
-        {formData.paymentType === 'monthly' && (
+      <form className="form-job " onSubmit={handleSubmit} autoComplete="off">
+        <div className="form-body has-fixed-button-row">
+          <FormButtonRow>
+            {/* <Button actionType="cancel">Cancel</Button> */}
+            <Link to="/jobs">Cancel</Link>
+            <Button type="submit" data-button-submit="">
+              Save
+            </Button>
+          </FormButtonRow>
           <fieldset>
             <FormElement
-              htmlFor="weekHours"
-              label="Hours per week"
-              touched={touched.weekHours}
-              errors={errors.weekHours}
-              disabled={formData.paymentType === 'hourly'}
+              htmlFor="name"
+              label="Job Name"
+              error={errors.jobName}
+              touched={touched.jobName}
             >
               <input
-                id="weekHours"
-                name="weekHours"
-                type="number"
-                step="0.01"
-                min="0"
-                value={formData.weekHours}
+                type="text"
+                name="jobName"
+                value={formData.jobName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                placeholder="0"
-                disabled={formData.paymentType === 'hourly'}
+                placeholder="Enter a job name..."
+                required={true}
               />
             </FormElement>
 
             <FormElement
-              htmlFor="daysPerWeek"
-              label="Days per week"
-              touched={touched.daysPerWeek}
-              errors={errors.daysPerWeek}
-              disabled={formData.paymentType === 'hourly'}
+              label="Payment is hours based"
+              htmlFor="paymentTypeHourly"
             >
               <input
-                id="daysPerWeek"
-                name="daysPerWeek"
-                type="number"
-                step="1"
-                min="0"
-                max="7"
-                value={formData.daysPerWeek}
+                type="radio"
+                checked={formData.paymentType === 'hourly'}
+                name="paymentType"
+                id="paymentTypeHourly"
+                value="hourly"
                 onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
-                disabled={formData.paymentType === 'hourly'}
               />
             </FormElement>
-
             <FormElement
-              htmlFor="monthlyIncome"
-              label="Fixed monthly income"
-              touched={touched.monthlyIncome}
-              errors={errors.monthlyIncome}
+              label="Payment is month based"
+              htmlFor="paymentTypeMonthly"
             >
               <input
-                id="monthlyIncome"
-                type="number"
-                step="0.01"
-                name="monthlyIncome"
-                value={formData.monthlyIncome}
+                type="radio"
+                checked={formData.paymentType === 'monthly'}
+                name="paymentType"
+                id="paymentTypeMonthly"
+                value="monthly"
                 onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="0"
               />
             </FormElement>
           </fieldset>
-        )}
 
-        <fieldset>
-          <FormElement
-            htmlFor="hoursUnpaid"
-            label="Unpaid Hours per Day (Break)"
-            touched={touched.hoursUnpaid}
-            errors={errors.hoursUnpaid}
-          >
-            <input
-              id="hoursUnpaid"
-              name="hoursUnpaid"
-              type="number"
-              step="0.01"
-              min="0"
-              value={formData.hoursUnpaid}
-              onChange={handleChange}
-              placeholder="0"
-              required={true}
-            />
-          </FormElement>
-        </fieldset>
+          {formData.paymentType === 'hourly' && (
+            <>
+              <fieldset>
+                <FormElement
+                  htmlFor="dayHours"
+                  label="Hours per day"
+                  touched={touched.dayHours}
+                  errors={errors.dayHours}
+                  disabled={formData.paymentType === 'monthly'}
+                >
+                  <input
+                    id="dayHours"
+                    name="dayHours"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    value={formData.dayHours}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="0"
+                    disabled={formData.paymentType === 'monthly'}
+                  />
+                </FormElement>
 
-        <fieldset>
-          <FormElement
-            htmlFor="color"
-            label="Color 🎨"
-            touched={touched.color}
-            errors={errors.color}
-          >
-            <input
-              style={{ padding: 0 }}
-              id="color"
-              name="color"
-              type="color"
-              value={formData.color}
-              onChange={handleChange}
-            />
-          </FormElement>
-        </fieldset>
-        {isUpdateForm && (
-          <p>
-            <small>
-              Updates to Job Settings will only not affect existing records for
-              this Job (except color).
-            </small>
-          </p>
-        )}
+                <FormElement
+                  htmlFor="rate"
+                  label="Hourly Rate"
+                  touched={touched.rate}
+                  errors={errors.rate}
+                  disabled={formData.paymentType === 'monthly'}
+                >
+                  <input
+                    id="rate"
+                    type="number"
+                    step="0.01"
+                    name="rate"
+                    value={formData.rate}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="0"
+                    disabled={formData.paymentType === 'monthly'}
+                  />
+                </FormElement>
+              </fieldset>
+            </>
+          )}
+          {formData.paymentType === 'monthly' && (
+            <fieldset>
+              <FormElement
+                htmlFor="weekHours"
+                label="Hours per week"
+                touched={touched.weekHours}
+                errors={errors.weekHours}
+                disabled={formData.paymentType === 'hourly'}
+              >
+                <input
+                  id="weekHours"
+                  name="weekHours"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.weekHours}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                  disabled={formData.paymentType === 'hourly'}
+                />
+              </FormElement>
 
-        <div>
+              <FormElement
+                htmlFor="daysPerWeek"
+                label="Days per week"
+                touched={touched.daysPerWeek}
+                errors={errors.daysPerWeek}
+                disabled={formData.paymentType === 'hourly'}
+              >
+                <input
+                  id="daysPerWeek"
+                  name="daysPerWeek"
+                  type="number"
+                  step="1"
+                  min="0"
+                  max="7"
+                  value={formData.daysPerWeek}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                  disabled={formData.paymentType === 'hourly'}
+                />
+              </FormElement>
+
+              <FormElement
+                htmlFor="monthlyIncome"
+                label="Fixed monthly income"
+                touched={touched.monthlyIncome}
+                errors={errors.monthlyIncome}
+              >
+                <input
+                  id="monthlyIncome"
+                  type="number"
+                  step="0.01"
+                  name="monthlyIncome"
+                  value={formData.monthlyIncome}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="0"
+                />
+              </FormElement>
+            </fieldset>
+          )}
+
+          <fieldset>
+            <FormElement
+              htmlFor="hoursUnpaid"
+              label="Unpaid Hours per Day (Break)"
+              touched={touched.hoursUnpaid}
+              errors={errors.hoursUnpaid}
+            >
+              <input
+                id="hoursUnpaid"
+                name="hoursUnpaid"
+                type="number"
+                step="0.01"
+                min="0"
+                value={formData.hoursUnpaid}
+                onChange={handleChange}
+                placeholder="0"
+                required={true}
+              />
+            </FormElement>
+          </fieldset>
+
+          <fieldset>
+            <FormElement
+              htmlFor="color"
+              label="Color 🎨"
+              touched={touched.color}
+              errors={errors.color}
+            >
+              <input
+                style={{ padding: 0 }}
+                id="color"
+                name="color"
+                type="color"
+                value={formData.color}
+                onChange={handleChange}
+              />
+            </FormElement>
+          </fieldset>
+          {isUpdateForm && (
+            <p>
+              <small>
+                Updates to Job Settings will only not affect existing records
+                for this Job (except color).
+              </small>
+            </p>
+          )}
+
           {isUpdateForm && (
             <Button
               type="button"
