@@ -309,19 +309,19 @@ export default function FormRecord({
         }}
         settings={settings}
       />
+      <FormButtonRow>
+        <Button actionType="cancel">Cancel</Button>
+        <Button type="submit" data-button-submit="">
+          Save
+        </Button>
+      </FormButtonRow>
       <form
-        className="form-record"
+        className="form-record has-fixed-button-row"
         // ref={form}
         onSubmit={handleSubmit}
         data-record-id={formData.recordId}
         autoComplete="off"
       >
-        <FormButtonRow>
-          <Button actionType="cancel">Cancel</Button>
-          <Button type="submit" data-button-submit="">
-            Save
-          </Button>
-        </FormButtonRow>
         <input type="hidden" name="id" value={formData.id} />
 
         <fieldset>

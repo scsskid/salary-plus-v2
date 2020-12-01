@@ -26,7 +26,7 @@ export default function JobsList({ jobs }) {
         <Button onClick={() => history.push(`/jobs/add`)}>New</Button>
       </FormButtonRow>
 
-      <div className="component-body">
+      <div className="component-body has-fixed-button-row">
         {jobsList.length ? <fieldset>{jobsList}</fieldset> : <div>No Jobs</div>}
       </div>
     </div>

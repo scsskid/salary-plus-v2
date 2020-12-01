@@ -9,18 +9,20 @@
 }
 
 .form-button-row {
+  background: var(--color-bg-light);
   position: fixed;
   @mixin padHor;
   z-index: 1;
   left: 0;
   right: 0;
-  top: calc(14 * var(--b));
+  top: calc(12 * var(--b));
   display: flex;
   justify-content: space-between;
   margin-bottom: calc(2 * var(--b));
 }
 
-.form-button-row-inner {
+.has-fixed-button-row {
+  padding-top: calc(8 * var(--b));
 }
 
 input,

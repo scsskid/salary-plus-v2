@@ -211,14 +211,18 @@ export default function FormJob({
       <Prompt message="Discard unsaved changes?" when={formIsHalfTouched} />
       <LogToScreen title="touched" object={touched} settings={settings} />
       <LogToScreen title="errors" object={errors} settings={settings} />
-      <form className="form-job" onSubmit={handleSubmit} autoComplete="off">
-        <FormButtonRow>
-          {/* <Button actionType="cancel">Cancel</Button> */}
-          <Link to="/jobs">Cancel</Link>
-          <Button type="submit" data-button-submit="">
-            Save
-          </Button>
-        </FormButtonRow>
+      <FormButtonRow>
+        {/* <Button actionType="cancel">Cancel</Button> */}
+        <Link to="/jobs">Cancel</Link>
+        <Button type="submit" data-button-submit="">
+          Save
+        </Button>
+      </FormButtonRow>
+      <form
+        className="form-job has-fixed-button-row"
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <fieldset>
           <FormElement
             htmlFor="name"
