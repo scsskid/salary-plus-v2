@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  useHistory,
-  useLocation
+  Redirect
 } from 'react-router-dom';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
