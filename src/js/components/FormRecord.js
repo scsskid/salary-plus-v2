@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Dialog from './Dialog';
 import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function FormRecord({
   saveRecord,
@@ -54,6 +55,8 @@ export default function FormRecord({
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
+
+  ScrollToTopOnMount();
 
   React.useEffect(() => {
     if (dates.length === 0) {

@@ -8,6 +8,7 @@ import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
 import { deltaDate, getFirstDateOfMonthDate } from '../utils/date-fns.js';
 import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Dashboard({ jobs, settings, records, setInputDate }) {
   const clock = useClock();
@@ -45,6 +46,8 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
     end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
+
+  ScrollToTopOnMount();
 
   function addJobNudge() {
     if (!jobs.length) {

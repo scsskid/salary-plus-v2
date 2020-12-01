@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import FormElement from './FormElement';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Settings({ jobs, children, settings, dispatch }) {
   const history = useHistory();
-
   const {
     language = 'en-US',
     allowCustomJobProps = false,
@@ -24,6 +24,8 @@ export default function Settings({ jobs, children, settings, dispatch }) {
     allowCustomJobPropsInRecordForm,
     reportingSource
   });
+
+  ScrollToTopOnMount();
 
   function handleChange(e) {
     const { name, value: tempValue, checked, type } = e.target;

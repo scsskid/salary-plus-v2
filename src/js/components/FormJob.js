@@ -7,6 +7,7 @@ import Dialog from './Dialog';
 import FormElement from './FormElement';
 import LogToScreen from './LogToScreen';
 import FormButtonRow from './FormButtonRow';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 const defaultFormData = {
   jobName: '',
@@ -70,6 +71,8 @@ export default function FormJob({
   const formIsHalfTouched =
     Object.values(touched).length > 0 &&
     Object.values(touched).length != Object.values(formData).length;
+
+  ScrollToTopOnMount();
 
   React.useEffect(() => {
     if (submit) {

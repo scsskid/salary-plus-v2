@@ -3,7 +3,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  useHistory,
+  useLocation
 } from 'react-router-dom';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
@@ -52,7 +54,11 @@ export default function App() {
         });
 
   const unattachedRecords = getUnattachedRecords(appData?.records, jobs);
-
+  const viewSegements = [
+    { title: 'Dashboard', path: '/view/dashboard' },
+    { title: 'Calendar', path: '/view/calendar' },
+    { title: 'Reporting', path: '/view/reporting' }
+  ];
   React.useEffect(() => {
     // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
@@ -185,13 +191,7 @@ export default function App() {
                       unattachedRecordsCount={unattachedRecords.length}
                     />
                   </AppHeader>
-                  <SegmentNav
-                    segments={[
-                      { title: 'Dashboard', path: '/view/dashboard' },
-                      { title: 'Calendar', path: '/view/calendar' },
-                      { title: 'Reporting', path: '/view/reporting' }
-                    ]}
-                  />
+                  <SegmentNav segments={viewSegements} />
                 </Route>
                 <Switch>
                   <Route exact path="/view/dashboard">

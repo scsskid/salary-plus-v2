@@ -5,6 +5,7 @@ import Weekdays from './Weekdays.js';
 import WidgetInputDate from './WidgetInputDate.js';
 import useDatecellMarkers from '../hooks/useDatecellMarkers';
 import { getAutoOffsetHeight } from '../utils/helpers';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Calendar({
   inputDate = new Date(),
@@ -17,6 +18,7 @@ export default function Calendar({
 }) {
   useDatecellMarkers('selected', clock, inputDate);
   useDatecellMarkers('today', clock, inputDate);
+  ScrollToTopOnMount();
 
   React.useEffect(() => {
     const datePickerDom = document.querySelector('.calendar-body');

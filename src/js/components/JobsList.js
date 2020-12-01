@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Button from './Button';
 import FormButtonRow from './FormButtonRow';
 import FormElement from './FormElement';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function JobsList({ jobs }) {
   const history = useHistory();
@@ -18,6 +19,8 @@ export default function JobsList({ jobs }) {
       ></button>
     </FormElement>
   ));
+
+  ScrollToTopOnMount();
 
   return (
     <div className="jobs-list">

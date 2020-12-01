@@ -4,8 +4,10 @@ import { getRecordsByMonth } from '../utils/dataHelpers.js';
 import * as r from '../utils/reporting-fns';
 import FigureHours from './FigureHours';
 import FigureEarned from './FigureEarned';
+import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Reporting({ inputDate, records, jobs, settings }) {
+  ScrollToTopOnMount();
   //
   const monthRecords = getRecordsByMonth({
     records,
