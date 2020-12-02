@@ -1,0 +1,21 @@
+{
+  "short_name": "Salary Plus",
+  "name": "Salary Plus",
+  "icons": [
+    {
+      "src": "/icons/app-icons/app-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/app-icons/app-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "backgroud_color": "#FF0000",
+  "display": "fullscreen",
+  "scope": "/",
+  "theme_color": "#00FF00"
+}
