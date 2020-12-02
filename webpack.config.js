@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -55,6 +57,15 @@ module.exports = {
     ]
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/icons',
+          to: 'icons'
+        }
+      ]
+    }),
+    new WriteFilePlugin(),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.[contenthash].css'
