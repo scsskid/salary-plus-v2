@@ -17,36 +17,34 @@ export default function RecordsList({
   const dateRangeCount =
     Math.floor((dateRange.start - dateRange.end) / (24 * 60 * 60 * 1000)) * -1;
 
-  let dateList = Array(dateRangeCount)
-    .fill()
-    .map((_, i) => {
-      const date = new Date(dateRange.start.getTime());
-      date.setDate(date.getDate() + i);
-      const dateRecords = getRecordsByDate({ records, date });
-      const hasRecords = dateRecords.length > 0;
+  let dateList = [...Array(dateRangeCount)].map((_, i) => {
+    const date = new Date(dateRange.start.getTime());
+    date.setDate(date.getDate() + i);
+    const dateRecords = getRecordsByDate({ records, date });
+    const hasRecords = dateRecords.length > 0;
 
-      return (
-        hasRecords && (
-          <div className="view-list-date" key={i}>
-            {!hideDates && (
-              <h1 className="view-list-date-title">
-                {date.toLocaleDateString(settings.language, {
-                  weekday: 'long',
-                  month: 'short',
-                  day: 'numeric'
-                })}
-              </h1>
-            )}
-            <DateDetails
-              date={date}
-              jobs={jobs}
-              records={records}
-              settings={settings}
-            />
-          </div>
-        )
-      );
-    });
+    return (
+      hasRecords && (
+        <div className="view-list-date" key={i}>
+          {!hideDates && (
+            <h1 className="view-list-date-title">
+              {date.toLocaleDateString(settings.language, {
+                weekday: 'long',
+                month: 'short',
+                day: 'numeric'
+              })}
+            </h1>
+          )}
+          <DateDetails
+            date={date}
+            jobs={jobs}
+            records={records}
+            settings={settings}
+          />
+        </div>
+      )
+    );
+  });
 
   return (
     <div className="view-list">
