@@ -62,6 +62,13 @@ module.exports = {
         {
           from: 'src/icons',
           to: 'icons'
+        },
+        {
+          from: 'src/splashscreens',
+          to: 'splashscreens'
+        },
+        {
+          from: 'src/webrootfiles'
         }
       ]
     }),
