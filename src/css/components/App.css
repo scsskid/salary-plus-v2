@@ -53,3 +53,7 @@ html {
   left: 0;
   right: 0;
 }
+
+.main-navigation {
+  padding-bottom: env(safe-area-inset-bottom, 200px);
+}
