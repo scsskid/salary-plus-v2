@@ -16,6 +16,10 @@ html {
   height: calc(var(--vh, 1vh) * 100);
   /* height: -webkit-fill-available; */
   touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 body:before {
