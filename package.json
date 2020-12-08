@@ -6,9 +6,10 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
-    "start": "webpack-dev-server --open --mode development --public --host 0.0.0.0",
+    "start": "webpack-dev-server --open --mode development --public",
     "upgrade-interactive": "npm-check --update",
-    "stylelint-check": "stylelint-config-prettier-check"
+    "stylelint-check": "stylelint-config-prettier-check",
+    "unsecure-chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:8080"
   },
   "repository": {
     "type": "git",
