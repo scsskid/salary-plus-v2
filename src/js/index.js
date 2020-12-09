@@ -4,21 +4,25 @@ import '../css/index.css';
 import App from './components/App';
 
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/sw.js')
-    .then(function (reg) {
-      if (reg.installing) {
+  console.log('CLIENT: service worker registration in progress.');
+  navigator.serviceWorker.register('/service-worker.js').then(
+    function (registration) {
+      console.log('CLIENT: service worker registration complete.');
+      console.log(registration);
+      if (registration.installing) {
         console.log('Service worker installing');
-      } else if (reg.waiting) {
+      } else if (registration.waiting) {
         console.log('Service worker installed');
-      } else if (reg.active) {
-        console.log('Service worker active');
+      } else if (registration.active) {
+        console.log('Service worker active !');
       }
-    })
-    .catch(function (error) {
-      // registration failed
-      console.log('Registration failed with ' + error);
-    });
+    },
+    function () {
+      console.log('CLIENT: service worker registration failure.');
+    }
+  );
+} else {
+  console.log('CLIENT: service worker is not supported.');
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
