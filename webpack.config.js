@@ -16,9 +16,8 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    https: true,
     historyApiFallback: true,
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
     open: false,
     hot: true,
     clientLogLevel: 'warning'

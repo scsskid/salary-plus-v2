@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --open --mode development --public",
     "upgrade-interactive": "npm-check --update",
     "stylelint-check": "stylelint-config-prettier-check",
-    "unsecure-chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=https://localhost:8080"
+    "unsecure-chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=http://localhost:8080,http://127.0.0.1:8080,http://0.0.0.0:8080"
   },
   "repository": {
     "type": "git",
