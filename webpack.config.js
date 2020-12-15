@@ -16,11 +16,14 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    historyApiFallback: true,
-    host: '0.0.0.0',
+    host: 'localhost',
+    https: false,
     open: false,
-    hot: true,
-    clientLogLevel: 'warning'
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, 'dist'),
+    hot: false,
+    clientLogLevel: 'warning',
+    compress: true
   },
   module: {
     rules: [
