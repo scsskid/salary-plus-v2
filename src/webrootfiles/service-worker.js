@@ -1,26 +1,42 @@
 const version = 1;
-const assetCacheName = `assets-${version}`;
+const cacheName = `assets-${version}`;
+const filesToCache = [
+  '/',
+  '/main.js',
+  '/icons/',
+  '/view/dashboard/',
+  '/icons/icon-add.svg'
+];
 
 self.addEventListener('install', (event) => {
+  console.log('[ServiceWorker] Install');
   event.waitUntil(
     caches
-      .open(assetCacheName)
+      .open(cacheName)
       .then((cache) => {
-        return cache.addAll([
-          '/',
-          '/main.js',
-          '/icons/',
-          '/icons/icon-add.svg'
-        ]);
+        console.log('[ServiceWorker] Caching app shell');
+        return cache.addAll(filesToCache);
       })
       .then(function () {
-        console.log('WORKER: install completed !');
+        console.log('[ServiceWorker] Install completed !');
       })
   );
 });
 
+self.addEventListener('activate', function (event) {
+  console.log('Claiming control');
+  return self.clients.claim();
+});
+
 self.addEventListener('fetch', (event) => {
   console.log('sw fetch event 2');
+  console.log(event);
+
+  // event.respondWith(async function() {
+  //   const cache = await caches.open(cacheName)
+  // })
+
+  // always return cache:
 
   event.respondWith(
     caches.match(event.request).then(function (cached) {
