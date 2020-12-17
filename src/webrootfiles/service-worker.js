@@ -10,6 +10,10 @@ const filesToCache = [
 
 self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Install');
+
+  // don't wait
+  // self.skipWaiting();
+
   event.waitUntil(
     caches
       .open(cacheName)
@@ -24,24 +28,37 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', function (event) {
-  console.log('Claiming control');
-  return self.clients.claim();
+  console.log('[ServiceWorker] Install');
+
+  // delete any caches that arent
+  // return self.clients.claim(); // try to immediately invoke service worker on first load
 });
 
 self.addEventListener('fetch', (event) => {
-  console.log('sw fetch event 2');
-  console.log(event);
-
-  // event.respondWith(async function() {
-  //   const cache = await caches.open(cacheName)
-  // })
-
-  // always return cache:
+  console.log('[ServiceWorker] fetch event', event);
 
   event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      console.log(cached);
-      return cached;
+    caches.match(event.request).then(function (response) {
+      // response aka cahce(d)
+      // Cache hit - return response
+      console.log(response);
+      if (response) {
+        return response;
+      }
+      return fetch(event.request).then(function (response) {
+        // skip if isnt valid message
+        if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response;
+        }
+
+        var responseToCache = response.clone();
+
+        caches.open(cacheName).then(function (cache) {
+          cache.put(event.request, responseToCache);
+        });
+
+        return response;
+      });
     })
   );
 });
