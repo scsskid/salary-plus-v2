@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import '../css/index.css';
 import App from './components/App';
 
-registerServiceWorker();
-
 ReactDOM.render(<App />, document.getElementById('root'));
+
+window.addEventListener('load', registerServiceWorker);
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {

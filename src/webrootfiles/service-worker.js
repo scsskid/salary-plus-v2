@@ -1,5 +1,5 @@
 const version = 1;
-const cacheName = `assets-${version}`;
+const currentCacheName = `assets-${version}`;
 const filesToCache = [
   '/',
   '/main.js',
@@ -9,14 +9,11 @@ const filesToCache = [
 ];
 
 self.addEventListener('install', (event) => {
-  console.log('[ServiceWorker] Install');
-
-  // don't wait
-  // self.skipWaiting();
+  console.log(`[ServiceWorker] Install with Cache Key:${currentCacheName}`);
 
   event.waitUntil(
     caches
-      .open(cacheName)
+      .open(currentCacheName)
       .then((cache) => {
         console.log('[ServiceWorker] Caching app shell');
         return cache.addAll(filesToCache);
@@ -28,9 +25,21 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', function (event) {
-  console.log('[ServiceWorker] Install');
+  console.log('[ServiceWorker] Activate');
 
-  // delete any caches that arent
+  // Delete any caches that arent that new worker doesn't need
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.mao((cacheName) => {
+          if (cacheName !== currentCacheName) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+
   // return self.clients.claim(); // try to immediately invoke service worker on first load
 });
 
