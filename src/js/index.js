@@ -23,6 +23,11 @@ function registerServiceWorker() {
           console.log('CLIENT: Service worker installed');
         } else if (registration.active) {
           console.log('CLIENT: Service worker active !');
+
+          console.log(
+            'CLIENT: Current Controller',
+            navigator.serviceWorker.controller
+          );
         }
       },
       function () {
