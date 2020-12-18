@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
     },
     devtool: 'source-map',
     devServer: {
-      host: 'localhost',
+      host: '0.0.0.0',
       https: false,
       open: false,
       historyApiFallback: true,
@@ -45,7 +45,6 @@ module.exports = (env, argv) => {
             mode === 'production'
               ? MiniCssExtractPlugin.loader
               : 'style-loader',
-
             {
               loader: 'css-loader',
               options: { importLoaders: 1, sourceMap: true }
