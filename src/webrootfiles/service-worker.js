@@ -31,7 +31,7 @@ self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
-        cacheNames.mao((cacheName) => {
+        cacheNames.map((cacheName) => {
           if (cacheName !== currentCacheName) {
             return caches.delete(cacheName);
           }
@@ -39,35 +39,45 @@ self.addEventListener('activate', function (event) {
       );
     })
   );
-
-  // return self.clients.claim(); // try to immediately invoke service worker on first load
 });
+
+// If fetched resource not found in cache, try to fetch it from network and put it in cache
 
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event', event);
 
   event.respondWith(
     caches.match(event.request).then(function (response) {
-      // response aka cahce(d)
-      // Cache hit - return response
-      console.log(response);
-      if (response) {
-        return response;
-      }
-      return fetch(event.request).then(function (response) {
-        // skip if isnt valid message
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
-        }
+      return (
+        response ||
+        fetch(event.request)
+          .then(function (response) {
+            // skip if isnt valid message
+            if (
+              !response ||
+              response.status !== 200 ||
+              response.type !== 'basic'
+            ) {
+              return response;
+            }
 
-        var responseToCache = response.clone();
+            let responseClone = response.clone();
 
-        caches.open(cacheName).then(function (cache) {
-          cache.put(event.request, responseToCache);
-        });
+            caches.open(currentCacheName).then(function (cache) {
+              cache.put(event.request, responseClone);
+            });
 
-        return response;
-      });
+            return response;
+          })
+          .catch(() => {
+            return new Response(
+              '<p>Could not get Request from Cache or from Network</p>',
+              {
+                headers: { 'Content-Type': 'text/html' }
+              }
+            );
+          })
+      );
     })
   );
 });

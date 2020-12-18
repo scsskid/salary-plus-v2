@@ -13,16 +13,16 @@ function registerServiceWorker() {
     navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).then(
       function (registration) {
         console.log(
-          'ServiceWorker registration successful with scope: ',
+          'CLIENT: ServiceWorker registration successful with scope: ',
           registration.scope
         );
         // console.log(registration);
         if (registration.installing) {
-          console.log('Service worker installing');
+          console.log('CLIENT: Service worker installing');
         } else if (registration.waiting) {
-          console.log('Service worker installed');
+          console.log('CLIENT: Service worker installed');
         } else if (registration.active) {
-          console.log('Service worker active !');
+          console.log('CLIENT: Service worker active !');
         }
       },
       function () {
