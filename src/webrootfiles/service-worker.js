@@ -5,7 +5,10 @@ const filesToCache = [
   '/main.js',
   '/icons/',
   '/view/dashboard/',
-  '/icons/icon-add.svg'
+  '/icons/icon-add.svg',
+  '/icons/icon-settings.svg',
+  '/icons/icon-view.svg',
+  '/icons/app-icons/app-icon-180.png',
 ];
 
 self.addEventListener('install', (event) => {
