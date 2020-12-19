@@ -1,5 +1,5 @@
-const version = 1;
-const currentCacheName = `assets-${version}`;
+const version = 2;
+const currentCacheName = `salary-plus-assets-${version}`;
 const filesToCache = [
   '/',
   '/main.js',
