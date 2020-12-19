@@ -50,6 +50,21 @@ self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event', event);
 
   event.respondWith(
+    // BESSER: erst explizit cache öffnen
+    /*
+self.addEventListener('fetch', event => {
+  
+  event.respondWith(
+    caches.open(cacheName).then(cache => {
+      return cache.match(event.request.url).then(response => {
+        return response || fetch(event.request.url)
+      })
+    })
+    
+  )
+})
+    */
+
     caches.match(event.request).then(function (response) {
       return (
         response ||
