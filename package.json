@@ -8,7 +8,8 @@
     "dev": "webpack --mode development",
     "start": "webpack-dev-server",
     "upgrade-interactive": "npm-check --update",
-    "stylelint-check": "stylelint-config-prettier-check"
+    "stylelint-check": "stylelint-config-prettier-check",
+    "unsecure-chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=http://localhost:8080,http://127.0.0.1:8080,http://0.0.0.0:8080"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.2",
     "core-js": "^3.6.5",
     "css-loader": "^4.3.0",
     "cssnano": "^4.1.10",
@@ -63,7 +65,8 @@
     "stylelint-prettier": "^1.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "write-file-webpack-plugin": "^4.5.1"
   },
   "dependencies": {
     "react": "^16.14.0",

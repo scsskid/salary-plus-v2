@@ -16,40 +16,53 @@ html {
   height: calc(var(--vh, 1vh) * 100);
   /* height: -webkit-fill-available; */
   touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  z-index: 7;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top);
+  width: 100%;
+  background: linear-gradient(
+    hsl(var(--hue-main) 5% 70%),
+    hsl(var(--hue-main) 18% 96%) 100%
+  );
+}
+
+body {
 }
 
 #root {
   height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  /* height: calc(var(--vh, 1vh) * 100); */ /* breaks PWA Layout */
   /* height: -webkit-fill-available; */
   display: grid;
   grid-template-rows: 1fr auto;
 }
 
 .main {
-  /* grid-row: 1 / 2; */
-  margin-top: calc(12 * var(--b));
+  margin-top: calc((10 * var(--b)) + env(safe-area-inset-top));
   @mixin padHor;
   overflow: scroll;
   padding-bottom: calc(16 * var(--b));
 }
 
-.main-navigation {
-  position: fixed;
-  z-index: 1;
-  bottom: 0;
-  width: 100%;
-  height: calc(10 * var(--b));
-  /* grid-row: 2 / 3; */
-}
-
 .app-header {
   background: var(--color-bg-light);
   @mixin padHor;
-  height: calc(12 * var(--b));
+  height: calc(8 * var(--b));
   position: fixed;
   z-index: 1;
-  top: 0;
+  top: calc((0 * var(--b)) + env(safe-area-inset-top));
   left: 0;
   right: 0;
 }

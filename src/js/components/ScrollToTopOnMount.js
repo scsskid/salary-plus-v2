@@ -6,7 +6,6 @@ export default function ScrollToTopOnMount() {
 
   React.useEffect(() => {
     const main = document.getElementsByClassName('main')[0];
-    console.log('Scroll Effect');
     main.scrollTo(0, 0);
   }, [pathname]);
 
