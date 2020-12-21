@@ -26,10 +26,10 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', function (event) {
-  // Delete any caches that arent that new worker doesn't need
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
+        // Delete any caches that arent that new worker doesn't need
         cacheNames.map((cacheName) => {
           if (cacheName !== currentCacheName) {
             console.log(`[SW] Deleting old cache`, cacheName);
@@ -41,13 +41,13 @@ self.addEventListener('activate', function (event) {
   );
 });
 
-// If fetched resource not found in cache, try to fetch it from network and put it in cache
-
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event');
 
   event.respondWith(
     caches.open(currentCacheName).then((cache) => {
+      // If fetched resource not found in cache,
+      // try to fetch it from network and put it in cache
       return cache.match(event.request).then((response) => {
         const fetchPromise = fetch(event.request).then(function (
           networkResponse
