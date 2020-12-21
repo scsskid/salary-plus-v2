@@ -1,8 +1,9 @@
-const version = 2;
+const version = 3;
 const currentCacheName = `salary-plus-assets-${version}`;
 const filesToCache = [
   '/',
   '/main.js',
+  '/main.css',
   '/icons/',
   '/view/dashboard/',
   '/icons/icon-add.svg',
@@ -17,10 +18,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(currentCacheName)
-      .then((cache) => {
-        console.log('[ServiceWorker] Caching app shell');
-        return cache.addAll(filesToCache);
-      })
+      .then((cache) => cache.addAll(filesToCache))
       .then(function () {
         console.log('[ServiceWorker] Install completed !');
       })
@@ -28,14 +26,13 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', function (event) {
-  console.log('[ServiceWorker] Activate');
-
   // Delete any caches that arent that new worker doesn't need
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheName !== currentCacheName) {
+            console.log(`[SW] Deleting old cache`, cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -47,73 +44,19 @@ self.addEventListener('activate', function (event) {
 // If fetched resource not found in cache, try to fetch it from network and put it in cache
 
 self.addEventListener('fetch', (event) => {
-  console.log('[ServiceWorker] fetch event', event);
+  console.log('[ServiceWorker] fetch event');
 
   event.respondWith(
-    // BESSER: erst explizit cache öffnen
-    /*
-self.addEventListener('fetch', event => {
-  
-  event.respondWith(
-    caches.open(cacheName).then(cache => {
-      return cache.match(event.request.url).then(response => {
-        return response || fetch(event.request.url)
-      })
-    })
-    
-  )
-})
-    */
-
-    caches.match(event.request).then(function (response) {
-      return (
-        response ||
-        fetch(event.request)
-          .then(function (response) {
-            // skip if isnt valid message
-            if (
-              !response ||
-              response.status !== 200 ||
-              response.type !== 'basic'
-            ) {
-              return response;
-            }
-
-            let responseClone = response.clone();
-
-            caches.open(currentCacheName).then(function (cache) {
-              cache.put(event.request, responseClone);
-            });
-
-            return response;
-          })
-          .catch(() => {
-            return new Response(
-              '<p>Could not get Request from Cache or from Network</p>',
-              {
-                headers: { 'Content-Type': 'text/html' }
-              }
-            );
-          })
-      );
+    caches.open(currentCacheName).then((cache) => {
+      return cache.match(event.request).then((response) => {
+        const fetchPromise = fetch(event.request).then(function (
+          networkResponse
+        ) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        });
+        return response || fetchPromise;
+      });
     })
   );
 });
-
-// similar functionality /w async/await syntax
-
-/*
-
-addEventListener('fetch', event => {
-  // Prevent the default, and handle the request ourselves.
-  event.respondWith(async function() {
-    // Try to get the response from a cache.
-    const cachedResponse = await caches.match(event.request);
-    // Return it if we found one.
-    if (cachedResponse) return cachedResponse;
-    // If we didn't find a match in the cache, use the network.
-    return fetch(event.request);
-  }());
-});
-
-*/
