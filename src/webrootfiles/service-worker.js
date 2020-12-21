@@ -1,7 +1,7 @@
-const version = 3;
+const version = 4;
 const currentCacheName = `salary-plus-assets-${version}`;
 const filesToCache = [
-  '/',
+  '/index.html',
   '/main.js',
   '/main.css',
   '/icons/',
@@ -44,6 +44,15 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', (event) => {
   console.log('[ServiceWorker] fetch event');
 
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith(caches.match('index.html'));
+    return;
+  }
+
   event.respondWith(
     caches.open(currentCacheName).then((cache) => {
       // If fetched resource not found in cache,
@@ -52,7 +61,10 @@ self.addEventListener('fetch', (event) => {
         const fetchPromise = fetch(event.request).then(function (
           networkResponse
         ) {
-          cache.put(event.request, networkResponse.clone());
+          const responseClone = networkResponse.clone();
+          if (networkResponse.status == 200) {
+            cache.put(event.request, responseClone);
+          }
           return networkResponse;
         });
         return response || fetchPromise;
