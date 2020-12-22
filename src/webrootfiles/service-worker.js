@@ -1,4 +1,4 @@
-const version = 16;
+const version = 17;
 const currentCacheName = `salary-plus-assets-${version}`;
 const filesToCache = [
   '/index.html',
