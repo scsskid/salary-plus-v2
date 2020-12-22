@@ -66,3 +66,15 @@ body {
   left: 0;
   right: 0;
 }
+
+/* Update Notification */
+
+.update-notification {
+  color: red;
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 1;
+  background: #fff;
+  padding: 10px;
+}
