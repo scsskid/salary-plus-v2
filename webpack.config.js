@@ -1,6 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
@@ -26,7 +26,8 @@ module.exports = (env, argv) => {
       contentBase: path.join(__dirname, 'dist'),
       hot: false,
       clientLogLevel: 'warning',
-      compress: true
+      compress: true,
+      writeToDisk: true
     },
     module: {
       rules: [
@@ -44,7 +45,8 @@ module.exports = (env, argv) => {
           use: [
             mode === 'production'
               ? MiniCssExtractPlugin.loader
-              : 'style-loader',
+              : MiniCssExtractPlugin.loader,
+            // : 'style-loader',
             {
               loader: 'css-loader',
               options: { importLoaders: 1, sourceMap: true }
@@ -63,6 +65,10 @@ module.exports = (env, argv) => {
         }
       ]
     },
+    optimization: {
+      minimize: true,
+      minimizer: [new CssMinimizerPlugin()]
+    },
     plugins: [
       new CopyPlugin({
         patterns: [
@@ -79,7 +85,6 @@ module.exports = (env, argv) => {
           }
         ]
       }),
-      new WriteFilePlugin(),
       new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         // filename: 'main.[contenthash].css'
