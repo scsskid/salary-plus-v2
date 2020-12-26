@@ -4,12 +4,10 @@
   "description": "Salary Plus",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode development",
-    "start": "webpack serve --mode development",
-    "upgrade-interactive": "npm-check --update",
-    "stylelint-check": "stylelint-config-prettier-check",
-    "unsecure-chrome": "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --user-data-dir=/tmp/foo --ignore-certificate-errors --unsafely-treat-insecure-origin-as-secure=http://localhost:8080,http://127.0.0.1:8080,http://0.0.0.0:8080"
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "start": "webpack serve --config webpack.dev.js",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "repository": {
     "type": "git",
@@ -65,7 +63,8 @@
     "stylelint-prettier": "^1.1.2",
     "webpack": "^5.11.0",
     "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "react": "^17.0.1",
