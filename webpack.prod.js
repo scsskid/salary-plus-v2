@@ -5,10 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: 'development',
   devtool: 'source-map',
   optimization: {
-    minimize: true,
+    minimize: false,
     minimizer: [`...`, new CssMinimizerPlugin()]
   },
   module: {
@@ -29,7 +29,8 @@ module.exports = merge(common, {
   plugins: [
     new WorkboxPlugin.InjectManifest({
       swSrc: './src/service-worker.js',
-      maximumFileSizeToCacheInBytes: 10000000
+      maximumFileSizeToCacheInBytes: 10000000,
+      mode: 'development'
     })
   ]
 });
