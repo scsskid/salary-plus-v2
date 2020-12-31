@@ -5,10 +5,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = merge(common, {
-  mode: 'development',
+  mode: 'production',
   devtool: 'source-map',
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [`...`, new CssMinimizerPlugin()]
   },
   module: {

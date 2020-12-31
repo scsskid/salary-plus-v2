@@ -58,8 +58,7 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      // filename: 'main.[contenthash].css'
-      filename: 'main.css' // not caching until figrued out how to cache hashed with service worker (via workbox)
+      filename: 'main.css'
     }),
     new HtmlWebPackPlugin({
       template: './src/index.html',
