@@ -28,7 +28,6 @@ import useClock from '../hooks/useClock';
 import Dashboard from './Dashboard';
 import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
-import Clock from './Clock';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
 import Notification from './Notification';
@@ -36,57 +35,7 @@ import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
 import useNotification from '../hooks/useNotification';
-import { Workbox, messageSW } from 'workbox-window';
-
-function SWWrapper() {
-  const [showPrompt, setShowPrompt] = React.useState(false);
-
-  const wb = new Workbox('/service-worker.js');
-
-  let registration;
-
-  const onAccept = async () => {
-    wb.addEventListener('controlling', (event) => {
-      window.location.reload();
-    });
-
-    if (registration && registration.waiting) {
-      messageSW(registration.waiting, { type: 'SKIP_WAITING' });
-    }
-  };
-
-  React.useEffect(() => {
-    wb.addEventListener('waiting', () => {
-      setShowPrompt(true);
-    });
-    wb.addEventListener('externalwaiting', () => {
-      setShowPrompt(true);
-    });
-
-    wb.register().then((r) => {
-      console.log(r);
-      registration = r;
-    });
-  }, []);
-
-  return (
-    showPrompt && (
-      <div>
-        <h1>5</h1>
-        <p>
-          <button
-            onClick={() => {
-              setShowPrompt(false);
-            }}
-          >
-            Not now
-          </button>{' '}
-          <button onClick={onAccept}>Install</button>
-        </p>
-      </div>
-    )
-  );
-}
+import ServiceWorkerWrapper from './ServiceWorkerWrapper';
 
 export default function App() {
   const clock = useClock();
@@ -365,15 +314,10 @@ export default function App() {
                 </Switch>
               </>
             )}
-            <SWWrapper />
+            <ServiceWorkerWrapper />
           </main>
         </Router>
       </ErrorBoundary>
     </React.StrictMode>
   );
 }
-
-// if (
-//   'serviceWorker' in navigator &&
-//   process.env.NODE_ENV !== 'OFFdevelopment'
-// ) {}

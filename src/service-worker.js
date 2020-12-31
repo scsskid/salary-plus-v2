@@ -24,6 +24,6 @@ addEventListener('message', (event) => {
   }
 });
 
-// -const handler = createHandlerBoundToURL('/index.html');
+// const handler = createHandlerBoundToURL('/index.html');
 // const navigationRoute = new NavigationRoute(handler);
 // registerRoute(navigationRoute);
