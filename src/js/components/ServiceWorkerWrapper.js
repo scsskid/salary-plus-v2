@@ -4,7 +4,7 @@ import { Workbox, messageSW } from 'workbox-window';
 export default function ServiceWorkerWrapper() {
   const [showPrompt, setShowPrompt] = React.useState(false);
 
-  const wb = new Workbox('./service-worker.js');
+  const wb = new Workbox('/service-worker.js');
 
   let registration = 'foo';
 
@@ -20,7 +20,7 @@ export default function ServiceWorkerWrapper() {
     });
 
     if (registration && registration.waiting) {
-      console.log('message to waiting sw');
+      console.log('message to wait ing sw');
       messageSW(registration.waiting, { type: 'SKIP_WAITING' });
     }
   }
@@ -35,6 +35,7 @@ export default function ServiceWorkerWrapper() {
   }, []);
 
   wb.register().then((r) => {
+    console.log('wb window: successful registered', r);
     registration = r;
   });
 
