@@ -3,10 +3,8 @@ import { Workbox, messageSW } from 'workbox-window';
 
 export default function ServiceWorkerWrapper() {
   const [showPrompt, setShowPrompt] = React.useState(false);
-
   const wb = new Workbox('/service-worker.js');
-
-  let registration = 'foo';
+  let registration;
 
   function onReject() {
     setShowPrompt(false);
