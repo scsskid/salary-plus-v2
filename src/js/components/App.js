@@ -57,6 +57,8 @@ export default function App() {
     { title: 'Calendar', path: '/view/calendar' },
     { title: 'Reporting', path: '/view/reporting' }
   ];
+  const withServiceWorker =
+    'serviceWorker' in navigator && process.env.NODE_ENV === 'production';
   React.useEffect(() => {
     // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
@@ -314,7 +316,7 @@ export default function App() {
                 </Switch>
               </>
             )}
-            <ServiceWorkerWrapper />
+            {withServiceWorker && <ServiceWorkerWrapper />}
           </main>
         </Router>
       </ErrorBoundary>
