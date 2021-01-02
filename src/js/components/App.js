@@ -43,7 +43,7 @@ export default function App() {
   const [notification, setNotification, mountingState] = useNotification();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const appRunning = Object.entries(appData).length > 0;
-  const { records = [], settings = {}, jobs = [], app = {} } = appData;
+  const { records = [], settings = {}, jobs = [] } = appData;
   const recordsByInputJob =
     settings.inputJobId == 0 || !settings.inputJobId
       ? records

@@ -3,7 +3,7 @@ import Button from './Button';
 import Version from './Version';
 
 export default function Welcome({ seedFunctions }) {
-  const { insertSampleData, insertBootstrapData } = seedFunctions;
+  const { insertBootstrapData } = seedFunctions;
 
   return (
     <>
@@ -20,9 +20,6 @@ export default function Welcome({ seedFunctions }) {
         updates. Go to <code>settings/jobs</code> to add a job
       </p>
       <p>
-        {/* <Button className="btn" onClick={insertSampleData}>
-          Insert Sample Data
-        </Button>{' '} */}
         <Button className="btn" onClick={insertBootstrapData}>
           Start
         </Button>
