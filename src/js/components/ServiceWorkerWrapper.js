@@ -33,7 +33,6 @@ export default function ServiceWorkerWrapper() {
   }, []);
 
   wb.register().then((r) => {
-    console.log('wb window: successful registered', r);
     registration = r;
   });
 
