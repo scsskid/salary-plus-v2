@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from './Button';
+import Version from './Version';
 
 export default function Welcome({ seedFunctions }) {
   const { insertSampleData, insertBootstrapData } = seedFunctions;
@@ -26,6 +27,7 @@ export default function Welcome({ seedFunctions }) {
           Start
         </Button>
       </p>
+      <Version />
     </>
   );
 }

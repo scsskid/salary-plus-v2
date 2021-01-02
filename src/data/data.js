@@ -1,5 +1,5 @@
-const app = {
-  version: 'Alpha 1.0.1',
+export const app = {
+  version: 'Alpha 1',
   localStorageKey: 'salary-plus:app-data'
 };
 

@@ -303,7 +303,6 @@ export default function App() {
                         settings={settings}
                         dispatch={dispatch}
                         appRunning={appRunning}
-                        version={app?.version}
                         appData={appData}
                         clock={clock}
                       />

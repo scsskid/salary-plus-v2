@@ -1,11 +1,11 @@
 import * as React from 'react';
 import LogToScreen from './LogToScreen';
+import Version from './Version';
 
 export default function Debug({
   appRunning,
   settings,
   dispatch,
-  version,
   appData,
   clock
 }) {
@@ -100,11 +100,7 @@ export default function Debug({
           </p>
         </>
       )}
-      {appRunning && (
-        <div style={{ fontSize: '.8rem', opacity: 0.5 }}>
-          Version: {version}
-        </div>
-      )}
+      {appRunning && <Version />}
     </div>
   );
 }
