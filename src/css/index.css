@@ -23,5 +23,6 @@
 @import 'components/Figure.css';
 @import 'components/Notification.css';
 @import 'components/ServiceWorkerWrapper.css';
+@import 'components/Toast.css';
 
 @import 'base/colors.css';

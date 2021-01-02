@@ -36,6 +36,7 @@ import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
 import useNotification from '../hooks/useNotification';
 import ServiceWorkerWrapper from './ServiceWorkerWrapper';
+import Toast from './Toast';
 
 export default function App() {
   const clock = useClock();
@@ -145,6 +146,21 @@ export default function App() {
     });
   }
 
+  const testList = [
+    {
+      id: 1,
+      title: 'Success',
+      description: 'This is a success toast component',
+      backgroundColor: '#5cb85c'
+    },
+    {
+      id: 2,
+      title: 'Danger',
+      description: 'This is an error toast component',
+      backgroundColor: '#d9534f'
+    }
+  ];
+
   return (
     <React.StrictMode>
       <ErrorBoundary appData={appData}>
@@ -168,6 +184,7 @@ export default function App() {
                   notification={notification}
                   mountingState={mountingState}
                 />
+                <Toast toastList={testList} position="bottom-right" />
 
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
