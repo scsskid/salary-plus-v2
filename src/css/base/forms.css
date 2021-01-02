@@ -15,10 +15,10 @@
   z-index: 1;
   left: 0;
   right: 0;
-  top: calc(12 * var(--b));
+  top: calc(12 * var(--b) + env(safe-area-inset-top));
   display: flex;
   justify-content: space-between;
-  margin-bottom: calc(2 * var(--b));
+  padding-bottom: calc(4 * var(--b));
 }
 
 .has-fixed-button-row {

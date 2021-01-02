@@ -1,11 +1,19 @@
 .app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  background: var(--color-bg-light);
+  @mixin padHor;
+  height: calc(14 * var(--b));
+  position: fixed;
+  z-index: 1;
+  top: calc((0 * var(--b)) + env(safe-area-inset-top));
+  left: 0;
+  right: 0;
 
   & h1 {
-    /* padding-top: calc(4 * var(--b)); */
+    padding-top: calc(4 * var(--b));
     @mixin fontSize 22;
     margin-bottom: 0;
   }
+}
+
+.app-header {
 }
