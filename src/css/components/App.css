@@ -47,10 +47,10 @@ body:before {
 }
 
 .main {
-  margin-top: calc((14 * var(--b)) + env(safe-area-inset-top));
   @mixin padHor;
-  overflow: scroll;
-  padding-bottom: calc(16 * var(--b));
+  padding-top: calc((14 * var(--b)) + env(safe-area-inset-top));
+  padding-bottom: calc(14 * var(--b) + env(safe-area-inset-top));
+  overflow-y: scroll;
 }
 
 /* Update Notification */
