@@ -38,11 +38,15 @@ export default function ServiceWorkerWrapper() {
 
   return (
     showPrompt && (
-      <div>
+      <div className="update-avaiable-notification">
         <h1>New version available</h1>
         <p>
-          <button onClick={onAccept}>Install</button>{' '}
-          <button onClick={onReject}>Not now</button>
+          <button className="btn" onClick={onAccept}>
+            Install
+          </button>{' '}
+          <button className="btn" onClick={onReject}>
+            Not now
+          </button>
         </p>
       </div>
     )

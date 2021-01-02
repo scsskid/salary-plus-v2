@@ -1,0 +1,11 @@
+.update-avaiable-notification {
+  position: fixed;
+  z-index: 1;
+  bottom: 4rem;
+  border-radius: 0.5rem;
+  right: 1rem;
+  color: red;
+
+  background: #fff;
+  padding: 1rem;
+}

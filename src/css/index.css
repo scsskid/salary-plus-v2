@@ -22,5 +22,6 @@
 @import 'components/WidgetInputDate.css';
 @import 'components/Figure.css';
 @import 'components/Notification.css';
+@import 'components/ServiceWorkerWrapper.css';
 
 @import 'base/colors.css';
