@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from './Button';
 import FormElement from './FormElement';
+import LogToScreen from './LogToScreen';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
+import Toast from './Toast';
 
 export default function Settings({ jobs, children, settings, dispatch }) {
   const history = useHistory();
@@ -26,6 +29,27 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   });
 
   ScrollToTopOnMount();
+
+  // Toast
+
+  const [list, setList] = React.useState([]);
+  let toastProperties = null;
+  const notification = {
+    title: 'Success',
+    description: 'This is a success toast component',
+    backgroundColor: '#5cb85c'
+  };
+
+  function showToast(type) {
+    const id = Math.floor(Math.random() * 100 + 1);
+
+    toastProperties = {
+      id,
+      ...notification
+    };
+
+    setList([...list, toastProperties]);
+  }
 
   function handleChange(e) {
     const { name, value: tempValue, checked, type } = e.target;
@@ -136,6 +160,15 @@ export default function Settings({ jobs, children, settings, dispatch }) {
           </FormElement>
         </fieldset>
       </form>
+      <Button
+        onClick={() => {
+          showToast(notification);
+        }}
+      >
+        Show Toast
+      </Button>
+      <Toast toastList={list} position="bottom-right" autoDelete={true} />
+      <LogToScreen title="list" object={list} settings={settings} />
       {children}
     </>
   );
