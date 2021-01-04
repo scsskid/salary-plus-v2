@@ -1,10 +1,23 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { getAutoOffsetHeight } from '../utils/helpers';
 
 export default function Toast(props) {
   const { toastList, setToastList, autoDelete } = props;
   const [list, setList] = React.useState(toastList);
+
+  function setContainerCSSHeight() {
+    console.log('set Height');
+    const notificationContainerDom = document.querySelector(
+      '.notification-container'
+    );
+
+    setTimeout(() => {
+      notificationContainerDom.style.height =
+        getAutoOffsetHeight(notificationContainerDom) + 'px';
+    }, 0);
+  }
 
   React.useEffect(() => {
     setList(toastList);
@@ -12,11 +25,10 @@ export default function Toast(props) {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      console.log('int');
       if (autoDelete && toastList.length && list.length) {
         deleteToast(toastList[0].id);
       }
-    }, 3000);
+    }, 1000);
 
     return () => {
       clearInterval(interval);
@@ -32,7 +44,13 @@ export default function Toast(props) {
     <TransitionGroup className={`notification-container `}>
       {list.map(({ id, title, description }) => {
         return (
-          <CSSTransition key={id} timeout={500} classNames="toast-transition">
+          <CSSTransition
+            key={id}
+            timeout={500}
+            classNames="toast-transition"
+            onEnter={setContainerCSSHeight}
+            onExit={setContainerCSSHeight}
+          >
             <div className={`notification2 toast`}>
               <button
                 onClick={() => {
