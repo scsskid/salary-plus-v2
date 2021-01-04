@@ -43,6 +43,7 @@ export default function App() {
   const [appData, dispatch] = useLocalStorageReducer();
   const [notification, setNotification, mountingState] = useNotification();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
+  const [toastList, setToastList] = React.useState([]);
   const appRunning = Object.entries(appData).length > 0;
   const { records = [], settings = {}, jobs = [] } = appData;
   const recordsByInputJob =
@@ -146,6 +147,16 @@ export default function App() {
     });
   }
 
+  function appendToast(notificationContent) {
+    const id = Math.floor(Math.random() * 100 + 1);
+    const toastProperties = {
+      id,
+      ...notificationContent
+    };
+
+    setToastList([...toastList, toastProperties]);
+  }
+
   return (
     <React.StrictMode>
       <ErrorBoundary appData={appData}>
@@ -168,6 +179,11 @@ export default function App() {
                 <Notification
                   notification={notification}
                   mountingState={mountingState}
+                />
+                <Toast
+                  toastList={toastList}
+                  setToastList={setToastList}
+                  autoDelete={true}
                 />
 
                 <Route exact path="/view">
@@ -299,6 +315,7 @@ export default function App() {
                       settings={settings}
                       jobs={jobs}
                       dispatch={dispatch}
+                      appendToast={appendToast}
                     >
                       <Debug
                         settings={settings}

@@ -2,11 +2,15 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from './Button';
 import FormElement from './FormElement';
-import LogToScreen from './LogToScreen';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
-import Toast from './Toast';
 
-export default function Settings({ jobs, children, settings, dispatch }) {
+export default function Settings({
+  jobs,
+  children,
+  settings,
+  dispatch,
+  appendToast
+}) {
   const history = useHistory();
   const {
     language = 'en-US',
@@ -31,18 +35,6 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   ScrollToTopOnMount();
 
   // Toast
-
-  const [toastList, setToastList] = React.useState([]);
-
-  function showToast(notificationContent) {
-    const id = Math.floor(Math.random() * 100 + 1);
-    const toastProperties = {
-      id,
-      ...notificationContent
-    };
-
-    setToastList([...toastList, toastProperties]);
-  }
 
   function handleChange(e) {
     const { name, value: tempValue, checked, type } = e.target;
@@ -155,21 +147,16 @@ export default function Settings({ jobs, children, settings, dispatch }) {
       </form>
       <Button
         onClick={() => {
-          showToast({
-            title: 'Success',
-            description: 'This is a success toast component',
-            backgroundColor: '#F00'
+          appendToast({
+            title: 'Notification Title',
+            description: 'This is a example notification',
+            type: 'success'
           });
         }}
       >
         Show Toast
       </Button>
-      <Toast
-        toastList={toastList}
-        setToastList={setToastList}
-        autoDelete={true}
-      />
-      <LogToScreen title="toastList" object={toastList} settings={settings} />
+
       {children}
     </>
   );

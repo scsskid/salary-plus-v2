@@ -25,11 +25,7 @@ export default function Toast(props) {
   return (
     <div className={`notification-container `}>
       {toastList.map((toast, i) => (
-        <div
-          key={i}
-          className={`notification2 toast `}
-          style={{ backgroundColor: toast.backgroundColor }}
-        >
+        <div key={i} className={`notification2 toast toast--${toast.type}`}>
           <button
             onClick={() => {
               deleteToast(toast.id);
