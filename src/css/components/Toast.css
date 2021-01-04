@@ -10,12 +10,12 @@
 
 .toast-transition-enter {
   opacity: 0;
-  /* transform: translateX(100px); */
+  transform: translateX(100px);
 }
 
 .toast-transition-enter-active {
   opacity: 1;
-  transition: 0.2s ease;
+  transition: 0.5s ease;
   transform: translateX(0);
 }
 
@@ -26,8 +26,8 @@
 
 .toast-transition-exit-active {
   opacity: 0;
-  transition: 0.2s ease;
-  /* transform: translateX(100px); */
+  transition: 0.5s ease;
+  transform: translateX(100px);
 }
 
 /* Actual Toast */
@@ -39,4 +39,5 @@
     0 2px 5px -1px hsl(0deg, 20%, 90%);
   border-radius: 4px;
   margin-top: 1rem;
+  border: 2px solid black;
 }
