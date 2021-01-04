@@ -37,6 +37,8 @@ import ErrorBoundary from './ErrorBoundary';
 import useNotification from '../hooks/useNotification';
 import ServiceWorkerWrapper from './ServiceWorkerWrapper';
 import Toast from './Toast';
+import { v4 as uuid } from 'uuid';
+import LogToScreen from './LogToScreen';
 
 export default function App() {
   const clock = useClock();
@@ -148,7 +150,7 @@ export default function App() {
   }
 
   function appendToast(notificationContent) {
-    const id = Math.floor(Math.random() * 100 + 1);
+    const id = uuid();
     const toastProperties = {
       id,
       ...notificationContent
@@ -334,6 +336,7 @@ export default function App() {
               </>
             )}
             {withServiceWorker && <ServiceWorkerWrapper />}
+            <LogToScreen title="list" object={toastList} settings={settings} />
           </main>
         </Router>
       </ErrorBoundary>

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export default function Toast(props) {
   const { toastList, setToastList, autoDelete } = props;
@@ -23,24 +24,28 @@ export default function Toast(props) {
   }
 
   return (
-    <div className={`notification-container `}>
-      {toastList.map((toast, i) => (
-        <div key={i} className={`notification2 toast toast--${toast.type}`}>
-          <button
-            onClick={() => {
-              deleteToast(toast.id);
-            }}
-          >
-            X
-          </button>
+    <TransitionGroup className={`notification-container `}>
+      {toastList.map((toast, i) => {
+        return (
+          <CSSTransition key={toast.id} timeout={500} classNames="it3m">
+            <div key={i} className={`notification2 toast toast--${toast.type}`}>
+              <button
+                onClick={() => {
+                  deleteToast(toast.id);
+                }}
+              >
+                X
+              </button>
 
-          <div>
-            <p className="notification-title">{toast.title}</p>
-            <p className="notification-message">{toast.description}</p>
-          </div>
-        </div>
-      ))}
-    </div>
+              <div>
+                <p className="notification-title">{toast.title}</p>
+                <p className="notification-message">{toast.description}</p>
+              </div>
+            </div>
+          </CSSTransition>
+        );
+      })}
+    </TransitionGroup>
   );
 }
 
