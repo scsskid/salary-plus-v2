@@ -2,16 +2,11 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Toast(props) {
-  const { toastList, autoDelete } = props;
-  const [list, setList] = React.useState(toastList);
-
-  React.useEffect(() => {
-    setList([...toastList]);
-  }, [toastList]);
+  const { toastList, setToastList, autoDelete } = props;
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      if (autoDelete && toastList.length && list.length) {
+      if (autoDelete && toastList.length) {
         deleteToast(toastList[0].id);
       }
     }, 2000);
@@ -19,19 +14,17 @@ export default function Toast(props) {
     return () => {
       clearInterval(interval);
     };
-  }, [toastList, autoDelete, list]);
+  }, [toastList, autoDelete]);
 
   function deleteToast(id) {
-    const listItemIndex = list.findIndex((e) => e.id === id);
     const toastListItem = toastList.findIndex((e) => e.id === id);
-    list.splice(listItemIndex, 1);
     toastList.splice(toastListItem, 1);
-    setList([...list]);
+    setToastList([...toastList]);
   }
 
   return (
     <div className={`notification-container `}>
-      {list.map((toast, i) => (
+      {toastList.map((toast, i) => (
         <div
           key={i}
           className={`notification2 toast `}

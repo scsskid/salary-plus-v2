@@ -32,7 +32,7 @@ export default function Settings({ jobs, children, settings, dispatch }) {
 
   // Toast
 
-  const [list, setList] = React.useState([]);
+  const [toastList, setToastList] = React.useState([]);
 
   function showToast(notificationContent) {
     const id = Math.floor(Math.random() * 100 + 1);
@@ -41,7 +41,7 @@ export default function Settings({ jobs, children, settings, dispatch }) {
       ...notificationContent
     };
 
-    setList([...list, toastProperties]);
+    setToastList([...toastList, toastProperties]);
   }
 
   function handleChange(e) {
@@ -158,14 +158,18 @@ export default function Settings({ jobs, children, settings, dispatch }) {
           showToast({
             title: 'Success',
             description: 'This is a success toast component',
-            backgroundColor: '#FF0'
+            backgroundColor: '#F00'
           });
         }}
       >
         Show Toast
       </Button>
-      <Toast toastList={list} autoDelete={true} />
-      <LogToScreen title="list" object={list} settings={settings} />
+      <Toast
+        toastList={toastList}
+        setToastList={setToastList}
+        autoDelete={true}
+      />
+      <LogToScreen title="toastList" object={toastList} settings={settings} />
       {children}
     </>
   );
