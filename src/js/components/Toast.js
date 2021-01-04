@@ -10,7 +10,7 @@ export default function Toast(props) {
       if (autoDelete && toastList.length) {
         deleteToast(toastList[0].id);
       }
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearInterval(interval);
@@ -27,8 +27,12 @@ export default function Toast(props) {
     <TransitionGroup className={`notification-container `}>
       {toastList.map((toast, i) => {
         return (
-          <CSSTransition key={toast.id} timeout={500} classNames="it3m">
-            <div key={i} className={`notification2 toast toast--${toast.type}`}>
+          <CSSTransition
+            key={toast.id}
+            timeout={200}
+            classNames="toast-transition"
+          >
+            <div className={`notification2 toast toast--${toast.type}`}>
               <button
                 onClick={() => {
                   deleteToast(toast.id);

@@ -1,28 +1,42 @@
 .notification-container {
   position: fixed;
   z-index: 2;
-  bottom: 12px;
+  bottom: 4rem;
   right: 12px;
-  transition: transform 0.6s ease-in-out;
-  animation: toast-in-right 0.7s;
+  transition: height 0.6s ease-in-out;
 }
 
 /* Animation / Transitions */
 
-/* .it3m-enter {
+.toast-transition-enter {
   opacity: 0;
+  /* transform: translateX(100px); */
 }
 
-.it3m-enter-active {
+.toast-transition-enter-active {
   opacity: 1;
-  transition: opacity 200ms;
+  transition: 0.2s ease;
+  transform: translateX(0);
 }
 
-.it3m-exit {
+.toast-transition-exit {
   opacity: 1;
+  transform: translateX(0);
 }
 
-.it3m-exit-active {
+.toast-transition-exit-active {
   opacity: 0;
-  transition: opacity 200ms;
-} */
+  transition: 0.2s ease;
+  /* transform: translateX(100px); */
+}
+
+/* Actual Toast */
+
+.toast {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: inset 0 0 0 0px var(--color-text),
+    0 2px 5px -1px hsl(0deg, 20%, 90%);
+  border-radius: 4px;
+  margin-top: 1rem;
+}
