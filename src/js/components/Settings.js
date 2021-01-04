@@ -33,19 +33,12 @@ export default function Settings({ jobs, children, settings, dispatch }) {
   // Toast
 
   const [list, setList] = React.useState([]);
-  let toastProperties = null;
-  const notification = {
-    title: 'Success',
-    description: 'This is a success toast component',
-    backgroundColor: '#5cb85c'
-  };
 
-  function showToast(type) {
+  function showToast(notificationContent) {
     const id = Math.floor(Math.random() * 100 + 1);
-
-    toastProperties = {
+    const toastProperties = {
       id,
-      ...notification
+      ...notificationContent
     };
 
     setList([...list, toastProperties]);
@@ -162,12 +155,16 @@ export default function Settings({ jobs, children, settings, dispatch }) {
       </form>
       <Button
         onClick={() => {
-          showToast(notification);
+          showToast({
+            title: 'Success',
+            description: 'This is a success toast component',
+            backgroundColor: '#FF0'
+          });
         }}
       >
         Show Toast
       </Button>
-      <Toast toastList={list} position="bottom-right" autoDelete={true} />
+      <Toast toastList={list} autoDelete={true} />
       <LogToScreen title="list" object={list} settings={settings} />
       {children}
     </>

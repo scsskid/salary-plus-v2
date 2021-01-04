@@ -7,8 +7,6 @@ export default function Toast(props) {
 
   React.useEffect(() => {
     setList([...toastList]);
-
-    // eslint-disable-next-line
   }, [toastList]);
 
   React.useEffect(() => {
@@ -21,8 +19,6 @@ export default function Toast(props) {
     return () => {
       clearInterval(interval);
     };
-
-    // eslint-disable-next-line
   }, [toastList, autoDelete, list]);
 
   function deleteToast(id) {
