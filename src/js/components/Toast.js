@@ -4,36 +4,26 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { getAutoOffsetHeight } from '../utils/helpers';
 
 export default function Toast(props) {
-  const { toastList, setToastList, autoDelete } = props;
+  const { toastList, setToastList } = props;
   const [list, setList] = React.useState(toastList);
-
-  function setContainerCSSHeight() {
-    console.log('set Height');
-    const notificationContainerDom = document.querySelector(
-      '.notification-container'
-    );
-
-    setTimeout(() => {
-      notificationContainerDom.style.height =
-        getAutoOffsetHeight(notificationContainerDom) + 'px';
-    }, 0);
-  }
 
   React.useEffect(() => {
     setList(toastList);
   }, [toastList]);
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (autoDelete && toastList.length) {
-        deleteToast(toastList[0].id);
-      }
-    }, 3000);
+  React.useEffect(deleteIfNotPersitent, [toastList]);
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, [toastList, autoDelete]);
+  function deleteIfNotPersitent() {
+    if (toastList.length) {
+      const latest = [...toastList].reverse()[0];
+
+      if (!latest?.persistent) {
+        setTimeout(() => {
+          deleteToast(latest.id);
+        }, 3000);
+      }
+    }
+  }
 
   function deleteToast(id) {
     setList((items) => items.filter((item) => item.id !== id));
@@ -42,15 +32,9 @@ export default function Toast(props) {
 
   return (
     <TransitionGroup className={`notification-container `}>
-      {list.map(({ id, title, description }) => {
+      {list.map(({ id, title, message }) => {
         return (
-          <CSSTransition
-            key={id}
-            timeout={500}
-            classNames="toast-transition"
-            // onEnter={setContainerCSSHeight}
-            // onExit={setContainerCSSHeight}
-          >
+          <CSSTransition key={id} timeout={500} classNames="toast-transition">
             <div className={`notification2 toast`}>
               <button
                 onClick={() => {
@@ -60,10 +44,10 @@ export default function Toast(props) {
                 X
               </button>
 
-              <div>
-                <p className="notification-title">{title}</p>
-                <p className="notification-message">{description}</p>
-              </div>
+              {title ? <p className="notification-title">{title}</p> : null}
+              {message ? (
+                <p className="notification-message">{message}</p>
+              ) : null}
             </div>
           </CSSTransition>
         );

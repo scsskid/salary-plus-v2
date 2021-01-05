@@ -149,13 +149,22 @@ export default function Settings({
       <Button
         onClick={() => {
           appendToast({
-            title: 'Notification Title',
-            description: 'This is a example notification',
-            type: 'success'
+            title: 'Autodelete!!',
+            text: 'This is a example notification'
           });
         }}
       >
-        Show Toast
+        Autodelete Toast
+      </Button>
+      <Button
+        onClick={() => {
+          appendToast({
+            title: 'Persist!!',
+            persistent: true
+          });
+        }}
+      >
+        Persist Toast
       </Button>
 
       {children}
