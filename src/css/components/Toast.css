@@ -2,7 +2,9 @@
   position: fixed;
   z-index: 2;
   bottom: 4rem;
-  right: 12px;
+  right: 1rem;
+  left: 1rem;
+  pointer-events: none;
   /* transition: height 0.2s; */
 }
 
@@ -40,6 +42,9 @@
   border-radius: 4px;
   margin-top: 1rem;
   border: 2px solid black;
+  max-width: 16rem;
+  margin-left: auto;
+  pointer-events: all;
 }
 
 .toast:first-child {
