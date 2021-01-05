@@ -32,17 +32,19 @@ export default function Toast(props) {
 
   return (
     <TransitionGroup className={`notification-container `}>
-      {list.map(({ id, title, message }) => {
+      {list.map(({ id, title, message, persistent }) => {
         return (
           <CSSTransition key={id} timeout={500} classNames="toast-transition">
-            <div className={`notification2 toast`}>
-              <button
-                onClick={() => {
-                  deleteToast(id);
-                }}
-              >
-                X
-              </button>
+            <div className="toast">
+              {persistent ? (
+                <button
+                  onClick={() => {
+                    deleteToast(id);
+                  }}
+                >
+                  X
+                </button>
+              ) : null}
 
               {title ? <p className="notification-title">{title}</p> : null}
               {message ? (
