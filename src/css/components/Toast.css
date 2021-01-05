@@ -44,7 +44,7 @@
   border: 2px solid black;
   max-width: 16rem;
   margin-left: auto;
-  pointer-events: all;
+  pointer-events: auto;
 }
 
 .toast:first-child {
