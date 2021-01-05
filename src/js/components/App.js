@@ -33,7 +33,7 @@ import WidgetInputDate from './WidgetInputDate';
 import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
-import ServiceWorkerWrapper from './ServiceWorkerWrapper';
+import useServiceWorker from './useServiceWorker';
 import Toast from './Toast';
 import { v4 as uuid } from 'uuid';
 import LogToScreen from './LogToScreen';
@@ -60,6 +60,11 @@ export default function App() {
   ];
   const withServiceWorker =
     'serviceWorker' in navigator && process.env.NODE_ENV === 'production';
+
+  if (withServiceWorker) {
+    useServiceWorker({ appendToast });
+  }
+
   React.useEffect(() => {
     // to hook, remove listener cleanup:
     window.addEventListener('resize', throttle(setAppInnerHeight));
@@ -147,6 +152,7 @@ export default function App() {
   }
 
   function appendToast(notificationContent) {
+    console.log('append Toast Fn');
     const id = uuid();
     const toastProperties = {
       id,
@@ -162,6 +168,7 @@ export default function App() {
         <Router>
           {appRunning && <Navigation />}
           <main className="main">
+            <Toast toastList={toastList} setToastList={setToastList} />
             {!appRunning ? (
               <>
                 <Welcome
@@ -175,12 +182,6 @@ export default function App() {
               </>
             ) : (
               <>
-                <Toast
-                  toastList={toastList}
-                  setToastList={setToastList}
-                  autoDelete={true}
-                />
-
                 <Route exact path="/view">
                   <Redirect to="/view/dashboard" />
                 </Route>
@@ -328,7 +329,6 @@ export default function App() {
                 </Switch>
               </>
             )}
-            {withServiceWorker && <ServiceWorkerWrapper />}
             <LogToScreen title="list" object={toastList} settings={settings} />
           </main>
         </Router>
