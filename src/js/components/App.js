@@ -30,11 +30,9 @@ import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
-import Notification from './Notification';
 import RecordsList from './RecordsList';
 import { WidgetInputJobId } from './WidgetInputJobId';
 import ErrorBoundary from './ErrorBoundary';
-import useNotification from '../hooks/useNotification';
 import ServiceWorkerWrapper from './ServiceWorkerWrapper';
 import Toast from './Toast';
 import { v4 as uuid } from 'uuid';
@@ -43,7 +41,6 @@ import LogToScreen from './LogToScreen';
 export default function App() {
   const clock = useClock();
   const [appData, dispatch] = useLocalStorageReducer();
-  const [notification, setNotification, mountingState] = useNotification();
   const [inputDate, setInputDate] = React.useState(() => new Date(clock.today));
   const [toastList, setToastList] = React.useState([]);
   const appRunning = Object.entries(appData).length > 0;
@@ -81,7 +78,7 @@ export default function App() {
       payload: formData
     });
     setInputDate(new Date(formData.dateBegin));
-    setNotification('Record saved.');
+    appendToast({ message: 'Record saved.' });
   }
 
   function saveJob(formData) {
@@ -89,7 +86,7 @@ export default function App() {
       type: 'id' in formData ? 'updateJob' : 'createJob',
       payload: formData
     });
-    setNotification('Job saved.');
+    appendToast({ message: 'Job saved.' });
   }
 
   function deleteItem({ type, id }) {
@@ -99,7 +96,7 @@ export default function App() {
       type: `delete${typeString}`,
       payload: { id }
     });
-    setNotification(`${typeString} deleted.`);
+    appendToast({ message: `${typeString} deleted.` });
   }
 
   function changeMonth(summand = 0) {
@@ -178,10 +175,6 @@ export default function App() {
               </>
             ) : (
               <>
-                <Notification
-                  notification={notification}
-                  mountingState={mountingState}
-                />
                 <Toast
                   toastList={toastList}
                   setToastList={setToastList}
