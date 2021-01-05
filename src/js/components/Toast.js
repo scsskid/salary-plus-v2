@@ -48,8 +48,8 @@ export default function Toast(props) {
             key={id}
             timeout={500}
             classNames="toast-transition"
-            onEnter={setContainerCSSHeight}
-            onExit={setContainerCSSHeight}
+            // onEnter={setContainerCSSHeight}
+            // onExit={setContainerCSSHeight}
           >
             <div className={`notification2 toast`}>
               <button
