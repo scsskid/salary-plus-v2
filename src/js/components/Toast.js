@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { getAutoOffsetHeight } from '../utils/helpers';
 
 export default function Toast(props) {
   const { toastList, setToastList } = props;

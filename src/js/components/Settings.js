@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from './Button';
 import FormElement from './FormElement';
-import LogToScreen from './LogToScreen';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Settings({
