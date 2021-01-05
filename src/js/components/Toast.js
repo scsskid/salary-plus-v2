@@ -25,10 +25,10 @@ export default function Toast(props) {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      if (autoDelete && toastList.length && list.length) {
+      if (autoDelete && toastList.length) {
         deleteToast(toastList[0].id);
       }
-    }, 1000);
+    }, 3000);
 
     return () => {
       clearInterval(interval);
