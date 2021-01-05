@@ -2,8 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-export default function Toast(props) {
-  const { toastList, setToastList } = props;
+export default function Toast({ toastList, setToastList }) {
   const [list, setList] = React.useState(toastList);
 
   React.useEffect(() => {
@@ -31,11 +30,11 @@ export default function Toast(props) {
 
   return (
     <TransitionGroup className={`notification-container `}>
-      {list.map(({ id, title, message, persistent }) => {
+      {list.map(({ id, title, message, persistent, confirm }) => {
         return (
           <CSSTransition key={id} timeout={500} classNames="toast-transition">
             <div className="toast">
-              {persistent ? (
+              {persistent && !confirm ? (
                 <button
                   onClick={() => {
                     deleteToast(id);
@@ -48,6 +47,27 @@ export default function Toast(props) {
               {title ? <p className="notification-title">{title}</p> : null}
               {message ? (
                 <p className="notification-message">{message}</p>
+              ) : null}
+              {confirm ? (
+                <div>
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      confirm.action();
+                    }}
+                  >
+                    {confirm.buttonLabel}
+                  </button>
+                  {` `}
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      deleteToast(id);
+                    }}
+                  >
+                    Not Now
+                  </button>
+                </div>
               ) : null}
             </div>
           </CSSTransition>
