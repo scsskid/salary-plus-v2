@@ -152,14 +152,16 @@ export default function App() {
   }
 
   function appendToast(notificationContent) {
-    console.log('append Toast Fn');
     const id = uuid();
     const toastProperties = {
       id,
       ...notificationContent
     };
 
-    setToastList([...toastList, toastProperties]);
+    // setToastList([...toastList, toastProperties]);
+    setToastList((previousState) => {
+      return [...previousState, toastProperties];
+    });
   }
 
   return (

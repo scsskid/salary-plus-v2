@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export default function Toast({ toastList, setToastList }) {
-  const [list, setList] = React.useState(toastList);
-
-  React.useEffect(() => {
-    setList(toastList);
-  }, [toastList]);
-
   React.useEffect(deleteIfNotPersitent, [toastList]);
 
   function deleteIfNotPersitent() {
@@ -21,16 +15,19 @@ export default function Toast({ toastList, setToastList }) {
         }, 3000);
       }
     }
+
+    return () => {
+      // todo
+    };
   }
 
   function deleteToast(id) {
-    setList((items) => items.filter((item) => item.id !== id));
     setToastList((items) => items.filter((item) => item.id !== id));
   }
 
   return (
     <TransitionGroup className={`notification-container `}>
-      {list.map(({ id, title, message, persistent, confirm }) => {
+      {toastList.map(({ id, title, message, persistent, confirm }) => {
         return (
           <CSSTransition key={id} timeout={500} classNames="toast-transition">
             <div className="toast">
@@ -82,3 +79,7 @@ Toast.propTypes = {
   autoDelete: PropTypes.bool,
   autoDeleteTime: PropTypes.number
 };
+
+// function Delayed({ children,  }) {
+
+// }
