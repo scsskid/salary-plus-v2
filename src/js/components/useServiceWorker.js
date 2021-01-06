@@ -8,7 +8,8 @@ export default function useServiceWorker({ appendToast }) {
   async function onAccept() {
     console.log('On Accept', registration);
     wb.addEventListener('controlling', () => {
-      console.log('controller change');
+      console.log('[wb] controller change');
+      appendToast({ message: 'Updating...' });
       window.location.reload();
     });
 
@@ -20,10 +21,10 @@ export default function useServiceWorker({ appendToast }) {
 
   function activatePrompt() {
     appendToast({
-      message: 'New version available!!!!',
+      message: 'New version available.',
       persistent: true,
       confirm: {
-        buttonLabel: 'install',
+        buttonLabel: 'Update',
         action: onAccept
       }
     });
@@ -32,6 +33,17 @@ export default function useServiceWorker({ appendToast }) {
   React.useEffect(() => {
     wb.addEventListener('waiting', activatePrompt);
     wb.addEventListener('externalwaiting', activatePrompt);
+    wb.addEventListener('activated', (event) => {
+      // appendToast({ message: '******* WB Activated.', persistent: true });
+    });
+    wb.addEventListener('installed', (event) => {
+      const { isUpdate } = event;
+      const message = isUpdate
+        ? 'Update Installed. Ready to apply.'
+        : 'The App is now installed and works offline.';
+      appendToast({ message });
+      console.log('WB installed', event);
+    });
   }, []);
 
   wb.register().then((r) => {
