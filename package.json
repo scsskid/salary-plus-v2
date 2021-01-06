@@ -4,11 +4,10 @@
   "description": "Salary Plus",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js",
-    "start": "webpack serve --config webpack.dev.js",
-    "stylelint-check": "stylelint-config-prettier-check",
-    "postinstall": "sh postinstall.sh"
+    "build": "sh write-commit-number.sh && webpack --config webpack.prod.js",
+    "dev": "sh write-commit-number.sh && webpack --config webpack.dev.js",
+    "start": "sh write-commit-number.sh && webpack serve --config webpack.dev.js",
+    "stylelint-check": "stylelint-config-prettier-check"
   },
   "repository": {
     "type": "git",
