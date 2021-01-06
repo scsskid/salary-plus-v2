@@ -1,9 +1,9 @@
 .notification-container {
   position: fixed;
   z-index: 2;
-  bottom: 4rem;
-  right: 1rem;
-  left: 1rem;
+  bottom: calc((14 * var(--b)) + env(safe-area-inset-bottom));
+  right: calc((3 * var(--b)));
+  left: calc((3 * var(--b)));
   pointer-events: none;
   /* transition: height 0.2s; */
 }
