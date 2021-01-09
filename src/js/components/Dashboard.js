@@ -10,14 +10,21 @@ import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
-export default function Dashboard({ jobs, settings, records, setInputDate }) {
+export default function Dashboard({
+  jobs,
+  settings,
+  records,
+  setInputDate,
+  inputDate
+}) {
   ScrollToTopOnMount();
   const clock = useClock();
+  const widgetReportingTargetDate = clock.today;
   const firstDateOfCurrentMonth = getFirstDateOfMonthDate(clock.today); // set to deltaDate
 
   const monthRecords = getRecordsByMonth({
     records,
-    date: clock.today
+    date: widgetReportingTargetDate
   });
 
   const lastThreeMonthsRecords = getRecordsByRange(records, {
@@ -82,7 +89,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
           <header className="section-header">
             <h2>Stats</h2>
             <p>
-              {clock.today.toLocaleDateString(settings.language, {
+              {widgetReportingTargetDate.toLocaleDateString(settings.language, {
                 month: 'long',
                 year: 'numeric'
               })}

@@ -216,6 +216,7 @@ export default function App() {
                       settings={settings}
                       records={recordsByInputJob}
                       setInputDate={setInputDate}
+                      inputDate={inputDate}
                     />
                   </Route>
                   <Route exact path="/view/calendar">
