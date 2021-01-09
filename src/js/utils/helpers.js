@@ -153,7 +153,7 @@ export function mutateArrayWithObject(obj, array) {
 
 // Development
 
-export function shiftRecordsDates({ data, summand }) {
+export function shiftRecordsDates({ records = [], summand = 0 }) {
   const shiftMonths = (record) => {
     const beginCopy = new Date(record.begin);
     const endCopy = new Date(record.end);
@@ -168,10 +168,7 @@ export function shiftRecordsDates({ data, summand }) {
     };
   };
 
-  return {
-    ...data,
-    records: data.records.map(shiftMonths)
-  };
+  return records.map(shiftMonths);
 }
 
 export function round(num, decimalPlaces = 0) {
