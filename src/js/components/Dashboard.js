@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Dashboard({ jobs, settings, records, setInputDate }) {
+  ScrollToTopOnMount();
   const clock = useClock();
   const firstDateOfCurrentMonth = getFirstDateOfMonthDate(clock.today); // set to deltaDate
 
@@ -24,7 +25,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     end: firstDateOfCurrentMonth
   });
 
-  const currentYear = getRecordsByRange(records, {
+  const currentYearRecords = getRecordsByRange(records, {
     start: new Date(`${clock.today.getFullYear()}-01-01`),
     end: new Date(`${clock.today.getFullYear() + 1}-01-01`)
   });
@@ -46,8 +47,6 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     start: new Date(clock.today.getTime() + 24 * 60 * 60 * 1000),
     end: new Date(clock.today.getTime() + 8 * 24 * 60 * 60 * 1000)
   });
-
-  ScrollToTopOnMount();
 
   function addJobNudge() {
     if (!jobs.length) {
@@ -80,32 +79,18 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     <>
       <div className="view-dashboard | view-component">
         <div className="view-dashboard-reporting">
-          <h2>
-            {clock.today.toLocaleDateString(settings.language, {
-              month: 'long',
-              year: 'numeric'
-            })}{' '}
-            Stats
-          </h2>
+          <header className="section-header">
+            <h2>Stats</h2>
+            <p>
+              {clock.today.toLocaleDateString(settings.language, {
+                month: 'long',
+                year: 'numeric'
+              })}
+            </p>
+          </header>
           <WidgetReporting
             records={monthRecords}
-            figures={['dates', 'hours', 'earned']}
-            settings={settings}
-            inputDate={clock.today}
-            setInputDate={setInputDate}
-          />
-          <h2>Past 3 Months</h2>
-          <WidgetReporting
-            records={lastThreeMonthsRecords}
-            figures={['dates', 'hours', 'earned']}
-            settings={settings}
-            inputDate={clock.today}
-            setInputDate={setInputDate}
-          />
-          <h2>Current Year</h2>
-          <WidgetReporting
-            records={currentYear}
-            figures={['dates', 'hours', 'earned']}
+            figures={['hours', 'earned', 'overtimeHours', 'overtimeEarned']}
             settings={settings}
             inputDate={clock.today}
             setInputDate={setInputDate}
@@ -114,7 +99,8 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
             <Link to="/view/reporting">Full Report →</Link>
           </p>
         </div>
-        {todayRecords.length > 0 && (
+
+        {/* {todayRecords.length > 0 && (
           <div className="view-dashboard-ongoing">
             <h2>Today</h2>
             <RecordsList
@@ -124,9 +110,9 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
               hideDates={true}
             />
           </div>
-        )}
+        )} */}
 
-        {beforeTodayRecords.length > 0 && (
+        {/* {beforeTodayRecords.length > 0 && (
           <div className="view-dashboard-recent">
             <h2>Most Recent</h2>
 
@@ -136,7 +122,8 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
               records={beforeTodayRecords}
             />
           </div>
-        )}
+        )} */}
+
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
           <div className="view-dashboard-upcoming-week">

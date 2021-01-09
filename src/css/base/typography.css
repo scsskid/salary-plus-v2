@@ -28,7 +28,7 @@ body {
 }
 
 :--heading {
-  @mixin fontSize 16;
+  @mixin fontSize 14;
 }
 
 :--typographic {
@@ -37,5 +37,13 @@ body {
 }
 
 :--typographic:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  margin-bottom: var(--bx);
+}
+
+.section-header :--heading {
   margin-bottom: 0;
 }
