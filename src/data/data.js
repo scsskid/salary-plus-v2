@@ -2516,5 +2516,36 @@ export const sampleData = {
       currency: 'EUR',
       color: '#FF0000'
     }
+  ],
+  jobs: [
+    {
+      id: 1,
+      jobName: "Hell's Kitchen™️",
+      rate: 20,
+      hoursUnpaid: 0.5,
+      dayHours: 8,
+      status: 'active',
+      currency: 'EUR',
+      color: '#FF0000'
+    },
+    {
+      id: 2,
+      jobName: 'Ostertag',
+      weekHours: 37.5,
+      hoursUnpaid: 0.75,
+      status: 'active',
+      currency: 'EUR',
+      color: '#1249CA'
+    },
+    {
+      id: 3,
+      jobName: 'Benedikts Teufelsküche',
+      dayHours: 6,
+      hoursUnpaid: 1,
+      rate: 75,
+      status: 'active',
+      currency: 'DKK',
+      color: '#FF007F'
+    }
   ]
 };
