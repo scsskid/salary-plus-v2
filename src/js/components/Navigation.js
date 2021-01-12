@@ -8,13 +8,21 @@ const Navigaton = () => {
   return (
     <nav className="main-navigation">
       <ul>
-        <NavEl route="/view">
+        <NavEl route="/">
           <IconView />
-          View
+          Home
+        </NavEl>
+        <NavEl route="/calendar">
+          <IconView />
+          Calendar
         </NavEl>
         <NavEl route="/records/add">
           <IconAdd />
           Add
+        </NavEl>
+        <NavEl route="/reporting">
+          <IconView />
+          Reporting
         </NavEl>
         <NavEl route="/settings">
           <IconSettings />

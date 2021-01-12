@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Welcome from './Welcome';
 import NoMatch from './NoMatch';
 import Navigation from './Navigation';
@@ -26,7 +21,6 @@ import Reporting from './Reporting';
 import JobsList from './JobsList';
 import useClock from '../hooks/useClock';
 import Dashboard from './Dashboard';
-import SegmentNav from './SegmentNav';
 import AppHeader from './AppHeader';
 import Calendar from './Calendar';
 import WidgetInputDate from './WidgetInputDate';
@@ -53,11 +47,6 @@ export default function App() {
         });
 
   const unattachedRecords = getUnattachedRecords(appData?.records, jobs);
-  const viewSegements = [
-    { title: 'Dashboard', path: '/view/dashboard' },
-    { title: 'Calendar', path: '/view/calendar' },
-    { title: 'Reporting', path: '/view/reporting' }
-  ];
   const withServiceWorker =
     'serviceWorker' in navigator && process.env.NODE_ENV === 'production';
 
@@ -158,7 +147,6 @@ export default function App() {
       ...notificationContent
     };
 
-    // setToastList([...toastList, toastProperties]);
     setToastList((previousState) => {
       return [...previousState, toastProperties];
     });
@@ -184,20 +172,7 @@ export default function App() {
               </>
             ) : (
               <>
-                <Route exact path="/view">
-                  <Redirect to="/view/dashboard" />
-                </Route>
-                <Route exact path="/">
-                  <Redirect to="/view/dashboard" />
-                </Route>
-                <Route
-                  path={[
-                    '/view/dashboard',
-                    '/view/list',
-                    '/view/calendar',
-                    '/view/reporting'
-                  ]}
-                >
+                <Route path={['/', '/list', '/calendar', '/reporting']}>
                   <AppHeader key="view" title="View">
                     <WidgetInputJobId
                       settings={settings}
@@ -206,10 +181,9 @@ export default function App() {
                       unattachedRecordsCount={unattachedRecords.length}
                     />
                   </AppHeader>
-                  <SegmentNav segments={viewSegements} />
                 </Route>
                 <Switch>
-                  <Route exact path="/view/dashboard">
+                  <Route exact path="/">
                     {/* <Clock /> */}
                     <Dashboard
                       jobs={jobs}
@@ -219,7 +193,7 @@ export default function App() {
                       inputDate={inputDate}
                     />
                   </Route>
-                  <Route exact path="/view/calendar">
+                  <Route exact path="/calendar">
                     <Calendar
                       inputDate={inputDate}
                       settings={settings}
@@ -232,7 +206,7 @@ export default function App() {
                       clock={clock}
                     />
                   </Route>
-                  <Route exact path="/view/list">
+                  <Route exact path="/list">
                     <WidgetInputDate
                       inputDate={inputDate}
                       settings={settings}
@@ -247,7 +221,7 @@ export default function App() {
                       records={monthRecords}
                     />
                   </Route>
-                  <Route exact path="/view/reporting">
+                  <Route exact path="/reporting">
                     <WidgetInputDate
                       inputDate={inputDate}
                       settings={settings}
