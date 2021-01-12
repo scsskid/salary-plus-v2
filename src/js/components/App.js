@@ -5,12 +5,9 @@ import NoMatch from './NoMatch';
 import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
+import { throttle, setAppInnerHeight } from '../utils/helpers.js';
+import { getWeekStartDateOffset } from '../utils/date-fns';
 import {
-  throttle,
-  setAppInnerHeight,
-  
-} from '../utils/helpers.js';
-import {getWeekStartDateOffset} from '../utils/date-fns'
   getRecordsByMonth,
   getUnattachedRecords
 } from '../utils/dataHelpers.js';
@@ -116,12 +113,7 @@ export default function App() {
   }
 
   function changeDate(summand = 0) {
-    const inputDateCopy = (function () {
-      const date = new Date(inputDate.getTime());
-      date.setHours(0, 0, 0, 0);
-      date.setDate(1);
-      return date;
-    })();
+    const inputDateCopy = getFirstDateOfMonthDate(inputDate);
 
     inputDateCopy.setDate(inputDate.getDate() + summand);
     inputDateCopy.setDate(getWeekStartDateOffset(inputDateCopy));
@@ -182,6 +174,15 @@ export default function App() {
                     />
                   </AppHeader>
                 </Route>
+                <Route path={['/list', '/calendar', '/reporting']}>
+                  <WidgetInputDate
+                    inputDate={inputDate}
+                    settings={settings}
+                    changeMonth={changeMonth}
+                    setInputDate={setInputDate}
+                    changeDate={changeDate}
+                  />
+                </Route>
                 <Switch>
                   <Route exact path="/">
                     {/* <Clock /> */}
@@ -200,20 +201,11 @@ export default function App() {
                       handleDateClick={handleDateClick}
                       setInputDate={setInputDate}
                       records={recordsByInputJob}
-                      changeDate={changeDate}
-                      changeMonth={changeMonth}
                       jobs={jobs}
                       clock={clock}
                     />
                   </Route>
                   <Route exact path="/list">
-                    <WidgetInputDate
-                      inputDate={inputDate}
-                      settings={settings}
-                      changeMonth={changeMonth}
-                      setInputDate={setInputDate}
-                      changeDate={changeDate}
-                    />
                     <RecordsList
                       jobs={jobs}
                       settings={settings}
@@ -222,17 +214,9 @@ export default function App() {
                     />
                   </Route>
                   <Route exact path="/reporting">
-                    <WidgetInputDate
-                      inputDate={inputDate}
-                      settings={settings}
-                      changeMonth={changeMonth}
-                      setInputDate={setInputDate}
-                      changeDate={changeDate}
-                    />
                     <Reporting
                       inputDate={inputDate}
                       settings={settings}
-                      changeMonth={changeMonth}
                       records={recordsByInputJob}
                       jobs={jobs}
                     />

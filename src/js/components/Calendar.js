@@ -2,17 +2,15 @@ import * as React from 'react';
 import DateDetails from './DateDetails.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
-import WidgetInputDate from './WidgetInputDate.js';
 import useDatecellMarkers from '../hooks/useDatecellMarkers';
 import { getAutoOffsetHeight } from '../utils/helpers';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
 export default function Calendar({
   inputDate = new Date(),
-  handleDateClick,
   settings,
+  handleDateClick,
   records = [],
-  changeMonth,
   jobs = [],
   clock
 }) {
@@ -27,13 +25,6 @@ export default function Calendar({
 
   return (
     <>
-      <div className="view-calendar-controls">
-        <WidgetInputDate
-          inputDate={inputDate}
-          settings={settings}
-          changeMonth={changeMonth}
-        />
-      </div>
       <div className="calendar-body">
         <Weekdays settings={settings} />
         <Month

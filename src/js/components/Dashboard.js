@@ -9,7 +9,7 @@ import { deltaDate, getFirstDateOfMonthDate } from '../utils/date-fns.js';
 import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
-import { getWeekStartDateOffset } from '../utils/date-fns.js';
+import { getWeekStartDate } from '../utils/date-fns.js';
 
 export default function Dashboard({
   jobs,
