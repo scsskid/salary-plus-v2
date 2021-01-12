@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Week from './Week';
-import { getWeekStartDateOffset } from '../utils/helpers.js';
+import { getWeekStartDateOffset } from '../utils/date-fns.js';
 
 export default function Month({ inputDate, handleDateClick, records, jobs }) {
   const weeks = [];

@@ -1,7 +1,5 @@
 import * as React from 'react';
 import Button from './Button';
-// eslint-disable-next-line no-unused-vars
-import { getWeekStartDateOffset } from '../utils/helpers';
 
 export default function WidgetInputDate({
   inputDate,

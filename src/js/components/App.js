@@ -8,9 +8,9 @@ import { useLocalStorageReducer } from '../utils/store';
 import {
   throttle,
   setAppInnerHeight,
-  getWeekStartDateOffset
+  
 } from '../utils/helpers.js';
-import {
+import {getWeekStartDateOffset} from '../utils/date-fns'
   getRecordsByMonth,
   getUnattachedRecords
 } from '../utils/dataHelpers.js';
