@@ -38,27 +38,18 @@ export function getFirstDateOfMonthDate(input) {
   return new Date(dt.setDate(1));
 }
 
-export function getWeekStartDateOffset(angleDate, weekStartsOn = 'monday') {
+export function getWeekStartDateOffset(angleDate) {
   const date = angleDate.getDate();
   const day = angleDate.getDay();
   const dateMinusDay = date - day;
-  console.table({
-    angleDate: angleDate.toString(),
-    modulorDate: date % 7,
-    day,
-    dateMinusDay,
-    weekStartDateDate: new Date(
-      angleDate.getTime() - dateMinusDay * 60 * 60 * 1000 * 24
-    ).toString(),
-    weekStartsOn
-  });
+
   return dateMinusDay;
 }
 
-export function getWeekStartDate(angleDate, weekStartsOn = 'monday') {
+export function getWeekStartDate(angleDate) {
   const weekStartDate = new Date(angleDate.getTime());
 
-  const weekStartOffset = getWeekStartDateOffset(weekStartDate, weekStartsOn);
+  const weekStartOffset = getWeekStartDateOffset(weekStartDate);
 
   weekStartDate.setTime(
     weekStartDate.getTime() + weekStartOffset * 60 * 60 * 1000 * 24

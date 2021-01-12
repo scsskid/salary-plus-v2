@@ -19,14 +19,6 @@ export default function Week({
 
   const cells = [];
   for (let i = 0; i < 7; i++) {
-    // if (!bleedMonth && !isSameMonth(dateWalker, startDate)) {
-    //   cells.push(
-    //     <div
-    //       className="calendar-date calendar-date--empty"
-    //       key={`weekday-bodycell-${i}`}
-    //     ></div>
-    //   );
-    // } else {
     cells.push(
       <DateCell
         key={i}
@@ -36,7 +28,7 @@ export default function Week({
         jobs={jobs}
       />
     );
-    // }
+
     dateWalker.setDate(dateWalker.getDate() + 1);
   }
 

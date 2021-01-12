@@ -149,14 +149,10 @@ export default function Dashboard({
           <br />
           {new Date().toString()}
           <div className="view-dashboard-upcoming-week">
-            <Weekdays
-              dayStart={getWeekStartDate(inputDate).getDay()}
-              settings={settings}
-            />
+            <Weekdays dayStart={0} settings={settings} />
             <Week
               records={records}
               startDate={new Date(getWeekStartDate(inputDate).getTime())}
-              // startDate={new Date()}
               jobs={jobs}
             />
           </div>

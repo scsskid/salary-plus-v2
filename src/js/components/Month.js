@@ -19,7 +19,7 @@ export default function Month({ startDate, handleDateClick, records, jobs }) {
     console.log(getWeekStartDateOffset(new Date('2021-01-31')));
   }, [startDate]);
 
-  for (let i = 1; i < 42; i = i + 7) {
+  for (let i = 0; i < 42; i = i + 7) {
     const requestedDate = new Date(xy1Date.getTime() + i * 60 * 60 * 24 * 1000);
     // console.log(requestedDate);
     const isPrevMonth =
