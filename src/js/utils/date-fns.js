@@ -34,6 +34,7 @@ export function deltaDate(input, amount, dateType) {
 
 export function getFirstDateOfMonthDate(input) {
   const dt = new Date(input);
+  dt.setHours(0, 0, 0, 0);
   return new Date(dt.setDate(1));
 }
 
