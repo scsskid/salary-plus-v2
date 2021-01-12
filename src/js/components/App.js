@@ -6,7 +6,10 @@ import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
 import { throttle, setAppInnerHeight } from '../utils/helpers.js';
-import { getWeekStartDateOffset } from '../utils/date-fns';
+import {
+  getWeekStartDateOffset,
+  getFirstDateOfMonthDate
+} from '../utils/date-fns';
 import {
   getRecordsByMonth,
   getUnattachedRecords

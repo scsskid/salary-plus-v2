@@ -41,14 +41,28 @@ export function getFirstDateOfMonthDate(input) {
 export function getWeekStartDateOffset(angleDate, weekStartsOn = 'monday') {
   const date = angleDate.getDate();
   const day = angleDate.getDay();
-  const startDate = weekStartsOn === 'monday' ? date - day + 1 : date - day;
-  return startDate <= date ? startDate : startDate - 7; // set walkerInput to -7 days if value not in the past
+  const dateMinusDay = date - day;
+  console.table({
+    angleDate: angleDate.toString(),
+    modulorDate: date % 7,
+    day,
+    dateMinusDay,
+    weekStartDateDate: new Date(
+      angleDate.getTime() - dateMinusDay * 60 * 60 * 1000 * 24
+    ).toString(),
+    weekStartsOn
+  });
+  return dateMinusDay;
 }
 
-export function getWeekStartDate(inputDate, weekStartsOn = 'monday') {
-  const currentDate = new Date(inputDate.getTime());
-  const weekStartOffset = getWeekStartDateOffset(currentDate, weekStartsOn);
-  currentDate.setDate(weekStartOffset);
+export function getWeekStartDate(angleDate, weekStartsOn = 'monday') {
+  const weekStartDate = new Date(angleDate.getTime());
 
-  return currentDate;
+  const weekStartOffset = getWeekStartDateOffset(weekStartDate, weekStartsOn);
+
+  weekStartDate.setTime(
+    weekStartDate.getTime() + weekStartOffset * 60 * 60 * 1000 * 24
+  );
+
+  return weekStartDate;
 }

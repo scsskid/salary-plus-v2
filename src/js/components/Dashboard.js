@@ -5,7 +5,11 @@ import Weekdays from './Weekdays';
 import WidgetReporting from './WidgetReporting';
 import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
-import { deltaDate, getFirstDateOfMonthDate } from '../utils/date-fns.js';
+import {
+  deltaDate,
+  getFirstDateOfMonthDate,
+  getWeekStartDateOffset
+} from '../utils/date-fns.js';
 import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
@@ -22,6 +26,7 @@ export default function Dashboard({
   const clock = useClock();
   const widgetReportingTargetDate = clock.today;
   const firstDateOfCurrentMonth = getFirstDateOfMonthDate(clock.today); // set to deltaDate
+  const firstDateOfCurrentWeek = getWeekStartDate(clock.today);
 
   const monthRecords = getRecordsByMonth({
     records,
@@ -83,6 +88,12 @@ export default function Dashboard({
     );
   }
 
+  React.useEffect(() => {
+    // console.log(inputDate);
+    // console.log(getWeekStartDateOffset(inputDate));
+    // console.log(getWeekStartDate(inputDate));
+  }, []);
+
   return (
     <>
       <div className="view-dashboard | view-component">
@@ -134,11 +145,18 @@ export default function Dashboard({
 
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
+          {inputDate.toString()}
+          <br />
+          {new Date().toString()}
           <div className="view-dashboard-upcoming-week">
-            <Weekdays dayStart={clock.today.getDay() + 1} settings={settings} />
+            <Weekdays
+              dayStart={getWeekStartDate(inputDate).getDay()}
+              settings={settings}
+            />
             <Week
               records={records}
-              inputDate={new Date(clock.today.getTime() + 24 * 60 * 60 * 1000)}
+              startDate={new Date(getWeekStartDate(inputDate).getTime())}
+              // startDate={new Date()}
               jobs={jobs}
             />
           </div>

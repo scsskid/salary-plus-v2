@@ -19,6 +19,7 @@ export default function Calendar({
   ScrollToTopOnMount();
 
   React.useEffect(() => {
+    // console.log(inputDate);
     const datePickerDom = document.querySelector('.calendar-body');
     datePickerDom.style.height = getAutoOffsetHeight(datePickerDom) + 'px';
   }, [inputDate]);
@@ -28,7 +29,10 @@ export default function Calendar({
       <div className="calendar-body">
         <Weekdays settings={settings} />
         <Month
-          inputDate={inputDate}
+          startDate={(() => {
+            const inputDateCopy = new Date(inputDate);
+            return new Date(inputDateCopy.setDate(1));
+          })()}
           handleDateClick={handleDateClick}
           records={records}
           jobs={jobs}

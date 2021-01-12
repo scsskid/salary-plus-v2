@@ -3,8 +3,7 @@ import { isSameMonth } from '../utils/helpers.js';
 import DateCell from './DateCell.js';
 
 export default function Week({
-  inputDate = new Date(),
-  dateWalker = inputDate,
+  startDate = new Date('1982/10/04'),
   bleedMonth = false,
   records = [],
   jobs,
@@ -12,27 +11,32 @@ export default function Week({
     console.warn('no handler for dateClick');
   }
 }) {
+  const dateWalker = new Date(startDate.getTime());
+
+  React.useEffect(() => {
+    // console.log(startDate);
+  }, []);
+
   const cells = [];
   for (let i = 0; i < 7; i++) {
-    if (!bleedMonth && !isSameMonth(dateWalker, inputDate)) {
-      cells.push(
-        <div
-          className="calendar-date calendar-date--empty"
-          key={`weekday-bodycell-${i}`}
-        ></div>
-      );
-    } else {
-      cells.push(
-        <DateCell
-          key={i}
-          date={new Date(dateWalker.getTime())}
-          handleDateClick={handleDateClick}
-          inputDate={inputDate}
-          records={records}
-          jobs={jobs}
-        />
-      );
-    }
+    // if (!bleedMonth && !isSameMonth(dateWalker, startDate)) {
+    //   cells.push(
+    //     <div
+    //       className="calendar-date calendar-date--empty"
+    //       key={`weekday-bodycell-${i}`}
+    //     ></div>
+    //   );
+    // } else {
+    cells.push(
+      <DateCell
+        key={i}
+        date={new Date(dateWalker.getTime())}
+        handleDateClick={handleDateClick}
+        records={records}
+        jobs={jobs}
+      />
+    );
+    // }
     dateWalker.setDate(dateWalker.getDate() + 1);
   }
 
