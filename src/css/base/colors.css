@@ -7,7 +7,7 @@
   --color-highlight: hsl(var(--hue-accent) 72% 39%);
 
   --color-link: hsl(var(--hue-main) 60% 30%);
-  --color-bg-light: hsl(var(--hue-main) 18% 96%);
+  --color-bg-light: hsl(var(--hue-main) 18% 100%);
   --color-bg-dark: var(--color-text);
 }
 
