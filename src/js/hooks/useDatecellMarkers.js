@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as helpers from '../utils/helpers';
 
-export default function useDateCellsHighlighting(
+export default function useDateCellMarkers(
   type = 'today',
   clock = { now: new Date(), today: new Date() },
   inputDate = new Date()

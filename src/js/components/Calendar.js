@@ -2,7 +2,7 @@ import * as React from 'react';
 import DateDetails from './DateDetails.js';
 import Month from './Month.js';
 import Weekdays from './Weekdays.js';
-import useDatecellMarkers from '../hooks/useDatecellMarkers';
+import useDateCellMarkers from '../hooks/useDateCellMarkers';
 import { getAutoOffsetHeight } from '../utils/helpers';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 
@@ -14,8 +14,8 @@ export default function Calendar({
   jobs = [],
   clock
 }) {
-  useDatecellMarkers('selected', clock, inputDate);
-  useDatecellMarkers('today', clock, inputDate);
+  useDateCellMarkers('selected', clock, inputDate);
+  useDateCellMarkers('today', clock, inputDate);
   ScrollToTopOnMount();
 
   React.useEffect(() => {

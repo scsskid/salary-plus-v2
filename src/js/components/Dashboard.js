@@ -10,6 +10,7 @@ import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
 import { getWeekStartDate } from '../utils/date-fns.js';
+import useDateCellMarkers from '../hooks/useDateCellMarkers';
 
 export default function Dashboard({
   jobs,
@@ -23,6 +24,7 @@ export default function Dashboard({
   const widgetReportingTargetDate = clock.today;
   const monthStartDate = getMonthStartDate(clock.today); // set to deltaDate
   const weekStartDate = getWeekStartDate(clock.today);
+  useDateCellMarkers();
 
   const monthRecords = getRecordsByMonth({
     records,
