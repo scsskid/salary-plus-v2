@@ -12,18 +12,31 @@ import ScrollToTopOnMount from './ScrollToTopOnMount';
 import { getWeekStartDate } from '../utils/date-fns.js';
 import useDateCellMarkers from '../hooks/useDateCellMarkers';
 
-export default function Dashboard({
-  jobs,
-  settings,
-  records,
-  setInputDate,
-  inputDate
-}) {
+export default function Dashboard({ jobs, settings, records, setInputDate }) {
   ScrollToTopOnMount();
   const clock = useClock();
   const widgetReportingTargetDate = clock.today;
   const monthStartDate = getMonthStartDate(clock.today); // set to deltaDate
+
   const weekStartDate = getWeekStartDate(clock.today);
+  const weekEndDate = new Date(
+    new Date(weekStartDate).setDate(weekStartDate.getDate() + 6)
+  );
+
+  const dateStringOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  };
+
+  const weekDateDisplay = {
+    start: weekStartDate.toLocaleDateString(
+      settings.language,
+      dateStringOptions
+    ),
+    end: weekEndDate.toLocaleDateString(settings.language, dateStringOptions)
+  };
+
   useDateCellMarkers();
 
   const monthRecords = getRecordsByMonth({
@@ -142,13 +155,18 @@ export default function Dashboard({
         )} */}
 
         <div className="view-dashboard-upcoming">
-          <h2>Upcoming</h2>
+          <header className="section-header">
+            <h2>Week Schedule</h2>
+            <p>
+              {weekDateDisplay.start} - {weekDateDisplay.end}
+            </p>
+          </header>
 
           <div className="view-dashboard-upcoming-week">
             <Weekdays settings={settings} />
             <Week
               records={records}
-              startDate={new Date(getWeekStartDate(inputDate).getTime())}
+              startDate={weekStartDate}
               jobs={jobs}
               bleedMonth={true}
             />
