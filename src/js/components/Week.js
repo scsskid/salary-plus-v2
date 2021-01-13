@@ -1,37 +1,39 @@
 import * as React from 'react';
-import { isSameMonth } from '../utils/helpers.js';
 import DateCell from './DateCell.js';
 
 export default function Week({
   startDate = new Date('1982/10/04'),
-  bleedMonth = false,
   records = [],
   jobs,
   handleDateClick = () => {
     console.warn('no handler for dateClick');
-  }
+  },
+  requestedMonthIndex,
+  bleedMonth = false
 }) {
   const endDate = new Date(startDate).setDate(startDate.getDate() + 7);
 
-  // React.useEffect(() => {
-  //   console.log(startDate);
-  //   console.log(new Date(endDate));
-  //   console.log('---');
-  // }, []);
-
   const cells = [];
   for (const d = new Date(startDate); d < endDate; d.setDate(d.getDate() + 1)) {
-    cells.push(
-      <DateCell
-        key={d}
-        date={new Date(d)}
-        handleDateClick={handleDateClick}
-        records={records}
-        jobs={jobs}
-      />
-    );
+    const isBleedDate = d.getMonth() !== requestedMonthIndex;
 
-    // dateWalker.setDate(dateWalker.getDate() + 1);
+    if (isBleedDate && bleedMonth === false) {
+      console.log('skipping bleed date', d);
+      cells.push(
+        <div key={d} className="calendar-date calendar-date--empty"></div>
+      );
+    } else {
+      cells.push(
+        <DateCell
+          key={d}
+          date={new Date(d)}
+          handleDateClick={handleDateClick}
+          records={records}
+          jobs={jobs}
+          isBleedDate={isBleedDate}
+        />
+      );
+    }
   }
 
   return <div className="week-row calendar-week">{cells}</div>;

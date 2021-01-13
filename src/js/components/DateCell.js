@@ -1,7 +1,13 @@
 import * as React from 'react';
 import { getRecordsByDate } from '../utils/dataHelpers.js';
 
-export default function DateCell({ date, records, handleDateClick, jobs }) {
+export default function DateCell({
+  date = new Date(),
+  records = [],
+  handleDateClick = () => {},
+  jobs = [],
+  isBleedDate = false
+}) {
   const dateRecords = getRecordsByDate({
     records,
     date
@@ -20,6 +26,7 @@ export default function DateCell({ date, records, handleDateClick, jobs }) {
       className="calendar-date"
       data-date-string={date.toISOString()}
       data-day={day}
+      style={isBleedDate ? { opacity: 0.2 } : null}
     >
       <button
         type="button"
