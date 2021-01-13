@@ -157,7 +157,7 @@ export default function App() {
             ) : (
               <>
                 <Route path={['/', '/list', '/calendar', '/reporting']}>
-                  <AppHeader key="view" title="View">
+                  <AppHeader>
                     <WidgetInputJobId
                       settings={settings}
                       jobs={jobs}
