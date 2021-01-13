@@ -5,6 +5,7 @@ import Weekdays from './Weekdays.js';
 import useDateCellMarkers from '../hooks/useDateCellMarkers';
 import { getAutoOffsetHeight } from '../utils/helpers';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
+import { getMonthStartDate } from '../utils/date-fns.js';
 
 export default function Calendar({
   inputDate = new Date(),
@@ -29,10 +30,7 @@ export default function Calendar({
       <div className="calendar-body">
         <Weekdays settings={settings} />
         <Month
-          startDate={(() => {
-            const inputDateCopy = new Date(inputDate);
-            return new Date(inputDateCopy.setDate(1));
-          })()}
+          startDate={(() => getMonthStartDate(inputDate))()}
           handleDateClick={handleDateClick}
           records={records}
           jobs={jobs}
