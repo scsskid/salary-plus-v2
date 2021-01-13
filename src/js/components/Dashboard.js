@@ -99,12 +99,6 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
     );
   }
 
-  React.useEffect(() => {
-    // console.log(inputDate);
-    // console.log(getWeekStartDateOffset(inputDate));
-    // console.log(getWeekStartDate(inputDate));
-  }, []);
-
   return (
     <>
       <div className="view-dashboard | view-component">
