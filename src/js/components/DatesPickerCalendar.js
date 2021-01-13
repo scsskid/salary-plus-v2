@@ -5,6 +5,7 @@ import Month from './Month';
 import WidgetInputDate from './WidgetInputDate';
 import useDateCellMarkers from '../hooks/useDateCellMarkers';
 import { getAutoOffsetHeight } from '../utils/helpers';
+import { getMonthStartDate } from '../utils/date-fns';
 
 export default function DatesPickerCalendar({
   inputDate,
@@ -130,7 +131,7 @@ export default function DatesPickerCalendar({
         </div>
         <Weekdays settings={settings} />
         <Month
-          inputDate={inputDate}
+          startDate={(() => getMonthStartDate(inputDate))()}
           handleDateClick={handleDateClick}
           records={records}
           jobs={jobs}
