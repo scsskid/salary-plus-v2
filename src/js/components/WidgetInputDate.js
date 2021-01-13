@@ -34,10 +34,7 @@ export default function WidgetInputDate({
       prev: () => changeMonth(-1),
       next: () => changeMonth(1)
     },
-    week: {
-      prev: () => changeDate(-7),
-      next: () => changeDate(7)
-    }
+    week: {}
   };
 
   return (

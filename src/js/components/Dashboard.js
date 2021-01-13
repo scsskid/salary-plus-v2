@@ -5,11 +5,7 @@ import Weekdays from './Weekdays';
 import WidgetReporting from './WidgetReporting';
 import useClock from '../hooks/useClock';
 import { getRecordsByRange, getRecordsByMonth } from '../utils/dataHelpers.js';
-import {
-  deltaDate,
-  getFirstDateOfMonthDate,
-  getWeekStartDateOffset
-} from '../utils/date-fns.js';
+import { deltaDate, getMonthStartDate } from '../utils/date-fns.js';
 import { isSameDay } from '../utils/helpers.js';
 import { Link } from 'react-router-dom';
 import ScrollToTopOnMount from './ScrollToTopOnMount';
@@ -25,8 +21,8 @@ export default function Dashboard({
   ScrollToTopOnMount();
   const clock = useClock();
   const widgetReportingTargetDate = clock.today;
-  const firstDateOfCurrentMonth = getFirstDateOfMonthDate(clock.today); // set to deltaDate
-  const firstDateOfCurrentWeek = getWeekStartDate(clock.today);
+  const monthStartDate = getMonthStartDate(clock.today); // set to deltaDate
+  const weekStartDate = getWeekStartDate(clock.today);
 
   const monthRecords = getRecordsByMonth({
     records,
@@ -34,8 +30,8 @@ export default function Dashboard({
   });
 
   const lastThreeMonthsRecords = getRecordsByRange(records, {
-    start: deltaDate(firstDateOfCurrentMonth, -3, 'months'),
-    end: firstDateOfCurrentMonth
+    start: deltaDate(monthStartDate, -3, 'months'),
+    end: monthStartDate
   });
 
   const currentYearRecords = getRecordsByRange(records, {
@@ -145,11 +141,9 @@ export default function Dashboard({
 
         <div className="view-dashboard-upcoming">
           <h2>Upcoming</h2>
-          {inputDate.toString()}
-          <br />
-          {new Date().toString()}
+
           <div className="view-dashboard-upcoming-week">
-            <Weekdays dayStart={0} settings={settings} />
+            <Weekdays settings={settings} />
             <Week
               records={records}
               startDate={new Date(getWeekStartDate(inputDate).getTime())}

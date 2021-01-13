@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { getWeekDayNames } from '../utils/helpers.js';
 
-export default function Weekdays({ dayStart, settings }) {
+export default function Weekdays({ firstDayOfWeekIndex = 1, settings }) {
   let cells = [];
   for (let i = 0; i < 7; i++) {
     const weekdayName = getWeekDayNames({
-      dayStart,
+      firstDayOfWeekIndex,
       format: 'short',
       locale: settings.language
     })[i];

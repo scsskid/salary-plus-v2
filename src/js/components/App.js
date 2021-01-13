@@ -6,10 +6,7 @@ import Navigation from './Navigation';
 import Settings from './Settings';
 import { useLocalStorageReducer } from '../utils/store';
 import { throttle, setAppInnerHeight } from '../utils/helpers.js';
-import {
-  getWeekStartDateOffset,
-  getFirstDateOfMonthDate
-} from '../utils/date-fns';
+import { getMonthStartDate } from '../utils/date-fns';
 import {
   getRecordsByMonth,
   getUnattachedRecords
@@ -115,14 +112,6 @@ export default function App() {
     setInputDate(summand === 0 ? clock.today : inputDateCopy);
   }
 
-  function changeDate(summand = 0) {
-    const inputDateCopy = getFirstDateOfMonthDate(inputDate);
-
-    inputDateCopy.setDate(inputDate.getDate() + summand);
-    inputDateCopy.setDate(getWeekStartDateOffset(inputDateCopy));
-    setInputDate(inputDateCopy);
-  }
-
   function handleDateClick(e) {
     setInputDate(new Date(e.currentTarget.parentElement.dataset.dateString));
   }
@@ -183,7 +172,6 @@ export default function App() {
                     settings={settings}
                     changeMonth={changeMonth}
                     setInputDate={setInputDate}
-                    changeDate={changeDate}
                   />
                 </Route>
                 <Switch>
