@@ -37,7 +37,7 @@ export default function Month({
         records={records}
         jobs={jobs}
         requestedMonthIndex={requestedMonthIndex}
-        bleedMonth={true}
+        bleedMonth={false}
       />
     );
   }
