@@ -18,7 +18,6 @@ export default function Week({
     const isBleedDate = d.getMonth() !== requestedMonthIndex;
 
     if (isBleedDate && bleedMonth === false) {
-      console.log('skipping bleed date', d);
       cells.push(
         <div key={d} className="calendar-date calendar-date--empty"></div>
       );
