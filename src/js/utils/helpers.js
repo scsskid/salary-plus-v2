@@ -29,13 +29,13 @@ export function NumberFormatter(locale, options = {}) {
 // dates
 
 export function getWeekDayNames({
-  dayStart = 1,
+  firstDayOfWeekIndex = 1,
   format = 'short',
   locale = 'en-US'
 }) {
   const names = [];
   const date = new Date('2020-10-04');
-  date.setDate(date.getDate() + dayStart - 1);
+  date.setDate(date.getDate() + firstDayOfWeekIndex - 1);
   let days = 7;
 
   while (days !== 0) {
