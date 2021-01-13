@@ -32,28 +32,22 @@ export function deltaDate(input, amount, dateType) {
   }
 }
 
-export function getFirstDateOfMonthDate(input) {
+export function getMonthStartDate(input) {
   const dt = new Date(input);
   dt.setHours(0, 0, 0, 0);
   return new Date(dt.setDate(1));
 }
 
-export function getWeekStartDateOffset(angleDate) {
-  const date = angleDate.getDate();
-  const day = angleDate.getDay();
-  const dateMinusDay = date - day;
+export function getWeekStartDate(dateObj, firstDayOfWeekIndex = 1) {
+  const dayOfWeek = dateObj.getDay();
+  const firstDayOfWeek = new Date(dateObj);
+  const diff =
+    dayOfWeek >= firstDayOfWeekIndex
+      ? dayOfWeek - firstDayOfWeekIndex
+      : 6 - dayOfWeek;
 
-  return dateMinusDay;
-}
+  firstDayOfWeek.setDate(dateObj.getDate() - diff);
+  firstDayOfWeek.setHours(0, 0, 0, 0);
 
-export function getWeekStartDate(angleDate) {
-  const weekStartDate = new Date(angleDate.getTime());
-
-  const weekStartOffset = getWeekStartDateOffset(weekStartDate);
-
-  weekStartDate.setTime(
-    weekStartDate.getTime() + weekStartOffset * 60 * 60 * 1000 * 24
-  );
-
-  return weekStartDate;
+  return firstDayOfWeek;
 }
