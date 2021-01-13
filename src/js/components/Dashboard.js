@@ -148,6 +148,7 @@ export default function Dashboard({
               records={records}
               startDate={new Date(getWeekStartDate(inputDate).getTime())}
               jobs={jobs}
+              bleedMonth={true}
             />
           </div>
           <div className="view-dashboard-upcoming-list">

@@ -5,8 +5,8 @@ export default function DateCell({
   date = new Date(),
   records = [],
   handleDateClick = () => {},
-  jobs = [],
-  isBleedDate = false
+  jobs = []
+  // isBleedDate = false
 }) {
   const dateRecords = getRecordsByDate({
     records,
@@ -26,7 +26,7 @@ export default function DateCell({
       className="calendar-date"
       data-date-string={date.toISOString()}
       data-day={day}
-      style={isBleedDate ? { opacity: 0.2 } : null}
+      // style={isBleedDate ? { opacity: 0.2 } : null}
     >
       <button
         type="button"
