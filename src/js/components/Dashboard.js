@@ -120,7 +120,7 @@ export default function Dashboard({ jobs, settings, records, setInputDate }) {
             setInputDate={setInputDate}
           />
           <p style={{ textAlign: 'right' }}>
-            <Link to="/view/reporting">Full Report →</Link>
+            <Link to="/reporting">Full Report →</Link>
           </p>
         </div>
 
